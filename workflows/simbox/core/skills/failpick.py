@@ -177,9 +177,9 @@ class FailPick(BaseSkill):
 
     def get_ee_poses(self, frame: str = "world"):
         # get grasp poses at specific frame
-        if frame not in ["world", "body", "armbase"]:
+        if frame not in ["world", "body", "armbase", "robot"]:
             raise ValueError(
-                f"poses in {frame} frame is not supported: accepted values are [world, body, armbase] only"
+                f"poses in {frame} frame is not supported: accepted values are [world, body, armbase, robot] only"
             )
 
         if frame == "body":
@@ -191,7 +191,7 @@ class FailPick(BaseSkill):
         if frame == "world":
             return T_ee2w
 
-        if frame == "robot":  # robot base frame
+        if frame in ["robot", "armbase"]:  # controller reference frame; robot is the legacy alias
             T_r2w = get_relative_transform(
                 get_prim_at_path(self.controller.reference_prim_path), get_prim_at_path(self.task.root_prim_path)
             )
