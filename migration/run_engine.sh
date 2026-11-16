@@ -37,16 +37,16 @@ export CUDA_CACHE_PATH="$PAIR_ROOT/cache41/cuda"
 export MESA_SHADER_CACHE_DIR="$PAIR_ROOT/cache41/mesa"
 export OPTIX_CACHE_PATH="$PAIR_ROOT/cache41/optix"
 export __GL_SHADER_DISK_CACHE_PATH="$PAIR_ROOT/cache41/gl"
-export MAX_JOBS=4
-export CUDA_HOME="$PAIR_ROOT/env/cuda-11.8"
-export CC="$PAIR_ROOT/env/gcc11/usr/bin/gcc-11"
-export CXX="$PAIR_ROOT/env/gcc11/usr/bin/g++-11"
+export MAX_JOBS="${MAX_JOBS:-4}"
+export CUDA_HOME="${CUDA_HOME:-$PAIR_ROOT/env/cuda-11.8}"
+export CC="${CC:-$PAIR_ROOT/env/gcc11/usr/bin/gcc-11}"
+export CXX="${CXX:-$PAIR_ROOT/env/gcc11/usr/bin/g++-11}"
 export PATH="$PAIR_ROOT/env/python310/ninja/data/bin:$PAIR_ROOT/env/python310/bin:$CUDA_HOME/bin:$PATH"
 export PYTHONEXE="$PAIR_ROOT/runtime41/kit/python/bin/python3"
 export LD_LIBRARY_PATH="/usr/local/nvidia/lib:/usr/local/nvidia/lib64:$CUDA_HOME/lib64"
 export PYTHONUNBUFFERED=1
 export PYTHONPYCACHEPREFIX="$PAIR_ROOT/cache41/pycache"
-export TORCH_CUDA_ARCH_LIST=8.9
+# Unset means Torch detects the local GPU when compiling; L20 was tested at 8.9.
 export ISAAC_SIM_PATH="$PAIR_ROOT/runtime41"
 export SETUPTOOLS_SCM_PRETEND_VERSION=0.0.0+interndata20261112
 cd "$ENGINE_ROOT"

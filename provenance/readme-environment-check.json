@@ -1,0 +1,14 @@
+{
+  "torch": "2.2.2+cu118",
+  "numpy": "1.26.0",
+  "numpy_file": "/vepfs/public/pengjiaqi/egoengine-migration-20261116/restore-validation/runtime41/kit/exts/omni.kit.pip_archive/pip_prebundle/numpy/__init__.py",
+  "gpu": "NVIDIA L20",
+  "capability": [
+    8,
+    9
+  ],
+  "planner": "curobo.wrap.reacher.motion_gen",
+  "extension": "/vepfs/public/pengjiaqi/egoengine-migration-20261116/restore-validation/env/curobo41-built/curobo/curobolib/kinematics_fused_cu.cpython-310-x86_64-linux-gnu.so",
+  "validation": "Existing independently restored environment; not a fresh installation or rebuild",
+  "large_assets_downloaded": false
+}
