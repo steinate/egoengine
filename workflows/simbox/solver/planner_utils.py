@@ -617,10 +617,12 @@ def solve_ik_traj_with_standoff(
 def build_plant(time_step=0.004, discrete_contact_solver="sap", robot_name=None, init_qpos=None):
 
     global robot_plant
-    multibody_plant_config = MultibodyPlantConfig(
-        time_step=time_step,
-        discrete_contact_solver=discrete_contact_solver,
-    )
+    multibody_plant_config = MultibodyPlantConfig(time_step=time_step)
+    # Drake >= 1.24 renamed this option; retain the requested SAP model.
+    if hasattr(multibody_plant_config, "discrete_contact_approximation"):
+        multibody_plant_config.discrete_contact_approximation = discrete_contact_solver
+    else:
+        multibody_plant_config.discrete_contact_solver = discrete_contact_solver
     builder = DiagramBuilder()
     robot_plant, _ = AddMultibodyPlant(multibody_plant_config, builder)
     if "split_aloha" in robot_name:
@@ -649,7 +651,8 @@ def build_plant(time_step=0.004, discrete_contact_solver="sap", robot_name=None,
 def AddR5a(plant, init_qpos):
     franka_combined_path = "workflows/simbox/panda_drake/r5a/R5a.urdf"
     parser = Parser(plant)
-    franka = parser.AddModelFromFile(franka_combined_path)
+    franka = (parser.AddModels(franka_combined_path)[0] if hasattr(parser, "AddModels")
+              else parser.AddModelFromFile(franka_combined_path))
     plant.WeldFrames(plant.world_frame(), plant.GetFrameByName("base_link"))
 
     # Set default positions:
@@ -668,7 +671,8 @@ def AddR5a(plant, init_qpos):
 def AddPiper(plant, init_qpos):
     franka_combined_path = "workflows/simbox/panda_drake/piper100/piper100.urdf"
     parser = Parser(plant)
-    franka = parser.AddModelFromFile(franka_combined_path)
+    franka = (parser.AddModels(franka_combined_path)[0] if hasattr(parser, "AddModels")
+              else parser.AddModelFromFile(franka_combined_path))
     plant.WeldFrames(plant.world_frame(), plant.GetFrameByName("arm_base"))
 
     # Set default positions:
@@ -687,7 +691,8 @@ def AddPiper(plant, init_qpos):
 def AddFranka(plant, init_qpos):
     franka_combined_path = "workflows/simbox/panda_drake/panda_arm_hand.urdf"
     parser = Parser(plant)
-    franka = parser.AddModelFromFile(franka_combined_path)
+    franka = (parser.AddModels(franka_combined_path)[0] if hasattr(parser, "AddModels")
+              else parser.AddModelFromFile(franka_combined_path))
     plant.WeldFrames(plant.world_frame(), plant.GetFrameByName("panda_link0"))
     # Set default positions:
     if init_qpos is None:

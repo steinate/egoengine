@@ -1,0 +1,134 @@
+{
+  "scope": "Three official skill pipelines with explicit physics recording and geometric native Worker replay; no human dynamics validation.",
+  "render_sampling": "Approximately 5 Hz plus contact frames, held on original 30 Hz timeline.",
+  "trajectory_archive_sha256": "3a13501fa89f3a7d2fe12711f4e960b5b5fe46208d291047a41f27ce428564bb",
+  "tasks": {
+    "close_microwave": {
+      "episode": "task-pairs/close_microwave/seed-44-explicit",
+      "frames": 554,
+      "physics_fps": 30,
+      "duration_s": 18.466666666666665,
+      "rendered_samples": 94,
+      "source_sha256": "a938527b1492057d99a4c9fccd8a898307b97965fa88a32d68d55c6ad22397a9",
+      "human_sha256": "86e2b888aa549fca74e10465d9d542644cacae7c84c469224c3156dba56dede9",
+      "max_world_matrix_error": 5.551115123125783e-17,
+      "videos": {
+        "human-ego-debug": {
+          "probe": {
+            "r_frame_rate": "30/1",
+            "duration": "18.466667",
+            "nb_read_frames": "554"
+          },
+          "sha256": "11352d6ef72ce425bf759018aef4142004e3b11a313d141563d677535c367c84"
+        },
+        "robot-ego-front-debug": {
+          "probe": {
+            "r_frame_rate": "30/1",
+            "duration": "18.466667",
+            "nb_read_frames": "554"
+          },
+          "sha256": "40b98ab68d3142e6e14a9e635e8b8b7cc1e48c715b50ccb1ece98a799ce42788"
+        }
+      },
+      "human_metrics": {
+        "max_wrist_error_m": 0.0027188001301248262,
+        "max_wrist_angle_error_deg": 4.332645733627845,
+        "max_native_arm_joint_step_deg": 6.875493541569876,
+        "max_foot_drift_m": 0.0,
+        "max_fitted_fingertip_error_m": 0.0051327605947145295
+      },
+      "robot_metrics": {
+        "frames": 554,
+        "duration_s": 18.466666666666665,
+        "max_lift_m": 0.0,
+        "end_drift_m": 0.0,
+        "initial_angle_rad": 0.8732858300209045,
+        "final_angle_rad": 0.07808566093444824
+      }
+    },
+    "hang_cup": {
+      "episode": "task-pairs/hang_cup/seed-43-explicit",
+      "frames": 472,
+      "physics_fps": 30,
+      "duration_s": 15.733333333333333,
+      "rendered_samples": 82,
+      "source_sha256": "f610d3331e22fc31702281e4f553ab8e1dd590fdfc07969baf421a7ab28c9a0b",
+      "human_sha256": "47ac84b94f0c8b35907821ea75a4a51874f562791158c7c0184d5250226d4561",
+      "max_world_matrix_error": 0.0,
+      "videos": {
+        "human-ego-debug": {
+          "probe": {
+            "r_frame_rate": "30/1",
+            "duration": "15.733333",
+            "nb_read_frames": "472"
+          },
+          "sha256": "bd65a5051fe7f241a80f1d7f3694487314a1ab9ae63b20e426ba01c49026a51a"
+        },
+        "robot-ego-front-debug": {
+          "probe": {
+            "r_frame_rate": "30/1",
+            "duration": "15.733333",
+            "nb_read_frames": "472"
+          },
+          "sha256": "04a4994e31c315bc109771b950a978a65c5475fcee78cc985884f9ae46676c56"
+        }
+      },
+      "human_metrics": {
+        "max_wrist_error_m": 8.676675130711448e-05,
+        "max_wrist_angle_error_deg": 1.8578700272804254,
+        "max_native_arm_joint_step_deg": 6.875493541569872,
+        "max_foot_drift_m": 0.0,
+        "max_fitted_fingertip_error_m": 0.00011592730515084
+      },
+      "robot_metrics": {
+        "frames": 472,
+        "duration_s": 15.733333333333333,
+        "max_lift_m": 0.18382465839385986,
+        "end_drift_m": 0.050357716251569255,
+        "supported_tail_frames": 30,
+        "end_motion_note": "A hanging cup may swing; test persistent support-region overlap and elevated bottom, not zero motion."
+      }
+    },
+    "insert_flower": {
+      "episode": "task-pairs/insert_flower/seed-44-explicit",
+      "frames": 593,
+      "physics_fps": 30,
+      "duration_s": 19.766666666666666,
+      "rendered_samples": 102,
+      "source_sha256": "5d3b7414e5a2b056f41437f37e1d0eedc3a3603ad9014a56f3d05149c94bd316",
+      "human_sha256": "0da2af657a7df3d3c70f60e940248c240e25b754c2a1dca5efe194fd23f7de60",
+      "max_world_matrix_error": 0.0,
+      "videos": {
+        "human-ego-debug": {
+          "probe": {
+            "r_frame_rate": "30/1",
+            "duration": "19.766667",
+            "nb_read_frames": "593"
+          },
+          "sha256": "dab304e2f93c79bac15ff2e7bdb22b30782ccc14ed4cc5a49f9d57249f34ef3e"
+        },
+        "robot-ego-front-debug": {
+          "probe": {
+            "r_frame_rate": "30/1",
+            "duration": "19.766667",
+            "nb_read_frames": "593"
+          },
+          "sha256": "97dfb87d85a47bbe9aab15de661b8439e1ee3049a64ddc347a18e56a19dc811c"
+        }
+      },
+      "human_metrics": {
+        "max_wrist_error_m": 0.00048089389703309774,
+        "max_wrist_angle_error_deg": 3.136390623436364,
+        "max_native_arm_joint_step_deg": 6.875493541569605,
+        "max_foot_drift_m": 0.0,
+        "max_fitted_fingertip_error_m": 0.0007517957769449212
+      },
+      "robot_metrics": {
+        "frames": 593,
+        "duration_s": 19.766666666666666,
+        "max_lift_m": 0.5602564215660095,
+        "end_drift_m": 0.0014260944345093481
+      }
+    }
+  }
+}

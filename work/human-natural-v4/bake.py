@@ -3,7 +3,13 @@
 import sys, json, hashlib, argparse
 from pathlib import Path
 
-ROOT = Path("/vepfs/public/pengjiaqi/interndata-human-pair")
+ap = argparse.ArgumentParser()
+ap.add_argument("--preview", action="store_true")
+ap.add_argument("--root", type=Path, default=Path("/vepfs/public/pengjiaqi/interndata-human-pair"))
+ap.add_argument("--folder", type=Path)
+ap.add_argument("--stride", type=int, default=1)
+args = ap.parse_args()
+ROOT = args.root
 BASE = ROOT / "human41"
 sys.path.insert(0, str(ROOT / "runtime41/kit/exts/omni.usd.libs"))
 from pxr import Usd, UsdSkel, UsdGeom, Gf, Vt
@@ -15,7 +21,7 @@ from human_control import Human
 from character_materials import repair_materials
 
 h = Human()
-folder = ROOT / "human-natural-v4"
+folder = args.folder or ROOT / "human-natural-v4"
 data = np.load(folder / "human-animation.npz")
 h.world = data["world_transform"]
 out = folder / "skin-cache"
@@ -62,13 +68,14 @@ for pr in source.Traverse():
     meshes.append(
         (str(pr.GetPath()), skin, mesh.GetPointsAttr().Get(), np.array(tris), np.array(mat))
     )
-ap = argparse.ArgumentParser()
-ap.add_argument("--preview", action="store_true")
-args = ap.parse_args()
 samples = (
     sorted(set(np.linspace(0, len(data["source_frame"]) - 1, 11, dtype=int).tolist()))
     if args.preview
-    else list(range(len(data["source_frame"])))
+    else sorted(
+        set(
+            list(range(0, len(data["source_frame"]), args.stride)) + [len(data["source_frame"]) - 1]
+        )
+    )
 )
 errors = []
 for sample in samples:
@@ -147,7 +154,7 @@ report = {
     "source_animation": str(folder / "human-animation.npz"),
     "source_sha256": hashlib.sha256((folder / "human-animation.npz").read_bytes()).hexdigest(),
     "samples": data["source_frame"][samples].tolist(),
-    "fps": 15,
+    "fps": float(1 / np.median(np.diff(data["video_time_s"]))),
     "mesh_paths": [m[0] for m in meshes],
     "max_usd_fk_position_error_m": max(errors),
     "method": "CPU UsdSkel skinning of original character mesh; original UVs and PBR textures retained; area-weighted vertex normals recomputed; per-frame static geometry for Isaac4.1 rendering",

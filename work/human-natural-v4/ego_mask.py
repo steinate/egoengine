@@ -2,12 +2,16 @@
 Observer uses the unmasked full-body template. No change to camera location.
 """
 
-import sys, json
+import sys, json, argparse
 from pathlib import Path
 import numpy as np
 
-ROOT = Path("/vepfs/public/pengjiaqi/interndata-human-pair")
-BASE = ROOT / "human-natural-v4"
+ap = argparse.ArgumentParser()
+ap.add_argument("--root", type=Path, default=Path("/vepfs/public/pengjiaqi/interndata-human-pair"))
+ap.add_argument("--folder", type=Path)
+args = ap.parse_args()
+ROOT = args.root
+BASE = args.folder or ROOT / "human-natural-v4"
 sys.path.insert(0, str(ROOT / "runtime41/kit/exts/omni.usd.libs"))
 from pxr import Usd, UsdGeom, Vt
 

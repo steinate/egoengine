@@ -1,0 +1,70 @@
+{
+  "scope": "Static configuration candidates; only execution plus independent validation earns a passed status.",
+  "first_batch": [
+    "hang_cup",
+    "close_microwave",
+    "insert_flower"
+  ],
+  "tasks": {
+    "hang_cup": {
+      "type": "rigid placement",
+      "config": "basic/split_aloha/hang_the_cup_on_rack/hang_the_cup_on_rack_part0.yaml",
+      "active": [
+        "L"
+      ],
+      "object": "oo3d_object1"
+    },
+    "handover": {
+      "type": "bimanual transfer and placement",
+      "config": "long_horizon/split_aloha/handover/lr/dish.yaml",
+      "active": [
+        "L",
+        "R"
+      ],
+      "object": "pick_object",
+      "note": "New-machine seeds 42/43/44 failed planning; no accepted paired video."
+    },
+    "close_microwave": {
+      "type": "articulated door",
+      "config": "art/split_aloha/close_the_microwave/left/close_the_microwave_part0.yaml",
+      "active": [
+        "L"
+      ],
+      "object": "close_v_left"
+    },
+    "insert_flower": {
+      "type": "rigid insertion",
+      "config": "basic/split_aloha/insert_the_flower_in_vase/insert_the_flower_in_vase_part0.yaml",
+      "active": [
+        "L"
+      ],
+      "object": "oo3d_object1"
+    },
+    "insert_marker": {
+      "type": "rigid insertion",
+      "config": "basic/split_aloha/insert_the_markpen_in_penholder/insert_the_markpen_in_penholder_part0.yaml"
+    },
+    "stack_bowls": {
+      "type": "rigid stacking",
+      "config": "basic/split_aloha/stack_bowls/stack_two_l.yaml"
+    },
+    "stack_lift": {
+      "type": "bimanual tray lift",
+      "config": "basic/split_aloha/stack_cubes_lift/lr.yaml",
+      "note": "Previously validated with documented stable_place fixes."
+    },
+    "open_microwave": {
+      "type": "articulated door",
+      "config": "art/split_aloha/open_the_microwave/left/open_the_microwave_part0.yaml"
+    },
+    "pick_banana": {
+      "type": "rigid pick and lift",
+      "config": "pick_and_place/split_aloha/single_pick/left/omniobject3d-banana.yaml"
+    }
+  },
+  "excluded_initially": [
+    "cloth folding: requires per-frame deforming mesh state",
+    "pouring: requires particle/surface state",
+    "wiping dirt: requires material/visibility state as well as poses"
+  ]
+}
