@@ -103,3 +103,5 @@ result["passed"] = bool(
 )
 (folder / "stack-validation.json").write_text(json.dumps(result, indent=2))
 print(json.dumps(result, indent=2))
+if not result["passed"]:
+    raise SystemExit(1)

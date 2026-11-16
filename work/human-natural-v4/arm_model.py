@@ -17,6 +17,14 @@ def axial_y(R):
 
 def body_pose(lean, sidelean=0.0):
     p = ref.copy()
+    if FRESH:
+        for name, pitch in [("NeckTwist01", -0.25), ("Head", -0.55)]:
+            j = h.idx(name)
+            g = h.fk(p)
+            right = -h.world[:3, 0]
+            desired = Rotation.from_rotvec(right * pitch).as_matrix() @ restworld[j, :3, :3]
+            p[j, :3, :3] = g[h.parents[j], :3, :3].T @ desired
+        return p
     j = h.idx("Hip")
     p[j, :3, :3] = (
         reference[h.parents[j], :3, :3].T @ rot(1, sidelean) @ rot(0, -lean) @ reference[j, :3, :3]

@@ -33,12 +33,15 @@ ffmpeg -version
 
 [上游安装说明](https://internrobotics.github.io/InternDataEngine-Docs/guides/installation.html)
 推荐 4.1.0，并允许使用 SDK 自带 Python。当前项目固定复现 4.1.0。
-官方最新下载入口见 [ASSETS.md](../ASSETS.md)，旧版公开直链未确认。
-在有权访问 VLA-Infra 时，可以按需取得已有安装包：
+官方旧版直链已在新机器验证可下载。仅在本机没有安装包时执行：
 
-```text
-root@172.31.21.245:2222
-/vepfs/public/pengjiaqi/interndata-human-pair/downloads/isaac-sim-4.1.0.zip
+```bash
+mkdir -p "$PAIR_ROOT/downloads"
+curl -fL --retry 5 -C - \
+  'https://download.isaacsim.omniverse.nvidia.com/isaac-sim-standalone%404.1.0-rc.7%2B4.1.14801.71533b68.gl.linux-x86_64.release.zip' \
+  -o "$PAIR_ROOT/downloads/isaac-sim-4.1.0.zip"
+test "$(stat -c %s "$PAIR_ROOT/downloads/isaac-sim-4.1.0.zip")" = 8335189359
+sha256sum "$PAIR_ROOT/downloads/isaac-sim-4.1.0.zip" > "$PAIR_ROOT/downloads/isaac-sim-4.1.0.sha256"
 ```
 
 不自动传输该大文件。取得安装包后先查看 ZIP 的顶层结构，再解压；最终必须满足：
@@ -46,7 +49,7 @@ root@172.31.21.245:2222
 ```bash
 # 若包内直接包含 python.sh/kit/exts，解压命令如下：
 mkdir -p "$PAIR_ROOT/runtime41"
-unzip /path/to/isaac-sim-4.1.0.zip -d "$PAIR_ROOT/runtime41"
+unzip "$PAIR_ROOT/downloads/isaac-sim-4.1.0.zip" -d "$PAIR_ROOT/runtime41"
 test -f "$PAIR_ROOT/runtime41/python.sh"
 test -x "$PAIR_ROOT/runtime41/kit/python/bin/python3"
 cat "$PAIR_ROOT/runtime41/VERSION"
@@ -105,7 +108,7 @@ bash "$PAIR_ROOT/runtime41/python.sh" -m pip install \
   --target "$PAIR_ROOT/env/python310" --upgrade pip==26.1.2
 bash "$PAIR_ROOT/runtime41/python.sh" -m pip install \
   --target "$PAIR_ROOT/env/python310" --upgrade \
-  -r "$EGO_ROOT/work/isaac41/requirements-engine41.txt"
+  -r "$EGO_ROOT/work/isaac41/requirements-extra-linux310.lock.txt"
 
 # 查看实际导入来源；不要另装最新 Torch 来“修复”版本差异。
 bash "$PAIR_ROOT/runtime41/python.sh" -c \
@@ -115,9 +118,16 @@ bash "$PAIR_ROOT/runtime41/python.sh" -c \
 此处安装 NumPy 1.26.4，预期 Torch 2.2.2+cu118。Kit 启动后可能优先加载它自带的
 NumPy 1.26.0：本次环境检查在独立恢复副本实际观察到该行为，检查会记录实际版本和路径，
 接受 1.26.0/1.26.4，不接受 NumPy 2.x。不要为了统一显示版本而删除 Kit 自带包。
-基础依赖显式固定了版本，但此 requirements
-不是所有传递依赖的带散列 lockfile；安装后保留实际版本，环境检查不过不能继续宣称复现成功。
+`requirements-engine41.txt` 保留直接依赖的说明；上面的 Linux/Python 3.10 版本锁
+记录新机器实际安装的 131 个额外包，包含传递依赖，但不是带制品散列的供应链锁文件。
+安装后保留实际版本，环境检查不过不能继续宣称复现成功。
 `usd-core`/Torch/Warp 由 Kit 提供，不对它们执行升级安装。
+
+若原站下载慢，可显式选择包镜像，例如追加
+`--index-url https://mirrors.cloud.tencent.com/pypi/simple`。已有完整 wheel 时直接传入该 wheel
+的文件路径；仅设置 `--find-links` 不保证 pip 优先选择同版本本地文件。
+下载和安装缓存继续放在 `$PAIR_ROOT` 内。PathTracing 还需要匹配驱动的 OptiX 数据，
+见 [新机器渲染依赖](FRESH_EPISODE.md#环境与任务资产)。
 
 ## 编译 CuRobo 并检查环境
 
@@ -169,7 +179,8 @@ bash "$EGO_ROOT/migration/run_engine.sh" "$PAIR_ROOT" -m pip freeze \
    模型禁止商用和二次分发；代码仓库不发布模型本体。
 2. 按 [Blender 链接与版本](../ASSETS.md) 准备 Blender 5.2.2。
    `deps/blender_mmd_tools/` 是保留的 4.5.14 导入器，要求 Blender ≥4.2，不能用 4.0.2。
-   原导出在 macOS 5.2.2 完成，Linux 同版原始导入尚未作为迁移验收项目完整跑过。
+   原导出在 macOS 5.2.2 完成；新机器已经使用 Linux 5.2.2 从原始 PMX 完成导入和导出，
+   核对为 12598 顶点、15794 三角面、208 骨骼。最终渲染仍需独立验收。
 3. 安装导入器需要的纯 Python OpenCC，再在 Blender 自带 Python 环境内执行脚本。
 
 ```bash

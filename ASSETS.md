@@ -3,7 +3,7 @@
 代码以本仓库根目录的 InternDataEngine 为基底。大模型、贴图、SDK 和数据不放入 Git，
 只列来源、版本、目标位置和校验信息；这些链接不会自动触发下载。
 
-## 当前安柏 / Isaac Sim 4.1 流程
+## Isaac Sim 4.1 流程与可选人物
 
 | 内容 | 下载入口 | 版本与放置位置 |
 | --- | --- | --- |
@@ -15,6 +15,7 @@
 | 环境光 | [envmap_lib](https://huggingface.co/datasets/InternRobotics/InternData-A1/tree/main/InternDataAssets/assets/envmap_lib) | 同名相对目录 |
 | CuRobo 资产和机器人配置 | [curobo](https://huggingface.co/datasets/InternRobotics/InternData-A1/tree/main/InternDataAssets/curobo) | `assets/InternDataAssets/curobo/`；规划器源码已保存在 `deps/curobo/` |
 | 机器人 URDF/网格 | [panda_drake](https://huggingface.co/datasets/InternRobotics/InternData-A1/tree/main/InternDataAssets/panda_drake) | `assets/InternDataAssets/panda_drake/` |
+| 最初的 Reallusion Worker 原生 USD / 手 / 贴图 | [NVIDIA 人物样例 ZIP](https://d4i3qtqj3r0z5.cloudfront.net/Characters_NVD%4010012.zip) | `human41/assets/characters/`；`bootstrap_worker.py` 只取 Worker 和许可文件，记录 ZIP CRC 与本地 SHA256 |
 | 安柏 2.0 原生 PMX / 贴图 | [原始模型 ZIP](https://activity.hdslb.com/blackboard/static/20210316/4d40bc4f98f94fbc71c235832ce3efd4/ApoSncaZI8.zip) | 解压到 `anime-human-v1/assets/amber/`；保留原始贴图目录 |
 | Blender 5.2.2 | [Linux x64](https://download.blender.org/release/Blender5.2/blender-5.2.2-linux-x64.tar.xz)、[macOS ARM64](https://download.blender.org/release/Blender5.2/blender-5.2.2-macos-arm64.dmg)、[官方 SHA256](https://download.blender.org/release/Blender5.2/blender-5.2.2.sha256) | 原 PMX 转换在 macOS 5.2.2 完成；MMD 导入器要求 Blender ≥4.2，源码已在 `deps/blender_mmd_tools/` |
 | CUDA 11.8 构建组件 | [NVIDIA 11.8.0 分发清单](https://developer.download.nvidia.com/compute/cuda/redist/redistrib_11.8.0.json) | 原环境使用 CUDA 11.8；清单包含组件地址和 SHA256 |
@@ -28,10 +29,19 @@
 原模型版权与使用条件保留在 [provenance/amber 记录](evidence/amber-upright/provenance.json)，
 包含禁止商用、禁止二次分发的原文。模型本体不随公开 Git 仓库分发。
 
-**Isaac Sim 4.1 的公开旧版 ZIP 直链未确认可用。** 官方下载页可能只提供较新版本，
-不能把它们视为本项目的已验证替代。VLA-Infra 已有安装包
-`/vepfs/public/pengjiaqi/interndata-human-pair/downloads/isaac-sim-4.1.0.zip`
-和完整 `runtime41/`，需要迁移时可按需复用；当前不自动传输。
+Isaac Sim 4.1 [NVIDIA 旧版 ZIP 直链](https://download.isaacsim.omniverse.nvidia.com/isaac-sim-standalone%404.1.0-rc.7%2B4.1.14801.71533b68.gl.linux-x86_64.release.zip)
+已在新机器下载，大小为 8,335,189,359 字节。安装命令见
+[环境文档](migration/README.md#isaac-sim-410)，无需复制原服务器 SDK。
+Blender 官方入口若返回 403，可使用
+[清华镜像校验清单](https://mirrors.tuna.tsinghua.edu.cn/blender/release/Blender5.2/blender-5.2.2.sha256)、
+[NLUUG 独立镜像校验清单](https://ftp.nluug.nl/pub/graphics/blender/release/Blender5.2/blender-5.2.2.sha256)，
+以及 [阿里镜像安装包](https://mirrors.aliyun.com/blender/release/Blender5.2/blender-5.2.2-linux-x64.tar.xz)。
+`bootstrap_character.sh` 比较两份校验清单并校验下载包 SHA256。
+
+Worker 采用 NVIDIA 样例包中原始 USD、手部网格与贴图，不替换皮肤 UV。
+[Worker 文件校验清单](provenance/worker-assets.json) 记录本次 197 个文件的 ZIP CRC、
+SHA256 和上游包 ETag。SHA256 是本项目下载后记录的校验值，不冒充供应商发布签名。
+`bootstrap_worker.py` 对照此清单验证已有文件与新下载文件。
 
 ## 逐文件地址与完整性
 
@@ -70,5 +80,6 @@ URL 使用上游 `main` 分支，它可能变化。LFS 文件应核对记录的 
 合计 89,711,203 字节（约 85.6 MiB），包括场景/轨迹/接触参考和原生角色导出。
 它不包含 SDK、外部场景资产、蒙皮缓存和渲染输出。可从已有服务器按需取得这些文件，
 之后按 README 重新解 IK、烘焙和渲染；原生角色导出也可从 PMX 重建。
-原 episode 和接触参考仍是固定输入，目前没有任意新 episode 的自动替代入口。
+严格复现历史 episode 时，这些仍是固定输入。若要从公开来源重新生成任务及配对视频，
+使用 [新任务转换流程](migration/FRESH_EPISODE.md)，无需这些历史文件。
 重新进行物理规划可能产生不同帧数的新 episode，不能声称与原 1507 帧逐位一致。

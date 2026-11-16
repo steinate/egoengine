@@ -13,9 +13,21 @@ for name in ["ego", "front"]:
         for f in sorted((BASE / "render").glob(f"verification-{name}-part*.json"))
     ]
     assert len(parts) == 3
+    assert all(
+        part["render_script_sha256"]
+        == hashlib.sha256((BASE / "render.py").read_bytes()).hexdigest()
+        for part in parts
+    )
+    assert sorted(int(p.stem) for p in (BASE / "render" / name).glob("*.png")) == list(range(N))
+    for log in (BASE / "render").glob(f"kit-{name}-part*.log"):
+        assert not any(
+            "[Error]" in line and "rtx.optixdenoising.plugin" in line
+            for line in log.read_text(errors="replace").splitlines()
+        )
     frames = sorted(i for part in parts for i in part["source_frames"])
     assert frames == list(range(N))
     assert len({x["source_animation_sha256"] for x in parts}) == 1
+    assert len({(x["quality"], x["renderer"], tuple(x["resolution"])) for x in parts}) == 1
     report = dict(parts[0])
     report.update(
         frames=N,
@@ -29,6 +41,7 @@ for name in ["ego", "front"]:
 assert (
     all(x["source_frames"] == list(range(N)) for x in rv.values())
     and rv["ego"]["source_animation_sha256"] == rv["front"]["source_animation_sha256"]
+    and all(rv["ego"][key] == rv["front"][key] for key in ("quality", "renderer", "resolution"))
 )
 r = dict(rv["ego"])
 r["views"] = rv

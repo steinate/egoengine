@@ -1,0 +1,1191 @@
+{
+  "url": "https://d4i3qtqj3r0z5.cloudfront.net/Characters_NVD%4010012.zip",
+  "etag": "\"f5992ab53b31d13561ae365d0360b09a-112\"",
+  "archive_bytes": 935072669,
+  "transferred_bytes_this_run": 199004689,
+  "files": [
+    {
+      "path": "Assets/Characters/Reallusion/Readme.txt",
+      "bytes": 3553,
+      "sha256": "41f31f1fb786324e1582b45b7094a25ee1f5b9d4b002ddaee9791d98b9ba3ef7",
+      "zip_crc32": 3715259938
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/.thumbs/256x256/Worker.usd.png",
+      "bytes": 54543,
+      "sha256": "fa3c99c0ef20cd4cbe64ed4a35499d62bc5e6a06b280a7719e64ddb9610f67c2",
+      "zip_crc32": 3319718856
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/OmniRLSurfaceBase.mdl",
+      "bytes": 15589,
+      "sha256": "c46670744567575466998add831588277a017e32e8149874403593322f8b3b69",
+      "zip_crc32": 718836764
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Std_Eye_Occlusion_R.usd",
+      "bytes": 1352,
+      "sha256": "4f10c1028056de0891127d8902e9d6a39c3b270baed68e5d0638795a74f10dad",
+      "zip_crc32": 2466789224
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Baseball_Cap.usd",
+      "bytes": 1349,
+      "sha256": "ba55e54edd2d2d8fd59f279456da375ffbd4e5f6856c4076db98c8a22282a5b6",
+      "zip_crc32": 2889580895
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Basketball_Shoes.usd",
+      "bytes": 1356,
+      "sha256": "d4c474cd4ee6f3a0261e228116eea5a16896d72ea8a417798e50089047ecbd4e",
+      "zip_crc32": 2512418369
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Cargo_pant.usd",
+      "bytes": 1340,
+      "sha256": "ecad260c4ff830a39b7c8545543e3beb22e3f333d1263ef1fed6aa3d5df62b76",
+      "zip_crc32": 3662349136
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Field_Jacket.usd",
+      "bytes": 1352,
+      "sha256": "8747cc275e1402d8c6d68374982ae253193355a96ea6867e1f7e630c654971f4",
+      "zip_crc32": 3788502518
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/OmniHair.mdl",
+      "bytes": 35376,
+      "sha256": "c04577e10e10a1f032875276c7f833b144d988ad3b262797f4f850b9b390d6c0",
+      "zip_crc32": 4104322081
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/OmniHairBase.mdl",
+      "bytes": 12158,
+      "sha256": "2e9942a1290ee00b0cfa21e7b873e982918e5f3b00e40792f0070db29b8ed824",
+      "zip_crc32": 1731036234
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/OmniImage.mdl",
+      "bytes": 21782,
+      "sha256": "319151ddfd041570b587230bf723b90e930c2e812da5ff421ad5c6c990c348c9",
+      "zip_crc32": 1672488047
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/OmniRLBase.mdl",
+      "bytes": 6673,
+      "sha256": "9b9ec2f453628c9b9a75f80df5ebb055ea6f9c4cd828fd6127f9f23010f3e6bf",
+      "zip_crc32": 2855544797
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/OmniRL_DHHead.mdl",
+      "bytes": 27503,
+      "sha256": "fbf5c2fb79c594d542b1c40c9bce932d904ed9b5b8d3c169d9a404dee8576de8",
+      "zip_crc32": 842880067
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/OmniRL_EyeOcclusion.mdl",
+      "bytes": 49061,
+      "sha256": "294b763abfc8faee9ff98330c48196d137f12123269382fcfd4b8569e1061dda",
+      "zip_crc32": 2384488450
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/OmniRL_EyeOcclusion_Opacity.png",
+      "bytes": 58243,
+      "sha256": "c269598680bc712092a324506b9efda0b30e67f96ab3c571a944f2ae11f07544",
+      "zip_crc32": 2923098755
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/OmniRL_PBR.mdl",
+      "bytes": 7546,
+      "sha256": "20d269131dd7ea7dbe07faca3a64699aa287e0ac36255856486e4e46025f3750",
+      "zip_crc32": 4196323324
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/OmniRL_SSS.mdl",
+      "bytes": 19745,
+      "sha256": "338a346e70a0e61bc73e86bb2da0af0963389f942b56e407036e70d8bc4e5b13",
+      "zip_crc32": 1215648964
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/OmniRL_Tearline.mdl",
+      "bytes": 48982,
+      "sha256": "8d24da10f756e17ef0fdc29fa98783936a8041cae473945afee396027515b9b9",
+      "zip_crc32": 1489002242
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/OmniShared.mdl",
+      "bytes": 16990,
+      "sha256": "66ba0a0ed2af9259f24deceea4371f0b448219f65ef6cc7ca8f2952008259c73",
+      "zip_crc32": 4001072030
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/OmniSurface.mdl",
+      "bytes": 48984,
+      "sha256": "837fae1ce22a74471c70fbc6c543a8ccde46408d25a1a05d4a68cbe491791e9d",
+      "zip_crc32": 2397470627
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/OmniSurfaceBase.mdl",
+      "bytes": 19981,
+      "sha256": "8f87e33e09fc2224c9f15d561d7192399ed13ee11357219e698a9feb36d24338",
+      "zip_crc32": 791314047
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/OmniSurfaceUber.mdl",
+      "bytes": 59682,
+      "sha256": "4bffe0eb5c8a5a620bc8118c2ede93ab2726ac2bc76b5bdc72a07124ae09326f",
+      "zip_crc32": 2115701028
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/OmniSurfaceUberBase.mdl",
+      "bytes": 26358,
+      "sha256": "11894bc69462103ce3bfc31212b8cef3b47b609b6dc7eee1494b6e5cc2ec0a6b",
+      "zip_crc32": 2454856000
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Std_Skin_Head.usd",
+      "bytes": 1386,
+      "sha256": "06fa545bcc136a06e83f9e89d6657d9ba305030c22e0f4ae557ebe01eaa29518",
+      "zip_crc32": 3991797667
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Std_Cornea_L.usd",
+      "bytes": 1342,
+      "sha256": "ab568ef0d54b8d487c22f379fa0b25097c381fd82f7a74ebd2f326da142a729e",
+      "zip_crc32": 2391801573
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Std_Cornea_R.usd",
+      "bytes": 1342,
+      "sha256": "811ecd467f9aead9d15cb7296978c269cf415dbd4293640c9691028104f66709",
+      "zip_crc32": 1840159931
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Std_Eyelash.usd",
+      "bytes": 1379,
+      "sha256": "039e43e8fc7d37e2db0eaf245b86474ae104e2ea4ac93544fd49b3a98f563346",
+      "zip_crc32": 2993274536
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Std_Eye_L.usd",
+      "bytes": 1350,
+      "sha256": "453812711ea99e2caf1cbf9a6d687ab397748c5aec530f7c8ecc702ac355723f",
+      "zip_crc32": 498822302
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Std_Eye_Occlusion_L.usd",
+      "bytes": 1352,
+      "sha256": "f520a70a31ab0e5c73dd49ec31d7335eb5b385750b1fb9a887cfbe70a5cfa44d",
+      "zip_crc32": 4001901898
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Std_Eye_R.usd",
+      "bytes": 1350,
+      "sha256": "bf2d8c0b37ac9b965e7684ec155a609f7859fdc477337d2b496486811f4df5ef",
+      "zip_crc32": 2058680979
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Std_Lower_Teeth.usd",
+      "bytes": 1388,
+      "sha256": "d98a99bfbadfe4f5b804b3d8fd3713bfee9683611667905cd75788adde5aba0d",
+      "zip_crc32": 3872926345
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Std_Nails.usd",
+      "bytes": 1345,
+      "sha256": "0bcee9cb00d6c6548841073d2699e00a4d377c99e6701b8d4389d95622f6a0b1",
+      "zip_crc32": 279560152
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Std_Skin_Arm.usd",
+      "bytes": 1345,
+      "sha256": "e885d83603cf558adf0813a690cfda1cbd35a3f4196e80a57844b223495d7ab3",
+      "zip_crc32": 3639211879
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Std_Tearline_L.usd",
+      "bytes": 1341,
+      "sha256": "84370967044b36c73d896db85450011aeae6020eecbb5d977b303825edc3d492",
+      "zip_crc32": 1789245286
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Std_Skin_Body.usd",
+      "bytes": 1386,
+      "sha256": "7eefa1bdc2a3e6241ee36e3f7e74065f3e0c3ca82f65da27bf57d063b86af0ac",
+      "zip_crc32": 3464820754
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Std_Tearline_R.usd",
+      "bytes": 1341,
+      "sha256": "f92d3a3b984f05df6a5f8d8e15e27e3c6e5094f1662f98a7cbb730c7bc55ac4b",
+      "zip_crc32": 92817484
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Std_Skin_Leg.usd",
+      "bytes": 1382,
+      "sha256": "75e4de775e2cf91263b012898d9f2c5d0f817528642facc6cebb8ed084ae4031",
+      "zip_crc32": 2880311014
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Std_Tongue.usd",
+      "bytes": 1377,
+      "sha256": "315d92a8afe79dc1e18f4e48d120c7f891f89ff75af52efd6dab8b1f2136ca73",
+      "zip_crc32": 2844834959
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Std_Upper_Teeth.usd",
+      "bytes": 1388,
+      "sha256": "d5f62ec93a3e5470b670fb7ad00e989e376f0a5195d00cf6f28ee427e3d09621",
+      "zip_crc32": 4246225965
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Baseball_Cap/Baseball_Cap_BaseColor.png",
+      "bytes": 1009,
+      "sha256": "b708b0eb0609255c6f56406a1e10eae15c8c9dfb073d49cab881ad186682179d",
+      "zip_crc32": 1344440957
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Baseball_Cap/Baseball_Cap_Metal.png",
+      "bytes": 121,
+      "sha256": "196655f4797fcf4207c853fb62dc09caf69e2565eafe07d01e2c3ca84afb3c8d",
+      "zip_crc32": 3904934340
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Baseball_Cap/Baseball_Cap_Normal.png",
+      "bytes": 2181250,
+      "sha256": "4e2634c0c50bcb50115a506d855a2e00c20db31126a3ee8559c975aa95a6b393",
+      "zip_crc32": 914459690
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Baseball_Cap/Baseball_Cap_Rough.png",
+      "bytes": 848352,
+      "sha256": "aab9e7bea2cc7e344e4f86f1ca273f81031007d74d8e039398a728cb42ad9e98",
+      "zip_crc32": 1240101783
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Basketball_Shoes/Basketball_Shoes_Metal.png",
+      "bytes": 121,
+      "sha256": "196655f4797fcf4207c853fb62dc09caf69e2565eafe07d01e2c3ca84afb3c8d",
+      "zip_crc32": 3904934340
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Basketball_Shoes/Basketball_Shoes_BaseColor.jpg",
+      "bytes": 583699,
+      "sha256": "cdb4c3e5c118b9a05eea3637c9bc7f696781a3944ca6984a08a227b622a631d3",
+      "zip_crc32": 2702417959
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Basketball_Shoes/Basketball_Shoes_Normal.png",
+      "bytes": 1701095,
+      "sha256": "b4cbf22f7553f2584dff1727732e965df3c1399f7fec557c64dcc068939803cb",
+      "zip_crc32": 482206027
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Basketball_Shoes/Basketball_Shoes_Rough.png",
+      "bytes": 777932,
+      "sha256": "ade91c1a859b58a465362d520eca76a44b41022d5a621066a185deac73a0bc7f",
+      "zip_crc32": 3633810849
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Cargo_pant/Cargo_pant_BaseColor.jpg",
+      "bytes": 49663,
+      "sha256": "de4194c6d6402397d6e1e08fc30c207c2fc61de0474f65fac2a14ad32c24a1d7",
+      "zip_crc32": 407942022
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Cargo_pant/Cargo_pant_Blend.jpg",
+      "bytes": 681145,
+      "sha256": "1c4093fd7c473a5cee320295ab65114e653776123c0b7070756f8d35381e0c36",
+      "zip_crc32": 1396195144
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Cargo_pant/Cargo_pant_Normal.jpg",
+      "bytes": 1032702,
+      "sha256": "6e1d51299616f7ce4e746e46ca1cd59eb670e19e83938c3441ccc03868fcd53d",
+      "zip_crc32": 971790264
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Cargo_pant/Cargo_pant_Opacity.jpg",
+      "bytes": 17011,
+      "sha256": "507f4f47a3795b1bceb55bdba74379709bb7a5c48192024ba26501bc9943e182",
+      "zip_crc32": 3384806413
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Cargo_pant/Cargo_pant_Rough.png",
+      "bytes": 975733,
+      "sha256": "dd9210e9d61bbdb01f588b99368f4ea8c21184773c3a97751b4c714ddd6f0d9d",
+      "zip_crc32": 2299572137
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Field_Jacket/Field_Jacket_BaseColor.jpg",
+      "bytes": 1351208,
+      "sha256": "b69533f7934353c3fb6e122e546087101e34b1d16cfec7aec9bf8bee561e4d17",
+      "zip_crc32": 1863966290
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Field_Jacket/Field_Jacket_Metal.png",
+      "bytes": 121,
+      "sha256": "196655f4797fcf4207c853fb62dc09caf69e2565eafe07d01e2c3ca84afb3c8d",
+      "zip_crc32": 3904934340
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Field_Jacket/Field_Jacket_Normal.png",
+      "bytes": 8607062,
+      "sha256": "75b0a14f84fdc9ff74dcc1446727ef67b674d8b4ec58c305d3c82ab7588dcea1",
+      "zip_crc32": 3283844409
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Field_Jacket/Field_Jacket_Rough.png",
+      "bytes": 535970,
+      "sha256": "ca7f89bced5f93f039255a564a774e292121ba583af34f167c82cb7e4e2d76b7",
+      "zip_crc32": 2215744282
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Cornea_L/Std_Cornea_L_AO.jpg",
+      "bytes": 27619,
+      "sha256": "bf71766d616ed239b03a5a8066c18fb98bbf48e694b71688a71851636d781478",
+      "zip_crc32": 2133389151
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Cornea_L/Std_Cornea_L_BaseColor.jpg",
+      "bytes": 1965722,
+      "sha256": "628c31e15e2a48c7bdcb40802bc57edb14b26ad98c8656052ddfcfde524c914f",
+      "zip_crc32": 2257599942
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Cornea_L/Std_Cornea_L_Metal.jpg",
+      "bytes": 8764,
+      "sha256": "85117875409654e51386a4a3953c14d8d889964d266678b3759d08a8a7ab953c",
+      "zip_crc32": 2504116768
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Cornea_L/Std_Cornea_L_Rough.jpg",
+      "bytes": 8764,
+      "sha256": "85117875409654e51386a4a3953c14d8d889964d266678b3759d08a8a7ab953c",
+      "zip_crc32": 2504116768
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Cornea_R/Std_Cornea_R_AO.jpg",
+      "bytes": 27802,
+      "sha256": "70453a7decb34da1764ab1576ef9b98b1a261bcc11b30e6f1efc438f82d714a8",
+      "zip_crc32": 845284986
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Cornea_R/Std_Cornea_R_Metal.jpg",
+      "bytes": 8764,
+      "sha256": "85117875409654e51386a4a3953c14d8d889964d266678b3759d08a8a7ab953c",
+      "zip_crc32": 2504116768
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Cornea_R/Std_Cornea_R_BaseColor.jpg",
+      "bytes": 1965722,
+      "sha256": "628c31e15e2a48c7bdcb40802bc57edb14b26ad98c8656052ddfcfde524c914f",
+      "zip_crc32": 2257599942
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Cornea_R/Std_Cornea_R_Rough.jpg",
+      "bytes": 8764,
+      "sha256": "85117875409654e51386a4a3953c14d8d889964d266678b3759d08a8a7ab953c",
+      "zip_crc32": 2504116768
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Eyelash/Std_Eyelash_AO.jpg",
+      "bytes": 66163,
+      "sha256": "f80662be3ee0393c618da73326782ed5a7eb5f654b9427a7ec6fe6edd9419e2c",
+      "zip_crc32": 1354845935
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Eyelash/Std_Eyelash_BaseColor.jpg",
+      "bytes": 66166,
+      "sha256": "7cda577ea50404176d8569e5090a0a59067bb6cb692fef8a29147a5a74dad906",
+      "zip_crc32": 3195508478
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Eyelash/Std_Eyelash_Normal.png",
+      "bytes": 69163,
+      "sha256": "86b5b4d620eca498db539968d0afcee2282afb0e91ae9513203c41485b80d058",
+      "zip_crc32": 695989287
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Eyelash/Std_Eyelash_Opacity.jpg",
+      "bytes": 764394,
+      "sha256": "21835300d04d443179ae09299117c0bed60473eb30bd490eb5b1f7fc7158d4d2",
+      "zip_crc32": 2783798594
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Eyelash/Std_Eyelash_Rough.jpg",
+      "bytes": 66163,
+      "sha256": "f80662be3ee0393c618da73326782ed5a7eb5f654b9427a7ec6fe6edd9419e2c",
+      "zip_crc32": 1354845935
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Eye_L/Std_Eye_L_BaseColor.jpg",
+      "bytes": 2173483,
+      "sha256": "61e0805242a870897787c42a44a7d5d929b5ab92f14ab22d32cd03db195e6fc5",
+      "zip_crc32": 4227314541
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Eye_L/Std_Eye_L_Displace.jpg",
+      "bytes": 26033,
+      "sha256": "22791dcdefc145871aaa0961688ac468366cbd4b72c7d9e32ee3d7a0bda90e65",
+      "zip_crc32": 3430685320
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Eye_L/Std_Eye_L_Metal.jpg",
+      "bytes": 8764,
+      "sha256": "85117875409654e51386a4a3953c14d8d889964d266678b3759d08a8a7ab953c",
+      "zip_crc32": 2504116768
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Eye_L/Std_Eye_L_Normal.jpg",
+      "bytes": 114891,
+      "sha256": "c7af1f005168b4df2a5c34d7b2ed409a6b6006c28e95c81ab1ee00c41faf907e",
+      "zip_crc32": 2384166466
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Eye_L/Std_Eye_L_Rough.jpg",
+      "bytes": 8764,
+      "sha256": "b9151fef687d9782875ba0cd2039f93edaadc9be9bd1e2897ccb14c93a89351e",
+      "zip_crc32": 2688026550
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Eye_Occlusion_L/Std_Eye_Occlusion_L_BaseColor.jpg",
+      "bytes": 691,
+      "sha256": "4ecb84a96945bd55a253d08c1953455c7b2f68ed254dfbec2dd32a38dab14f77",
+      "zip_crc32": 832920494
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Eye_Occlusion_L/Std_Eye_Occlusion_L_Metal.jpg",
+      "bytes": 693,
+      "sha256": "ae720d682a3ccb743421a33aaca9e4ed940de729cbceeac8b462fd40a1d637a5",
+      "zip_crc32": 3713655373
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Eye_Occlusion_L/Std_Eye_Occlusion_L_Opacity.jpg",
+      "bytes": 693,
+      "sha256": "ae720d682a3ccb743421a33aaca9e4ed940de729cbceeac8b462fd40a1d637a5",
+      "zip_crc32": 3713655373
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Eye_Occlusion_L/Std_Eye_Occlusion_L_Rough.jpg",
+      "bytes": 691,
+      "sha256": "46a96db4d335bc28a39d7483d77157a85a227707a9098e05c51aaea67d55ed05",
+      "zip_crc32": 109753903
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Eye_Occlusion_R/Std_Eye_Occlusion_R_Metal.jpg",
+      "bytes": 693,
+      "sha256": "ae720d682a3ccb743421a33aaca9e4ed940de729cbceeac8b462fd40a1d637a5",
+      "zip_crc32": 3713655373
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Eye_Occlusion_R/Std_Eye_Occlusion_R_Opacity.jpg",
+      "bytes": 693,
+      "sha256": "ae720d682a3ccb743421a33aaca9e4ed940de729cbceeac8b462fd40a1d637a5",
+      "zip_crc32": 3713655373
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Eye_Occlusion_R/Std_Eye_Occlusion_R_BaseColor.jpg",
+      "bytes": 691,
+      "sha256": "4ecb84a96945bd55a253d08c1953455c7b2f68ed254dfbec2dd32a38dab14f77",
+      "zip_crc32": 832920494
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Eye_Occlusion_R/Std_Eye_Occlusion_R_Rough.jpg",
+      "bytes": 691,
+      "sha256": "46a96db4d335bc28a39d7483d77157a85a227707a9098e05c51aaea67d55ed05",
+      "zip_crc32": 109753903
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Eye_R/Std_Eye_R_BaseColor.jpg",
+      "bytes": 2173483,
+      "sha256": "61e0805242a870897787c42a44a7d5d929b5ab92f14ab22d32cd03db195e6fc5",
+      "zip_crc32": 4227314541
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Eye_R/Std_Eye_R_Displace.jpg",
+      "bytes": 26033,
+      "sha256": "cabf39e3c3c9e539bc556db4c006769a28605f9b10e3bfe8dbd46627c74220b6",
+      "zip_crc32": 2238052715
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Eye_R/Std_Eye_R_Metal.jpg",
+      "bytes": 8764,
+      "sha256": "85117875409654e51386a4a3953c14d8d889964d266678b3759d08a8a7ab953c",
+      "zip_crc32": 2504116768
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Eye_R/Std_Eye_R_Normal.jpg",
+      "bytes": 116046,
+      "sha256": "09a270d81d03a21f3071e7bb24d07bb6e190944791cdd9f03100d15e7ef80efe",
+      "zip_crc32": 3908284602
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Eye_R/Std_Eye_R_Rough.jpg",
+      "bytes": 8764,
+      "sha256": "b9151fef687d9782875ba0cd2039f93edaadc9be9bd1e2897ccb14c93a89351e",
+      "zip_crc32": 2688026550
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Lower_Teeth/Std_Lower_Teeth_AO.jpg",
+      "bytes": 67902,
+      "sha256": "757baecd3d2a3833a35e38e2f3f432d7cd32a30d1a61e3bc7543f0a4b8cf2d8d",
+      "zip_crc32": 2236323341
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Lower_Teeth/Std_Lower_Teeth_Metal.jpg",
+      "bytes": 8764,
+      "sha256": "85117875409654e51386a4a3953c14d8d889964d266678b3759d08a8a7ab953c",
+      "zip_crc32": 2504116768
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Lower_Teeth/Std_Lower_Teeth_BaseColor.png",
+      "bytes": 508619,
+      "sha256": "4fd4951713b4da2bf0aebb4386e7a875aa808606daa2c25d172549bf9a85eb66",
+      "zip_crc32": 2914775230
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Lower_Teeth/Std_Lower_Teeth_Normal.png",
+      "bytes": 578520,
+      "sha256": "660fc2c2a12ca8c12c9d3bfd6e6880be876973535144f4a689ac01e32abd4f82",
+      "zip_crc32": 1020318210
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Lower_Teeth/Std_Lower_Teeth_Rough.jpg",
+      "bytes": 235489,
+      "sha256": "00e7ce142629d8f6c0f0654beb2a27c1d3a5e9a4c2a6741b4d35f4e1ed9b923f",
+      "zip_crc32": 1500337571
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Nails/Std_Nails_AO.jpg",
+      "bytes": 414827,
+      "sha256": "d34d2df5bb0058f258265f39e19b85ad03ef51d5e810fbf8682ac7f21f3e486e",
+      "zip_crc32": 4278554001
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Nails/Std_Nails_BaseColor.jpg",
+      "bytes": 1048767,
+      "sha256": "fbb103e0290070fc7e402b90faf7509ea3f8ea2584565f9f7b75a22d39e411fe",
+      "zip_crc32": 962568584
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Nails/Std_Nails_MicroN.png",
+      "bytes": 24405709,
+      "sha256": "c59be413d3bb4b3c690a6a4c1d53b28948187cd836f48ced41280f3a3be39b45",
+      "zip_crc32": 4172968539
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Nails/Std_Nails_MicroNMask.jpg",
+      "bytes": 66165,
+      "sha256": "8f7cdb237f1ce5c71ceac0890737c65ef39174e6658011662663fa7019050d32",
+      "zip_crc32": 1098934447
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Nails/Std_Nails_Normal.png",
+      "bytes": 894468,
+      "sha256": "735ed34fe3b422ab7f0e9968aab237f99bf2bcd4a9afd6b981dedf111ae56c7b",
+      "zip_crc32": 2696523908
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Nails/Std_Nails_RGBAMask.tga",
+      "bytes": 4194322,
+      "sha256": "69f5681276097d7b3189b58a6ad4251f43d42755a70b16b6f70a9d38846a29ed",
+      "zip_crc32": 2020628096
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Nails/Std_Nails_Rough.jpg",
+      "bytes": 236670,
+      "sha256": "ad20542289a051b97a43ea5a8abf09df1e55c6e58ddf709285e822211e624e6e",
+      "zip_crc32": 2209047659
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Nails/Std_Nails_SSSMap.jpg",
+      "bytes": 631,
+      "sha256": "69160e12f5290ec2c2573dccdd9be624139eb757b74b55d06985174d3bbf69f7",
+      "zip_crc32": 3540161491
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Arm/Std_Skin_Arm_AO.jpg",
+      "bytes": 262035,
+      "sha256": "a7f17ff6f33a16b4c348be85a4abd8bfb7fb06cae75d24d9f536dbe63e4a3172",
+      "zip_crc32": 2689607061
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Arm/Std_Skin_Arm_BaseColor.jpg",
+      "bytes": 1351923,
+      "sha256": "4863a05dd43b7c32b1367a13d81a5e9330aaf38a13ac32d011194014ce6ea9fa",
+      "zip_crc32": 1476796263
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Arm/Std_Skin_Arm_MicroN.png",
+      "bytes": 24405709,
+      "sha256": "c59be413d3bb4b3c690a6a4c1d53b28948187cd836f48ced41280f3a3be39b45",
+      "zip_crc32": 4172968539
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Arm/Std_Skin_Arm_MicroNMask.jpg",
+      "bytes": 66165,
+      "sha256": "8f7cdb237f1ce5c71ceac0890737c65ef39174e6658011662663fa7019050d32",
+      "zip_crc32": 1098934447
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Arm/Std_Skin_Arm_Normal.png",
+      "bytes": 5323966,
+      "sha256": "48d0c2c738fcd7b7ffbeeebbd24d6f03f10617e1c9d32d9b474ac8738de906a9",
+      "zip_crc32": 3404959481
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Arm/Std_Skin_Arm_RGBAMask.tga",
+      "bytes": 4194322,
+      "sha256": "e4d8c73e7d3db532206593aaf3040d05aaa7ddd98f57824256bf4c5d970ba958",
+      "zip_crc32": 3311007218
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Arm/Std_Skin_Arm_Rough.jpg",
+      "bytes": 1230450,
+      "sha256": "c14c265683713e3f04d83d4292c6af33252e18ac0cfc1d8c43e093b397dbfe0f",
+      "zip_crc32": 1918935043
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Arm/Std_Skin_Arm_SSSMap.png",
+      "bytes": 363593,
+      "sha256": "fb6bb446aea961dea8dc79ddb512e4219e0f3c72e32680e44823da1b7568c6b0",
+      "zip_crc32": 175149298
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Body/Std_Skin_Body_RGBAMask.tga",
+      "bytes": 4194322,
+      "sha256": "6eadf246eea2d2e2d2626aa540146b168dac60f36ce31bef349e90f3328b489a",
+      "zip_crc32": 3933255823
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Body/Std_Skin_Body_AO.jpg",
+      "bytes": 174239,
+      "sha256": "9034fe9c2342acde8c497d86ebdb27e491ba18444863ef6dfcafdc77a186a63d",
+      "zip_crc32": 3303817665
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Body/Std_Skin_Body_BaseColor.jpg",
+      "bytes": 1320580,
+      "sha256": "33ab713da33efbc632b5d9ff5207eb3375b6eeeb80f9e97b8e3a688b5f8dc900",
+      "zip_crc32": 3549012813
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Body/Std_Skin_Body_Metal.jpg",
+      "bytes": 84484,
+      "sha256": "ab4b90edd2c806a577d0163edce1e48b36f7bd15d2ce93ae2c1ba5d085cd899e",
+      "zip_crc32": 1980583789
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Body/Std_Skin_Body_MicroN.png",
+      "bytes": 24405709,
+      "sha256": "c59be413d3bb4b3c690a6a4c1d53b28948187cd836f48ced41280f3a3be39b45",
+      "zip_crc32": 4172968539
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Body/Std_Skin_Body_MicroNMask.jpg",
+      "bytes": 66165,
+      "sha256": "8f7cdb237f1ce5c71ceac0890737c65ef39174e6658011662663fa7019050d32",
+      "zip_crc32": 1098934447
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Body/Std_Skin_Body_Normal.png",
+      "bytes": 5181594,
+      "sha256": "60e449fea5721816cba52a2d2819d4528fdfa7328e4b14288e64254b401f38af",
+      "zip_crc32": 4002289934
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Body/Std_Skin_Body_Rough.jpg",
+      "bytes": 1260305,
+      "sha256": "fe6fe66c9078b02e32255dcc631b92b697293a4f7bd463264be086bf3f1fe1c0",
+      "zip_crc32": 197080326
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Body/Std_Skin_Body_SSSMap.png",
+      "bytes": 388938,
+      "sha256": "71b904164b2dae0a206c5ab512b6020d55ad48b841d4e81dbd56d411d0ea1359",
+      "zip_crc32": 699627056
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Head/Std_Skin_Head_MicroN.png",
+      "bytes": 24405709,
+      "sha256": "c59be413d3bb4b3c690a6a4c1d53b28948187cd836f48ced41280f3a3be39b45",
+      "zip_crc32": 4172968539
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Head/Std_Skin_Head_AO.jpg",
+      "bytes": 186395,
+      "sha256": "dc6003edcaeb0b7b55532caef2bea2062439bf9fcd950f312907387055808b4a",
+      "zip_crc32": 2764209769
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Head/Std_Skin_Head_BaseColor.jpg",
+      "bytes": 2269619,
+      "sha256": "84bf658c7a9ff14a91d5ffb3fe0aefef35ff0d7fd3e00de9287fef6cede1ad94",
+      "zip_crc32": 208843455
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Head/Std_Skin_Head_BCBMap.jpg",
+      "bytes": 2686399,
+      "sha256": "b578e4401ee90e102926a1b076e01714fed9c196687015e7fcd13e6c742a8f4f",
+      "zip_crc32": 2903400768
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Head/Std_Skin_Head_CFULCMask.tga",
+      "bytes": 4194322,
+      "sha256": "e182d7a5771a929927e1bd6f92bc2efabb39020a44eb9e658a6a4c7382c29e80",
+      "zip_crc32": 3332546256
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Head/Std_Skin_Head_ENMask.tga",
+      "bytes": 4194322,
+      "sha256": "e3946cf7d39edad19c4db0f37cf616a57488b7936abb92cb21a4b59c70259502",
+      "zip_crc32": 2514405164
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Head/Std_Skin_Head_Metal.jpg",
+      "bytes": 69814,
+      "sha256": "6d1b74d7873bbe8e1e1eac5fc9d943582932559879162387db699ecbe0f441f7",
+      "zip_crc32": 2551600483
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Head/Std_Skin_Head_MicroNMask.jpg",
+      "bytes": 136984,
+      "sha256": "2ee9b5dddb4542d1d161c4fd3ff9174852b2b4c38b449c3b50710330abf70117",
+      "zip_crc32": 3601715703
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Head/Std_Skin_Head_NBMap.jpg",
+      "bytes": 2394233,
+      "sha256": "8d4a9b8639c5f9ae0a728016706027e9038743788600d8b347277558a699a8b5",
+      "zip_crc32": 1134201418
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Head/Std_Skin_Head_Rough.jpg",
+      "bytes": 1353891,
+      "sha256": "1178f9dd55ea8d6bbf59f7ced9f1148150ffe63fdb4c2ca3b160281bcc8f63c8",
+      "zip_crc32": 91719076
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Head/Std_Skin_Head_NMUILMask.tga",
+      "bytes": 4194322,
+      "sha256": "add8aea1770e2eb733c233956e1294cf265733089240dbbffda7c38bbdd6c0d4",
+      "zip_crc32": 3781582607
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Head/Std_Skin_Head_Normal.png",
+      "bytes": 4779678,
+      "sha256": "997744f01ec15d4ce1c8437f83c78620b8196faf7e9f489787ad1211f7e6ee0f",
+      "zip_crc32": 3822915531
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Head/Std_Skin_Head_SpecMask.jpg",
+      "bytes": 1312704,
+      "sha256": "9cecc930a77fd4c4459098eb2588d0fc14169bd431c651b519f99774dcbdfbf3",
+      "zip_crc32": 1662580909
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Head/Std_Skin_Head_SSSMap.jpg",
+      "bytes": 261280,
+      "sha256": "c7517e1010d536388fd71a3b2510156a1b274cf99c4ef2c13de10191b870215a",
+      "zip_crc32": 3634505296
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Tearline_R/Std_Tearline_R_Opacity.jpg",
+      "bytes": 691,
+      "sha256": "785f686759cc8a00cecb1b35caae87351b83dc986d1ee943b3bf2abdad64a698",
+      "zip_crc32": 1767874009
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Tearline_R/Std_Tearline_R_Rough.jpg",
+      "bytes": 693,
+      "sha256": "ae720d682a3ccb743421a33aaca9e4ed940de729cbceeac8b462fd40a1d637a5",
+      "zip_crc32": 3713655373
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Tearline_R/Std_Tearline_R_BaseColor.jpg",
+      "bytes": 691,
+      "sha256": "4ecb84a96945bd55a253d08c1953455c7b2f68ed254dfbec2dd32a38dab14f77",
+      "zip_crc32": 832920494
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Tearline_R/Std_Tearline_R_Metal.jpg",
+      "bytes": 691,
+      "sha256": "4ecb84a96945bd55a253d08c1953455c7b2f68ed254dfbec2dd32a38dab14f77",
+      "zip_crc32": 832920494
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Leg/Std_Skin_Leg_AO.jpg",
+      "bytes": 271230,
+      "sha256": "6fe77d6a9bbc50f8254bf03aa4bae50749163350c7bb38f907502c810db97271",
+      "zip_crc32": 2979768983
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Leg/Std_Skin_Leg_BaseColor.jpg",
+      "bytes": 1258853,
+      "sha256": "c98ad81b3c24b9afa026566721cfa4310651d246ae45e9fa39440b1b526c3757",
+      "zip_crc32": 547527429
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Leg/Std_Skin_Leg_Metal.jpg",
+      "bytes": 80208,
+      "sha256": "6c9ae93ae813370c67aed1a65080352423b99f6991bbc06527b28b92c7690535",
+      "zip_crc32": 2275109604
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Leg/Std_Skin_Leg_MicroN.png",
+      "bytes": 24405709,
+      "sha256": "c59be413d3bb4b3c690a6a4c1d53b28948187cd836f48ced41280f3a3be39b45",
+      "zip_crc32": 4172968539
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Leg/Std_Skin_Leg_MicroNMask.jpg",
+      "bytes": 66165,
+      "sha256": "8f7cdb237f1ce5c71ceac0890737c65ef39174e6658011662663fa7019050d32",
+      "zip_crc32": 1098934447
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Leg/Std_Skin_Leg_Normal.png",
+      "bytes": 4809397,
+      "sha256": "f533df362e8b411af2a65cc25e634ec06ef38f2def2ea075014b0d8d4e01f0f6",
+      "zip_crc32": 2311370791
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Leg/Std_Skin_Leg_RGBAMask.tga",
+      "bytes": 4194322,
+      "sha256": "3999438afea1bb65fc3422b426d96021d136d6e71198a92ee8e6327d9a2f7835",
+      "zip_crc32": 2142525139
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Leg/Std_Skin_Leg_Rough.jpg",
+      "bytes": 1166094,
+      "sha256": "a5b13a948c658cbf5aad3e0923f675c8bc508130347a9f6d8fecf2098c565698",
+      "zip_crc32": 2085345646
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Skin_Leg/Std_Skin_Leg_SSSMap.png",
+      "bytes": 356998,
+      "sha256": "800f319c3eadd730221145e20fc26723d2c8b7793acfd983b16c9c05779d9e67",
+      "zip_crc32": 1064624333
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Tearline_L/Std_Tearline_L_BaseColor.jpg",
+      "bytes": 691,
+      "sha256": "4ecb84a96945bd55a253d08c1953455c7b2f68ed254dfbec2dd32a38dab14f77",
+      "zip_crc32": 832920494
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Tearline_L/Std_Tearline_L_Metal.jpg",
+      "bytes": 691,
+      "sha256": "4ecb84a96945bd55a253d08c1953455c7b2f68ed254dfbec2dd32a38dab14f77",
+      "zip_crc32": 832920494
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Tearline_L/Std_Tearline_L_Opacity.jpg",
+      "bytes": 691,
+      "sha256": "785f686759cc8a00cecb1b35caae87351b83dc986d1ee943b3bf2abdad64a698",
+      "zip_crc32": 1767874009
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Tearline_L/Std_Tearline_L_Rough.jpg",
+      "bytes": 693,
+      "sha256": "ae720d682a3ccb743421a33aaca9e4ed940de729cbceeac8b462fd40a1d637a5",
+      "zip_crc32": 3713655373
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Tongue/Std_Tongue_AO.png",
+      "bytes": 5644,
+      "sha256": "a0211787d7127b9867dcaad2ee79ae1d878ed6ff7a785373bcb3086eb8e4b887",
+      "zip_crc32": 2745330186
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Tongue/Std_Tongue_BaseColor.png",
+      "bytes": 1026920,
+      "sha256": "f6130fa91547c1e34abf532aae5557884fabf3bf3b5539d004267ccc5605b513",
+      "zip_crc32": 3102916417
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Tongue/Std_Tongue_Metal.png",
+      "bytes": 551,
+      "sha256": "e3a0dbc3110df07dfcf308efaf2814caed8c303ea6b5e97f647d99cab41f6f3d",
+      "zip_crc32": 2908095914
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Tongue/Std_Tongue_Normal.png",
+      "bytes": 1074853,
+      "sha256": "accb58c88ec62a07e4560908bddac9543b4cf676b15e8c31691c31bbfe826664",
+      "zip_crc32": 24283796
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Tongue/Std_Tongue_Rough.png",
+      "bytes": 178327,
+      "sha256": "be117c8e9745f5d5316c29abb78a283dd76377f320591df19638fe4dd746036b",
+      "zip_crc32": 375433626
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Upper_Teeth/Std_Upper_Teeth_AO.jpg",
+      "bytes": 69906,
+      "sha256": "8ba99b76412c5447ad35b45e6203aa88b5cd8e52d6716592fe086294d71cfe7d",
+      "zip_crc32": 3259958748
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Upper_Teeth/Std_Upper_Teeth_BaseColor.png",
+      "bytes": 616393,
+      "sha256": "c342523696cdaa30a9760c515e94e0b69eea8c3a5a124ed89ec71033550245f0",
+      "zip_crc32": 1513051102
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Upper_Teeth/Std_Upper_Teeth_Normal.png",
+      "bytes": 603598,
+      "sha256": "b96b326823b800229519684b960b1240291c2477f0254aab610c860e402027be",
+      "zip_crc32": 2611812347
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Upper_Teeth/Std_Upper_Teeth_Metal.jpg",
+      "bytes": 8764,
+      "sha256": "85117875409654e51386a4a3953c14d8d889964d266678b3759d08a8a7ab953c",
+      "zip_crc32": 2504116768
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/Std_Upper_Teeth/Std_Upper_Teeth_Rough.jpg",
+      "bytes": 244725,
+      "sha256": "5bf52983a34cc6238014855effe27fea9cea8baa4936353ae3641b52dea273ca",
+      "zip_crc32": 580190775
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/V_Neck_Scrub_Shirt/V_Neck_Scrub_Shirt_BaseColor.jpg",
+      "bytes": 653030,
+      "sha256": "3cfc183baf977da3e3038d4c85c42922d8981fc960c4b94b8f77bd7d27a6fd71",
+      "zip_crc32": 1044939032
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/V_Neck_Scrub_Shirt/V_Neck_Scrub_Shirt_Blend.jpg",
+      "bytes": 665465,
+      "sha256": "61d2de2d38494497c19abf1615502dee226712ff839c702c5611e863add7b3ae",
+      "zip_crc32": 2972281142
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/V_Neck_Scrub_Shirt/V_Neck_Scrub_Shirt_Normal.jpg",
+      "bytes": 990663,
+      "sha256": "f24fa2c97e676c4a0a41576a2c02294344f3d157989abb948a478b13692a142e",
+      "zip_crc32": 877666502
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/V_Neck_Scrub_Shirt/V_Neck_Scrub_Shirt_Opacity.jpg",
+      "bytes": 17011,
+      "sha256": "507f4f47a3795b1bceb55bdba74379709bb7a5c48192024ba26501bc9943e182",
+      "zip_crc32": 3384806413
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/Textures/V_Neck_Scrub_Shirt/V_Neck_Scrub_Shirt_Rough.png",
+      "bytes": 189810,
+      "sha256": "6e04b61ae3445f6c59387c7839948888d9dd9508bb6eb3f4b2e057a24f239e85",
+      "zip_crc32": 3280229557
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Materials/V_Neck_Scrub_Shirt.usd",
+      "bytes": 1349,
+      "sha256": "0a824a2002cae47c517cc251bc0347ef991e99342468825dca44480ea67ae5b7",
+      "zip_crc32": 264529776
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Motions/Kitchen_CleanTable_M.usd",
+      "bytes": 2403214,
+      "sha256": "9ebd3eb80a12826ed3719ec912f8f96cd007ae304b86bfd717e9bff378f21131",
+      "zip_crc32": 112843887
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Motions/StandingDiscussion_LookingDown_M.usd",
+      "bytes": 1710281,
+      "sha256": "aad6000c09ddaee11b63dfaceebf07aaf349635cd13f6e89f1c1439ca152cc99",
+      "zip_crc32": 4272347560
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Motions/Market_Sales_Assisting_M.usd",
+      "bytes": 2192974,
+      "sha256": "0a2f8ed12d2b72d92641e973aa570456235d29e7abd6bdb4d32212e137abc126",
+      "zip_crc32": 3042480482
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Motions/Market_Sales_SortOut_M.usd",
+      "bytes": 2492493,
+      "sha256": "401a0cbcba2076fd5f35d2929b8d93c1cae77af8a7134bcf3524ceabcc97992b",
+      "zip_crc32": 310388093
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Motions/TrafficGuard_M.usd",
+      "bytes": 1372172,
+      "sha256": "9d007bc209e4f628e59d44b2c81a4dd17324e9bbc089b28dddfd79c2665b3d6d",
+      "zip_crc32": 3589068759
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Motions/Worker_Idle_Pose.usd",
+      "bytes": 35859,
+      "sha256": "b5ef3a3f7baabfd26ebc66f9693180c6a1953b66d212dc5ae93ae2ea7d12f9fc",
+      "zip_crc32": 208866104
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Props/Meshes/Basketball_Shoes.usd",
+      "bytes": 108505,
+      "sha256": "abc00deb649f37056afa6f7acd4cc4250e9cda4aa2a2f41dd31dbabe3b323231",
+      "zip_crc32": 4147863100
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Props/Meshes/CC_Base_Body.usd",
+      "bytes": 1860875,
+      "sha256": "9601e1a15c3a5b88afacb769c38a9220123a6683543395c28fc0847bfa51e250",
+      "zip_crc32": 2234417217
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Props/Meshes/Baseball_Cap.usd",
+      "bytes": 50508,
+      "sha256": "4d163453e94f3d92d2f5286ab2761d175b45b4d893e0ca95672e27b210c54f1a",
+      "zip_crc32": 3635450986
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Props/Meshes/Cargo_pant.usd",
+      "bytes": 179959,
+      "sha256": "f02ec9d11ad91d4d5eea23e60d30c86599ecc7c68116822c316a768bde90da10",
+      "zip_crc32": 3270848020
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Props/Meshes/CC_Base_Eye.usd",
+      "bytes": 25548,
+      "sha256": "2274973774b05de358909e11e8a54d2478239a1a2919f9615c72b16c48156cc4",
+      "zip_crc32": 4009225363
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Props/Meshes/V_Neck_Scrub_Shirt.usd",
+      "bytes": 91303,
+      "sha256": "06173d30d3da553693bfc5a5c657403e3657947afb41d5199b5d6e3b2521229c",
+      "zip_crc32": 383340224
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Props/Meshes/CC_Base_EyeOcclusion.usd",
+      "bytes": 10241,
+      "sha256": "8cb7315329ea9a1c251a7a8e1d52aefe16f3dca2832e53c1b419939cd4b009c1",
+      "zip_crc32": 4139824992
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Props/Meshes/CC_Base_TearLine.usd",
+      "bytes": 9034,
+      "sha256": "63971b8435abd6b30a3aa2a13c6ae6fd5fa456db05f5228853f9c7a548dd1b21",
+      "zip_crc32": 3893199952
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Props/Meshes/CC_Base_Teeth.usd",
+      "bytes": 141744,
+      "sha256": "0100ced93248e1570a4eefd757e928c2eb62ce6e07ab8dff5cb6ea4be5cb8e66",
+      "zip_crc32": 1367830260
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Props/Meshes/CC_Base_Tongue.usd",
+      "bytes": 49656,
+      "sha256": "272f9e813f9a6e4a166a830ae9727174cd2662e3a18ee09a214cf27cc24663f4",
+      "zip_crc32": 21759824
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Props/Meshes/Field_Jacket.usd",
+      "bytes": 292664,
+      "sha256": "350b6978ab48b05b98bdda69297864730350d3786fdd11e7fc90d0057c266bac",
+      "zip_crc32": 2600216887
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Props/Bones/Worker.Kitchen_CleanTable_M.usd",
+      "bytes": 686,
+      "sha256": "faf86466f821f3a15aea98672380d04c0928be6f8d7be4bc0053215f27c4c834",
+      "zip_crc32": 2158657273
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Props/Bones/Worker.Market_Sales_Assisting_M.usd",
+      "bytes": 690,
+      "sha256": "d9b75534e84ebcc13bc4788daba41dfa654071aeb634e3221d3d353a63104ef1",
+      "zip_crc32": 1247681201
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Props/Bones/Worker.Market_Sales_SortOut_M.usd",
+      "bytes": 688,
+      "sha256": "5a56b4822345f22109e8b636643dab92d83caa3a1ca39d060a142f5e0a3c2ced",
+      "zip_crc32": 3952070984
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Props/Bones/Worker.StandingDiscussion_LookingDown_M.usd",
+      "bytes": 697,
+      "sha256": "75e061a920ccc4d8f8fc778fb3ba05bcff21314ce370d6f0dc94aaa221fcde05",
+      "zip_crc32": 1904940867
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Props/Bones/Worker.TrafficGuard_M.usd",
+      "bytes": 680,
+      "sha256": "50c5a137be7ab029b185fda475624e427d23a9721e0a80d70a2353ab4abd4919",
+      "zip_crc32": 3761463657
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Props/Bones/Worker.usd",
+      "bytes": 28340,
+      "sha256": "b15e575cc05f6463c52402ff31cec4ec25e94925d32098979dc22af8f579f40d",
+      "zip_crc32": 2015596616
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Props/Bones/Worker.Worker_Idle_Pose.usd",
+      "bytes": 679,
+      "sha256": "a7f860a2dc9479e4cc384aeb0a3714e52168a809feedf116be40e2ca2371a97d",
+      "zip_crc32": 1010432405
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Props/Worker.Kitchen_CleanTable_M.usd",
+      "bytes": 769,
+      "sha256": "237f0c02715952099c66fe83f494d309f6b8d60b85be7f91666e3830d5701336",
+      "zip_crc32": 184523571
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Props/Worker.Market_Sales_Assisting_M.usd",
+      "bytes": 773,
+      "sha256": "14b0b17c78df0f97d2b9f7ed92d0fdb14aeb6a54b240ba35264bebaf8b8259c8",
+      "zip_crc32": 3452638732
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Props/Worker.Market_Sales_SortOut_M.usd",
+      "bytes": 771,
+      "sha256": "4187a4ce92f96a8ddb030893aa2ed7c88911f60c98f38b92f78c187bc5149bb4",
+      "zip_crc32": 414321769
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Props/Worker.StandingDiscussion_LookingDown_M.usd",
+      "bytes": 780,
+      "sha256": "ed773892dd5a14bd865fa8d761c9117c274f1d1b22a387b45f9e2888dbc568a2",
+      "zip_crc32": 4105082189
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Props/Worker.TrafficGuard_M.usd",
+      "bytes": 763,
+      "sha256": "f88e11aeb96c5b24b38cae095f6e2402dfbb6165aa9ca1f92c35404b0d011f4f",
+      "zip_crc32": 3705326209
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Props/Worker.usd",
+      "bytes": 2550,
+      "sha256": "f6a84cb98861ec5c2c98e6b15d5ca5a71e613a256da5fc43c8aafabfcf9db207",
+      "zip_crc32": 3088373985
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Props/Worker.Worker_Idle_Pose.usd",
+      "bytes": 762,
+      "sha256": "0ba313281b2e6c1dfb32309d4ad4157a755a8c98576dee6de1794b34cb8a8a34",
+      "zip_crc32": 994334436
+    },
+    {
+      "path": "Assets/Characters/Reallusion/Worker/Worker.usd",
+      "bytes": 3538,
+      "sha256": "ff3caab8bc83dc33829a928dd2288b2bf7cb55826103e2b570c90e2c3406a128",
+      "zip_crc32": 1004549663
+    },
+    {
+      "path": "PACKAGE-LICENSES/Characters_NVD-license.txt",
+      "bytes": 372,
+      "sha256": "d928c749badf35ef34c8df57ee012cc1ae7c9e8f62cb04bf8092db114424e841",
+      "zip_crc32": 2835893240
+    }
+  ],
+  "usage": "Original evaluation sample; bundled vendor license applies."
+}

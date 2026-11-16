@@ -72,7 +72,7 @@ for si, side in enumerate(["L", "R"]):
     t = timing["left" if side == "L" else "right"]
     intervals = [
         (t["object"], t["grasp"], t["release"], referenceH, referencef),
-        ("place_object", 1331, N - 1, traylocks[side], trayfits[side][1]),
+        ("place_object", timing["tray"]["grasp"], N - 1, traylocks[side], trayfits[side][1]),
     ]
     for name, start, end, lock, closed in intervals:
         target, _ = fast_points(closed, lock)
@@ -115,7 +115,7 @@ for si, side in enumerate(["L", "R"]):
         def residual(flat):
             f = flat.reshape(K, 17)
             return np.r_[
-                np.c_[(batch_points(f) - target).reshape(K, 15) * 1200, (f - closed) * 2.0].ravel(),
+                np.c_[(batch_points(f) - target).reshape(K, 15) * 1600, (f - closed) * 2.0].ravel(),
                 (np.diff(f, axis=0) * 10).ravel(),
                 (np.diff(f, 2, axis=0) * 35).ravel(),
             ]
@@ -134,7 +134,7 @@ for si, side in enumerate(["L", "R"]):
             np.clip(initial, lower + 1e-6, upper - 1e-6).ravel(),
             bounds=(np.tile(lower, K), np.tile(upper, K)),
             jac_sparsity=sp.tocsr(),
-            max_nfev=60,
+            max_nfev=100,
             ftol=1e-5,
             xtol=1e-6,
         )

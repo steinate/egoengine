@@ -4,19 +4,31 @@
 包括 `nimbus/`、`workflows/`、`configs/`、`deps/`、`policy/`、`tests/`。
 上游基线 `2a0a21f2c836df97c925729084e13d68950b4deb` 是本仓库的 Git 祖先。
 实际使用的 CuRobo Python/CUDA 源码在 `deps/curobo/`，人物导入器在
-`deps/blender_mmd_tools/`，人体 IK 和渲染代码在 `work/anime-human-v1/`。
+`deps/blender_mmd_tools/`，原始 Worker 人体 IK 和渲染代码在 `work/human-natural-v4/`、`work/human41/`，
+可选动漫版本在 `work/anime-human-v1/`。
 
 ## 迁移前先确认复现目标
 
-当前有两条已经验证过的路径。它们共享环境，但不能混用 episode：
+新机器从公开来源重新安装、下载资产并生成配对 episode，使用
+[全新部署与新任务转换](migration/FRESH_EPISODE.md)。此路径不需要访问原服务器，
+也不需要下载旧复现包。当前目标是最初的 **Worker 非动漫人物**；
+新机器机械臂任务和 Worker 三视角调试视频已跑通：1490 帧源轨迹、99.33 秒完整任务，
+调试渲染为 640×360、每 3 个源帧采样一次。详细对照与滞后修复见
+[调试重放说明](migration/DEBUG_REPLAY.md)。
+
+下表区分新部署与历史复现；它们共享环境，但不能混用 episode：
 
 | 目标 | 输入 | 验收结果 |
 | --- | --- | --- |
 | 重新运行双臂叠块、抬托盘任务 | 仓库代码、Isaac Sim 4.1、任务资产 | 官方 `plan_with_render` 工作流，加本项目的任务级 `stable_place` 修复；独立检查叠放和最终保持 |
-| 复现原任务的安柏 ego/正面/机器人同步视频 | 同一环境、原 **1507 帧** episode、接触参考、安柏原生网格与骨架 | 原物体轨迹和时间轴保持不变，安柏使用自己的骨架 IK，输出三视角视频 |
+| 原始 Worker 非动漫人物配对 | 本次验收通过的机器人 episode、Worker 原生 USD 与随包动作库 | 独立人体 IK，保持物体轨迹与时间轴，输出三视角视频 |
+| 可选：复现历史安柏同步视频 | 同一环境、原 **1507 帧** episode、接触参考、安柏原生网格与骨架 | 原物体轨迹和时间轴保持不变，安柏使用自己的骨架 IK，输出三视角视频 |
 
-**当前人物流程针对原 1507 帧任务调试，尚不是任意新 episode 的自动转换器。**
-重新规划得到的新 episode 帧数可能变化；不能直接把新轨迹覆盖到人物输入。
+新部署使用 [Worker 入口](migration/FRESH_EPISODE.md#原始-worker-真人风格人物本次目标)。
+历史安柏入口保留原 1507 帧任务的接触参考。
+新入口 `export_episode.py` 和 `solve_motion.py --native-contacts` 根据新任务的物体与事件生成接触，
+支持本项目同一种双臂叠块/抬盘任务的可变帧数；它不是任意任务的通用转换器。
+重新规划得到的新 episode 帧数可能变化；不能混用新轨迹和旧人物动画。
 人物视频是原物体轨迹的视觉重放，不是重新验证人体接触动力学。
 以下步骤完整覆盖“在新机器跑机器人任务”和“在新机器重建原配对视频”。
 
@@ -49,8 +61,8 @@ git rev-parse HEAD
 ├── assets/InternDataAssets/        # assets/、curobo/、panda_drake/
 ├── src/InternDataEngine41 -> .../egoengine  # 指向当前 checkout，非另一份源码
 ├── robot-stack-v2/                 # 任务配置、运行、验收与新 trial
-├── human-stack-v3/source/          # 原配对 episode 的输入
-├── human-natural-v4/               # 原任务的空间接触参考
+├── human-stack-v3/source/          # 当前选定 episode 的不可变输入
+├── human-natural-v4/               # 原始 Worker 的 IK、蒙皮、视频与校验
 ├── anime-human-v1/                 # 角色导出、IK、蒙皮、渲染、delivery/
 ├── human41/usd_python.sh           # USD/NumPy 工具入口
 └── run_env41.sh                    # 转发到当前 checkout 的引擎入口
@@ -65,7 +77,7 @@ CUDA 11.8 / GCC 11 / NVIDIA L20**；实测系统为 Ubuntu 24.04.2、驱动 535.
 按 [环境安装步骤](migration/README.md#环境安装) 完成：
 
 1. 从 [资产与环境链接](ASSETS.md) 获取 **4.1.0** SDK，放到 `$PAIR_ROOT/runtime41/`。
-   官方旧版直链尚未确认；VLA-Infra 保留原 ZIP，可按需复用。不要用最新版代替。
+   已确认 NVIDIA 的 4.1.0 旧版直链，见安装文档；不要用最新版代替。
 2. 安装系统依赖、CUDA 11.8 和 GCC 11。
 3. 使用 SDK 自带 Python 和 `work/isaac41/requirements-engine41.txt` 安装依赖。
    不额外安装 `usd-core`、Torch 或 Warp 覆盖 Kit 自带版本。
@@ -260,9 +272,8 @@ bash "$PAIR_ROOT/human41/usd_python.sh" "$PAIR_ROOT/anime-human-v1/encode.py"
 - CUDA 编译错误/架构不匹配：核对 Torch 的 cu118、CUDA 11.8、GCC 11，重新在目标 GPU 编译；
   不能把 L20 二进制直接当作其他 GPU 已验证版本。
 - 1507 帧断言失败：输入不是原 episode；不要删除断言或截断新轨迹。
-- 新任务自动转人物：仍需从新事件生成接触参考，并替换 `solve_motion.py`、`verify.py`、
-  `encode.py` 中固定阶段/帧数。历史 `human-stack-v3/export_source.py` 也绑定原 trial 和 1507 帧，
-  尚无可直接复制执行的通用新 episode 转换入口。
+- 新任务转人物：同一种叠块/抬盘任务使用 [新任务转换入口](migration/FRESH_EPISODE.md)。
+  历史 `human-stack-v3/export_source.py` 仍绑定原 trial 和 1507 帧，不用于新任务。
 
 [环境与可选导入详细说明](migration/README.md) · [资产下载链接](ASSETS.md) ·
 [历史实现与结果](docs/human-pair.md) · [可选旧快照说明](migration/OFFLINE_SNAPSHOT.md)

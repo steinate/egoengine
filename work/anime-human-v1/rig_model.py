@@ -1,10 +1,11 @@
 """Native PMX bone lengths, bounded fingers and analytic humanoid limb IK."""
 
 from pathlib import Path
+import os
 import numpy as np
 from scipy.spatial.transform import Rotation
 
-B = Path(__file__).resolve().parent
+B = Path(os.environ.get("EGO_AVATAR_DIR", Path(__file__).resolve().parent)).resolve()
 SCALE = 1.10
 
 

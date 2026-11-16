@@ -1,3 +1,36 @@
+Fresh original-Worker deployment (new-machine path)
+
+See migration/FRESH_EPISODE.md for SDK, selective robot assets and episode export.
+python3 migration/bootstrap_worker.py RUN_ROOT
+bash migration/run_worker_motion.sh RUN_ROOT
+
+This path sets EGO_WORKER_FRESH=1, uses the native Reallusion Worker USD and
+included pose library, and consumes the new immutable human-stack-v3/source.
+It does not need the historical human animation, scan hands, anime models or Blender.
+A fixed upright standing pose faces 15 degrees toward the right-side workspace.
+Native clavicle protraction and arm/finger IK preserve the source bone lengths;
+the body support plane may sit below the table support plane. World-space elbow
+constraints rotate with the torso. Source object arrays and actual episode length
+are verified by verify_fresh.py, not the historical 1507-frame validate.py.
+Previous grasp-fit caches are archived before a new solve so the entry point
+always starts from the original rig. Start with render_debug.sh: one GPU process
+at a time, 640x360 RayTracedLighting, no temporal AA, and a last/first/last RGB
+repeatability audit before the complete sampled episode. Default stride is 3;
+EGO_DEBUG_STRIDE=1 renders every source frame. Robot and human views use identical
+sample indices and hold durations. Debug outputs explicitly say sampled debug;
+they preserve task duration but are not full-rate rendered videos.
+
+Each source frame gets a fresh avatar prim. Reusing a prim and updating its
+points in place produced stale GPU hand geometry despite correct CPU transforms.
+Do not remove this synchronization measure based only on CPU position tests.
+
+For a full-rate deliverable, render_full.sh defaults to one process and the same
+low-cost profile. EGO_RENDER_JOBS=2 is the maximum. Set EGO_RENDER_QUALITY=final
+explicitly for 1280x720 PathTracing. All profiles keep source objects/timing intact.
+
+The remainder documents the earlier 1507-frame experiment and its old comparison
+inputs; those comparison files are not needed by the fresh entry point above.
+
 Human natural v4 — complete paired stable-stack episode
 
 Remote working directory:
@@ -32,7 +65,7 @@ Reproduction (from ROOT/human41; CPU stages use usd_python.sh):
 9. bash ../human-natural-v4/render_full.sh
 
 The optional --preview bake/render flags select 11 diagnostic source frames.
-Full rendering uses six independent Isaac Sim 4.1 jobs, three segments per view.
+Full rendering splits into three segments per view, with one process by default.
 encode.py verifies all 1507 frames, source hashes, object poses and decoded video
 frame counts before creating the synchronized robot / human ego / human front video.
 

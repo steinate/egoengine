@@ -1,4 +1,4 @@
-"""Encode only complete verified 1507-frame paired videos."""
+"""Encode only complete verified videos from the same source episode."""
 
 import json, hashlib, subprocess, shutil, zipfile
 from pathlib import Path
@@ -8,7 +8,7 @@ from PIL import Image, ImageDraw, ImageOps
 B = Path(__file__).resolve().parent
 D = B / "delivery"
 D.mkdir(exist_ok=True)
-N = 1507
+N = len(np.load(B / "source/world-tracks.npz")["place_object_world"])
 sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
 motion = json.loads((B / "motion-verification.json").read_text())
 assert motion["source_objects_bitwise_equal"]
@@ -20,6 +20,11 @@ for p in parts:
     assert p["animation_sha256"] == sha(B / "anime-animation.npz") == motion["animation_sha256"]
     assert p["render_script_sha256"] == sha(B / "render.py")
     assert p["max_object_position_error_m"] < 1e-6 and p["max_object_rotation_error_rad"] < 1e-6
+for view in ["ego", "front"]:
+    log = (B / "render" / f"kit-{view}-full.log").read_text(errors="replace")
+    assert not any(
+        "[Error]" in line and "rtx.optixdenoising.plugin" in line for line in log.splitlines()
+    ), f"OptiX denoising failed in {view}; refusing a noisy delivery"
 
 
 def run(args):
@@ -54,6 +59,9 @@ for v in ["ego", "front"]:
         ]
     )
 font = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+if not Path(font).is_file():
+    font = str(B.parent / "env/system/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf")
+assert Path(font).is_file(), font
 filters = []
 for i, label in enumerate(
     ["Source robot | original episode", "Amber ego | native rig IK", "Amber front | same timeline"]
@@ -142,13 +150,31 @@ for name in [
     "asset-audit.json",
     "provenance.json",
     "camera-framing.json",
-    "README.txt",
 ]:
     shutil.copy2(B / name, D / name)
+ik = json.loads((B / "ik-report.json").read_text())
+(D / "README.txt").write_text(
+    f"Robot / Amber ego / front: {N} synchronized frames, 15 fps, {N / 15:.6f} seconds.\n"
+    f"Source trajectory SHA256: {sha(B / 'source/world-tracks.npz')}\n"
+    f"Contact source: {ik.get('contact_source', 'legacy_human_reference')}\n"
+    "Original episode object poses and frame order are preserved. Native PMX skeleton IK, fixed upright torso.\n"
+    "This is visual trajectory replay, not a new human-driven physics rollout.\n"
+    "Amber 2.0: miHoYo / 神帝宇. Original model terms in provenance.json; no model redistribution or commercial license implied.\n"
+    "See video-verification.json, motion-verification.json, camera-framing.json and checksums.json for this run.\n"
+)
 shutil.copy2(B / "source/contact-schedule.json", D / "contact-schedule.json")
 shutil.copy2(B / "source/robot-stack-validation.json", D / "robot-stack-validation.json")
 for v in ["ego", "front"]:
-    frames = [0, 137, 433, 780, 1044, 1331, 1506]
+    schedule = json.loads((B / "source/contact-schedule.json").read_text())
+    frames = [
+        0,
+        schedule["left"]["grasp"],
+        schedule["left"]["release"],
+        schedule["right"]["grasp"],
+        schedule["right"]["release"],
+        schedule["tray"]["grasp"],
+        N - 1,
+    ]
     sheet = Image.new("RGB", (3 * 480, 3 * 290), "#111827")
     draw = ImageDraw.Draw(sheet)
     for k, i in enumerate(frames):
@@ -159,7 +185,12 @@ for v in ["ego", "front"]:
         sheet.paste(image, (x, y))
         draw.text((x + 10, y + 272), f"{v} | source frame {i} | {i / 15:.2f}s", fill="white")
     sheet.save(D / f"{v}-complete-contact-sheet.jpg", quality=92)
-    for i in [137, 780, 1331, 1506]:
+    for i in [
+        schedule["left"]["grasp"],
+        schedule["right"]["grasp"],
+        schedule["tray"]["grasp"],
+        N - 1,
+    ]:
         shutil.copy2(B / f"render/{v}/{i:04d}.png", D / f"{v}-{i:04d}.png")
 report = {
     "frames": N,

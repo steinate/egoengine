@@ -2,7 +2,7 @@
 Object motion is never simulated anew. Human joint angles are not robot joints.
 """
 
-import sys, json, hashlib
+import sys, json, hashlib, os
 from pathlib import Path
 import numpy as np
 from scipy.spatial.transform import Rotation, Slerp
@@ -20,7 +20,8 @@ track = dict(np.load(src))
 N = len(track["place_object_world"])
 timing = json.loads((ROOT / "human-stack-v3/source/contact-schedule.json").read_text())
 h.world[:3, 3] = [0, -0.64, -0.01]
-base = h.priors[0].copy()
+FRESH = os.environ.get("EGO_WORKER_FRESH") == "1"
+base = (h.rest if FRESH else h.priors[0]).copy()
 
 
 def unit(x):
@@ -337,3 +338,62 @@ def schedule(side, i):
             H = tray
         f = fopen + (trayfits[side][1] - fopen) * smooth((i - arrive) / (tray_grasp - arrive))
     return H, f
+
+
+if FRESH:
+    # Solve only a fixed avatar placement. Source objects and robot timing never move.
+    # A lower support plane is allowed; no torso flexion is used to gain reach.
+    h.world[:3, :3] = rot(2, np.deg2rad(15)) @ np.diag([-1.0, -1.0, 1.0])
+    h.world[:3, 3] = 0
+    reach_pose = base.copy()
+    for side in ["L", "R"]:
+        j = h.idx(side + "_Clavicle")
+        reach_pose[j, :3, :3] = reach_pose[j, :3, :3] @ rot(0, 0.45)
+    rest_world = h.fk(reach_pose)
+    placement_refits = (
+        np.load(OUT / "grasp-refit.npz") if (OUT / "grasp-refit.npz").exists() else None
+    )
+    goals = {}
+    for side in ["L", "R"]:
+        t = timing["left" if side == "L" else "right"]
+        cube = track[t["object"] + "_world"][t["grasp"] : t["release"] + 1] @ (
+            placement_refits[side + "_H"] if placement_refits is not None else locks[side]
+        )
+        tray = track["place_object_world"][timing["tray"]["grasp"] :] @ traylocks[side]
+        goals[side] = np.concatenate([cube[:, :3, 3], tray[:, :3, 3]])
+    best = None
+    for x in np.linspace(-0.15, 0.15, 13):
+        for y in np.linspace(-0.65, -0.55, 11):
+            for z in np.linspace(-0.425, -0.35, 4):
+                offset = np.array([x, y, z])
+                ratios = []
+                for side in ["L", "R"]:
+                    shoulder = rest_world[h.idx(side + "_Upperarm"), :3, 3] + offset
+                    length = sum(
+                        np.linalg.norm(h.rest[h.idx(side + n), :3, 3])
+                        for n in ["_Forearm", "_Hand"]
+                    )
+                    ratios.extend(np.linalg.norm(goals[side] - shoulder, axis=1) / length)
+                ratios = np.array(ratios)
+                cost = (
+                    np.maximum(ratios - 0.93, 0).max() * 100
+                    + np.mean(ratios**2) * 0.05
+                    + (y + 0.72)
+                    + abs(x) * 0.1
+                )
+                if best is None or cost < best[0]:
+                    best = cost, offset, float(ratios.max())
+    h.world[:3, 3] = best[1]
+    (OUT / "upright-placement.json").write_text(
+        json.dumps(
+            {
+                "root_translation_m": best[1].tolist(),
+                "max_reach_ratio": best[2],
+                "fixed_upright_rest_torso": True,
+                "standing_yaw_degrees": 15,
+                "support_plane_may_differ_from_scene_floor": True,
+            },
+            indent=2,
+        )
+    )
+    print("UPRIGHT_PLACEMENT", best[1], best[2], flush=True)

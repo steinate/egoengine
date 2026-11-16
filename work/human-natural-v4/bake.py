@@ -66,7 +66,7 @@ ap = argparse.ArgumentParser()
 ap.add_argument("--preview", action="store_true")
 args = ap.parse_args()
 samples = (
-    [0, 137, 258, 433, 474, 780, 1006, 1044, 1130, 1331, 1506]
+    sorted(set(np.linspace(0, len(data["source_frame"]) - 1, 11, dtype=int).tolist()))
     if args.preview
     else list(range(len(data["source_frame"])))
 )

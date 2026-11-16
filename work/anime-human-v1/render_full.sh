@@ -2,13 +2,16 @@
 set -euo pipefail
 ROOT=/vepfs/public/pengjiaqi/interndata-human-pair
 BASE="$ROOT/anime-human-v1"
+N="$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["frames"])' "$BASE/source/scene-meta.json")"
 cd "$ROOT"
 pids=()
 for view in ego front; do
   target="$ROOT/cache41/kit-anime-$view-full/cache"
   mkdir -p "$target"
-  cp -a "$ROOT/cache41/kit-anime-both-preview/cache/." "$target/"
-  bash run_env41.sh "$BASE/render.py" --view "$view" --start 0 --end 1507 --job full > "$BASE/render-$view.log" 2>&1 &
+  if [[ -d "$ROOT/cache41/kit-anime-both-preview/cache" ]]; then
+    cp -a "$ROOT/cache41/kit-anime-both-preview/cache/." "$target/"
+  fi
+  bash run_env41.sh "$BASE/render.py" --view "$view" --start 0 --end "$N" --job full > "$BASE/render-$view.log" 2>&1 &
   pids+=("$!")
 done
 failed=0

@@ -6,7 +6,8 @@ from rig_model import B, Rig, Hand
 a = np.load(B / "anime-animation.npz")
 src = np.load(B / "source/world-tracks.npz")
 rig = Rig()
-N = 1507
+N = len(src["place_object_world"])
+assert N > 1
 assert len(a["source_frame"]) == N
 assert np.array_equal(a["source_frame"], np.arange(N))
 assert np.allclose(a["video_time_s"], np.arange(N) / 15, atol=1e-10)
@@ -73,4 +74,27 @@ report["cameras"] = {
     "no_180_degree_roll_flip": True,
 }
 (B / "motion-verification.json").write_text(json.dumps(report, indent=2))
+# Recompute framing for this episode instead of copying historical evidence.
+framing = {"source_world_tracks_sha256": report["source_world_tracks_sha256"], "objects": {}}
+inverse_camera = np.linalg.inv(C)
+for name in ["place_object", "pick_object_left1", "pick_object_right1"]:
+    v = src[name + "_mesh_vertices"]
+    lo, hi = v.min(0), v.max(0)
+    corners = np.array(
+        [[x, y, z, 1] for x in [lo[0], hi[0]] for y in [lo[1], hi[1]] for z in [lo[2], hi[2]]]
+    )
+    camera_points = np.einsum("nij,kj->nki", inverse_camera @ src[name + "_world"], corners)
+    depth = -camera_points[:, :, 2]
+    uv = camera_points[:, :, :2] / np.maximum(depth[:, :, None], 1e-9)
+    uv *= [1280 * 17 / 36, -1280 * 17 / 36]
+    uv += [640, 360]
+    outside = ((uv < [0, 0]) | (uv > [1280, 720])).any(axis=(1, 2)) | (depth <= 0).any(axis=1)
+    framing["objects"][name] = {
+        "min": uv.min(axis=(0, 1)).tolist(),
+        "max": uv.max(axis=(0, 1)).tolist(),
+        "outside_frames": int(outside.sum()),
+        "minimum_depth_m": float(depth.min()),
+    }
+(B / "camera-framing.json").write_text(json.dumps(framing, indent=2))
+assert all(o["outside_frames"] == 0 for o in framing["objects"].values()), "Objects leave ego frame"
 print(json.dumps(report, indent=2))

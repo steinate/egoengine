@@ -13,6 +13,12 @@ p.add_argument("--view", choices=["both", "ego", "front"], default="both")
 a = p.parse_args()
 tag = a.view + ("-" + a.job if a.job else "")
 RENDER_CODE_SHA256 = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
+OPTIX_WEIGHTS = Path("/usr/share/nvidia/nvoptix.bin")
+if not OPTIX_WEIGHTS.is_file():
+    raise RuntimeError(
+        "OptiX denoiser data is missing. See migration/FRESH_EPISODE.md and bootstrap_optix.sh."
+    )
+OPTIX_WEIGHTS_SHA256 = hashlib.sha256(OPTIX_WEIGHTS.read_bytes()).hexdigest()
 ROOT = Path("/vepfs/public/pengjiaqi/interndata-human-pair")
 BASE = ROOT / "anime-human-v1"
 OLD = BASE
@@ -213,6 +219,7 @@ try:
         "max_object_position_error_m": max(position_errors),
         "max_object_rotation_error_rad": max(rotation_errors),
         "renderer": "Isaac Sim 4.1 RTX PathTracing 64 SPP",
+        "optix_weights_sha256": OPTIX_WEIGHTS_SHA256,
         "actor": "Genshin Impact Amber; original PMX mesh, UVs, textures and skin weights; native humanoid IK",
         "front_camera_world_usd": front_T.tolist(),
         "front_focal_length_mm": 24.0,

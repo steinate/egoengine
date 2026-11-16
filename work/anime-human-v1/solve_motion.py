@@ -8,86 +8,111 @@ from scipy.signal import savgol_filter
 from scipy.spatial.transform import Rotation
 from rig_model import *
 
-old = np.load(B / "reference/human-animation.npz")
+
+def legacy_targets(rig, hands):
+    old = np.load(B / "reference/human-animation.npz")
+    track = dict(np.load(B / "source/world-tracks.npz"))
+    N = len(old["source_frame"])
+    names = [n.split("/")[-1] for n in old["names"]]
+    Gref = old["local"].copy()
+    for j, p in enumerate(old["parents"]):
+        Gref[:, j] = (old["world_transform"] if p < 0 else Gref[:, p]) @ old["local"][:, j]
+    results = {}
+    report = {}
+    start = time.time()
+    for side, hand in hands.items():
+        W = Gref[:, names.index(side + "_Hand")]
+        tips = []
+        joints = []
+        for f, length in zip(
+            ["Thumb", "Index", "Mid", "Ring", "Pinky"], [0.023, 0.021, 0.023, 0.020, 0.017]
+        ):
+            ids = [names.index(side + "_" + f + str(k)) for k in [1, 2, 3]]
+            points = Gref[:, ids][:, :, :3, 3]
+            tip = points[:, -1] + Gref[:, ids[-1], :3, 1] * length
+            tips.append(tip)
+            joints.append(points)
+        tips = np.stack(tips, axis=1)
+        joints = np.stack(joints, axis=1)
+        target = np.einsum("nji,nkj->nki", W[:, :3, :3], tips - W[:, None, :3, 3])
+        nodes = np.einsum("nji,nfkj->nfki", W[:, :3, :3], joints - W[:, None, None, :3, 3])
+        keys = np.unique(np.r_[np.arange(0, N, 4), N - 1, 137, 433, 621, 780, 1044, 1191, 1331])
+        sol = []
+        previous = np.r_[np.zeros(6), [0, 0, 0, 0.2, 0.2], np.tile([0, 0.3, 0.4], 4)]
+        lo = np.r_[[-0.035] * 3, [-0.65] * 3, hand.lo]
+        hi = np.r_[[0.035] * 3, [0.65] * 3, hand.hi]
+        for frame in keys:
+            goal = target[frame]
+            goalnodes = nodes[frame]
+
+            def residual(x):
+                g, t = hand.fk(x[6:])
+                R = rot(x[3:6])
+                t = t @ R.T + x[:3]
+                p = g[:, :, :3, 3] @ R.T + x[:3]
+                return np.r_[
+                    (t - goal).ravel() * 400,
+                    (p - goalnodes).ravel() * 25,
+                    x[:3] * 8,
+                    x[3:6] * 0.2,
+                    (x[6:] - previous[6:]) * 0.08,
+                ]
+
+            fit = least_squares(
+                residual,
+                np.clip(previous, lo + 1e-7, hi - 1e-7),
+                bounds=(lo, hi),
+                max_nfev=100 if frame == 0 else 32,
+                ftol=1e-6,
+                xtol=1e-6,
+            )
+            previous = fit.x
+            sol.append(previous.copy())
+            if len(sol) % 80 == 0:
+                print("HAND", side, frame, "elapsed", round(time.time() - start), flush=True)
+        x = CubicSpline(keys, sol, axis=0, bc_type="natural")(np.arange(N))
+        x = np.clip(savgol_filter(x, 13, 3, axis=0), lo, hi)
+        wrist = []
+        errs = []
+        boneworld = []
+        for i in range(N):
+            H = W[i] @ transform(rot(x[i, 3:6]), x[i, :3])
+            g, t = hand.fk(x[i, 6:])
+            wrist.append(H)
+            boneworld.append(H @ g)
+            errs.append(np.linalg.norm(t @ H[:3, :3].T + H[:3, 3] - tips[i], axis=1))
+        results[side + "_q"] = x[:, 6:]
+        results[side + "_canonical_wrist_world"] = np.array(wrist)
+        results[side + "_finger_world"] = np.array(boneworld)
+        report[side] = {
+            "max_tip_error_mm": float(np.max(errs) * 1000),
+            "p95_tip_error_mm": float(np.percentile(errs, 95) * 1000),
+        }
+    return old, results, report
+
+
+import argparse
+
+p = argparse.ArgumentParser()
+p.add_argument(
+    "--native-contacts",
+    action="store_true",
+    help="Fit this episode directly from object geometry and contact events",
+)
+a = p.parse_args()
 track = dict(np.load(B / "source/world-tracks.npz"))
-N = len(old["source_frame"])
 rig = Rig()
-names = [n.split("/")[-1] for n in old["names"]]
-Gref = old["local"].copy()
-for j, p in enumerate(old["parents"]):
-    Gref[:, j] = (old["world_transform"] if p < 0 else Gref[:, p]) @ old["local"][:, j]
 hands = {s: Hand(rig, s) for s in ["L", "R"]}
-results = {}
-report = {}
-start = time.time()
-for side, hand in hands.items():
-    W = Gref[:, names.index(side + "_Hand")]
-    tips = []
-    joints = []
-    for f, length in zip(
-        ["Thumb", "Index", "Mid", "Ring", "Pinky"], [0.023, 0.021, 0.023, 0.020, 0.017]
-    ):
-        ids = [names.index(side + "_" + f + str(k)) for k in [1, 2, 3]]
-        points = Gref[:, ids][:, :, :3, 3]
-        tip = points[:, -1] + Gref[:, ids[-1], :3, 1] * length
-        tips.append(tip)
-        joints.append(points)
-    tips = np.stack(tips, axis=1)
-    joints = np.stack(joints, axis=1)
-    target = np.einsum("nji,nkj->nki", W[:, :3, :3], tips - W[:, None, :3, 3])
-    nodes = np.einsum("nji,nfkj->nfki", W[:, :3, :3], joints - W[:, None, None, :3, 3])
-    keys = np.unique(np.r_[np.arange(0, N, 4), N - 1, 137, 433, 621, 780, 1044, 1191, 1331])
-    sol = []
-    previous = np.r_[np.zeros(6), [0, 0, 0, 0.2, 0.2], np.tile([0, 0.3, 0.4], 4)]
-    lo = np.r_[[-0.035] * 3, [-0.65] * 3, hand.lo]
-    hi = np.r_[[0.035] * 3, [0.65] * 3, hand.hi]
-    for frame in keys:
-        goal = target[frame]
-        goalnodes = nodes[frame]
+if a.native_contacts:
+    from native_contacts import generate
 
-        def residual(x):
-            g, t = hand.fk(x[6:])
-            R = rot(x[3:6])
-            t = t @ R.T + x[:3]
-            p = g[:, :, :3, 3] @ R.T + x[:3]
-            return np.r_[
-                (t - goal).ravel() * 400,
-                (p - goalnodes).ravel() * 25,
-                x[:3] * 8,
-                x[3:6] * 0.2,
-                (x[6:] - previous[6:]) * 0.08,
-            ]
-
-        fit = least_squares(
-            residual,
-            np.clip(previous, lo + 1e-7, hi - 1e-7),
-            bounds=(lo, hi),
-            max_nfev=100 if frame == 0 else 32,
-            ftol=1e-6,
-            xtol=1e-6,
-        )
-        previous = fit.x
-        sol.append(previous.copy())
-        if len(sol) % 80 == 0:
-            print("HAND", side, frame, "elapsed", round(time.time() - start), flush=True)
-    x = CubicSpline(keys, sol, axis=0, bc_type="natural")(np.arange(N))
-    x = np.clip(savgol_filter(x, 13, 3, axis=0), lo, hi)
-    wrist = []
-    errs = []
-    boneworld = []
-    for i in range(N):
-        H = W[i] @ transform(rot(x[i, 3:6]), x[i, :3])
-        g, t = hand.fk(x[i, 6:])
-        wrist.append(H)
-        boneworld.append(H @ g)
-        errs.append(np.linalg.norm(t @ H[:3, :3].T + H[:3, 3] - tips[i], axis=1))
-    results[side + "_q"] = x[:, 6:]
-    results[side + "_canonical_wrist_world"] = np.array(wrist)
-    results[side + "_finger_world"] = np.array(boneworld)
-    report[side] = {
-        "max_tip_error_mm": float(np.max(errs) * 1000),
-        "p95_tip_error_mm": float(np.percentile(errs, 95) * 1000),
-    }
+    timing = json.loads((B / "source/contact-schedule.json").read_text())
+    results, report = generate(rig, track, timing)
+    N = len(track["place_object_world"])
+    old = {"source_frame": np.arange(N), "video_time_s": np.arange(N) / 15.0}
+else:
+    old, results, report = legacy_targets(rig, hands)
+    N = len(old["source_frame"])
 
 # The user explicitly permits the avatar support plane to differ from the
 # table's base plane. Keep pelvis and spine upright at every frame, and solve
@@ -190,9 +215,40 @@ for i in range(N):
 allG = np.array(allG)
 errors = np.array(errors)
 assert np.isfinite(allG).all()
+cam = np.array(cam)
+if a.native_contacts:
+    # A new planner rollout may lift a cube higher than the historical episode.
+    # Keep the anatomical eye position and a fixed gaze, fitting only pitch to
+    # all object bounding-box corners across the complete source timeline.
+    inverse_camera = np.linalg.inv(cam)
+    camera_points = []
+    for name in ["place_object", "pick_object_left1", "pick_object_right1"]:
+        vertices = track[name + "_mesh_vertices"]
+        lo, hi = vertices.min(0), vertices.max(0)
+        corners = np.array(
+            [[x, y, z, 1] for x in [lo[0], hi[0]] for y in [lo[1], hi[1]] for z in [lo[2], hi[2]]]
+        )
+        points = np.einsum("nij,kj->nki", inverse_camera @ track[name + "_world"], corners)
+        camera_points.append(points[:, :, :3].reshape(-1, 3))
+    camera_points = np.concatenate(camera_points)
+    best = None
+    for degrees in np.linspace(-15, 15, 241):
+        adjustment = rot([np.deg2rad(degrees), 0, 0])
+        points = camera_points @ adjustment
+        depth = -points[:, 2]
+        if depth.min() <= 0.045:
+            continue
+        uv = points[:, :2] / depth[:, None] * [1280 * 17 / 36, -1280 * 17 / 36] + [640, 360]
+        margin = float(min(uv.min(), (np.array([1280, 720]) - uv).min()))
+        if best is None or margin > best[0]:
+            best = (margin, degrees, adjustment)
+    assert best is not None and best[0] >= 16, "Episode does not fit the ego camera; review framing"
+    cam[:, :3, :3] = cam[:, :3, :3] @ best[2]
+    report["ego_camera_pitch_adjustment_deg"] = float(best[1])
+    report["ego_object_image_margin_px"] = best[0]
 results.update(
     bone_world=allG,
-    camera_world_usd=np.array(cam),
+    camera_world_usd=cam,
     source_frame=old["source_frame"],
     video_time_s=old["video_time_s"],
     torso_lean_rad=lean,
@@ -210,6 +266,9 @@ np.savez_compressed(B / "anime-animation.npz", **results)
 report.update(
     frames=N,
     fps=15,
+    contact_source="native_geometry_and_episode_events"
+    if a.native_contacts
+    else "legacy_human_reference",
     torso_lean_degrees=0.0,
     avatar_root_world=root.tolist(),
     nominal_support_plane_z_m=-0.4664,

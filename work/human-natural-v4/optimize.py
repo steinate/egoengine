@@ -5,7 +5,11 @@ from scipy.sparse import lil_matrix
 from scipy.signal import savgol_filter
 import time
 
-old = np.load(ROOT / "human-stack-v3/human-animation.npz")
+old = (
+    {"arm_q": np.tile(np.array([pose_q(s, ref) for s in ["L", "R"]]), (N, 1, 1))}
+    if FRESH
+    else np.load(ROOT / "human-stack-v3/human-animation.npz")
+)
 # A steady working stance, with fewer forward/backward torso excursions.
 keys = np.array(
     [0, 90, 137, 260, 433, 550, 621, 720, 780, 930, 1044, 1140, 1191, 1331, 1431, N - 1]
@@ -14,6 +18,8 @@ leans = np.deg2rad([27, 38, 46, 37, 39, 31, 31, 42, 50, 36, 36, 31, 33, 41, 33, 
 
 
 def lean_at(i):
+    if FRESH:
+        return 0.0
     k = min(np.searchsorted(keys, i, side="right") - 1, len(keys) - 2)
     u = smooth((i - keys[k]) / (keys[k + 1] - keys[k]))
     return leans[k] * (1 - u) + leans[k + 1] * u
@@ -21,8 +27,17 @@ def lean_at(i):
 
 lo = np.r_[[-0.14, -0.14], [-2.7, -2.7, -2.7], 0.25, -1.65, -0.32, -0.65]
 hi = np.r_[[0.14, 0.14], [2.7, 2.7, 2.7], 2.40, 1.65, 0.32, 0.65]
+if FRESH:
+    # Allow scapular/clavicular motion while the thorax remains upright.
+    # Native clavicle X rotates the shoulder forward; Z supplies elevation.
+    lo[:2], hi[:2] = [-0.15, -0.40], [0.65, 0.40]
+    lo[7:9], hi[7:9] = [-0.40, -0.85], [0.40, 0.85]
 sidelean = lambda i: 0.08 * smooth((i - 670) / 100) * (1.0 - smooth((i - 800) / 110))
 bodies = np.array([body_pose(lean_at(i), sidelean(i)) for i in range(N)])
+
+
+body_right = rot(2, np.deg2rad(15)) @ np.array([1.0, 0, 0]) if FRESH else np.array([1.0, 0, 0])
+body_forward = rot(2, np.deg2rad(15)) @ np.array([0.0, 1, 0]) if FRESH else np.array([0.0, 1, 0])
 
 
 def elbow_goal(S, W, side, l1, l2):
@@ -33,7 +48,7 @@ def elbow_goal(S, W, side, l1, l2):
     along = (l1 * l1 - l2 * l2 + dc * dc) / (2 * dc)
     height = np.sqrt(np.maximum(l1 * l1 - along * along, 0))
     sign = 1 if side == "R" else -1
-    pole = np.array([sign * 0.80, 0.12, -0.68])
+    pole = sign * 0.80 * body_right + 0.12 * body_forward + np.array([0.0, 0, -0.68])
     v = pole - np.sum(u * pole, axis=-1)[..., None] * u
     v /= np.maximum(np.linalg.norm(v, axis=-1)[..., None], 1e-8)
     return S + u * along[..., None] + v * height[..., None]
@@ -46,11 +61,11 @@ def local_residual(q, arm, H, prior):
     l2 = np.linalg.norm(arm.parts[3][:3, 3])
     goal = elbow_goal(S, H[:3, 3], arm.side, l1, l2)
     return np.r_[
-        (W - H[:3, 3]) * 700,
-        Rotation.from_matrix(H[:3, :3].T @ g[3, :3, :3]).as_rotvec() * 25,
+        (W - H[:3, 3]) * 1500,
+        Rotation.from_matrix(H[:3, :3].T @ g[3, :3, :3]).as_rotvec() * 45,
         (E - goal) * 16,
-        max(0.015 - arm.sign * (E[0] - S[0]), 0) * 300,
-        max(S[1] - 0.005 - E[1], 0) * 180,
+        max(0.015 - arm.sign * np.dot(E - S, body_right), 0) * 1200,
+        max(-np.dot(E - S, body_forward) - 0.005, 0) * 180,
         (q - prior) * np.array([1.5, 1.5, 0.05, 0.05, 0.05, 0.03, 0.03, 0.0, 0.0]),
         q[7:9] * 1.2,
     ]
@@ -190,11 +205,11 @@ for si, side in enumerate(["L", "R"]):
         desired = elbow_goal(S, H[:, :3, 3], side, l1, l2)
         orientation = Rotation.from_matrix(np.swapaxes(H[:, :3, :3], 1, 2) @ R[:, 3]).as_rotvec()
         local = np.c_[
-            (W - H[:, :3, 3]) * 700,
-            orientation * 25,
+            (W - H[:, :3, 3]) * 1500,
+            orientation * 45,
             (E - desired) * 16,
-            np.maximum(0.015 - sign * (E[:, 0] - S[:, 0]), 0) * 300,
-            np.maximum(S[:, 1] - 0.005 - E[:, 1], 0) * 180,
+            np.maximum(0.015 - sign * ((E - S) @ body_right), 0) * 1200,
+            np.maximum(-((E - S) @ body_forward) - 0.005, 0) * 180,
             (q - reference_q) * np.array([1.5, 1.5, 0.05, 0.05, 0.05, 0.03, 0.03, 0, 0]),
             q[:, 7:9] * 1.2,
         ]
@@ -302,8 +317,6 @@ np.savez_compressed(
     world_transform=h.world,
     names=h.names,
     parents=h.parents,
-    source_frame=np.arange(N),
-    video_time_s=np.arange(N) / 15,
     wrist_targets=targets,
     arm_q=np.stack(allq, axis=1),
     finger_q=finger_values,
@@ -312,7 +325,7 @@ np.savez_compressed(
     elbows=np.array(elbows),
     feet=np.array(feet),
     hip_lean_rad=np.array([lean_at(i) for i in range(N)]),
-    **track,
+    **dict(track, source_frame=np.arange(N), video_time_s=np.arange(N) / 15),
 )
 report = {
     "frames": N,
