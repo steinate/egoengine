@@ -1,78 +1,95 @@
-# Robot → Human Ego 配对视频实验
+# EgoEngine: human-pair extensions to InternDataEngine
 
-保存 InternDataEngine 机械臂任务到人物演示视频的源码、配置、部署补丁和验证记录。
-物体位姿与时间轴来自机器人 episode；人物使用自己的骨架求解 IK，再在 Isaac Sim 中同步重放。
+This repository is built directly on InternDataEngine. The complete upstream
+source tree and Git history are preserved at the repository root, including
+`nimbus/`, `workflows/`, `configs/`, `deps/`, `policy/`, and `tests/`.
+Our recorder, scene export, and controller changes modify those original modules.
+`human_pair/` contains engine extensions; `work/` contains character IK, asset
+conversion, and synchronized video workflows.
 
-## 当前已验证版本
+- [Migration and offline reproduction](migration/README.md)
+- [Human-pair workflow and verified results](docs/human-pair.md)
+- `deps/curobo/`: the deployed CuRobo planner source, including CUDA kernels.
+- `migration/`: private snapshot, verification, restoration, and replay tools.
 
-`work/anime-human-v1/` 为安柏直立版：1507 帧、15 fps、100.466667 秒，包含双臂叠块、撤手、抬托盘和末尾保持。
-人物全程固定直立，脚下支撑面允许与桌脚基面不同高。人物使用原生骨长、手指 IK 和双骨手臂 IK。
-机器人、ego、正面视频按同一源帧索引同步。
+The upstream baseline `2a0a21f2c836df97c925729084e13d68950b4deb` is a Git ancestor.
+The private migration bundle includes models, scenes, trajectories, Isaac Sim 4.1,
+and the compiled planning environment. Restricted assets are not published here.
+The original project introduction, attribution, and citation follow.
 
-机器人任务使用 InternDataEngine 官方 pipeline，包含已记录的任务级 `stable_place` 修复；不是未经修改的上游基准。
-人物输出是保持源物体轨迹的视觉配对重放，不代表重新验证了人体接触动力学。
+---
 
-- 源轨迹 SHA256：`ffe2178587c9dcb770c28e528bb3d76f2e48bf7d693eb20858f8073cc4d6c655`
-- 验证报告：[evidence/amber-upright](evidence/amber-upright/)
-- 实现与复现顺序：[安柏说明](work/anime-human-v1/README.txt)
-- 本机完整视频：`outputs/anime-human-v1/delivery/robot-ego-front-full.mp4`
+<div align="center">
 
-学园偶像大师人物目前仅进行资产调研，尚未接入或渲染完成。
+# InternDataEngine: Pioneering High-Fidelity Synthetic Data Generator for Robotic Manipulation
 
-## 文件组织
+</div>
 
-保留现有阶段目录，避免移动脚本破坏跨阶段导入和已部署路径。
+<div align="center">
 
-| 目录 | 内容 |
-| --- | --- |
-| `work/isaac41/` | Isaac Sim 4.1 环境、官方任务执行、轨迹导出与诊断 |
-| `work/robot-stack-v2/` | 完整双臂叠块和抬托盘任务及稳定放置修复 |
-| `work/human-stack-v3/` | 原始完整配对 episode 与人物重放入口 |
-| `work/human-natural-v4/` | 人体手臂、手指、站姿和相机优化 |
-| `work/human-scan-v5/`、`work/human-scan-v6/` | 扫描手接入、原生 UV 和左右手修正 |
-| `work/anime-human-v1/` | 当前完成的安柏原生骨架、直立 IK 和同步渲染 |
-| `work/human41/`、`work/human-ego/`、`work/human-ik-v2/`、`work/paired-human-ego/` | 早期实现与阶段性验证，保留以便追溯 |
-| `work/avatar-assets-v1/` | 人物资产转换与预览工具 |
-| `work/gaussian-ego/`、`work/isaac51-validation/` | Gaussian 与 Isaac Sim 5.1 实验，不作为当前交付入口 |
-| `patches/` | 本机和 VLA-Infra 的 InternDataEngine 修改，分别保存 |
-| `provenance/` | 上游版本、补丁校验和及本机提交信息 |
-| `evidence/` | 已完成渲染的只读验证记录 |
+[![Paper InternData-A1](https://img.shields.io/badge/Paper-InternData--A1-red.svg)](https://arxiv.org/abs/2511.16651)
+[![Paper Nimbus](https://img.shields.io/badge/Paper-Nimbus-red.svg)](https://arxiv.org/abs/2601.21449)
+[![Paper InternVLA-M1](https://img.shields.io/badge/Paper-InternVLA--M1-red.svg)](https://arxiv.org/abs/2510.13778)
+[![Data InternData-A1](https://img.shields.io/badge/Data-InternData--A1-blue?logo=huggingface)](https://huggingface.co/datasets/InternRobotics/InternData-A1)
+[![Data InternData-M1](https://img.shields.io/badge/Data-InternData--M1-blue?logo=huggingface)](https://huggingface.co/datasets/InternRobotics/InternData-M1)
+[![Docs](https://img.shields.io/badge/Docs-Online-green.svg)](https://internrobotics.github.io/InternDataEngine-Docs/)
 
-## 开发检查
+</div>
 
-```bash
-python3 -m venv .venv
-.venv/bin/pip install -r requirements-dev.txt
-make format RUFF=.venv/bin/ruff
-make check RUFF=.venv/bin/ruff
+## 💻 About
+
+<div align="center">
+  <img src="./docs/images/intern_data_engine.jpeg" alt="InternDataEngine Overview" width="80%">
+</div>
+
+InternDataEngine is a synthetic data generation engine for embodied AI that powers large-scale model training and iteration. Built on NVIDIA Isaac Sim, it unifies high-fidelity physical interaction from InternData-A1, semantic task and scene generation from InternData-M1, and high-throughput scheduling from the Nimbus framework to deliver realistic, task-aligned, and massively scalable robotic manipulation data.
+
+- **More realistic physical interaction**: Unified simulation of rigid, articulated, deformable, and fluid objects across single-arm, dual-arm, and humanoid robots, enabling long-horizon, skill-composed manipulation that better supports sim-to-real transfer.
+- **More diverse data generation**: By leveraging the internal state of the simulation engine to extract high-quality ground truth, coupled with multi-dimensional domain randomization (e.g., layout, texture, structure, and lighting), the data distribution is significantly expanded. This approach produces precise and diverse operational data, while simultaneously exporting rich multimodal annotations such as bounding boxes, segmentation masks, and keypoints.
+- **More efficient large-scale production**: Nimbus-powered asynchronous pipelines that decouple planning, rendering, and storage, achieving 2–3× end-to-end throughput, cluster-level load balancing and fault tolerance for billion-scale data generation.
+
+## 🔥 Latest News
+
+- **[2026/03]** We release the InternDataEngine codebase v1.0, which includes the core modules: InternData-A1 and Nimbus.
+
+## 🚀 Quickstart
+
+Please refer to the [Installation](https://internrobotics.github.io/InternDataEngine-Docs/guides/installation.html) and [Usage](https://internrobotics.github.io/InternDataEngine-Docs/guides/quickstart.html) to start the installation and run your first synthetic data generation task.
+
+For more details, please check [Documentation](https://internrobotics.github.io/InternDataEngine-Docs/).
+
+## License and Citation
+All the code within this repo are under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). Please consider citing our papers if it helps your research.
+
+```BibTeX
+@article{tian2025interndata,
+  title={Interndata-a1: Pioneering high-fidelity synthetic data for pre-training generalist policy},
+  author={Tian, Yang and Yang, Yuyin and Xie, Yiman and Cai, Zetao and Shi, Xu and Gao, Ning and Liu, Hangxu and Jiang, Xuekun and Qiu, Zherui and Yuan, Feng and others},
+  journal={arXiv preprint arXiv:2511.16651},
+  year={2025}
+}
+
+@article{he2026nimbus,
+  title={Nimbus: A Unified Embodied Synthetic Data Generation Framework},
+  author={He, Zeyu and Zhang, Yuchang and Zhou, Yuanzhen and Tao, Miao and Li, Hengjie and Tian, Yang and Zeng, Jia and Wang, Tai and Cai, Wenzhe and Chen, Yilun and others},
+  journal={arXiv preprint arXiv:2601.21449},
+  year={2026}
+}
+
+@article{chen2025internvla,
+  title={Internvla-m1: A spatially guided vision-language-action framework for generalist robot policy},
+  author={Chen, Xinyi and Chen, Yilun and Fu, Yanwei and Gao, Ning and Jia, Jiaya and Jin, Weiyang and Li, Hao and Mu, Yao and Pang, Jiangmiao and Qiao, Yu and others},
+  journal={arXiv preprint arXiv:2510.13778},
+  year={2025}
+}
 ```
 
-Ruff 固定为 0.14.4；Python 使用 100 列、四空格、双引号。语法检查不会导入 Isaac Sim 或 Blender。
-引擎几何测试需要 NumPy，可在已有科学计算环境中执行：
-
-```bash
-cd work/InternDataEngine
-python -m unittest human_pair.test_geometry
-```
-
-## 部署与复现边界
-
-VLA-Infra 的现有部署根目录为 `/vepfs/public/pengjiaqi/interndata-human-pair`。
-仓库的 `work/<阶段>/` 对应部署的 `<根目录>/<阶段>/`；`work/isaac41/` 中环境包装脚本对应部署根目录。
-脚本仍包含这套实验环境的固定路径，不能把干净克隆视为已安装好资产与运行环境的一键工程。
-引擎补丁用法见 [patches/README.md](patches/README.md)。
-
-人物解算、Blender 导入、Isaac Sim 渲染分别需要对应运行环境，以及原轨迹、场景、合法取得的人物资产和阶段缓存。
-安柏的顺序为导入/导出资产 → `solve_motion.py` → `verify.py` → `bake_and_template.py` → `render_full.sh`。
-已有部署上的 `render_full.sh` 还依赖预览阶段预热的渲染缓存；不要盲目覆盖正在使用的部署文件。
-
-本次整理先保存原始源码快照，再单独提交格式化。历史报告中的代码散列指向当时实际执行的文件；
-格式化后的源码不冒充重新渲染过的版本。格式化通过 Python AST 等价检查和既有验证脚本核验。
-
-模型、贴图、原轨迹、视频、缓存、下载的第三方仓库及虚拟环境保留在磁盘，由 `.gitignore` 排除。
-第三方仓库版本见 [provenance/dependencies.json](provenance/dependencies.json)，不在本仓库重复打包。
-安柏资产条款禁止商用和二次分发；代码提交不含原模型或贴图。其他资产遵循各自授权。
-
-本机与部署源码比对时，三个本机诊断/实验脚本比部署更新：`audit_colliders.py` 排除 Cooked 属性、
-`measure_recorded_contact.py` 从关节框架推导位移、`gaussian-ego/fit_motion.py` 修正模板 RMSE。
-这些本机改动保留；部署代码未被格式化或覆盖。
+<!--
+```BibTeX
+@misc{interndataengine2026,
+  title={InternDataEngine: A Synthetic Data Generation Engine for Robotic Learning},
+  author={InternDataEngine Contributors},
+  year={2026},
+  }
+}
+``` -->

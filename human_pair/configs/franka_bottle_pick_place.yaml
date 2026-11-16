@@ -1,0 +1,184 @@
+tasks:
+- name: banana_base_task
+  asset_root: workflows/simbox/assets
+  task: BananaBaseTask
+  task_id: 0
+  offset: null
+  render: true
+  arena_file: /vepfs/public/pengjiaqi/interndata-human-pair/src/InternDataEngine41/human_pair/configs/neutral_arena.yaml
+  neglect_collision_names:
+  - table
+  env_map:
+    envmap_lib: envmap_lib
+    apply_randomization: true
+    intensity_range:
+    - 1000
+    - 1000
+    rotation_range:
+    - 0
+    - 180
+  robots:
+  - name: franka
+    robot_config_file: workflows/simbox/core/configs/robots/fr3.yaml
+    euler:
+    - 0.0
+    - 0.0
+    - 90.0
+    left_joint_home:
+    - 0.0
+    - -0.143
+    - 0.0
+    - -2.435
+    - 0.0
+    - 2.235
+    - 0.789
+    left_joint_home_std:
+    - 0.0
+    - 0.0
+    - 0.0
+    - 0.0
+    - 0.0
+    - 0.0
+    - 0.0
+  objects:
+  - name: pick_object_left
+    path: pick_and_place/pre-train-pick/assets/omniobject3d-bottle/google_scan-bottle_0011/Aligned_obj.usd
+    target_class: RigidObject
+    dataset: oo3d
+    category: omniobject3d-bottle
+    prim_path_child: Aligned
+    translation:
+    - 0.0
+    - 0.0
+    - 0.0
+    euler:
+    - 0.0
+    - 0.0
+    - 0.0
+    scale:
+    - 0.001
+    - 0.001
+    - 0.001
+    apply_randomization: false
+    orientation_mode: keep
+    legacy_task_units: false
+  regions:
+  - object: pick_object_left
+    target: table
+    random_type: A_on_B_region_sampler
+    random_config:
+      pos_range:
+      - - -0.1
+        - -0.2
+        - 0.0
+      - - -0.08
+        - -0.18
+        - 0.0
+      yaw_rotation:
+      - 0.0
+      - 0.0
+  - object: ${tasks.0.robots.0.name}
+    target: table
+    random_type: A_on_B_region_sampler
+    random_config:
+      pos_range:
+      - - 0.0
+        - -0.495
+        - 0.0
+      - - 0.0
+        - -0.445
+        - 0.05
+      yaw_rotation:
+      - 0.0
+      - 0.0
+  cameras:
+  - name: ${tasks.0.robots.0.name}_hand
+    translation:
+    - 0.085
+    - 0.0
+    - -0.02
+    orientation:
+    - 0.153
+    - 0.69
+    - 0.69
+    - 0.153
+    camera_axes: usd
+    camera_file: workflows/simbox/core/configs/cameras/realsense_d435i.yaml
+    parent: ${tasks.0.robots.0.name}/fr3/panda_hand
+    apply_randomization: false
+    max_translation_noise: 0.03
+    max_orientation_noise: 5.0
+  - name: ${tasks.0.robots.0.name}_head
+    translation:
+    - 0.0
+    - 0.65
+    - 1.24
+    orientation:
+    - 0.0
+    - 0.0
+    - -0.466
+    - -0.885
+    camera_axes: usd
+    camera_file: workflows/simbox/core/configs/cameras/realsense_d455_v3.yaml
+    parent: ''
+    apply_randomization: false
+    max_translation_noise: 0.06
+    max_orientation_noise: 10.0
+  data:
+    task_dir: human_pair/franka_bottle_pick_place
+    language_instruction: Pick up the bottle and place it on the right side of the
+      table.
+    detailed_language_instruction: Pick, lift, move right, release on the table, and
+      retreat.
+    collect_info: ''
+    version: v3.0, head camerea 1280x720, wrist 640x480, y 45 degrees
+    update: true
+    max_episode_length: 800
+    export_replay_scene: true
+  skills:
+  - franka:
+    - left:
+      - name: pick
+        objects:
+        - pick_object_left
+        filter_x_dir:
+        - forward
+        - 90
+        filter_z_dir:
+        - downward
+        - 45
+        pre_grasp_offset: 0.05
+        gripper_change_steps: 15
+        t_eps: 0.01
+        o_eps: 1
+        process_valid: true
+        lift_th: 0.02
+        post_grasp_offset_min: 0.12
+        post_grasp_offset_max: 0.12
+        test_mode: forward
+      - name: place
+        objects:
+        - pick_object_left
+        - table
+        place_direction: vertical
+        x_ratio_range:
+        - 0.62
+        - 0.66
+        y_ratio_range:
+        - 0.3
+        - 0.35
+        pre_place_z_offset: 0.2
+        place_z_offset: 0.045
+        position_constraint: object
+        keep_grasp_orientation: true
+        ignore_substring:
+        - pick_object_left
+        post_place_vector:
+        - 0.0
+        - 0.0
+        - -0.12
+        gripper_change_steps: 20
+        success_mode: xybbox
+      - name: heuristic__skill
+        mode: home
+        gripper_state: 1.0

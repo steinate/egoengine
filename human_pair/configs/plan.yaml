@@ -1,0 +1,28 @@
+name: human_pair_plan
+load_stage:
+  scene_loader:
+    type: env_loader
+    args:
+      workflow_type: SimBoxDualWorkFlow
+      cfg_path: /vepfs/public/pengjiaqi/interndata-human-pair/src/InternDataEngine41/human_pair/configs/franka_bottle_pick_place.yaml
+      simulator:
+        physics_dt: 1/30
+        rendering_dt: 1/30
+        stage_units_in_meters: 1.0
+        headless: true
+        anti_aliasing: 0
+        multi_gpu: false
+  layout_random_generator:
+    type: env_randomizer
+    args:
+      random_num: 1
+      strict_mode: false
+plan_stage:
+  seq_planner:
+    type: env_planner
+store_stage:
+  writer:
+    type: env_writer
+    args:
+      batch_async: false
+      seq_output_dir: /vepfs/public/pengjiaqi/interndata-human-pair/outputs41/plan
