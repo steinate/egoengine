@@ -278,7 +278,7 @@ class Manualpick(BaseSkill):
         if post_grasp_offset:
             p_base_ee_postgrasps = deepcopy(p_base_ee_grasps)
             p_base_ee_postgrasps[index][2] += post_grasp_offset
-            cmd = (p_base_ee_postgrasps[index], q_base_ee_grasps[index], self.gripper_cmd, {})
+            cmd = (p_base_ee_postgrasps[index], q_base_ee_grasps[index], "close_gripper", {})
             manip_list.append(cmd)
 
         self.manip_list = manip_list
