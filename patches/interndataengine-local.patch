@@ -1,0 +1,1243 @@
+diff --git a/deps/world_toolkit/world_recorder/__init__.py b/deps/world_toolkit/world_recorder/__init__.py
+index 86fbd52..1251182 100644
+--- a/deps/world_toolkit/world_recorder/__init__.py
++++ b/deps/world_toolkit/world_recorder/__init__.py
+@@ -29,6 +29,9 @@ class WorldRecorder:
+         self.prim_visibilities = []
+         self.replay_counter = 0
+         self.num_steps = 0
++        # Optional visual-only animation hook, invoked after recorded transforms
++        # are applied and before rendering. Not serialized in trajectory files.
++        self.before_render = None
+ 
+         for robot_name, robot in robots.items():
+             if not isinstance(robot, Robot):
+@@ -202,6 +205,8 @@ class WorldRecorder:
+                 else:
+                     prim.GetAttribute("visibility").Set("inherited")
+ 
++            if self.before_render is not None:
++                self.before_render(self.replay_counter)
+             self.world.render()
+             if increment_counter:
+                 self.replay_counter += 1
+@@ -250,12 +255,24 @@ class WorldRecorder:
+                 "prim_visibilities": self.prim_visibilities,
+             }
+ 
++        record_data["prim_paths"] = [str(p.GetPath()) for p in self.xform_prims]
+         return pickle.dumps(record_data)
+ 
+     def loads(self, data):
+         """Deserialize recorder data based on mode."""
+         record_data = pickle.loads(data)
+         mode = record_data.get("mode", "prim_pose")
++        paths = record_data.get("prim_paths")
++        current_paths = [str(p.GetPath()) for p in self.xform_prims]
++        if paths is not None and paths != current_paths:
++            raise ValueError("Recorded prim paths/order do not match reconstructed scene")
++        if mode == "prim_pose":
++            poses = record_data["prim_poses"]
++            vis = record_data["prim_visibilities"]
++            if len(poses) != record_data["num_steps"] or len(vis) != len(poses):
++                raise ValueError("Trajectory frame count mismatch")
++            if any(len(p) != len(current_paths) for p in poses) or any(len(v) != len(current_paths) for v in vis):
++                raise ValueError("Trajectory prim count mismatch")
+ 
+         if mode == "prim_pose" and not self.step_replay:
+             self.num_steps = record_data["num_steps"]
+diff --git a/human_pair/__init__.py b/human_pair/__init__.py
+new file mode 100644
+index 0000000..8ca1689
+--- /dev/null
++++ b/human_pair/__init__.py
+@@ -0,0 +1 @@
++"""Visual-only human reference video integration for InternDataEngine."""
+diff --git a/human_pair/audit_plan.py b/human_pair/audit_plan.py
+new file mode 100644
+index 0000000..cb7290d
+--- /dev/null
++++ b/human_pair/audit_plan.py
+@@ -0,0 +1,33 @@
++"""Inspect a trusted engine plan pickle without importing Isaac Sim.
++
++Never use this on untrusted pickle files. Public LeRobot files are not plans.
++"""
++
++import argparse, json, pickle
++from pathlib import Path
++
++
++def inspect(path):
++    cfg_b, rec_b, log_b = pickle.loads(Path(path).read_bytes())
++    cfg, rec, log = map(pickle.loads, (cfg_b, rec_b, log_b))
++    return {
++        "format": "InternDataEngine plan tuple",
++        "mode": rec.get("mode", "prim_pose"),
++        "num_steps": rec["num_steps"],
++        "prim_paths": rec.get("prim_paths"),
++        "legacy_order_only": "prim_paths" not in rec,
++        "task": cfg.get("task"),
++        "objects": [
++            {k: o.get(k) for k in ["name", "path", "scale", "prim_path_child"]}
++            for o in cfg.get("objects", [])
++        ],
++        "object_log_keys": {r: list(v) for r, v in log.get("object_data_logger", {}).items()},
++        "proprio_keys": {r: list(v) for r, v in log.get("proprio_data_logger", {}).items()},
++    }
++
++
++if __name__ == "__main__":
++    ap = argparse.ArgumentParser()
++    ap.add_argument("plan")
++    args = ap.parse_args()
++    print(json.dumps(inspect(args.plan), indent=2, ensure_ascii=False))
+diff --git a/human_pair/configs/franka_bottle_pick_place.yaml b/human_pair/configs/franka_bottle_pick_place.yaml
+new file mode 100644
+index 0000000..2a73b42
+--- /dev/null
++++ b/human_pair/configs/franka_bottle_pick_place.yaml
+@@ -0,0 +1,176 @@
++tasks:
++- name: banana_base_task
++  asset_root: workflows/simbox/assets
++  task: BananaBaseTask
++  task_id: 0
++  offset: null
++  render: true
++  arena_file: /vepfs/public/pengjiaqi/interndata-human-pair/src/InternDataEngine/human_pair/configs/neutral_arena.yaml
++  neglect_collision_names:
++  - table
++  env_map:
++    envmap_lib: envmap_lib
++    apply_randomization: true
++    intensity_range:
++    - 1000
++    - 1000
++    rotation_range:
++    - 0
++    - 180
++  robots:
++  - name: franka
++    robot_config_file: workflows/simbox/core/configs/robots/fr3.yaml
++    euler:
++    - 0.0
++    - 0.0
++    - 90.0
++    left_joint_home:
++    - 0.0
++    - -0.143
++    - 0.0
++    - -2.435
++    - 0.0
++    - 2.235
++    - 0.789
++    left_joint_home_std:
++    - 0.0
++    - 0.0
++    - 0.0
++    - 0.0
++    - 0.0
++    - 0.0
++    - 0.0
++  objects:
++  - name: pick_object_left
++    path: pick_and_place/pre-train-pick/assets/omniobject3d-bottle/google_scan-bottle_0011/Aligned_obj.usd
++    target_class: RigidObject
++    dataset: oo3d
++    category: omniobject3d-bottle
++    prim_path_child: Aligned
++    translation:
++    - 0.0
++    - 0.0
++    - 0.0
++    euler:
++    - 0.0
++    - 0.0
++    - 0.0
++    scale:
++    - 0.001
++    - 0.001
++    - 0.001
++    apply_randomization: false
++    orientation_mode: keep
++    legacy_task_units: true
++  regions:
++  - object: pick_object_left
++    target: table
++    random_type: A_on_B_region_sampler
++    random_config:
++      pos_range:
++      - - -0.1
++        - -0.2
++        - 0.0
++      - - -0.08
++        - -0.18
++        - 0.0
++      yaw_rotation:
++      - 0.0
++      - 0.0
++  - object: ${tasks.0.robots.0.name}
++    target: table
++    random_type: A_on_B_region_sampler
++    random_config:
++      pos_range:
++      - - 0.0
++        - -0.495
++        - 0.0
++      - - 0.0
++        - -0.445
++        - 0.05
++      yaw_rotation:
++      - 0.0
++      - 0.0
++  cameras:
++  - name: ${tasks.0.robots.0.name}_hand
++    translation:
++    - 0.085
++    - 0.0
++    - -0.02
++    orientation:
++    - 0.153
++    - 0.69
++    - 0.69
++    - 0.153
++    camera_axes: usd
++    camera_file: workflows/simbox/core/configs/cameras/realsense_d435i.yaml
++    parent: ${tasks.0.robots.0.name}/fr3/panda_hand
++    apply_randomization: false
++    max_translation_noise: 0.03
++    max_orientation_noise: 5.0
++  - name: ${tasks.0.robots.0.name}_head
++    translation:
++    - 0.0
++    - 0.65
++    - 1.24
++    orientation:
++    - 0.0
++    - 0.0
++    - -0.466
++    - -0.885
++    camera_axes: usd
++    camera_file: workflows/simbox/core/configs/cameras/realsense_d455_v3.yaml
++    parent: ''
++    apply_randomization: false
++    max_translation_noise: 0.06
++    max_orientation_noise: 10.0
++  data:
++    task_dir: human_pair/franka_bottle_pick_place
++    language_instruction: Pick up the bottle and place it on the right side of the
++      table.
++    detailed_language_instruction: Pick, lift, move right, release on the table, and
++      retreat.
++    collect_info: ''
++    version: v3.0, head camerea 1280x720, wrist 640x480, y 45 degrees
++    update: true
++    max_episode_length: 800
++    export_replay_scene: true
++  skills:
++  - franka:
++    - left:
++      - name: pick
++        objects:
++        - pick_object_left
++        filter_x_dir:
++        - forward
++        - 90
++        filter_z_dir:
++        - downward
++        - 45
++        pre_grasp_offset: 0.05
++        gripper_change_steps: 15
++        t_eps: 0.01
++        o_eps: 1
++        process_valid: true
++        lift_th: 0.02
++        post_grasp_offset_min: 0.12
++        post_grasp_offset_max: 0.12
++        test_mode: forward
++      - name: place
++        objects:
++        - pick_object_left
++        - table
++        place_direction: vertical
++        x_ratio_range:
++        - 0.62
++        - 0.66
++        y_ratio_range:
++        - 0.3
++        - 0.35
++        pre_place_z_offset: 0.15
++        place_z_offset: 0.025
++        gripper_change_steps: 15
++        success_mode: xybbox
++      - name: heuristic__skill
++        mode: home
++        gripper_state: 1.0
+diff --git a/human_pair/configs/neutral_arena.yaml b/human_pair/configs/neutral_arena.yaml
+new file mode 100644
+index 0000000..5c26f16
+--- /dev/null
++++ b/human_pair/configs/neutral_arena.yaml
+@@ -0,0 +1,74 @@
++name: pick_randomized_arena
++fixtures:
++- name: table
++  path: table0/instance.usd
++  target_class: GeometryObject
++  translation:
++  - 0.0
++  - 0.0
++  - 0.375
++  scale:
++  - 0.001
++  - 0.001053
++  - 0.001056
++- name: floor
++  target_class: PlaneObject
++  size:
++  - 5.0
++  - 5.0
++  translation:
++  - 0
++  - 0
++  - 0
++- name: background0
++  target_class: PlaneObject
++  size:
++  - 3.0
++  - 5.0
++  translation:
++  - -2
++  - 0
++  - 1
++  euler:
++  - 0.0
++  - 90.0
++  - 0.0
++- name: background1
++  target_class: PlaneObject
++  size:
++  - 3.0
++  - 5.0
++  translation:
++  - 2
++  - 0
++  - 1
++  euler:
++  - 0.0
++  - 90.0
++  - 0.0
++- name: background2
++  target_class: PlaneObject
++  size:
++  - 5.0
++  - 3.0
++  translation:
++  - 0
++  - -2
++  - 1
++  euler:
++  - 90.0
++  - 0.0
++  - 0.0
++- name: background3
++  target_class: PlaneObject
++  size:
++  - 5.0
++  - 3.0
++  translation:
++  - 0
++  - 2
++  - 1
++  euler:
++  - 90.0
++  - 0.0
++  - 0.0
+diff --git a/human_pair/configs/plan.yaml b/human_pair/configs/plan.yaml
+new file mode 100644
+index 0000000..457ba84
+--- /dev/null
++++ b/human_pair/configs/plan.yaml
+@@ -0,0 +1,28 @@
++name: human_pair_plan
++load_stage:
++  scene_loader:
++    type: env_loader
++    args:
++      workflow_type: SimBoxDualWorkFlow
++      cfg_path: /vepfs/public/pengjiaqi/interndata-human-pair/src/InternDataEngine/human_pair/configs/franka_bottle_pick_place.yaml
++      simulator:
++        physics_dt: 1/30
++        rendering_dt: 1/30
++        stage_units_in_meters: 1.0
++        headless: true
++        anti_aliasing: 0
++        multi_gpu: false
++  layout_random_generator:
++    type: env_randomizer
++    args:
++      random_num: 1
++      strict_mode: false
++plan_stage:
++  seq_planner:
++    type: env_planner
++store_stage:
++  writer:
++    type: env_writer
++    args:
++      batch_async: false
++      seq_output_dir: /vepfs/public/pengjiaqi/interndata-human-pair/outputs/plan
+diff --git a/human_pair/configs/render.yaml b/human_pair/configs/render.yaml
+new file mode 100644
+index 0000000..ca96d91
+--- /dev/null
++++ b/human_pair/configs/render.yaml
+@@ -0,0 +1,30 @@
++name: human_pair_render
++load_stage:
++  scene_loader:
++    type: env_loader
++    args:
++      workflow_type: SimBoxDualWorkFlow
++      cfg_path: /vepfs/public/pengjiaqi/interndata-human-pair/src/InternDataEngine/human_pair/configs/franka_bottle_pick_place.yaml
++      simulator:
++        physics_dt: 1/30
++        rendering_dt: 1/30
++        stage_units_in_meters: 1.0
++        headless: true
++        anti_aliasing: 0
++        multi_gpu: false
++  layout_random_generator:
++    type: env_randomizer
++    args:
++      input_dir: /vepfs/public/pengjiaqi/interndata-human-pair/outputs/plan/BananaBaseTask/plan
++plan_stage:
++  seq_planner:
++    type: env_reader
++render_stage:
++  renderer:
++    type: env_renderer
++store_stage:
++  writer:
++    type: env_writer
++    args:
++      batch_async: false
++      output_dir: /vepfs/public/pengjiaqi/interndata-human-pair/outputs/render
+diff --git a/human_pair/diagnostics.py b/human_pair/diagnostics.py
+new file mode 100644
+index 0000000..a842715
+--- /dev/null
++++ b/human_pair/diagnostics.py
+@@ -0,0 +1,85 @@
++"""Task diagnostics for initial scene / grasp calibration, without changing policy."""
++
++import json
++from pathlib import Path
++import numpy as np
++
++
++def install(output_dir):
++    import workflows
++
++    original_import = workflows.import_extensions
++
++    def import_extensions(kind):
++        original_import(kind)
++        from workflows.base import NimbusWorkFlow
++
++        SimBoxDualWorkFlow = NimbusWorkFlow.workflows[kind]
++        original = SimBoxDualWorkFlow.generate_seq
++
++        def generate(self):
++            out = Path(output_dir)
++            out.mkdir(parents=True, exist_ok=True)
++            result = {"robots": {}, "objects": {}}
++            for name, r in self.task.robots.items():
++                result["robots"][name] = {
++                    "pose": [np.asarray(x).tolist() for x in r.get_world_pose()],
++                    "joints": r.get_joint_positions().tolist(),
++                }
++            for name, o in self.task.objects.items():
++                result["objects"][name] = {
++                    "pose": [np.asarray(x).tolist() for x in o.get_world_pose()],
++                    "scale": o.get_local_scale().tolist(),
++                }
++            from core.skills.pick import Pick
++
++            p = Pick(
++                self.task.robots["franka"],
++                self.controllers["franka"]["left"],
++                self.task,
++                self.task_cfg["skills"][0]["franka"][0]["left"][0],
++            )
++            targets = p.get_ee_poses("armbase")
++            result["grasp_translation_range"] = [
++                targets[:, :3, 3].min(0).tolist(),
++                targets[:, :3, 3].max(0).tolist(),
++            ]
++            ctrl = self.controllers["franka"]["left"]
++            result["current_ee_in_base"] = [np.asarray(x).tolist() for x in ctrl.get_ee_pose()]
++            original_plan = ctrl.plan
++            plan_calls = 0
++
++            def checked_plan(*a, **kw):
++                nonlocal plan_calls
++                if plan_calls == 0:
++                    print(
++                        "MOTION_OBSTACLES",
++                        {
++                            k: [o.name for o in (getattr(ctrl.world_cfg, k, None) or [])]
++                            for k in ["mesh", "cuboid", "sphere", "capsule"]
++                        },
++                        flush=True,
++                    )
++                plan_calls += 1
++                outcome = original_plan(*a, **kw)
++                if not outcome.success.any():
++                    print("MOTION_FAILURE", str(outcome.status), "target", str(a[0]), flush=True)
++                return outcome
++
++            ctrl.plan = checked_plan
++            print("TASK_DIAGNOSTICS", json.dumps(result), flush=True)
++            (out / "initial-scene.json").write_text(json.dumps(result, indent=2))
++            self.stage.Flatten().Export(str(out / "initial-scene.usdc"))
++            import imageio.v2 as imageio
++
++            for _ in range(10):
++                self.world.render()
++            for name, c in self.task.cameras.items():
++                rgb = c.get_rgba()
++                if rgb.size:
++                    imageio.imwrite(out / (name + ".png"), rgb.astype(np.uint8))
++            return original(self)
++
++        SimBoxDualWorkFlow.generate_seq = generate
++
++    workflows.import_extensions = import_extensions
+diff --git a/human_pair/engine_job.py b/human_pair/engine_job.py
+new file mode 100644
+index 0000000..aa8ff20
+--- /dev/null
++++ b/human_pair/engine_job.py
+@@ -0,0 +1,33 @@
++"""Engine entrypoint with task-owned Kit logs/caches and explicit random seed."""
++
++import argparse, sys
++from pathlib import Path
++
++ap = argparse.ArgumentParser()
++ap.add_argument("--config", required=True)
++ap.add_argument("--seed", type=int, default=42)
++ap.add_argument("--diagnostics", action="store_true")
++args = ap.parse_args()
++root = Path(__file__).resolve().parents[3]
++sys.argv = [
++    sys.argv[0],
++    "--portable-root",
++    str(root / "cache/kit"),
++    f"--/log/file={root}/logs/kit-engine.log",
++    f"--/structuredLog/logDirectory={root}/logs/structured",
++    f"--/app/userConfigPath={root}/cache/user.config.json",
++]
++from nimbus.utils.utils import init_env
++
++init_env()
++from nimbus.utils.config_processor import ConfigProcessor
++from nimbus.utils.flags import set_debug_mode, set_random_seed
++from nimbus import run_data_engine
++from human_pair.diagnostics import install
++
++if args.diagnostics:
++    install(root / "outputs/task-diagnostics")
++set_debug_mode(True)
++set_random_seed(args.seed)
++config = ConfigProcessor().process_config(args.config, cli_args=[])
++run_data_engine(config, args.seed)
+diff --git a/human_pair/export_tracks.py b/human_pair/export_tracks.py
+new file mode 100644
+index 0000000..c3b2f90
+--- /dev/null
++++ b/human_pair/export_tracks.py
+@@ -0,0 +1,64 @@
++"""Export world-space object/EE/TCP tracks from a trusted patched plan pickle."""
++
++import argparse, json, pickle
++from pathlib import Path
++import numpy as np
++from scipy.spatial.transform import Rotation
++
++
++def main():
++    ap = argparse.ArgumentParser()
++    ap.add_argument("plan")
++    ap.add_argument("--object", default="pick_object_left")
++    ap.add_argument("--robot", default="franka")
++    ap.add_argument("--output", required=True)
++    a = ap.parse_args()
++    path = Path(a.plan)
++    cfg, rec, log = map(pickle.loads, pickle.loads(path.read_bytes()))
++    if rec.get("mode") != "prim_pose":
++        raise ValueError("Exporter currently requires prim_pose mode")
++    meta = json.loads(path.with_suffix(".meta.json").read_text())
++    paths = rec.get("prim_paths")
++    if paths != meta["prim_paths"]:
++        raise ValueError("Missing/mismatched prim path manifest")
++
++    def matrices(prim):
++        idx = paths.index(prim)
++        p = np.array([f[idx][0] for f in rec["prim_poses"]])
++        q = np.array([f[idx][1] for f in rec["prim_poses"]])
++        T = np.tile(np.eye(4), (len(p), 1, 1))
++        T[:, :3, 3] = p
++        T[:, :3, :3] = Rotation.from_quat(q[:, [1, 2, 3, 0]]).as_matrix()
++        return T
++
++    obj = matrices(meta["object_paths"][a.object])
++    ee_info = meta["end_effector_paths"][a.robot]
++    ee = matrices(ee_info["left"])
++    offset = np.eye(4)
++    offset[2, 3] = ee_info["tcp_offset"]  # FR3 convention only
++    if a.robot != "franka":
++        raise ValueError("Confirm TCP axis for other embodiments before exporting")
++    proprio = log["proprio_data_logger"][a.robot]
++    states = np.asarray(proprio["states.joint.position"])
++    actions = log["action_data_logger"][a.robot]
++    joint_actions = np.asarray(actions["master_actions.joint.position"])
++    gripper_open = np.asarray(actions["master_actions.gripper.openness"])
++    if not (len(states) == len(obj) == len(joint_actions) == len(gripper_open)):
++        raise ValueError("Robot state/action and scene trajectory length mismatch")
++    np.savez_compressed(
++        a.output,
++        object_T=obj,
++        ee_T=ee,
++        tcp_T=ee @ offset,
++        robot_joint_state=states,
++        robot_joint_action=joint_actions,
++        gripper_open_command=gripper_open,
++        gripper_width=np.asarray(proprio["states.gripper.position"]),
++        frame_index=np.arange(len(obj)),
++        dt=meta["physics_dt"],
++    )
++    print(f"Exported {len(obj)} frames; world frame, meters, 4x4 column-vector transforms")
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/human_pair/geometry.py b/human_pair/geometry.py
+new file mode 100644
+index 0000000..138048e
+--- /dev/null
++++ b/human_pair/geometry.py
+@@ -0,0 +1,39 @@
++"""Metric world-space utilities; transforms multiply column vectors."""
++
++import numpy as np
++
++
++def two_bone_ik(shoulder, wrist, upper_length, fore_length, pole):
++    """Return elbow; reject unreachable targets instead of stretching limbs.
++
++    pole is a world-space elbow hint, not a direction. For sequences, use a
++    consistent anatomical pole and check elbow continuity after solving.
++    """
++    s, w, p = (np.asarray(x, dtype=float) for x in (shoulder, wrist, pole))
++    d = np.linalg.norm(w - s)
++    if not np.isfinite([*s, *w, *p, upper_length, fore_length]).all():
++        raise ValueError("Non-finite IK input")
++    if min(upper_length, fore_length) <= 0 or d < 1e-8:
++        raise ValueError("Degenerate arm")
++    if d > upper_length + fore_length + 1e-8 or d < abs(upper_length - fore_length) - 1e-8:
++        raise ValueError("Unreachable wrist: change shoulder/stance or reject episode")
++    axis = (w - s) / d
++    bend = p - s - np.dot(p - s, axis) * axis
++    if np.linalg.norm(bend) < 1e-7:
++        raise ValueError("Pole is collinear: choose a stable anatomical pole")
++    bend /= np.linalg.norm(bend)
++    along = (upper_length**2 - fore_length**2 + d * d) / (2 * d)
++    height = np.sqrt(max(upper_length**2 - along**2, 0.0))
++    return s + along * axis + height * bend
++
++
++def locked_grasp(object_T, object_to_wrist):
++    """Only for a stable, non-sliding rigid grasp interval."""
++    return np.asarray(object_T) @ np.asarray(object_to_wrist)
++
++
++def center_mano_vertices(vertices, joints, wrist_T):
++    """MANO vertices are not wrist-centered; explicitly subtract joint 0."""
++    local = np.asarray(vertices) - np.asarray(joints)[:, :1, :]
++    T = np.asarray(wrist_T)
++    return np.einsum("tij,tvj->tvi", T[:, :3, :3], local) + T[:, None, :3, 3]
+diff --git a/human_pair/make_task.py b/human_pair/make_task.py
+new file mode 100644
+index 0000000..a0d00c7
+--- /dev/null
++++ b/human_pair/make_task.py
+@@ -0,0 +1,85 @@
++"""Derive a bounded single-arm pick/place task from the upstream Franka task."""
++
++import copy
++from pathlib import Path
++import yaml
++
++
++def main():
++    root = Path(__file__).resolve().parents[1]
++    base = (
++        root
++        / "workflows/simbox/core/configs/tasks/pick_and_place/franka/single_pick/omniobject3d-bottle.yaml"
++    )
++    doc = yaml.safe_load(base.read_text())
++    t = doc["tasks"][0]
++    obj = t["objects"][0]
++    obj.update(apply_randomization=False, orientation_mode="keep", legacy_task_units=True)
++    t.pop("distractors", None)
++    t["robots"][0]["left_joint_home_std"] = [0.0] * 7
++    t["regions"][0]["random_config"]["pos_range"] = [[-0.10, -0.20, 0.0], [-0.08, -0.18, 0.0]]
++    t["regions"][0]["random_config"]["yaw_rotation"] = [0.0, 0.0]
++    t["data"].update(
++        task_dir="human_pair/franka_bottle_pick_place",
++        language_instruction="Pick up the bottle and place it on the right side of the table.",
++        detailed_language_instruction="Pick, lift, move right, release on the table, and retreat.",
++        max_episode_length=800,
++        export_replay_scene=True,
++    )
++    skills = t["skills"][0]["franka"][0]["left"]
++    skills[0].update(
++        test_mode="forward",
++        filter_z_dir=["downward", 45],
++        post_grasp_offset_min=0.12,
++        post_grasp_offset_max=0.12,
++        gripper_change_steps=15,
++    )
++    skills.append(
++        dict(
++            name="place",
++            objects=["pick_object_left", "table"],
++            place_direction="vertical",
++            x_ratio_range=[0.62, 0.66],
++            y_ratio_range=[0.30, 0.35],
++            pre_place_z_offset=0.15,
++            place_z_offset=0.025,
++            gripper_change_steps=15,
++            success_mode="xybbox",
++        )
++    )
++    skills.append(dict(name="heuristic__skill", mode="home", gripper_state=1.0))
++    for c in t["cameras"]:
++        c["apply_randomization"] = False
++    target = root / "human_pair/configs"
++    target.mkdir(exist_ok=True)
++    arena = yaml.safe_load((root / t["arena_file"]).read_text())
++    for fixture in arena["fixtures"]:
++        fixture.pop("texture", None)
++    arena_path = target / "neutral_arena.yaml"
++    arena_path.write_text(yaml.safe_dump(arena, sort_keys=False))
++    t["arena_file"] = str(arena_path)
++    t["env_map"]["intensity_range"] = [1000, 1000]
++    task_path = target / "franka_bottle_pick_place.yaml"
++    task_path.write_text(yaml.safe_dump(doc, sort_keys=False))
++    for kind in ["plan", "render"]:
++        cfg = yaml.safe_load((root / f"configs/simbox/de_{kind}_template.yaml").read_text())
++        cfg["name"] = "human_pair_" + kind
++        cfg["load_stage"]["scene_loader"]["args"]["cfg_path"] = str(task_path)
++        cfg["load_stage"]["scene_loader"]["args"]["simulator"]["multi_gpu"] = False
++        randomizer = cfg["load_stage"]["layout_random_generator"]["args"]
++        deploy = root.parents[1]
++        if kind == "plan":
++            randomizer.update(random_num=1, strict_mode=False)
++        else:
++            randomizer["input_dir"] = str(deploy / "outputs/plan/BananaBaseTask/plan")
++        writer = cfg["store_stage"]["writer"]["args"]
++        writer["batch_async"] = False
++        writer["seq_output_dir" if kind == "plan" else "output_dir"] = str(
++            deploy / "outputs" / kind
++        )
++        (target / f"{kind}.yaml").write_text(yaml.safe_dump(cfg, sort_keys=False))
++    print(task_path)
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/human_pair/overlay.py b/human_pair/overlay.py
+new file mode 100644
+index 0000000..0733e1d
+--- /dev/null
++++ b/human_pair/overlay.py
+@@ -0,0 +1,61 @@
++"""USD MANO mesh + geometric arm preview, attached after recorder initialization.
++
++Arm capsules are a debugging proxy, not a photorealistic body asset.
++Use only with WorldRecorder step_replay=False. Scene units must be meters.
++"""
++
++import numpy as np
++
++
++class HumanOverlay:
++    def __init__(self, stage, mesh_npz, robot_roots=()):
++        from pxr import UsdGeom, UsdShade, Sdf, Gf
++
++        self.UsdGeom, self.Gf = UsdGeom, Gf
++        self.data = np.load(mesh_npz, allow_pickle=False)
++        self.roots = [stage.GetPrimAtPath(p) for p in robot_roots]
++        if any(not p.IsValid() for p in self.roots):
++            raise ValueError("Invalid robot root")
++        root = "/World/HumanReference"
++        if stage.GetPrimAtPath(root).IsValid():
++            raise ValueError("HumanReference already exists")
++        UsdGeom.Xform.Define(stage, root)
++        self.mesh = UsdGeom.Mesh.Define(stage, root + "/hand")
++        f = self.data["faces"]
++        self.mesh.CreateFaceVertexCountsAttr(np.full(len(f), 3, dtype=np.int32).tolist())
++        self.mesh.CreateFaceVertexIndicesAttr(f.reshape(-1).tolist())
++        self.mesh.CreateSubdivisionSchemeAttr("none")
++        self.mesh.CreateDoubleSidedAttr(True)
++        material = UsdShade.Material.Define(stage, root + "/Skin")
++        shader = UsdShade.Shader.Define(stage, root + "/Skin/Shader")
++        shader.CreateIdAttr("UsdPreviewSurface")
++        shader.CreateInput("diffuseColor", Sdf.ValueTypeNames.Color3f).Set((0.52, 0.29, 0.19))
++        shader.CreateInput("roughness", Sdf.ValueTypeNames.Float).Set(0.5)
++        material.CreateSurfaceOutput().ConnectToSource(shader.ConnectableAPI(), "surface")
++        UsdShade.MaterialBindingAPI.Apply(self.mesh.GetPrim()).Bind(material)
++        self.arms = []
++        for name, radius in [("upper_arm", 0.045), ("forearm", 0.033)]:
++            cap = UsdGeom.Capsule.Define(stage, root + "/" + name)
++            cap.CreateRadiusAttr(radius)
++            cap.CreateAxisAttr("Z")
++            xf = UsdGeom.Xformable(cap.GetPrim())
++            self.arms.append((cap, xf.AddTranslateOp(), xf.AddOrientOp()))
++            UsdShade.MaterialBindingAPI.Apply(cap.GetPrim()).Bind(material)
++
++    def __call__(self, frame):
++        if frame >= len(self.data["vertices"]):
++            raise IndexError("Human/robot frame counts differ")
++        self.mesh.GetPointsAttr().Set(self.data["vertices"][frame].tolist())
++        # Must hide AFTER original visibility restoration on every frame.
++        for root in self.roots:
++            self.UsdGeom.Imageable(root).MakeInvisible()
++        points = [self.data[k][frame] for k in ("shoulder", "elbow", "wrist")]
++        for (cap, trans, orient), a, b in zip(self.arms, points[:-1], points[1:]):
++            delta = b - a
++            length = float(np.linalg.norm(delta))
++            cap.GetHeightAttr().Set(max(length - 2 * cap.GetRadiusAttr().Get(), 0.001))
++            trans.Set(self.Gf.Vec3d(*((a + b) / 2).tolist()))
++            q = self.Gf.Rotation(
++                self.Gf.Vec3d(0, 0, 1), self.Gf.Vec3d(*(delta / length).tolist())
++            ).GetQuat()
++            orient.Set(self.Gf.Quatf(q))
+diff --git a/human_pair/prepare_mano.py b/human_pair/prepare_mano.py
+new file mode 100644
+index 0000000..0e3fe04
+--- /dev/null
++++ b/human_pair/prepare_mano.py
+@@ -0,0 +1,76 @@
++"""Create a mesh cache from explicit MANO poses and world-space wrist targets.
++
++This does not infer grasps. Input NPZ: wrist_T[T,4,4], hand_pose[T,45],
++betas[10], shoulder[3], pole[3], upper_length scalar, fore_length scalar.
++Requires a user-provided licensed MANO_RIGHT.pkl. All lengths in meters.
++"""
++
++import argparse
++from pathlib import Path
++import numpy as np
++from .geometry import center_mano_vertices, two_bone_ik
++
++
++def main():
++    ap = argparse.ArgumentParser()
++    ap.add_argument("--model", required=True)
++    ap.add_argument("--input", required=True)
++    ap.add_argument("--output", required=True)
++    args = ap.parse_args()
++    import torch, smplx
++
++    if not Path(args.model).is_file():
++        raise FileNotFoundError("Provide your licensed MANO_RIGHT.pkl path")
++    d = np.load(args.input, allow_pickle=False)
++    T = d["wrist_T"]
++    pose = d["hand_pose"]
++    n = len(T)
++    if T.shape != (n, 4, 4) or pose.shape != (n, 45):
++        raise ValueError("Invalid pose shapes")
++    model = smplx.MANO(args.model, is_rhand=True, use_pca=False, flat_hand_mean=True, batch_size=1)
++    all_v = []
++    for start in range(0, n, 128):
++        count = min(128, n - start)
++        with torch.no_grad():
++            result = model(
++                betas=torch.tensor(
++                    np.broadcast_to(d["betas"], (count, 10)).copy(), dtype=torch.float32
++                ),
++                hand_pose=torch.tensor(pose[start : start + count], dtype=torch.float32),
++                global_orient=torch.zeros(count, 3),
++                transl=torch.zeros(count, 3),
++            )
++        all_v.append(
++            center_mano_vertices(
++                result.vertices.numpy(), result.joints.numpy(), T[start : start + count]
++            )
++        )
++    s = np.broadcast_to(d["shoulder"], (n, 3))
++    pole = np.broadcast_to(d["pole"], (n, 3))
++    elbows = np.stack(
++        [
++            two_bone_ik(
++                s[t], T[t, :3, 3], float(d["upper_length"]), float(d["fore_length"]), pole[t]
++            )
++            for t in range(n)
++        ]
++    )
++    vertices = np.concatenate(all_v)
++    if np.max(np.linalg.norm(vertices - T[:, None, :3, 3], axis=-1)) > 0.5:
++        raise ValueError("Hand exceeds 0.5 m from wrist: check model units")
++    np.savez_compressed(
++        args.output,
++        vertices=vertices.astype(np.float32),
++        faces=model.faces,
++        shoulder=s,
++        elbow=elbows,
++        wrist=T[:, :3, 3],
++        wrist_T=T,
++        hand_pose=pose,
++        betas=d["betas"],
++    )
++    print(f"Saved {n} frames to {args.output}; grasp/collision quality still requires validation")
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/human_pair/recorder_smoke.py b/human_pair/recorder_smoke.py
+new file mode 100644
+index 0000000..c96cf99
+--- /dev/null
++++ b/human_pair/recorder_smoke.py
+@@ -0,0 +1,99 @@
++"""Exercise the actual WorldRecorder with a known metric cube trajectory."""
++
++import argparse, json, pickle
++from pathlib import Path
++import numpy as np
++
++ap = argparse.ArgumentParser()
++ap.add_argument("--out", required=True)
++args, _ = ap.parse_known_args()
++out = Path(args.out)
++out.mkdir(parents=True, exist_ok=True)
++from isaacsim import SimulationApp
++
++app = SimulationApp({"headless": True, "multi_gpu": False, "width": 320, "height": 240})
++try:
++    from omni.isaac.core import World
++    from omni.isaac.core.objects import DynamicCuboid
++    from omni.isaac.core.utils.xforms import get_world_pose
++    from deps.world_toolkit.world_recorder import WorldRecorder
++    from pxr import UsdGeom, Gf, UsdLux
++
++    world = World(stage_units_in_meters=1.0)
++    cube = world.scene.add(
++        DynamicCuboid(
++            prim_path="/World/RecordedCube",
++            name="cube",
++            position=np.array([0, 0, 0.5]),
++            scale=np.array([0.05] * 3),
++        )
++    )
++    UsdLux.DomeLight.Define(world.stage, "/World/TestLight").CreateIntensityAttr(1000.0)
++    world.reset()
++    recorder = WorldRecorder(world, {}, {"cube": cube}, step_replay=False)
++    positions = []
++    for i in range(30):
++        p = np.array([i * 0.005, 0, 0.5 + 0.08 * np.sin(np.pi * i / 29)])
++        # Exercise USD geometric animation directly; PhysX set_world_pose is
++        # not flushed to USD until a simulation update in Isaac Sim 5.1.
++        cube.prim.GetAttribute("xformOp:translate").Set(Gf.Vec3d(*p.tolist()))
++        recorder.record()
++        positions.append(p)
++    data = recorder.dumps()
++    (out / "recorder.pkl").write_bytes(data)
++    # Explicitly synthetic fixture for testing the scene/video replay entrypoint.
++    (out / "synthetic-fixture.pkl").write_bytes(
++        pickle.dumps((pickle.dumps({"synthetic_test": True}), data, pickle.dumps({})))
++    )
++    world.stage.Flatten().Export(str(out / "synthetic-fixture.scene.usdc"))
++    (out / "synthetic-fixture.meta.json").write_text(
++        json.dumps(
++            {
++                "schema_version": 1,
++                "physics_dt": world.get_physics_dt(),
++                "prim_paths": [str(p.GetPath()) for p in recorder.xform_prims],
++                "object_paths": {"cube": "/World/RecordedCube"},
++                "robot_roots": [],
++                "end_effector_paths": {},
++            }
++        )
++    )
++    recorder.reset()
++    recorder.loads(data)
++    callback_frames = []
++    errors = []
++
++    def before_render(i):
++        callback_frames.append(i)
++        actual, _ = get_world_pose("/World/RecordedCube")
++        errors.append(float(np.linalg.norm(actual - positions[i])))
++
++    recorder.before_render = before_render
++    while not recorder.replay():
++        pass
++    assert callback_frames == list(range(30)), callback_frames
++    assert max(errors) < 1e-6, max(errors)
++    bad = pickle.loads(data)
++    bad["prim_paths"] = ["/wrong"]
++    rejected = False
++    try:
++        recorder.loads(pickle.dumps(bad))
++    except ValueError:
++        rejected = True
++    assert rejected
++    result = {
++        "frames": 30,
++        "max_position_error_m": max(errors),
++        "callback_exact_frame_order": True,
++        "wrong_prim_path_rejected": True,
++        "mode": "prim_pose",
++    }
++    (out / "result.json").write_text(json.dumps(result, indent=2))
++    print("RECORDER_RESULT", result, flush=True)
++except BaseException:
++    import traceback
++
++    traceback.print_exc()
++    raise
++finally:
++    app.close()
+diff --git a/human_pair/replay_scene.py b/human_pair/replay_scene.py
+new file mode 100644
+index 0000000..ad59d8f
+--- /dev/null
++++ b/human_pair/replay_scene.py
+@@ -0,0 +1,127 @@
++"""Render an exported plan/scene directly; no replanning or physical stepping.
++
++Without --human-mesh, renders robot baseline. With it, hides robot roots and
++updates MANO/arm geometry using the pre-render callback. This needs the patched
++plan's .meta.json and .scene.usdc sidecars, and accessible referenced textures.
++"""
++
++import argparse, json, pickle, sys
++from pathlib import Path
++import numpy as np
++
++ap = argparse.ArgumentParser()
++ap.add_argument("--plan", required=True)
++ap.add_argument("--output", required=True)
++ap.add_argument("--human-mesh")
++ap.add_argument("--max-frames", type=int)
++ap.add_argument("--eye", type=float, nargs=3, default=[0.0, -0.65, 1.45])
++ap.add_argument("--target", type=float, nargs=3, default=[0.0, 0.0, 0.85])
++args, kit_args = ap.parse_known_args()
++deploy = Path(__file__).resolve().parents[3]
++if "--portable-root" not in kit_args:
++    kit_args = ["--portable-root", str(deploy / "cache/kit")] + kit_args
++sys.argv = [
++    sys.argv[0],
++    f"--/structuredLog/logDirectory={deploy}/logs/structured",
++    f"--/log/file={deploy}/logs/kit-replay.log",
++] + kit_args
++path = Path(args.plan)
++out = Path(args.output)
++out.parent.mkdir(parents=True, exist_ok=True)
++cfg_b, rec_b, log_b = pickle.loads(path.read_bytes())
++rec = pickle.loads(rec_b)
++meta = json.loads(path.with_suffix(".meta.json").read_text())
++if rec.get("mode") != "prim_pose":
++    raise ValueError("Visual replay requires prim_pose data")
++if rec.get("prim_paths") != meta["prim_paths"]:
++    raise ValueError("Prim manifest mismatch")
++from isaacsim import SimulationApp
++
++app = SimulationApp({"headless": True, "multi_gpu": False, "width": 640, "height": 360})
++try:
++    import omni.usd
++    from omni.isaac.core import World
++    from omni.isaac.sensor import Camera
++    from omni.isaac.core.utils.stage import is_stage_loading
++    from omni.isaac.core.utils.xforms import get_world_pose
++    from deps.world_toolkit.world_recorder import WorldRecorder
++    from scipy.spatial.transform import Rotation
++    import imageio.v2 as imageio
++
++    omni.usd.get_context().open_stage(str(path.with_suffix(".scene.usdc")))
++    while is_stage_loading():
++        app.update()
++    world = World(
++        stage_units_in_meters=1.0, physics_dt=meta["physics_dt"], rendering_dt=meta["physics_dt"]
++    )
++    # Initialize the loaded stage and timeline once so camera annotators emit
++    # data. Every saved pose is restored afterwards; the replay loop only renders.
++    world.reset()
++    recorder = WorldRecorder(world, {}, {}, step_replay=False)
++    recorder.xform_prims = [world.stage.GetPrimAtPath(p) for p in meta["prim_paths"]]
++    if any(not p.IsValid() for p in recorder.xform_prims):
++        raise ValueError("Missing recorded prim")
++    recorder.loads(rec_b)
++    if args.human_mesh:
++        from .overlay import HumanOverlay
++
++        overlay = HumanOverlay(world.stage, args.human_mesh, meta["robot_roots"])
++        if len(overlay.data["vertices"]) != recorder.num_steps:
++            raise ValueError("Human/robot frame count mismatch")
++        recorder.before_render = overlay
++    eye = np.array(args.eye)
++    target = np.array(args.target)
++    z = eye - target
++    z /= np.linalg.norm(z)
++    x = np.cross([0.0, 0.0, 1.0], z)
++    x /= np.linalg.norm(x)
++    y = np.cross(z, x)
++    q = Rotation.from_matrix(np.stack([x, y, z], axis=1)).as_quat()[[3, 0, 1, 2]]
++    cam = Camera(
++        prim_path="/World/HumanEgoCamera",
++        resolution=(640, 360),
++        frequency=round(1 / meta["physics_dt"]),
++    )
++    cam.set_world_pose(eye, q, camera_axes="usd")
++    cam.set_clipping_range(0.01, 100.0)
++    cam.initialize()
++    for _ in range(15):
++        recorder._replay_from_prim_poses(increment_counter=False)
++    limit = min(recorder.num_steps, args.max_frames or recorder.num_steps)
++    errors = []
++    frames = 0
++    with imageio.get_writer(
++        out, fps=1 / meta["physics_dt"], codec="libx264", quality=8, macro_block_size=1
++    ) as writer:
++        for i in range(limit):
++            recorder.replay()
++            rgba = cam.get_rgba()
++            if rgba.shape != (360, 640, 4):
++                raise ValueError(f"Invalid camera output: {rgba.shape}")
++            rgb = rgba[:, :, :3].astype(np.uint8)
++            if i == 0:
++                imageio.imwrite(out.with_suffix(".png"), rgb)
++            writer.append_data(rgb)
++            frames += 1
++            for prim_path in meta["object_paths"].values():
++                if prim_path in meta["prim_paths"]:
++                    j = meta["prim_paths"].index(prim_path)
++                    p, _ = get_world_pose(prim_path)
++                    errors.append(float(np.linalg.norm(p - np.array(rec["prim_poses"][i][j][0]))))
++    result = {
++        "frames": frames,
++        "human_mesh": bool(args.human_mesh),
++        "max_object_position_error_m": max(errors, default=0),
++        "eye": args.eye,
++        "target": args.target,
++        "source_plan": str(path),
++    }
++    out.with_suffix(".json").write_text(json.dumps(result, indent=2))
++    print("REPLAY_RESULT", result, flush=True)
++except BaseException:
++    import traceback
++
++    traceback.print_exc()
++    raise
++finally:
++    app.close()
+diff --git a/human_pair/test_geometry.py b/human_pair/test_geometry.py
+new file mode 100644
+index 0000000..2c060fa
+--- /dev/null
++++ b/human_pair/test_geometry.py
+@@ -0,0 +1,36 @@
++import unittest
++import numpy as np
++from .geometry import two_bone_ik, locked_grasp, center_mano_vertices
++
++
++class GeometryTests(unittest.TestCase):
++    def test_lengths_and_reach(self):
++        s = np.array([0.0, 0.0, 0.0])
++        w = np.array([0.4, 0.0, 0.0])
++        e = two_bone_ik(s, w, 0.3, 0.25, [0, 1, 0])
++        self.assertAlmostEqual(np.linalg.norm(e - s), 0.3)
++        self.assertAlmostEqual(np.linalg.norm(w - e), 0.25)
++        self.assertGreater(e[1], 0)
++        with self.assertRaises(ValueError):
++            two_bone_ik(s, [1, 0, 0], 0.3, 0.25, [0, 1, 0])
++
++    def test_grasp_relative_pose(self):
++        obj = np.tile(np.eye(4), (3, 1, 1))
++        obj[:, 0, 3] = [0, 1, 2]
++        rel = np.eye(4)
++        rel[2, 3] = 0.1
++        result = locked_grasp(obj, rel)
++        np.testing.assert_allclose(np.linalg.inv(obj) @ result, np.broadcast_to(rel, (3, 4, 4)))
++
++    def test_actual_mano_wrist_is_origin(self):
++        v = np.array([[[1.0, 2, 3], [2, 2, 3]]])
++        j = np.array([[[1.0, 2, 3]]])
++        T = np.eye(4)[None]
++        T[0, :3, 3] = [0.2, 0.3, 0.4]
++        out = center_mano_vertices(v, j, T)
++        np.testing.assert_allclose(out[0, 0], [0.2, 0.3, 0.4])
++        np.testing.assert_allclose(out[0, 1], [1.2, 0.3, 0.4])
++
++
++if __name__ == "__main__":
++    unittest.main()
+diff --git a/workflows/simbox/core/objects/rigid_object.py b/workflows/simbox/core/objects/rigid_object.py
+index c6ca2c9..05a4de0 100644
+--- a/workflows/simbox/core/objects/rigid_object.py
++++ b/workflows/simbox/core/objects/rigid_object.py
+@@ -43,7 +43,17 @@ class RigidObject(RigidPrim):
+         kwargs["mass"] = cfg.get("mass", None)
+ 
+         # ===== Initialize =====
+-        create_prim(prim_path=prim_path, usd_path=usd_path)
++        if cfg.get("legacy_task_units", False):
++            # Opt-in for legacy assets whose scale/up-axis are already supplied
++            # by task config. Isaac 5.1 create_prim adds metrics-assembler
++            # conversions; direct USD reference preserves the original numeric
++            # coordinates used by grasp annotations and layout samplers.
++            from omni.isaac.core.utils.stage import get_current_stage
++            prim = get_current_stage().DefinePrim(prim_path, "Xform")
++            if not prim.GetReferences().AddReference(usd_path):
++                raise FileNotFoundError(usd_path)
++        else:
++            create_prim(prim_path=prim_path, usd_path=usd_path)
+         self.base_prim_path = prim_path
+         rigid_prim_path = os.path.join(self.base_prim_path, cfg["prim_path_child"])
+         self.mesh_prim_path = str(get_prim_at_path(rigid_prim_path).GetChildren()[0].GetPrimPath())
+diff --git a/workflows/simbox_dual_workflow.py b/workflows/simbox_dual_workflow.py
+index e683107..4a8b706 100644
+--- a/workflows/simbox_dual_workflow.py
++++ b/workflows/simbox_dual_workflow.py
+@@ -652,6 +652,24 @@ class SimBoxDualWorkFlow(NimbusWorkFlow):
+         path = os.path.join(save_path, f"{timestamp}.pkl")
+         with open(path, "wb") as f:
+             f.write(ser_bytes)
++        # Optional self-contained geometry snapshot and explicit semantic map.
++        # Textures can remain external references; retain the asset bundle.
++        if self.task_cfg.get("data", {}).get("export_replay_scene", False):
++            self.stage.Flatten().Export(path.replace(".pkl", ".scene.usdc"))
++            manifest = {
++                "schema_version": 1,
++                "physics_dt": self.world.get_physics_dt(),
++                "prim_paths": [str(p.GetPath()) for p in self.world_recorder.xform_prims],
++                "object_paths": {name: obj.prim_path for name, obj in self.task.objects.items()},
++                "robot_roots": self.robots_prim_paths,
++                "end_effector_paths": {
++                    name: {"left": robot.fl_ee_path, "right": robot.fr_ee_path,
++                           "tcp_offset": robot.tcp_offset}
++                    for name, robot in self.task.robots.items()
++                },
++            }
++            with open(path.replace(".pkl", ".meta.json"), "w") as f:
++                json.dump(manifest, f, indent=2)
+         return self.world_recorder.get_total_steps()
+ 
+     def save(self, save_path: str) -> int:

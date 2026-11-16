@@ -1,0 +1,100 @@
+diff --git a/deps/world_toolkit/world_recorder/__init__.py b/deps/world_toolkit/world_recorder/__init__.py
+index 86fbd52..1251182 100644
+--- a/deps/world_toolkit/world_recorder/__init__.py
++++ b/deps/world_toolkit/world_recorder/__init__.py
+@@ -29,6 +29,9 @@ class WorldRecorder:
+         self.prim_visibilities = []
+         self.replay_counter = 0
+         self.num_steps = 0
++        # Optional visual-only animation hook, invoked after recorded transforms
++        # are applied and before rendering. Not serialized in trajectory files.
++        self.before_render = None
+ 
+         for robot_name, robot in robots.items():
+             if not isinstance(robot, Robot):
+@@ -202,6 +205,8 @@ class WorldRecorder:
+                 else:
+                     prim.GetAttribute("visibility").Set("inherited")
+ 
++            if self.before_render is not None:
++                self.before_render(self.replay_counter)
+             self.world.render()
+             if increment_counter:
+                 self.replay_counter += 1
+@@ -250,12 +255,24 @@ class WorldRecorder:
+                 "prim_visibilities": self.prim_visibilities,
+             }
+ 
++        record_data["prim_paths"] = [str(p.GetPath()) for p in self.xform_prims]
+         return pickle.dumps(record_data)
+ 
+     def loads(self, data):
+         """Deserialize recorder data based on mode."""
+         record_data = pickle.loads(data)
+         mode = record_data.get("mode", "prim_pose")
++        paths = record_data.get("prim_paths")
++        current_paths = [str(p.GetPath()) for p in self.xform_prims]
++        if paths is not None and paths != current_paths:
++            raise ValueError("Recorded prim paths/order do not match reconstructed scene")
++        if mode == "prim_pose":
++            poses = record_data["prim_poses"]
++            vis = record_data["prim_visibilities"]
++            if len(poses) != record_data["num_steps"] or len(vis) != len(poses):
++                raise ValueError("Trajectory frame count mismatch")
++            if any(len(p) != len(current_paths) for p in poses) or any(len(v) != len(current_paths) for v in vis):
++                raise ValueError("Trajectory prim count mismatch")
+ 
+         if mode == "prim_pose" and not self.step_replay:
+             self.num_steps = record_data["num_steps"]
+diff --git a/workflows/simbox/core/objects/rigid_object.py b/workflows/simbox/core/objects/rigid_object.py
+index c6ca2c9..05a4de0 100644
+--- a/workflows/simbox/core/objects/rigid_object.py
++++ b/workflows/simbox/core/objects/rigid_object.py
+@@ -43,7 +43,17 @@ class RigidObject(RigidPrim):
+         kwargs["mass"] = cfg.get("mass", None)
+ 
+         # ===== Initialize =====
+-        create_prim(prim_path=prim_path, usd_path=usd_path)
++        if cfg.get("legacy_task_units", False):
++            # Opt-in for legacy assets whose scale/up-axis are already supplied
++            # by task config. Isaac 5.1 create_prim adds metrics-assembler
++            # conversions; direct USD reference preserves the original numeric
++            # coordinates used by grasp annotations and layout samplers.
++            from omni.isaac.core.utils.stage import get_current_stage
++            prim = get_current_stage().DefinePrim(prim_path, "Xform")
++            if not prim.GetReferences().AddReference(usd_path):
++                raise FileNotFoundError(usd_path)
++        else:
++            create_prim(prim_path=prim_path, usd_path=usd_path)
+         self.base_prim_path = prim_path
+         rigid_prim_path = os.path.join(self.base_prim_path, cfg["prim_path_child"])
+         self.mesh_prim_path = str(get_prim_at_path(rigid_prim_path).GetChildren()[0].GetPrimPath())
+diff --git a/workflows/simbox_dual_workflow.py b/workflows/simbox_dual_workflow.py
+index e683107..4a8b706 100644
+--- a/workflows/simbox_dual_workflow.py
++++ b/workflows/simbox_dual_workflow.py
+@@ -652,6 +652,24 @@ class SimBoxDualWorkFlow(NimbusWorkFlow):
+         path = os.path.join(save_path, f"{timestamp}.pkl")
+         with open(path, "wb") as f:
+             f.write(ser_bytes)
++        # Optional self-contained geometry snapshot and explicit semantic map.
++        # Textures can remain external references; retain the asset bundle.
++        if self.task_cfg.get("data", {}).get("export_replay_scene", False):
++            self.stage.Flatten().Export(path.replace(".pkl", ".scene.usdc"))
++            manifest = {
++                "schema_version": 1,
++                "physics_dt": self.world.get_physics_dt(),
++                "prim_paths": [str(p.GetPath()) for p in self.world_recorder.xform_prims],
++                "object_paths": {name: obj.prim_path for name, obj in self.task.objects.items()},
++                "robot_roots": self.robots_prim_paths,
++                "end_effector_paths": {
++                    name: {"left": robot.fl_ee_path, "right": robot.fr_ee_path,
++                           "tcp_offset": robot.tcp_offset}
++                    for name, robot in self.task.robots.items()
++                },
++            }
++            with open(path.replace(".pkl", ".meta.json"), "w") as f:
++                json.dump(manifest, f, indent=2)
+         return self.world_recorder.get_total_steps()
+ 
+     def save(self, save_path: str) -> int:

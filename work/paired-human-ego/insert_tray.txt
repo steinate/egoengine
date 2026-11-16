@@ -1,0 +1,21 @@
+def fit_tray(side):
+ s=1 if side=='R' else -1
+ R=rot(2,s*np.pi/2)@np.array([[0,0,-s],[0,1,0],[s,0,0.]])
+ targets=np.array([[.165,-.028,.010],[.136,-.025,.008],[.136,0,.008],[.136,.024,.008],[.137,.042,.008]]);targets[:,0]*=s
+ origin=np.array([s*.240,0,.082]);f0=np.r_[0.,.25,.35,.6,.5,np.tile([0.,.8,1.1],4)]
+ lo=np.r_[[min(s*.20,s*.29),-.055,.035],[-.8,-.8,-.8],[-1.,-1.3,-1.,0,0],np.tile([-.4,0,0],4)]
+ hi=np.r_[[max(s*.20,s*.29),.055,.13],[.8,.8,.8],[1.,1.3,1.5,1.6,1.5],np.tile([.4,1.7,1.9],4)]
+ boxes=[(np.array([0,0,-.024]),np.array([.153,.076,.004])),(np.array([.149,0,0]),np.array([.005,.076,.027])),(np.array([-.149,0,0]),np.array([.005,.076,.027])),(np.array([0,.072,0]),np.array([.153,.004,.027])),(np.array([0,-.072,0]),np.array([.153,.004,.027]))]
+ def unpack(x):
+  H=np.eye(4);H[:3,:3]=R@Rotation.from_rotvec(x[3:6]).as_matrix();H[:3,3]=x[:3];return H
+ def residual(x):
+  tips,pts=handpoints(side,x[6:],unpack(x));ds=[]
+  for center,half in boxes:
+   q=np.abs(pts-center)-half;ds.append(np.linalg.norm(np.maximum(q,0),axis=1)+np.minimum(q.max(1),0))
+  sdf=np.min(ds,axis=0)
+  return np.r_[(tips-targets).ravel()*300,np.maximum(.006-sdf,0)*210,np.maximum(-.020-pts[:,2],0)*220,(x[:3]-origin)*4,x[3:6]*.2,(x[6:]-f0)*.12]
+ best=least_squares(residual,np.r_[origin,[0,0,0],f0],bounds=(lo,hi),max_nfev=350)
+ H=unpack(best.x);tips,pts=handpoints(side,best.x[6:],H)
+ print('TRAY_FIT',side,'wrist',H[:3,3],'tiperr',np.linalg.norm(tips-targets,axis=1),flush=True)
+ return H,best.x[6:],{'tip_error_m':np.linalg.norm(tips-targets,axis=1).tolist(),'wrist':H.tolist(),'type':'Thumb outside and four fingers inside the original tray end rim'}
+

@@ -1,0 +1,45 @@
+{
+  "L": {
+    "max_tip_error_mm": 3.4030906869920026,
+    "p95_tip_error_mm": 0.34565282266070474
+  },
+  "R": {
+    "max_tip_error_mm": 2.0153542433324962,
+    "p95_tip_error_mm": 0.3456573818240351
+  },
+  "frames": 1507,
+  "fps": 15,
+  "torso_lean_degrees": 0.0,
+  "avatar_root_world": [
+    [
+      -1.0,
+      -1.2246467991473532e-16,
+      0.0,
+      0.1
+    ],
+    [
+      1.2246467991473532e-16,
+      -1.0,
+      0.0,
+      -0.582
+    ],
+    [
+      0.0,
+      0.0,
+      1.0,
+      -0.465
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "nominal_support_plane_z_m": -0.4664,
+  "uniform_model_scale": 1.1,
+  "max_arm_reach_error_m": 0.0,
+  "source_world_tracks_sha256": "ffe2178587c9dcb770c28e528bb3d76f2e48bf7d693eb20858f8073cc4d6c655",
+  "method": "Native PMX hand FK with bounded finger IK and spatial contact targets; native two-bone arms with outward poles, strictly upright fixed pelvis/spine, lower independent support plane, planted feet. No robot joint angles.",
+  "dynamics": "Exact original object pose replay; this is a paired visual demonstration, not a new human-driven physics rollout."
+}

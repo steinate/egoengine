@@ -1,0 +1,33 @@
+[
+  {
+    "path": "work/InternDataEngine",
+    "url": "https://github.com/InternRobotics/InternDataEngine.git",
+    "commit": "0890650e158850e4521c391344673ba9f0e61e1c"
+  },
+  {
+    "path": "work/gaussian-ego/GHOST",
+    "url": "https://github.com/ATAboukhadra/GHOST.git",
+    "commit": "c242093f50dc6fd895912f5fd58f761e1e950899"
+  },
+  {
+    "path": "work/isaac51-validation/3dgrut",
+    "url": "https://github.com/nv-tlabs/3dgrut.git",
+    "commit": "dfd3d54c8c612003fb7948443edf7778f2bcd5ec"
+  },
+  {
+    "path": "work/gaussian-avatar-audit/ExAvatar",
+    "url": "https://github.com/mks0601/ExAvatar_RELEASE.git",
+    "commit": "518f5647c8fa75cb648315c1677fdc105101fe11"
+  },
+  {
+    "path": "work/anime-human-v1/tools/blender_mmd_tools",
+    "url": "https://github.com/MMD-Blender/blender_mmd_tools.git",
+    "commit": "3451990faea2e0def110e7f6027f5c8575451e8b"
+  },
+  {
+    "name": "ManipNet hand source",
+    "url": "https://github.com/cghezhang/ManipNet",
+    "commit": "b37d47f0e7bc4fc4ca9dda12c8c8685a5dce04ac",
+    "fetch_script": "work/human-ego/prepare_hand_asset.py"
+  }
+]

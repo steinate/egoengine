@@ -1,0 +1,43 @@
+{
+  "downloaded_files_verified": 24,
+  "zip_crc_ok": true,
+  "source_scene_unchanged": true,
+  "source_robot_video_unchanged": true,
+  "source_objects_bitwise_equal": true,
+  "torso_upright_every_frame": true,
+  "frames": 1507,
+  "fps": 15,
+  "duration_s": 100.46666666666667,
+  "videos": {
+    "robot-ego-front-full.mp4": {
+      "probe": {
+        "width": 2880,
+        "height": 584,
+        "r_frame_rate": "15/1",
+        "duration": "100.466667",
+        "nb_read_frames": "1507"
+      },
+      "sha256": "e122930762d8d5bd9f2284e2a39349afb8fe91ebc5a968230d5d26892edf33f1"
+    },
+    "amber-front-full.mp4": {
+      "probe": {
+        "width": 1280,
+        "height": 720,
+        "r_frame_rate": "15/1",
+        "duration": "100.466667",
+        "nb_read_frames": "1507"
+      },
+      "sha256": "367f522f4ec90d415d4e5b534d408155444a718d0c751e8b69b2fec6d40a2515"
+    },
+    "amber-ego-full.mp4": {
+      "probe": {
+        "width": 1280,
+        "height": 720,
+        "r_frame_rate": "15/1",
+        "duration": "100.466667",
+        "nb_read_frames": "1507"
+      },
+      "sha256": "ba3dc703a2060125a3f5ac49d2e09be23c994f27bc7a65d2f5c33a948c886b6b"
+    }
+  }
+}

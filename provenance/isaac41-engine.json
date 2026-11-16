@@ -1,0 +1,40 @@
+{
+  "baseline": "2a0a21f2c836df97c925729084e13d68950b4deb",
+  "changed": [
+    "deps/world_toolkit/world_recorder/__init__.py",
+    "workflows/simbox/core/controllers/template_controller.py",
+    "workflows/simbox/core/objects/rigid_object.py",
+    "workflows/simbox_dual_workflow.py"
+  ],
+  "added": [
+    "human_pair/test_geometry.py",
+    "human_pair/make_task.py",
+    "human_pair/export_dual_evidence.py",
+    "human_pair/export_official_baseline.py",
+    "human_pair/__init__.py",
+    "human_pair/audit_plan.py",
+    "human_pair/inspect_video.py",
+    "human_pair/check_world_cache.py",
+    "human_pair/export_tracks.py",
+    "human_pair/validate_episode.py",
+    "human_pair/export_human_scene.py",
+    "human_pair/geometry.py",
+    "human_pair/prepare_mano.py",
+    "human_pair/run_pipeline.py",
+    "human_pair/diagnostics.py",
+    "human_pair/recorder_smoke.py",
+    "human_pair/contact_replay_job.py",
+    "human_pair/overlay.py",
+    "human_pair/probe_planner.py",
+    "human_pair/engine_job.py",
+    "human_pair/replay_scene.py",
+    "human_pair/export_dual_grasp.py",
+    "human_pair/configs/render.yaml",
+    "human_pair/configs/neutral_arena.yaml",
+    "human_pair/configs/plan.yaml",
+    "human_pair/configs/franka_bottle_pick_place.yaml"
+  ],
+  "missing": [],
+  "patch_sha256": "15d53ee9eb4bbbb2ead7447e026d6c91d9294e74fb487fd0bd0373d2a48d349b",
+  "note": "Exact deployed engine changes relative to the pinned upstream commit; generated output configs excluded. Runtime source files were read without modification."
+}

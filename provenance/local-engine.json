@@ -1,0 +1,7 @@
+{
+  "baseline": "2a0a21f2c836df97c925729084e13d68950b4deb",
+  "commit": "0890650e158850e4521c391344673ba9f0e61e1c",
+  "branch": "human-pair-integration",
+  "patch_sha256": "d2553db21292ea86382124529a204947b119181b77aae2f170a3a067b94ab538",
+  "note": "Local integration branch; differs from the captured deployed Isaac 4.1 engine. No upstream push."
+}

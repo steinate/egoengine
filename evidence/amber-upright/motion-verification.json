@@ -1,0 +1,52 @@
+{
+  "frames": 1507,
+  "fps": 15,
+  "duration_s": 100.46666666666667,
+  "source_objects_bitwise_equal": true,
+  "source_world_tracks_sha256": "ffe2178587c9dcb770c28e528bb3d76f2e48bf7d693eb20858f8073cc4d6c655",
+  "animation_sha256": "adb3ddc21b5c50e42a77c7ccf03d826f9210d3a89d0672b34f076c60796801e8",
+  "torso_lean_degrees": 0.0,
+  "pelvis_and_spine_constant_upright": true,
+  "nominal_support_plane_z_m": -0.4664,
+  "max_arm_reach_error_m": 0.0,
+  "limbs": {
+    "L": {
+      "native_arm_segment_lengths_m": [
+        0.2563031824633441,
+        0.21831210300086593
+      ],
+      "max_length_error_m": 6.661338147750939e-16,
+      "planted_foot_drift_m": 0.0,
+      "foot_position_m": [
+        -0.0010087868943810543,
+        -0.5955503800585864,
+        -0.3733749158382415
+      ],
+      "max_wrist_rotation_step_deg": 2.782584372538699,
+      "max_wrist_translation_step_m": 0.021188516727445133,
+      "max_finger_joint_step_deg": 7.812908741272419
+    },
+    "R": {
+      "native_arm_segment_lengths_m": [
+        0.2563030661314598,
+        0.21831207779475095
+      ],
+      "max_length_error_m": 6.106226635438361e-16,
+      "planted_foot_drift_m": 0.0,
+      "foot_position_m": [
+        0.20100878689438095,
+        -0.5955503800585866,
+        -0.3733749158382415
+      ],
+      "max_wrist_rotation_step_deg": 1.9078257481999406,
+      "max_wrist_translation_step_m": 0.01318044808181751,
+      "max_finger_joint_step_deg": 7.825279761943784
+    }
+  },
+  "cameras": {
+    "ego_anchor": "Native left/right eye centres, fixed anatomical right axis, gaze toward original work area",
+    "max_rotation_step_deg": 0.0,
+    "max_translation_step_m": 0.0,
+    "no_180_degree_roll_flip": true
+  }
+}

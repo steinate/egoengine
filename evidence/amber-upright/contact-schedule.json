@@ -1,0 +1,21 @@
+{
+  "left": {
+    "object": "pick_object_left1",
+    "begin": 0,
+    "grasp": 137,
+    "release": 433
+  },
+  "right": {
+    "object": "pick_object_right1",
+    "begin": 621,
+    "grasp": 780,
+    "release": 1044
+  },
+  "tray": {
+    "begin": 1191,
+    "grasp": 1331,
+    "end": 1506
+  },
+  "frames": 1507,
+  "fps": 15
+}

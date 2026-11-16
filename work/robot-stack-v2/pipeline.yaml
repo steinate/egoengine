@@ -1,0 +1,27 @@
+name: simbox_plan_with_render
+load_stage:
+  scene_loader:
+    type: env_loader
+    args:
+      workflow_type: SimBoxDualWorkFlow
+      cfg_path: /vepfs/public/pengjiaqi/interndata-human-pair/robot-stack-v2/task.yaml
+      simulator:
+        physics_dt: 1/30
+        rendering_dt: 1/30
+        stage_units_in_meters: 1.0
+        headless: true
+        anti_aliasing: 0
+  layout_random_generator:
+    type: env_randomizer
+    args:
+      random_num: 1
+      strict_mode: false
+plan_with_render_stage:
+  plan_with_render:
+    type: plan_with_render
+store_stage:
+  writer:
+    type: env_writer
+    args:
+      batch_async: true
+      output_dir: /vepfs/public/pengjiaqi/interndata-human-pair/robot-stack-v2/official-output
