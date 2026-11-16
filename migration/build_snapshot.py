@@ -36,6 +36,7 @@ def main():
     parser.add_argument("--prefix", default="deployment")
     parser.add_argument("--workers", type=int, default=3)
     parser.add_argument("--exclude-name", action="append", default=[])
+    parser.add_argument("--single-archive", help="Pack all children into one named component")
     args = parser.parse_args()
     root = args.root.resolve()
     output = args.output.resolve()
@@ -46,6 +47,8 @@ def main():
     children = sorted(p for p in root.iterdir() if p.name not in exclude)
     groups = [(p.name, [p]) for p in children if p.is_dir() and not p.is_symlink()]
     groups.append(("root-files", [p for p in children if not p.is_dir() or p.is_symlink()]))
+    if args.single_archive:
+        groups = [(args.single_archive, children)]
 
     def pack(group):
         name, paths = group

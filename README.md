@@ -7,14 +7,16 @@ Our recorder, scene export, and controller changes modify those original modules
 `human_pair/` contains engine extensions; `work/` contains character IK, asset
 conversion, and synchronized video workflows.
 
-- [Migration and offline reproduction](migration/README.md)
+- [Asset and runtime download links](ASSETS.md) — no automatic large-file downloads
+- [Deployment and reproduction](migration/README.md)
 - [Human-pair workflow and verified results](docs/human-pair.md)
 - `deps/curobo/`: the deployed CuRobo planner source, including CUDA kernels.
 - `migration/`: private snapshot, verification, restoration, and replay tools.
 
 The upstream baseline `2a0a21f2c836df97c925729084e13d68950b4deb` is a Git ancestor.
-The private migration bundle includes models, scenes, trajectories, Isaac Sim 4.1,
-and the compiled planning environment. Restricted assets are not published here.
+Large assets and runtime packages are referenced by download links and checksums;
+they are not automatically transferred. Existing private snapshots remain available
+on VLA-Infra. Restricted character assets are not published here.
 The original project introduction, attribution, and citation follow.
 
 ---

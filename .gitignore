@@ -84,6 +84,7 @@ output
 .cursor
 assets
 /curobo/
+/workflows/simbox/curobo
 panda_drake
 tests/*.log
 tests/*.txt

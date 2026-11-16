@@ -11,16 +11,24 @@ if [[ ! -f "$ENGINE_ROOT/launcher.py" ]]; then
   echo "InternDataEngine checkout is missing at $ENGINE_ROOT" >&2
   exit 1
 fi
-ASSET_LINK="$ENGINE_ROOT/workflows/simbox/assets"
-if [[ ! -e "$ASSET_LINK" && ! -L "$ASSET_LINK" ]]; then
-  ln -s "$PAIR_ROOT/assets/InternDataAssets" "$ASSET_LINK"
-fi
-if [[ "$(readlink -f "$ASSET_LINK")" != "$PAIR_ROOT/assets/InternDataAssets" ]]; then
-  echo "Existing asset path differs; refusing to overwrite $ASSET_LINK" >&2
-  exit 1
-fi
+for component in assets curobo panda_drake; do
+  ASSET_LINK="$ENGINE_ROOT/workflows/simbox/$component"
+  ASSET_TARGET="$PAIR_ROOT/assets/InternDataAssets/$component"
+  if [[ ! -d "$ASSET_TARGET" ]]; then
+    echo "Missing deployed component: $ASSET_TARGET" >&2
+    exit 1
+  fi
+  if [[ ! -e "$ASSET_LINK" && ! -L "$ASSET_LINK" ]]; then
+    ln -s "$ASSET_TARGET" "$ASSET_LINK"
+  fi
+  if [[ "$(readlink -f "$ASSET_LINK")" != "$ASSET_TARGET" ]]; then
+    echo "Existing asset path differs; refusing to overwrite $ASSET_LINK" >&2
+    exit 1
+  fi
+done
 export PYTHONPATH="$PAIR_ROOT/env/python310:$PAIR_ROOT/env/curobo41-built:$ENGINE_ROOT:$ENGINE_ROOT/workflows/simbox:$PAIR_ROOT/assets/InternDataAssets/curobo/src"
 export TMPDIR="$PAIR_ROOT/tmp"
+mkdir -p "$TMPDIR" "$PAIR_ROOT/logs" "$PAIR_ROOT/logs41"
 export XDG_CACHE_HOME="$PAIR_ROOT/cache41"
 export XDG_DATA_HOME="$PAIR_ROOT/cache41/data"
 export PIP_CACHE_DIR="$PAIR_ROOT/cache41/pip"

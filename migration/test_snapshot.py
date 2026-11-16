@@ -3,6 +3,7 @@
 import json
 import os
 from pathlib import Path
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -13,6 +14,37 @@ TOOLS = Path(__file__).resolve().parent
 
 
 class SnapshotTests(unittest.TestCase):
+    def test_checkout_launcher_uses_original_component_layout(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp).resolve()
+            project = base / "checkout"
+            deployment = base / "deployment"
+            (project / "migration").mkdir(parents=True)
+            (project / "workflows/simbox").mkdir(parents=True)
+            (project / "launcher.py").write_text("")
+            shutil.copy2(TOOLS / "run_engine.sh", project / "migration/run_engine.sh")
+            for component in ("assets", "curobo", "panda_drake"):
+                (deployment / "assets/InternDataAssets" / component).mkdir(parents=True)
+            (deployment / "runtime41").mkdir()
+            runtime = deployment / "runtime41/python.sh"
+            runtime.write_text('#!/bin/sh\nprintf "%s\\n" "$PYTHONPATH" "$PWD"\n')
+            runtime.chmod(0o755)
+            command = ["bash", str(project / "migration/run_engine.sh"), str(deployment), "-V"]
+            result = subprocess.run(command, check=True, capture_output=True, text=True)
+            self.assertIn(str(project), result.stdout)
+            self.assertTrue((deployment / "tmp").is_dir())
+            for component in ("assets", "curobo", "panda_drake"):
+                self.assertEqual(
+                    (project / "workflows/simbox" / component).resolve(),
+                    deployment / "assets/InternDataAssets" / component,
+                )
+            link = project / "workflows/simbox/assets"
+            link.unlink()
+            link.symlink_to(deployment / "assets/InternDataAssets")
+            result = subprocess.run(command, capture_output=True)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertEqual(link.resolve(), deployment / "assets/InternDataAssets")
+
     def test_relocation_changes_only_restored_paths(self):
         with tempfile.TemporaryDirectory() as tmp:
             base = Path(tmp).resolve()
@@ -68,6 +100,7 @@ class SnapshotTests(unittest.TestCase):
             subprocess.run([*command, str(restored)], check=True, capture_output=True)
             self.assertEqual((restored / "model/mesh.bin").read_bytes(), payload.read_bytes())
             self.assertEqual((restored / "run.sh").stat().st_mode & 0o777, 0o755)
+            self.assertTrue((restored / "tmp").is_dir())
             self.assertEqual(os.readlink(restored / "mesh-link"), "model/mesh.bin")
             self.assertEqual(
                 (restored / "model/mesh.bin").stat().st_ino,

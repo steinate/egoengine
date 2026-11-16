@@ -1,0 +1,61 @@
+{
+  "render_script_sha256": "c97cb9e28b13078da3b709a5bbd556e153cb650f0e4876db832e93ca336a37cf",
+  "animation_sha256": "adb3ddc21b5c50e42a77c7ccf03d826f9210d3a89d0672b34f076c60796801e8",
+  "frames": 3,
+  "fps": 15,
+  "source_frames": [
+    0,
+    780,
+    1506
+  ],
+  "max_object_position_error_m": 0.0,
+  "max_object_rotation_error_rad": 2.082282801187459e-09,
+  "renderer": "Isaac Sim 4.1 RTX PathTracing 64 SPP",
+  "actor": "Genshin Impact Amber; original PMX mesh, UVs, textures and skin weights; native humanoid IK",
+  "front_camera_world_usd": [
+    [
+      -1.0,
+      0.0,
+      0.0,
+      0.05
+    ],
+    [
+      0.0,
+      -0.16316817543630258,
+      0.9865982700799691,
+      2.1
+    ],
+    [
+      0.0,
+      0.9865982700799691,
+      0.16316817543630258,
+      0.95
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "front_focal_length_mm": 24.0,
+  "camera_K": [
+    [
+      604.4444444444445,
+      0,
+      640
+    ],
+    [
+      0,
+      604.4444444444445,
+      360
+    ],
+    [
+      0,
+      0,
+      1
+    ]
+  ],
+  "physics": "Original verified robot trajectory replay; no new human dynamics simulation",
+  "scene": "Original saved official-pipeline scene with robot replaced by Amber"
+}

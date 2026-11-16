@@ -15,6 +15,11 @@ def main():
     parser.add_argument("destination", type=Path)
     parser.add_argument("--prefix", default="deployment")
     parser.add_argument("--verify-only", action="store_true")
+    parser.add_argument(
+        "--merge-missing",
+        action="store_true",
+        help="Add missing supplement files; never overwrite files",
+    )
     args = parser.parse_args()
     args.destination = args.destination.resolve()
     index = json.loads((args.bundle / f"{args.prefix}-index.json").read_text())
@@ -30,9 +35,9 @@ def main():
     if args.verify_only:
         print("ALL_ARCHIVES_VERIFIED", flush=True)
         return
-    if args.destination.exists():
+    if args.destination.exists() and not args.merge_missing:
         parser.error("Destination already exists; use a new empty location")
-    args.destination.mkdir(parents=True)
+    args.destination.mkdir(parents=True, exist_ok=args.merge_missing)
     directories = []
     count = 0
     for item in index["archives"]:
@@ -82,6 +87,11 @@ def main():
         print("RESTORED_AND_HASHED", item["archive"], len(seen), flush=True)
     for directory, mode in reversed(directories):
         directory.chmod(mode)
+    if args.prefix == "deployment":
+        # The compact reproduction profile omits disposable contents, but the
+        # original launchers still expect these writable directories to exist.
+        for name in ("tmp", "logs", "logs41"):
+            (args.destination / name).mkdir(exist_ok=True)
     print("RESTORE_VERIFIED", count, "entries", args.destination, flush=True)
 
 

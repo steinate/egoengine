@@ -1,0 +1,46 @@
+{
+  "frames": 1522,
+  "physics_dt_s": 0.03333333333333333,
+  "video_fps": 15,
+  "task_variant": "official pipeline with stable_place task-local skill",
+  "after_retract_frame": 1176,
+  "tray_lift_start_frame": 1347,
+  "hold_start_frame": 1447,
+  "last_60_frames": {
+    "start": 1462,
+    "end_exclusive": 1522,
+    "all_frames_stacked": true,
+    "max_xy_offset_m": 0.0006717473152093589,
+    "height_difference_range_m": [
+      0.05704778432846069,
+      0.05705446004867554
+    ],
+    "max_cube_tilt_deg": {
+      "pick_object_left1": 1.8150662470634789,
+      "pick_object_right1": 2.121211153521643
+    }
+  },
+  "final_delta_m": [
+    -0.00032724346965551376,
+    0.00046706199645996094,
+    0.05705326795578003
+  ],
+  "tray_final_lift_m": 0.17828816175460815,
+  "official_workflow_frames": 1521,
+  "post_retract_to_end": {
+    "start": 1176,
+    "end_exclusive": 1522,
+    "all_frames_stacked": true,
+    "max_xy_offset_m": 0.0028415475971996784,
+    "height_difference_range_m": [
+      0.05700886249542236,
+      0.05794644355773926
+    ],
+    "max_cube_tilt_deg": {
+      "pick_object_left1": 3.272506490869194,
+      "pick_object_right1": 3.760188760144789
+    }
+  },
+  "final_hold_relative_drift_m": 4.4505565573461214e-05,
+  "passed": true
+}

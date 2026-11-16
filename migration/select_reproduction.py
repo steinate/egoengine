@@ -34,8 +34,10 @@ def main():
             if len(parts) > 1 and parts[1] not in {"kit-anime-both-preview", "torch", "warp"}:
                 return "disposable cache; Amber warm cache and JIT caches retained"
             return None
-        if len(parts) == 2 and is_dir and parts[1] in {"render", "preview", "delivery"}:
-            return "encoded delivery or generated image frames; source data retained"
+        if len(parts) == 2 and is_dir and parts[1] in {"render", "preview"}:
+            return "generated image frames; source data retained"
+        # Keep delivery directories: some contain downstream inputs, notably
+        # robot-stack-v2/delivery/object-and-robot-tracks.npz.
         if len(parts) == 2 and is_dir and parts[1] in {"skin-cache", "scan-cache"}:
             if parts[0] != "anime-human-v1":
                 return "regenerable earlier-stage skin cache; Amber cache retained"
