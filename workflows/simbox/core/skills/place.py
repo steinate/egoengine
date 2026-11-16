@@ -173,11 +173,11 @@ class Place(BaseSkill):
 
         elif direction == "horizontal":
             align_axis = self.T_world_container[:3, :3] @ np.array(self.skill_cfg["align_place_obj_axis"])
-            offset_axis = self.T_world_container[:3, :3] @ np.array(self.skill_cfg["offset_place_obj_axis"])
 
             tmp_pos_w = b_min + np.stack([x_ratios, y_ratios, z_ratios], axis=-1) * (b_max - b_min)
 
             if pos_constraint == "object":
+                offset_axis = self.T_world_container[:3, :3] @ np.array(self.skill_cfg["offset_place_obj_axis"])
                 pre_align = self.skill_cfg.get("pre_place_align", 0.2)
                 pre_offset = self.skill_cfg.get("pre_place_offset", 0.2)
                 plt_align = self.skill_cfg.get("place_align", 0.1)
