@@ -137,24 +137,18 @@ try:
         T[:3, 3] = eye
         return T
 
-    pose = d["local"][0].copy()
-    for j, parent in enumerate(d["parents"]):
-        pose[j] = (d["world_transform"] if parent < 0 else pose[parent]) @ pose[j]
-    names = [str(n).split("/")[-1] for n in d["names"]]
-    head = pose[names.index("Head"), :3, 3]
-    feet = pose[[names.index("L_Foot"), names.index("R_Foot")], :3, 3].mean(0)
-    center = (head + feet) * 0.5 + [0, 0, 0.07]
-    eye = center - d["world_transform"][:3, 1] * 1.9 + [0, 0, 0.18]
-    eye[2] = max(eye[2], 1.3)
-    front = look(eye, center)
-    ego_focal = 14.0 if report.get("gaze", {}).get("follow_object") else 16.0
+    # Front is along table normal, not avatar shoulder yaw. Equal X eliminates
+    # the previous diagonal tabletop perspective. The eye camera is fixed.
+    front = look(np.array([0.0, 1.55, 1.35]), np.array([0.0, -0.15, 0.88]))
+    ego_focal = report["gaze"].get("focal_length_mm", 10.0)
+    assert np.max(np.abs(d["camera_world_usd"] - d["camera_world_usd"][0])) < 1e-7
     annotators = {}
     camops = {}
     for name, T in [("ego", d["camera_world_usd"][0]), ("front", front)]:
         c = UsdGeom.Camera.Define(stage, "/World/PairCamera_" + name)
         camops[name] = c.AddTransformOp()
         camops[name].Set(Gf.Matrix4d(T.T.tolist()))
-        c.CreateFocalLengthAttr(ego_focal if name == "ego" else 17.5)
+        c.CreateFocalLengthAttr(ego_focal if name == "ego" else 18.0)
         c.CreateHorizontalApertureAttr(36.0)
         c.CreateVerticalApertureAttr(20.25)
         c.CreateClippingRangeAttr(Gf.Vec2f(0.045, 100))
@@ -178,7 +172,7 @@ try:
         )
     )
     if a.preview:
-        wanted = [0, N - 1] + [
+        wanted = [0, N - 1, int(np.argmax(d["wrist_targets"][:, :, 2, 3].max(axis=1)))] + [
             v[k] for v in report["contacts"].values() for k in ["grasp", "release"]
         ]
         samples = sorted(set(min(samples, key=lambda s: abs(s - i)) for i in wanted))
@@ -270,11 +264,16 @@ try:
         sync_audit_mae_255=audit_errors,
         wall_seconds=time.perf_counter() - started,
         front_camera_world=front.tolist(),
+        ego_camera_world=d["camera_world_usd"][0].tolist(),
+        max_ego_camera_transform_change=float(
+            np.abs(d["camera_world_usd"] - d["camera_world_usd"][0]).max()
+        ),
+        camera_policy="Fixed native eye camera facing across table; fixed table-normal front camera; no hand/object tracking",
         resolution=[640, 360],
         stride=a.stride,
         light_intensity_multiplier=0.5,
         ego_focal_length_mm=ego_focal,
-        front_focal_length_mm=17.5,
+        front_focal_length_mm=18.0,
         actor_floor_height_m=floor_height,
         staging="Actor floor lowered to native feet with support plinth under original table; task objects and links unchanged",
         method="Full-scale rigid/link replay, fresh avatar geometry each sampled frame, source time retained",

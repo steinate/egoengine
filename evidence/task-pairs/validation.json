@@ -1,7 +1,8 @@
 {
   "scope": "Three official skill pipelines with explicit physics recording and geometric native Worker replay; no human dynamics validation.",
+  "camera_policy": "Fixed native eye pose; zero roll; table-normal ego and front views. No hand/object following.",
   "render_sampling": "Approximately 5 Hz plus contact frames, held on original 30 Hz timeline.",
-  "trajectory_archive_sha256": "3a13501fa89f3a7d2fe12711f4e960b5b5fe46208d291047a41f27ce428564bb",
+  "trajectory_archive_sha256": "2b578cc099f680259a96d31fb1a97aef7486fcde2743bc909693f2d5bff3d195",
   "tasks": {
     "close_microwave": {
       "episode": "task-pairs/close_microwave/seed-44-explicit",
@@ -10,7 +11,7 @@
       "duration_s": 18.466666666666665,
       "rendered_samples": 94,
       "source_sha256": "a938527b1492057d99a4c9fccd8a898307b97965fa88a32d68d55c6ad22397a9",
-      "human_sha256": "86e2b888aa549fca74e10465d9d542644cacae7c84c469224c3156dba56dede9",
+      "human_sha256": "f76cf28842ae3f8a05c45efc64ee427b0c91ecd3ec9019741dfcf075fed43363",
       "max_world_matrix_error": 5.551115123125783e-17,
       "videos": {
         "human-ego-debug": {
@@ -19,7 +20,7 @@
             "duration": "18.466667",
             "nb_read_frames": "554"
           },
-          "sha256": "11352d6ef72ce425bf759018aef4142004e3b11a313d141563d677535c367c84"
+          "sha256": "7cce4b850df426e4daf1f368975019bc3d3dc35817421acee2def957efb893c8"
         },
         "robot-ego-front-debug": {
           "probe": {
@@ -27,7 +28,7 @@
             "duration": "18.466667",
             "nb_read_frames": "554"
           },
-          "sha256": "40b98ab68d3142e6e14a9e635e8b8b7cc1e48c715b50ccb1ece98a799ce42788"
+          "sha256": "6eda5d9a36cf8ab180aef777dd55b014905dab98154502d92235df5b4a36c0c0"
         }
       },
       "human_metrics": {
@@ -36,6 +37,13 @@
         "max_native_arm_joint_step_deg": 6.875493541569876,
         "max_foot_drift_m": 0.0,
         "max_fitted_fingertip_error_m": 0.0051327605947145295
+      },
+      "camera_metrics": {
+        "max_camera_change": 6.776660281601379e-17,
+        "max_native_eye_attachment_error_m": 0.0,
+        "max_ego_roll_component": 0.0,
+        "front_camera_table_edge_alignment": 1.0,
+        "max_ego_table_edge_misalignment": 2.7106641126405513e-16
       },
       "robot_metrics": {
         "frames": 554,
@@ -53,7 +61,7 @@
       "duration_s": 15.733333333333333,
       "rendered_samples": 82,
       "source_sha256": "f610d3331e22fc31702281e4f553ab8e1dd590fdfc07969baf421a7ab28c9a0b",
-      "human_sha256": "47ac84b94f0c8b35907821ea75a4a51874f562791158c7c0184d5250226d4561",
+      "human_sha256": "3d5adb13d25a555f2ee5250e4b1889077d97aa95578bb863e041fcfd636eda0b",
       "max_world_matrix_error": 0.0,
       "videos": {
         "human-ego-debug": {
@@ -62,7 +70,7 @@
             "duration": "15.733333",
             "nb_read_frames": "472"
           },
-          "sha256": "bd65a5051fe7f241a80f1d7f3694487314a1ab9ae63b20e426ba01c49026a51a"
+          "sha256": "4b39bb5418cfe470081ae1ee519a2096caa5d7ac7644e44d7d551215bb2069f9"
         },
         "robot-ego-front-debug": {
           "probe": {
@@ -70,7 +78,7 @@
             "duration": "15.733333",
             "nb_read_frames": "472"
           },
-          "sha256": "04a4994e31c315bc109771b950a978a65c5475fcee78cc985884f9ae46676c56"
+          "sha256": "cf8a27ea5b1aa7a4eeaf513cf2221871ac3f75982f4f8908e1ffed97ab2d6c10"
         }
       },
       "human_metrics": {
@@ -79,6 +87,13 @@
         "max_native_arm_joint_step_deg": 6.875493541569872,
         "max_foot_drift_m": 0.0,
         "max_fitted_fingertip_error_m": 0.00011592730515084
+      },
+      "camera_metrics": {
+        "max_camera_change": 6.776660281601379e-17,
+        "max_native_eye_attachment_error_m": 0.0,
+        "max_ego_roll_component": 0.0,
+        "front_camera_table_edge_alignment": 1.0,
+        "max_ego_table_edge_misalignment": 2.7106641126405513e-16
       },
       "robot_metrics": {
         "frames": 472,
@@ -96,7 +111,7 @@
       "duration_s": 19.766666666666666,
       "rendered_samples": 102,
       "source_sha256": "5d3b7414e5a2b056f41437f37e1d0eedc3a3603ad9014a56f3d05149c94bd316",
-      "human_sha256": "0da2af657a7df3d3c70f60e940248c240e25b754c2a1dca5efe194fd23f7de60",
+      "human_sha256": "48e6ceddd54addb9f992af7ef41cf6303bc029b940a1c573804411a256cdf32d",
       "max_world_matrix_error": 0.0,
       "videos": {
         "human-ego-debug": {
@@ -105,7 +120,7 @@
             "duration": "19.766667",
             "nb_read_frames": "593"
           },
-          "sha256": "dab304e2f93c79bac15ff2e7bdb22b30782ccc14ed4cc5a49f9d57249f34ef3e"
+          "sha256": "ad85491672ae57ab226d2ee1af1946efa0701caf76afa3bb9b2f70a0aed84f38"
         },
         "robot-ego-front-debug": {
           "probe": {
@@ -113,7 +128,7 @@
             "duration": "19.766667",
             "nb_read_frames": "593"
           },
-          "sha256": "97dfb87d85a47bbe9aab15de661b8439e1ee3049a64ddc347a18e56a19dc811c"
+          "sha256": "9fd034d20fbcaf21df30f6de90f4e28ab1c86698de49a67ad3812032984b77ad"
         }
       },
       "human_metrics": {
@@ -122,6 +137,13 @@
         "max_native_arm_joint_step_deg": 6.875493541569605,
         "max_foot_drift_m": 0.0,
         "max_fitted_fingertip_error_m": 0.0007517957769449212
+      },
+      "camera_metrics": {
+        "max_camera_change": 1.3877787807814457e-17,
+        "max_native_eye_attachment_error_m": 0.0,
+        "max_ego_roll_component": 0.0,
+        "front_camera_table_edge_alignment": 1.0,
+        "max_ego_table_edge_misalignment": 1.2352362915581825e-16
       },
       "robot_metrics": {
         "frames": 593,

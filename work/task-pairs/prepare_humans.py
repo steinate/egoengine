@@ -35,7 +35,7 @@ while True:
                 "gaze.py",
                 str(root),
                 str(ep),
-                *(["--follow-object"] if task == "insert_flower" else []),
+                *(["--pitch-deg", "26", "--focal-mm", "7"] if task == "insert_flower" else []),
             ],
             ["check_human.py", str(ep)],
             ["bake.py", "--root", str(root), "--folder", str(ep / "human"), "--stride", "3"],

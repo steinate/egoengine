@@ -17,7 +17,8 @@ for task, value in selected.items():
     v = json.loads((ep / "human/render/delivery/debug-verification.json").read_text())
     sv = json.loads((ep / "source-validation.json").read_text())
     hv = json.loads((ep / "human/validation.json").read_text())
-    assert sv["passed"] and hv["passed"]
+    cv = json.loads((ep / "human/camera-verification.json").read_text())
+    assert sv["passed"] and hv["passed"] and cv["passed"]
     assert (
         v["source_sha256"]
         == hashlib.sha256((ep / "source/world-tracks.npz").read_bytes()).hexdigest()
@@ -37,6 +38,7 @@ for task, value in selected.items():
         "max_world_matrix_error": v["max_world_matrix_error"],
         "videos": v["videos"],
         "human_metrics": hv["metrics"],
+        "camera_metrics": cv["metrics"],
         "robot_metrics": sv["metrics"],
     }
     for name in [
@@ -51,6 +53,7 @@ for task, value in selected.items():
         "human/human-animation.npz",
         "human/retarget-report.json",
         "human/validation.json",
+        "human/camera-verification.json",
         "human/render/delivery/debug-verification.json",
     ]:
         entries.append((ep / name, f"{task}/{name}"))

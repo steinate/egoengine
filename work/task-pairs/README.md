@@ -52,20 +52,21 @@ case "$episode" in
   */insert_flower/*)
     bash "$root/human41/usd_python.sh" "$root/task-pairs/human.py" "$root" "$episode" --grasp-roll -20
     bash "$root/human41/usd_python.sh" "$root/task-pairs/refine_fingers.py" "$root" "$episode"
-    bash "$root/human41/usd_python.sh" "$root/task-pairs/gaze.py" "$root" "$episode" --follow-object
+    bash "$root/human41/usd_python.sh" "$root/task-pairs/gaze.py" "$root" "$episode" --pitch-deg 26 --focal-mm 7
     ;;
   *)
     bash "$root/human41/usd_python.sh" "$root/task-pairs/human.py" "$root" "$episode"
     bash "$root/human41/usd_python.sh" "$root/task-pairs/gaze.py" "$root" "$episode"
     ;;
 esac
-# 插花的额外参数调整人体握持方向、指尖和头部跟随，不改变物体运动。
+# 插花的额外参数调整人体握持方向、指尖和固定相机视野，不改变物体运动。
 bash "$root/human41/usd_python.sh" "$root/task-pairs/check_human.py" "$episode"
 bash "$root/human41/usd_python.sh" "$root/task-pairs/bake.py" --root "$root" --folder "$episode/human" --stride 3
 bash "$root/human41/usd_python.sh" "$root/task-pairs/ego_mask.py" --root "$root" --folder "$episode/human"
 bash "$root/run_env41.sh" "$root/task-pairs/render.py" "$episode" --preview
 # 先看 preview 的抓取、释放和末帧，再跑全程。
 bash "$root/run_env41.sh" "$root/task-pairs/render.py" "$episode"
+bash "$root/human41/usd_python.sh" "$root/task-pairs/check_cameras.py" "$episode"
 bash "$root/human41/usd_python.sh" "$root/task-pairs/encode.py" "$episode"
 ```
 
@@ -80,6 +81,8 @@ bash "$root/human41/usd_python.sh" "$root/task-pairs/encode.py" "$episode"
 - `human/human-animation.npz`：原生 Worker 骨架、独立人体 IK，复制原物体状态与时间；`retarget-report.json` 保存误差和接触区间。
 - `human/skin-cache/`：原模型网格蒙皮、UV 与材质，三帧采样一次用于低成本预览；原始轨迹仍保存每一帧。
 - `human/render/delivery/`：完整时长 ego 和机器人/ego/正面拼接视频及编码校验。
+
+ego 相机固定在人体双眼之间，朝向桌子法线，消除横滚；没有逐帧手部、物体或 TCP 跟踪。头部采用固定姿态。正面相机固定在桌子前方、沿桌子法线取景，桌沿保持水平。插花使用固定 26° 俯角与 7 mm 广角，其他两项使用固定 35° 俯角与 10 mm 焦距；这些参数在整条视频中不变。`check_cameras.py` 独立检查眼位绑定、相机稳定、桌沿方向及原物体状态。
 
 三视角使用同一个源帧索引和时间。原始状态为 30 Hz，调试画面约 5 Hz，并额外保留接触关键帧；编码仍为 30 fps，保持原时长。两个采样时刻之间保持同一幅图，不插值篡改物体轨迹。首尾都包含。渲染先做“末帧→明显不同的姿态→末帧”检查，用重复帧误差排查 Isaac 4.1 动态网格滞后。首次充分预热，审计帧多次取样平均，减少 RTX 光照噪声，误差阈值保持不变。
 
