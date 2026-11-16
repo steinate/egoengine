@@ -1,0 +1,276 @@
+{
+  "archive": "sim/articulation_tasks/franka/close_the_washingmachine_left.tar.gz",
+  "prefix_bytes": 16777216,
+  "members": [
+    {
+      "name": ".",
+      "size": 0,
+      "type": "b'5'"
+    },
+    {
+      "name": "./videos",
+      "size": 0,
+      "type": "b'5'"
+    },
+    {
+      "name": "./videos/chunk-000",
+      "size": 0,
+      "type": "b'5'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head",
+      "size": 0,
+      "type": "b'5'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000087.mp4",
+      "size": 476652,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000000.mp4",
+      "size": 63942,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000008.mp4",
+      "size": 314957,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000056.mp4",
+      "size": 548009,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000084.mp4",
+      "size": 271982,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000100.mp4",
+      "size": 528348,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000028.mp4",
+      "size": 419517,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000046.mp4",
+      "size": 394852,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000064.mp4",
+      "size": 402495,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000019.mp4",
+      "size": 352912,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000018.mp4",
+      "size": 216430,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000005.mp4",
+      "size": 140402,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000091.mp4",
+      "size": 242847,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000090.mp4",
+      "size": 108908,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000082.mp4",
+      "size": 274771,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000060.mp4",
+      "size": 720798,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000004.mp4",
+      "size": 210760,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000077.mp4",
+      "size": 437136,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000035.mp4",
+      "size": 217619,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000089.mp4",
+      "size": 586012,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000050.mp4",
+      "size": 526324,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000063.mp4",
+      "size": 274359,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000002.mp4",
+      "size": 184455,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000058.mp4",
+      "size": 613066,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000011.mp4",
+      "size": 189312,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000102.mp4",
+      "size": 310468,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000074.mp4",
+      "size": 268265,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000042.mp4",
+      "size": 390454,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000071.mp4",
+      "size": 355858,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000076.mp4",
+      "size": 398495,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000072.mp4",
+      "size": 289156,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000043.mp4",
+      "size": 211756,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000101.mp4",
+      "size": 220417,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000040.mp4",
+      "size": 192305,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000041.mp4",
+      "size": 208687,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000007.mp4",
+      "size": 212570,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000052.mp4",
+      "size": 330825,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000105.mp4",
+      "size": 456380,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000047.mp4",
+      "size": 404162,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000086.mp4",
+      "size": 608590,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000013.mp4",
+      "size": 269900,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000073.mp4",
+      "size": 284368,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000024.mp4",
+      "size": 407874,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000069.mp4",
+      "size": 236910,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000055.mp4",
+      "size": 314385,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000025.mp4",
+      "size": 642665,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000020.mp4",
+      "size": 403514,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000066.mp4",
+      "size": 292536,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000003.mp4",
+      "size": 378568,
+      "type": "b'0'"
+    },
+    {
+      "name": "./videos/chunk-000/images.rgb.head/episode_000083.mp4",
+      "size": 461332,
+      "type": "b'0'"
+    }
+  ]
+}

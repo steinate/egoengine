@@ -1,0 +1,56 @@
+{
+  "scope": "Compatibility fixes retain the upstream task YAMLs. Removing an exception is not a successful task.",
+  "fixes": [
+    {
+      "family": "art/heat_the_food_in_the_microwave",
+      "fix_commit": "92b3785",
+      "change": "Read offset_place_obj_axis only in the object-constrained horizontal branch.",
+      "baseline_error": "KeyError('offset_place_obj_axis')",
+      "retest_status": "planning_failed",
+      "retest_error": null,
+      "engine_commit": "7c6ac767cfab7bc4859caa1cb21381138548504d",
+      "config_sha256": "99fdf48a7e5d2e0685be25f54a5e18d31cb577980c04c73cf0d1351baf8eee8e",
+      "run_dir": "retests/source-fixes/runs/6bb06948fcca"
+    },
+    {
+      "family": "basic/pour_water",
+      "fix_commit": "54138e1",
+      "change": "Preserve closed gripper during Manualpick post-grasp lift instead of accessing an undefined attribute.",
+      "baseline_error": "AttributeError(\"'Manualpick' object has no attribute 'gripper_cmd'\")",
+      "retest_status": "runtime_error",
+      "retest_error": "NotImplementedError()",
+      "engine_commit": "7c6ac767cfab7bc4859caa1cb21381138548504d",
+      "config_sha256": "d4858bfb5f22af0dfa13b3a7b65b857d6db6a4cb6058851ab9437afba7d1c389",
+      "run_dir": "retests/source-fixes/runs/63a71a79a10d"
+    },
+    {
+      "family": "basic/recovery_pick_objects",
+      "fix_commit": "e252b43",
+      "change": "Accept the legacy robot frame and route armbase to the existing controller-reference transform.",
+      "baseline_error": "ValueError('poses in robot frame is not supported: accepted values are [world, body, armbase] only')",
+      "retest_status": "planning_failed",
+      "retest_error": null,
+      "engine_commit": "7c6ac767cfab7bc4859caa1cb21381138548504d",
+      "config_sha256": "6b9ef555384b66e7ff3cc2a594b7198639fc01bbc76458f27e4b5f935468c5fe",
+      "run_dir": "retests/source-fixes/runs/510a5962a892"
+    },
+    {
+      "family": "long_horizon/flip_package",
+      "fix_commit": "7c6ac76",
+      "change": "Accept published ee_axis as a legacy alias for gripper_axis and validate the vector.",
+      "baseline_error": "AxisError(-1, 0, 'axisb')",
+      "retest_status": "planning_failed",
+      "retest_error": null,
+      "engine_commit": "7c6ac767cfab7bc4859caa1cb21381138548504d",
+      "config_sha256": "958cfc01153a191786fcba4d92c3ad25d7b980f5278a78fa05395022a2084c67",
+      "run_dir": "retests/source-fixes/runs/c47d8ea93923"
+    }
+  ],
+  "additional_unimplemented_path": {
+    "task": "basic/pour_water",
+    "source": "workflows/simbox/core/skills/approach_rotate.py",
+    "method": "Approach_Rotate.get_tgt_js",
+    "trigger": "approach__rotate.dummy_forward in both pour_water left/right configs",
+    "finding": "The upstream method directly raises NotImplementedError. It remains unimplemented; no replacement motion was invented."
+  }
+}

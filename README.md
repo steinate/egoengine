@@ -20,6 +20,8 @@
 
 全部配置的依赖审计、按任务族的实际规划测试，以及 Hugging Face 数据能否精确重放的边界，见 [任务覆盖与数据重放审计](work/task-audit/README.md)。论文的 70 项任务、仓库的 1128 个 YAML 和 59 个源码任务族不是同一统计口径。
 
+实际逐项结果见 [本机审计报告](evidence/task-audit/REPORT.md)，人体转换要求见 [Human ego 候选清单](evidence/task-audit/HUMAN_CANDIDATES.md)。原配置基线、补依赖/代码修复后的复测和已验收的人体视频分开记录；当前不承诺完整复现全部 70 项，也不将同名任务的新轨迹当作 HF 已发布 episode 的精确重放。
+
 下表区分新部署与历史复现；它们共享环境，但不能混用 episode：
 
 | 目标 | 输入 | 验收结果 |

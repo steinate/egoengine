@@ -1,0 +1,311 @@
+{
+  "archive": "sim_updated/articulation_tasks/franka/close_the_washingmachine_left.tar.gz",
+  "prefix_bytes": 16777216,
+  "members": [
+    {
+      "name": "close_the_washingmachine_left",
+      "size": 0,
+      "type": "b'5'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data",
+      "size": 0,
+      "type": "b'5'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000",
+      "size": 0,
+      "type": "b'5'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000000.parquet",
+      "size": 75374,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000001.parquet",
+      "size": 116372,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000002.parquet",
+      "size": 113448,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000003.parquet",
+      "size": 115149,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000004.parquet",
+      "size": 150717,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000005.parquet",
+      "size": 158089,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000006.parquet",
+      "size": 179870,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000007.parquet",
+      "size": 171099,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000008.parquet",
+      "size": 165689,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000009.parquet",
+      "size": 205160,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000010.parquet",
+      "size": 179111,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000011.parquet",
+      "size": 183590,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000012.parquet",
+      "size": 182326,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000013.parquet",
+      "size": 209343,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000014.parquet",
+      "size": 181824,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000015.parquet",
+      "size": 197412,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000016.parquet",
+      "size": 201387,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000017.parquet",
+      "size": 212175,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000018.parquet",
+      "size": 216354,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000019.parquet",
+      "size": 196524,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000020.parquet",
+      "size": 218637,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000021.parquet",
+      "size": 220204,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000022.parquet",
+      "size": 212995,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000023.parquet",
+      "size": 202400,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000024.parquet",
+      "size": 222770,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000025.parquet",
+      "size": 214425,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000026.parquet",
+      "size": 244686,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000027.parquet",
+      "size": 275246,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000028.parquet",
+      "size": 310737,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000029.parquet",
+      "size": 323225,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000030.parquet",
+      "size": 312540,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000031.parquet",
+      "size": 107364,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000032.parquet",
+      "size": 111008,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000033.parquet",
+      "size": 152019,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000034.parquet",
+      "size": 119432,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000035.parquet",
+      "size": 145729,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000036.parquet",
+      "size": 148242,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000037.parquet",
+      "size": 150991,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000038.parquet",
+      "size": 180799,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000039.parquet",
+      "size": 181523,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000040.parquet",
+      "size": 168284,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000041.parquet",
+      "size": 182819,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000042.parquet",
+      "size": 204544,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000043.parquet",
+      "size": 185424,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000044.parquet",
+      "size": 194559,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000045.parquet",
+      "size": 178822,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000046.parquet",
+      "size": 221419,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000047.parquet",
+      "size": 186691,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000048.parquet",
+      "size": 175557,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000049.parquet",
+      "size": 193580,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000050.parquet",
+      "size": 208470,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000051.parquet",
+      "size": 216042,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000052.parquet",
+      "size": 206365,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000053.parquet",
+      "size": 211772,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000054.parquet",
+      "size": 216038,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000055.parquet",
+      "size": 237887,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000056.parquet",
+      "size": 232136,
+      "type": "b'0'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/episode_000057.parquet",
+      "size": 265704,
+      "type": "b'0'"
+    }
+  ]
+}

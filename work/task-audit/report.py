@@ -26,6 +26,8 @@ for result in results:
         if config.get("has_fluid")
         else "需核对污渍/可见性或材质变化，另适配工具接触"
         if "clean_the_dirt" in family
+        else "多机器人协作，需要多个人体或角色分工，当前单 Worker 转换器未适配"
+        if config.get("robot_count", 1) > 1
         else "需灵巧手接触及手指映射，尚未完成人体转换"
         if "dexpnp" in family
         else "已有同任务的独立配对验收 episode；本配置实例仍按本行结果判断"
@@ -35,19 +37,25 @@ for result in results:
             "basic/insert_the_flower_in_vase",
             "art/close_the_microwave",
         ]
+        else "仅目标跟踪，不作为抓取/操作类 Human ego 配对样本"
+        if family in ["basic/track", "basic/track_the_targets"]
         else "候选：保存刚体/连杆状态，新增接触定义并做人体可达性与视野验收"
     )
 initial = [r for r in json.loads((base / "runtime-results.json").read_text()) if r.get("run_dir")]
 retests = []
 for retest_file in sorted((base / "retests").glob("*/family-runtime-results.json")):
-    retests.extend(json.loads(retest_file.read_text()))
+    retests.extend(
+        dict(row, retest_tag=retest_file.parent.name) for row in json.loads(retest_file.read_text())
+    )
 attempts = [r for r in initial + results + retests if r.get("run_dir")]
 successes_by_family = collections.defaultdict(list)
 for attempt in attempts:
     if attempt["status"] == "planning_succeeded":
         successes_by_family[attempt["family"]].append(attempt["config"])
 for result in results:
-    result["successful_configs_across_all_attempts"] = successes_by_family[result["family"]]
+    result["successful_configs_across_all_attempts"] = sorted(
+        set(successes_by_family[result["family"]])
+    )
 assert len(results) == manifest["families"], "Do not label an incomplete batch complete"
 assert {r["family"] for r in results} == {r["family"] for r in manifest["selected"]}
 
@@ -58,6 +66,7 @@ def write(name, value):
 
 write("family-results.json", results)
 write("retest-results.json", retests)
+write("family-selection.json", manifest)
 human_lines = [
     "# Human ego 转换候选与当前验证边界",
     "",
@@ -86,11 +95,12 @@ fields = [
     "missing_code",
     "missing_assets",
     "has_fluid",
+    "robot_count",
     "object_classes",
     "error",
 ]
 f = io.StringIO()
-c = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore")
+c = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore", lineterminator="\n")
 c.writeheader()
 for row in inventory["rows"]:
     c.writerow(
@@ -115,8 +125,10 @@ write(
     "asset-manifest.json",
     dict(
         repository="InternRobotics/InternData-A1",
-        revision="main (resolved hashes below)",
-        url_prefix="https://huggingface.co/datasets/InternRobotics/InternData-A1/resolve/main/",
+        revision=json.loads((base / "hf/repository-revision.json").read_text())["revision"],
+        url_prefix="https://huggingface.co/datasets/InternRobotics/InternData-A1/resolve/"
+        + json.loads((base / "hf/repository-revision.json").read_text())["revision"]
+        + "/",
         selected=manifest["selected"],
         files=files,
     ),
@@ -137,14 +149,23 @@ for folder in [base / "hf", base / "hf/sim", base / "hf/sim_updated_lerobotv30"]
                 folder.name + "-archive-members.json",
                 json.loads((folder / "archive-members.json").read_text()),
             )
+v30 = base / "hf/sim_updated_lerobotv30/actual-parquet-metadata.json"
+if v30.exists():
+    write("v30-actual-parquet-metadata.json", json.loads(v30.read_text()))
 write("sample-receipts.json", sample_receipts)
-for name in ["actual-parquet-metadata.json", "archive-members.json"]:
+for name in ["actual-parquet-metadata.json", "archive-members.json", "repository-revision.json"]:
     write(name, json.loads((base / "hf" / name).read_text()))
+physical_schema = base / "hf/physical-parquet-schemas.json"
+if physical_schema.exists():
+    write("physical-parquet-schemas.json", json.loads(physical_schema.read_text()))
 versions = {}
 for version in ["sim", "sim_updated", "sim_updated_lerobotv30"]:
     entries = json.loads((base / "hf" / (version + "-tree.json")).read_text())
     fs = [x for x in entries if x["type"] == "file"]
     versions[version] = dict(files=len(fs), bytes=sum(x["size"] for x in fs))
+timeout_receipt = base / "timeout-extension.json"
+if timeout_receipt.exists():
+    write("timeout-extension.json", json.loads(timeout_receipt.read_text()))
 summary = dict(
     upstream_baseline="2a0a21f2c836df97c925729084e13d68950b4deb",
     scope="Static checks on all YAMLs; one selected original configuration per source directory family; default seed 43. Not every embodiment/object variant, not all paper semantic tasks, not full physical/video validation.",
@@ -153,7 +174,10 @@ summary = dict(
     source_families=manifest["families"],
     family_runtime_counts=dict(collections.Counter(r["status"] for r in results)),
     families_with_a_successful_attempt=len([v for v in successes_by_family.values() if v]),
-    successful_configs_across_all_attempts=dict(successes_by_family),
+    successful_configs_across_all_attempts={
+        key: sorted(set(value)) for key, value in successes_by_family.items()
+    },
+    distinct_run_directories=len({r["run_dir"] for r in attempts}),
     additional_retest_attempts=len(retests),
     retest_runtime_counts=dict(collections.Counter(r["status"] for r in retests)),
     initial_attempts=len(initial),
@@ -170,12 +194,20 @@ summary = dict(
         repository="https://github.com/InternRobotics/SIM1",
         scope="Official org reply points to InternDataEngine plus SIM1. SIM1 is a separate Newton/Warp cloth pipeline, not executed by this Isaac Sim 4.1 audit; the reply does not give episode-to-scene mappings.",
     ),
-    exact_published_episode_replay="Not established: sampled released LeRobot schema and official converters omit complete scene/asset/object states.",
+    exact_published_episode_replay="Not established: actual v2.1 and v3.0 samples have the same 29 columns and omit complete scene/asset/object states, consistent with the official converters.",
     verified_paired_tasks=["hang_cup", "close_microwave", "insert_flower"],
     paired_task_scope="New official-task episodes, original Worker, fixed eye/front cameras; complete source times and object states retained; debug rendering approximately 5 Hz.",
 )
 write("summary.json", summary)
-for version in ["v1", "v2", "final"]:
+if physical_schema.exists():
+    physical = json.loads(physical_schema.read_text())
+    summary["physical_parquet_schema_checks"] = dict(
+        status_counts=physical["status_counts"],
+        distinct_column_sets=len(physical["column_sets"]),
+        column_counts=[len(columns) for columns in physical["column_sets"]],
+        scope="Bounded samples of one washing-machine task in v2.1 and v3.0, not all dataset tasks.",
+    )
+for version in ["v1", "v2", "textures", "final"]:
     name = "family-asset-download-results" + ("-" + version if version != "final" else "") + ".json"
     if (base / name).exists():
         downloaded = json.loads((base / name).read_text())
@@ -184,6 +216,14 @@ for version in ["v1", "v2", "final"]:
             downloaded_bytes=sum(x["bytes"] for x in downloaded if x["status"] == "downloaded"),
             failed=[x for x in downloaded if x["status"] == "failed"],
         )
+        if version == "final":
+            summary["final_asset_verification"] = dict(
+                manifest_files=len(manifest["files"]),
+                verified_files=sum(x["status"] in ["reused", "downloaded"] for x in downloaded),
+                same_paths={x["path"] for x in downloaded}
+                == {x["path"] for x in manifest["files"]},
+                note="Historical failed zero-byte .thumbs files are generated previews and were excluded from the final manifest; no required asset failure remains in the final download check.",
+            )
 write("summary.json", summary)
 lines = [
     "# 本机官方任务复现审计",
@@ -198,6 +238,10 @@ lines = [
     "",
     "成功仅表示官方规划 API 返回非零帧数；失败仅表示本次 seed/资产集合未通过。完整物体轨迹、终态与人体视频另行验收，目前配对视频验证的是挂杯、关闭微波炉和插花三项。",
     "",
+    f"另保留最初 {len(initial)} 份配置的实跑与 {len(retests)} 次单独复测。去重后共测试 {summary['unique_attempted_configs']} 份配置，产生 {summary['distinct_run_directories']} 个独立运行目录；合并这些尝试后，{summary['families_with_a_successful_attempt']} 个源码任务族至少有一份配置返回成功轨迹。这不代表同一族的全部变体都成功。",
+    "",
+    "两项传送带基线尝试曾因超时进程组清理问题发生短暂重叠；修复后另做顺序重测，见 retest-results.json 和 execution-caveats.json。基线保留，不能将其耗时当作干净的串行性能数据。",
+    "",
     "| 源码任务族 | 实际配置 | 状态 | 帧数 | 异常/阻塞 |",
     "|---|---|---|---:|---|",
 ]
@@ -211,6 +255,29 @@ for r in results:
         )
         + " |"
     )
+if retests:
+    lines += [
+        "",
+        "## 单独重测（不覆盖基线）",
+        "",
+        "| 复测批次 | 任务族 | 状态 | 帧数 | 异常 |",
+        "|---|---|---|---:|---|",
+    ]
+    for r in retests:
+        lines.append(
+            "| "
+            + " | ".join(
+                str(v).replace("|", "\\|").replace("\n", " ")
+                for v in [
+                    r["retest_tag"],
+                    r["family"],
+                    r["status"],
+                    r.get("frames", ""),
+                    r.get("error", ""),
+                ]
+            )
+            + " |"
+        )
 lines += [
     "",
     "## 能否重建 HF 已发布 episode",

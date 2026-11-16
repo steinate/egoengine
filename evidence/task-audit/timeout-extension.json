@@ -1,0 +1,7 @@
+{
+  "previous_family_timeout_s": 300,
+  "new_family_timeout_s": 600,
+  "current_child": 119596,
+  "current_run": "/mnt/data/pengjiaqi/egoengine-workspace/run/task-audit/runs/203a276b7f01",
+  "reason": "First conveyor task still making planning progress at 300 s; preserve baseline and extend subsequent attempts."
+}

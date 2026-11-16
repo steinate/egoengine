@@ -55,6 +55,16 @@ def dependencies(row):
     prefixes = []
     unresolved = []
     for name in row.get("missing_assets", []):
+        if name.startswith("texture_pool:"):
+            pool = next(x for x in row["texture_pools"] if x["object"] == name.split(":", 1)[1])
+            directory = base + pool["directory"].removeprefix("workflows/simbox/assets/")
+            if not pool["directory"].startswith("workflows/simbox/assets/") or not prefix_files(
+                directory
+            ):
+                unresolved.append(name + " " + pool["directory"])
+            else:
+                prefixes.append(directory)
+            continue
         if name.startswith("random_pool:"):
             pool = next(x for x in row["random_pools"] if x["object"] == name.split(":", 1)[1])
             patterns = [
@@ -134,7 +144,9 @@ for family, candidates in sorted(families.items()):
     selected.append(item)
     if not blocked:
         allfiles.update({x["path"]: x for x in files})
+revision = json.loads((b / "hf/repository-revision.json").read_text())["revision"]
 manifest = dict(
+    revision=revision,
     scope="One representative per source task family; original skills/configs retained. Direct asset model directories, without redundant authoring files; USD transitive dependencies still checked at runtime.",
     families=len(selected),
     counts=dict(collections.Counter(x["status"] for x in selected)),

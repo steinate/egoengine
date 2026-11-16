@@ -11,7 +11,10 @@ p = argparse.ArgumentParser()
 p.add_argument("audit", type=Path)
 a = p.parse_args()
 reports = []
-for result in sorted((a.audit / "runs").glob("*/result.json")):
+result_files = list((a.audit / "runs").glob("*/result.json")) + list(
+    (a.audit / "retests").glob("*/runs/*/result.json")
+)
+for result in sorted(result_files):
     run = result.parent
     info = json.loads(result.read_text())
     plan = run / "official-plan.pkl"
@@ -47,6 +50,13 @@ for result in sorted((a.audit / "runs").glob("*/result.json")):
         sha256=hashlib.sha256(plan.read_bytes()).hexdigest(),
         bytes=plan.stat().st_size,
         object_logger_keys=list(logger.get("object_data_logger", {}).keys()),
+        object_logger_fields={
+            robot: sorted(values) for robot, values in logger.get("object_data_logger", {}).items()
+        },
+        object_logger_frame_counts={
+            robot: {key: len(value) for key, value in values.items()}
+            for robot, values in logger.get("object_data_logger", {}).items()
+        },
         timing_note="Official recorded-frame order. This plan schema has no independently validated physical timestamps; paired videos use the separate explicit recorder in work/task-pairs.",
         scope="Structural/state integrity only; not task success, image replay, cloth/particle completeness or human IK validation.",
     )

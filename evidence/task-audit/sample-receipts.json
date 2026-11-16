@@ -1,0 +1,17 @@
+[
+  {
+    "folder": "hf",
+    "bytes": 16777216,
+    "sha256": "e58b3bb656fcf9f092e4d211ebf5b7cd5ef654374bbf35d5d3c43d10d307a02a"
+  },
+  {
+    "folder": "hf/sim",
+    "bytes": 16777216,
+    "sha256": "a8ad633a2c780b2782b596457d6f2c2e0816ce19e1962c70d63f4d3fa2bb2ec4"
+  },
+  {
+    "folder": "hf/sim_updated_lerobotv30",
+    "bytes": 33554432,
+    "sha256": "3a9781753907378023a22b6b4f536e2d4cc6c81de81f1671b0867861aad82d6d"
+  }
+]

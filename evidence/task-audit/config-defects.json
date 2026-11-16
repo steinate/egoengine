@@ -1,11 +1,5 @@
 [
   {
-    "config": "art/lift2/heat_the_food_in_the_microwave/heat_the_food_in_the_microwave.yaml",
-    "issue": "missing_horizontal_offset_axis",
-    "position_constraint": "gripper",
-    "meaning": "Place.sample_gripper_place_traj unconditionally reads offset_place_obj_axis even though only the object-constrained branch uses it."
-  },
-  {
     "config": "art/split_aloha/grasp_the_microwave_handle/left/grasp_the_microwave_handle_part0.yaml",
     "issue": "empty_static_articulation_info",
     "object": "open_v_handle_left",
@@ -22,5 +16,30 @@
     "issue": "empty_static_articulation_info",
     "object": "microwave",
     "meaning": "ArticulatedObject opens asset_root as a file when obj_info_path is empty."
+  },
+  {
+    "config": "basic/lift2/recovery_pick_objects/right/recovery_pick_objects_part1.yaml",
+    "issue": "missing_source_reference",
+    "field": "arena_file",
+    "path": "workflows/simbox/core/configs/arenas/scene_arena.yaml",
+    "meaning": "Referenced configuration is absent from the retained source tree."
+  },
+  {
+    "config": "long_horizon/lift2/collaborate_assemble_a_beef_sandwich/collaborate_assemble_a_beef_sandwich.yaml",
+    "issue": "missing_robot_definition",
+    "robot": "lift2_1",
+    "meaning": "Every robot requires robot_config_file or a complete inline target_class declaration."
+  },
+  {
+    "config": "long_horizon/lift2/collaborate_assemble_a_ham_sandwich/collaborate_assemble_a_ham_sandwich.yaml",
+    "issue": "missing_robot_definition",
+    "robot": "lift2_1",
+    "meaning": "Every robot requires robot_config_file or a complete inline target_class declaration."
+  },
+  {
+    "config": "long_horizon/split_aloha/collaborate_assemble_a_beef_sandwich_mix/collaborate_assemble_a_beef_sandwich_mix.yaml",
+    "issue": "missing_robot_definition",
+    "robot": "lift2",
+    "meaning": "Every robot requires robot_config_file or a complete inline target_class declaration."
   }
 ]

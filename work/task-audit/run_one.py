@@ -23,7 +23,9 @@ started = time.monotonic()
 
 def save():
     report["wall_seconds"] = time.monotonic() - started
-    (a.output / "result.json").write_text(json.dumps(report, indent=2))
+    temporary = a.output / "result.json.tmp"
+    temporary.write_text(json.dumps(report, indent=2))
+    temporary.replace(a.output / "result.json")
 
 
 def phase(name):
@@ -32,6 +34,7 @@ def phase(name):
     print("AUDIT_STAGE", name, flush=True)
 
 
+save()
 sys.argv = [sys.argv[0], "--allow-root", f"--/log/file={a.output}/kit.log"]
 from nimbus.utils.utils import init_env
 

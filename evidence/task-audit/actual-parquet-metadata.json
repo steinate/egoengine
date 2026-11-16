@@ -1,0 +1,198 @@
+{
+  "info": {
+    "features": {
+      "head_camera_intrinsics": {
+        "feature": {
+          "dtype": "float32",
+          "_type": "Value"
+        },
+        "length": 4,
+        "_type": "Sequence"
+      },
+      "hand_camera_intrinsics": {
+        "feature": {
+          "dtype": "float32",
+          "_type": "Value"
+        },
+        "length": 4,
+        "_type": "Sequence"
+      },
+      "head_camera_to_robot_extrinsics": {
+        "feature": {
+          "dtype": "float32",
+          "_type": "Value"
+        },
+        "length": 7,
+        "_type": "Sequence"
+      },
+      "hand_camera_to_robot_extrinsics": {
+        "feature": {
+          "dtype": "float32",
+          "_type": "Value"
+        },
+        "length": 7,
+        "_type": "Sequence"
+      },
+      "states.joint.position": {
+        "feature": {
+          "dtype": "float32",
+          "_type": "Value"
+        },
+        "length": 7,
+        "_type": "Sequence"
+      },
+      "states.gripper.position": {
+        "dtype": "float32",
+        "_type": "Value"
+      },
+      "states.gripper.pose": {
+        "feature": {
+          "dtype": "float32",
+          "_type": "Value"
+        },
+        "length": 6,
+        "_type": "Sequence"
+      },
+      "states.ee_to_armbase_pose": {
+        "feature": {
+          "dtype": "float32",
+          "_type": "Value"
+        },
+        "length": 7,
+        "_type": "Sequence"
+      },
+      "states.ee_to_robot_pose": {
+        "feature": {
+          "dtype": "float32",
+          "_type": "Value"
+        },
+        "length": 7,
+        "_type": "Sequence"
+      },
+      "states.tcp_to_armbase_pose": {
+        "feature": {
+          "dtype": "float32",
+          "_type": "Value"
+        },
+        "length": 7,
+        "_type": "Sequence"
+      },
+      "states.tcp_to_robot_pose": {
+        "feature": {
+          "dtype": "float32",
+          "_type": "Value"
+        },
+        "length": 7,
+        "_type": "Sequence"
+      },
+      "states.robot_to_env_pose": {
+        "feature": {
+          "dtype": "float32",
+          "_type": "Value"
+        },
+        "length": 7,
+        "_type": "Sequence"
+      },
+      "actions.joint.position": {
+        "feature": {
+          "dtype": "float32",
+          "_type": "Value"
+        },
+        "length": 7,
+        "_type": "Sequence"
+      },
+      "actions.gripper.position": {
+        "dtype": "float32",
+        "_type": "Value"
+      },
+      "actions.gripper.openness": {
+        "dtype": "float32",
+        "_type": "Value"
+      },
+      "actions.gripper.pose": {
+        "feature": {
+          "dtype": "float32",
+          "_type": "Value"
+        },
+        "length": 6,
+        "_type": "Sequence"
+      },
+      "actions.ee_to_armbase_pose": {
+        "feature": {
+          "dtype": "float32",
+          "_type": "Value"
+        },
+        "length": 7,
+        "_type": "Sequence"
+      },
+      "actions.ee_to_robot_pose": {
+        "feature": {
+          "dtype": "float32",
+          "_type": "Value"
+        },
+        "length": 7,
+        "_type": "Sequence"
+      },
+      "actions.tcp_to_armbase_pose": {
+        "feature": {
+          "dtype": "float32",
+          "_type": "Value"
+        },
+        "length": 7,
+        "_type": "Sequence"
+      },
+      "actions.tcp_to_robot_pose": {
+        "feature": {
+          "dtype": "float32",
+          "_type": "Value"
+        },
+        "length": 7,
+        "_type": "Sequence"
+      },
+      "master_actions.joint.position": {
+        "feature": {
+          "dtype": "float32",
+          "_type": "Value"
+        },
+        "length": 7,
+        "_type": "Sequence"
+      },
+      "master_actions.gripper.position": {
+        "dtype": "float32",
+        "_type": "Value"
+      },
+      "master_actions.gripper.openness": {
+        "dtype": "float32",
+        "_type": "Value"
+      },
+      "master_actions.gripper.pose": {
+        "feature": {
+          "dtype": "float32",
+          "_type": "Value"
+        },
+        "length": 6,
+        "_type": "Sequence"
+      },
+      "timestamp": {
+        "dtype": "float32",
+        "_type": "Value"
+      },
+      "frame_index": {
+        "dtype": "int64",
+        "_type": "Value"
+      },
+      "episode_index": {
+        "dtype": "int64",
+        "_type": "Value"
+      },
+      "index": {
+        "dtype": "int64",
+        "_type": "Value"
+      },
+      "task_index": {
+        "dtype": "int64",
+        "_type": "Value"
+      }
+    }
+  }
+}

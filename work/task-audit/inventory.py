@@ -47,6 +47,7 @@ for path in sorted(base.rglob("*.yaml")):
     )
     try:
         cfg = yaml.safe_load(path.read_text())
+        row["robot_count"] = max(len(task.get("robots", [])) for task in cfg["tasks"])
         row["has_fluid"] = any(bool(task.get("fluid")) for task in cfg["tasks"])
         row["object_classes"] = sorted(
             {
@@ -60,9 +61,15 @@ for path in sorted(base.rglob("*.yaml")):
         assets = []
         skills = []
         random_pools = []
+        texture_pools = []
         configs = {str(path): cfg}
         for task in cfg["tasks"]:
             root = repo / task["asset_root"]
+            for robot in task.get("robots", []):
+                if not robot.get("robot_config_file") and not robot.get("target_class"):
+                    missing_code.append(
+                        "robot:" + robot["name"] + ":missing robot_config_file/target_class"
+                    )
             objects = list(task.get("objects", []))
             row["task_dir"] = task.get("data", {}).get("task_dir")
             row["instruction"] = task.get("data", {}).get("language_instruction")
@@ -106,6 +113,25 @@ for path in sorted(base.rglob("*.yaml")):
                         annotations[name].add(annotation)
             randomized = set()
             for obj in objects:
+                if (
+                    obj.get("target_class") == "ArticulatedObject"
+                    and not obj.get("apply_randomization")
+                    and not obj.get("obj_info_path")
+                ):
+                    missing_code.append("object:" + obj["name"] + ":empty static obj_info_path")
+                if isinstance(obj.get("texture"), dict):
+                    texture = obj["texture"]
+                    directory = root / texture["texture_lib"]
+                    pool = dict(
+                        object=obj["name"],
+                        directory=str(directory.relative_to(repo)),
+                        randomized=bool(texture.get("apply_randomization")),
+                        index=int(texture.get("texture_id", 0)),
+                    )
+                    texture_pools.append(pool)
+                    available = sorted(v for v in directory.glob("*") if v.is_file())
+                    if len(available) < (1 if pool["randomized"] else pool["index"] + 1):
+                        missing_assets.append("texture_pool:" + obj["name"])
                 if obj.get("apply_randomization") and obj.get("target_class") == "RigidObject":
                     name = obj["name"]
                     randomized.add(name)
@@ -180,6 +206,7 @@ for path in sorted(base.rglob("*.yaml")):
             missing_assets=sorted(set(missing_assets)),
             assets=sorted(set(assets)),
             random_pools=random_pools,
+            texture_pools=texture_pools,
         )
         row["status"] = (
             "blocked_source"

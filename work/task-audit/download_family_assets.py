@@ -13,6 +13,7 @@ b = w / "run/task-audit"
 root = w / "run/assets"
 manifest = json.loads((b / "family-assets.json").read_text())
 files = manifest["files"]
+revision = manifest.get("revision", "main")
 token = (w / "config/hf_token").read_text().strip()
 assert all(not x.get("lfs") or "*" not in x["lfs"]["oid"] for x in files)
 print("MANIFEST", len(files), manifest["additional_bytes"], "download", a.download, flush=True)
@@ -49,7 +50,7 @@ def fetch(entry):
                 if digest(part, entry):
                     break
                 req = urllib.request.Request(
-                    "https://hf-mirror.com/datasets/InternRobotics/InternData-A1/resolve/main/"
+                    f"https://hf-mirror.com/datasets/InternRobotics/InternData-A1/resolve/{revision}/"
                     + urllib.parse.quote(entry["path"], safe="/")
                 )
                 req.add_unredirected_header("Authorization", "Bearer " + token)

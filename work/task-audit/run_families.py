@@ -7,6 +7,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+from process_control import terminate_group
 import signal
 import subprocess
 import time
@@ -72,12 +73,7 @@ for row in rows:
                     try:
                         proc.wait(timeout=a.timeout)
                     except subprocess.TimeoutExpired:
-                        os.killpg(proc.pid, signal.SIGTERM)
-                        try:
-                            proc.wait(timeout=10)
-                        except subprocess.TimeoutExpired:
-                            os.killpg(proc.pid, signal.SIGKILL)
-                            proc.wait()
+                        terminate_group(proc)
                         prior = json.loads(result.read_text()) if result.exists() else {}
                         # A shutdown hang must not erase a completed planning outcome.
                         prior["planning_status_before_timeout"] = prior.get("status")

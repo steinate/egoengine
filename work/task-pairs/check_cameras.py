@@ -16,7 +16,7 @@ front = np.asarray(r["front_camera_world"])
 names = [str(n).split("/")[-1] for n in d["names"]]
 eye_ids = [names.index("L_Eye"), names.index("R_Eye")]
 attachment = []
-for i in sorted(set([0, len(C) // 2, len(C) - 1])):
+for i in range(len(C)):
     g = d["local"][i].copy()
     for j, parent in enumerate(d["parents"]):
         g[j] = (d["world_transform"] if parent < 0 else g[parent]) @ g[j]

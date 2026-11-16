@@ -28,7 +28,11 @@ class Flip(BaseSkill):
         self.skill_cfg = cfg
         # The published flip_package configurations use the legacy ee_axis key.
         self.gripper_axis = np.asarray(cfg.get("gripper_axis", cfg.get("ee_axis")), dtype=float)
-        if self.gripper_axis.shape != (3,) or not np.all(np.isfinite(self.gripper_axis)) or np.linalg.norm(self.gripper_axis) == 0:
+        if (
+            self.gripper_axis.shape != (3,)
+            or not np.all(np.isfinite(self.gripper_axis))
+            or np.linalg.norm(self.gripper_axis) == 0
+        ):
             raise ValueError("Flip requires a finite, nonzero 3-vector gripper_axis (or legacy ee_axis)")
         self.manip_list = []
         if kwargs:

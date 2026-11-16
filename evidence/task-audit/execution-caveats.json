@@ -1,0 +1,70 @@
+{
+  "affected_configs": [
+    "basic/lift2/conveyor_beef_sandwich/conveyor_beef_sandwich.yaml",
+    "basic/split_aloha/conveyor_ham_sandwich/conveyor_ham_sandwich.yaml"
+  ],
+  "finding": "The first conveyor beef process exceeded 300 s. Its shell exited on SIGTERM but Kit continued and saved a successful result at 365.34 s, briefly overlapping the next ham task. Baseline success is an API outcome; wall time is not a clean serial measurement.",
+  "fix": "Always SIGKILL any surviving isolated process-group members after the grace wait, including when the shell leader exits first. test_process_control.py reproduces and checks this case.",
+  "followup": "Both conveyor configurations get separate sequential retests with a 600 s limit. Baseline plans/logs retained.",
+  "clean_retests": [
+    {
+      "family": "basic/conveyor_beef_sandwich",
+      "status": "planning_succeeded",
+      "frames": 1209,
+      "wall_seconds": 347.3754057680053,
+      "run_dir": "retests/clean-serial-600/runs/11359f39be62"
+    },
+    {
+      "family": "basic/conveyor_ham_sandwich",
+      "status": "planning_succeeded",
+      "frames": 501,
+      "wall_seconds": 351.5966196740046,
+      "run_dir": "retests/clean-serial-600/runs/203a276b7f01"
+    }
+  ],
+  "texture_retests": [
+    {
+      "family": "long_horizon/clean_the_dirt_with_brown_cloth",
+      "retest_tag": "arena-textures",
+      "status": "planning_failed",
+      "error": null,
+      "run_dir": "retests/arena-textures/runs/a8ec08f702d3"
+    },
+    {
+      "family": "long_horizon/clean_the_dirt_with_sponge",
+      "retest_tag": "arena-textures",
+      "status": "planning_failed",
+      "error": null,
+      "run_dir": "retests/arena-textures/runs/f38c328e6615"
+    },
+    {
+      "family": "long_horizon/clean_the_dirt_with_white_cloth",
+      "retest_tag": "arena-textures",
+      "status": "planning_failed",
+      "error": null,
+      "run_dir": "retests/arena-textures/runs/e3f119f7669e"
+    },
+    {
+      "family": "long_horizon/clean_the_dirt_with_brown_cloth",
+      "retest_tag": "texture-pools",
+      "status": "runtime_error",
+      "error": "ValueError('empty range for randrange() (0, 0, 0)')",
+      "run_dir": "retests/texture-pools/runs/a8ec08f702d3"
+    },
+    {
+      "family": "long_horizon/clean_the_dirt_with_sponge",
+      "retest_tag": "texture-pools",
+      "status": "runtime_error",
+      "error": "ValueError('empty range for randrange() (0, 0, 0)')",
+      "run_dir": "retests/texture-pools/runs/f38c328e6615"
+    },
+    {
+      "family": "long_horizon/clean_the_dirt_with_white_cloth",
+      "retest_tag": "texture-pools",
+      "status": "runtime_error",
+      "error": "ValueError('empty range for randrange() (0, 0, 0)')",
+      "run_dir": "retests/texture-pools/runs/e3f119f7669e"
+    }
+  ],
+  "texture_note": "The first supplement filled dirt-color libraries but missed arena table textures. Final supplementation includes dark/light table libraries; all three selected wiping configs then passed dependency checks and reached planning, but returned no successful episode."
+}

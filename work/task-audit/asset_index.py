@@ -2,17 +2,25 @@
 
 import argparse, json, time, urllib.request, urllib.parse
 from pathlib import Path
+from dataset_revision import pinned_revision
 
 p = argparse.ArgumentParser()
 p.add_argument("workspace", type=Path)
+p.add_argument(
+    "--inventory",
+    type=Path,
+    help="Use a later preflight without overwriting the baseline inventory",
+)
 a = p.parse_args()
 w = a.workspace
 b = w / "run/task-audit"
 out = b / "hf/asset-tree.json"
 token = (w / "config/hf_token").read_text().strip()
+revision = pinned_revision(b / "hf", token)
 endpoint = "https://hf-mirror.com"
 repo = "InternRobotics/InternData-A1"
-rows = json.loads((b / "inventory.json").read_text())["rows"]
+inventory_path = a.inventory or b / "inventory.json"
+rows = json.loads(inventory_path.read_text())["rows"]
 scopes = sorted(
     {
         path.split("/")[3]
@@ -20,6 +28,7 @@ scopes = sorted(
         for path in (
             row.get("missing_assets", [])
             + [pattern for pool in row.get("random_pools", []) for pattern in pool["patterns"]]
+            + [pool["directory"] for pool in row.get("texture_pools", [])]
         )
         if path.startswith("workflows/simbox/assets/") and len(path.split("/")) > 3
     }
@@ -30,7 +39,7 @@ for scope in scopes:
     if cached.exists():
         items.extend(json.loads(cached.read_text()))
         continue
-    url = f"{endpoint}/api/datasets/{repo}/tree/main/InternDataAssets/assets/{scope}?recursive=true&limit=1000"
+    url = f"{endpoint}/api/datasets/{repo}/tree/{revision}/InternDataAssets/assets/{scope}?recursive=true&limit=1000"
     page = 0
     scope_items = []
     while url:
@@ -65,7 +74,7 @@ for scope in scopes:
     items.extend(scope_items)
 out.write_text(json.dumps(items))
 lookup = {x["path"]: x for x in items if x["type"] == "file"}
-rows = json.loads((b / "inventory.json").read_text())["rows"]
+rows = json.loads(inventory_path.read_text())["rows"]
 needed = {}
 for row in rows:
     for path in row.get("missing_assets", []):
@@ -81,7 +90,9 @@ for rel, item in needed.items():
         item["url"] = (
             "https://huggingface.co/datasets/"
             + repo
-            + "/resolve/main/"
+            + "/resolve/"
+            + revision
+            + "/"
             + urllib.parse.quote(rel, safe="/")
         )
 result = dict(

@@ -1,0 +1,245 @@
+{
+  "upstream_baseline": "2a0a21f2c836df97c925729084e13d68950b4deb",
+  "scope": "Static checks on all YAMLs; one selected original configuration per source directory family; default seed 43. Not every embodiment/object variant, not all paper semantic tasks, not full physical/video validation.",
+  "configs": 1128,
+  "static_status_counts": {
+    "ready_for_runtime": 214,
+    "blocked_assets": 907,
+    "blocked_source": 7
+  },
+  "source_families": 59,
+  "family_runtime_counts": {
+    "runtime_error": 13,
+    "planning_failed": 35,
+    "planning_succeeded": 11
+  },
+  "families_with_a_successful_attempt": 13,
+  "successful_configs_across_all_attempts": {
+    "art/open_the_microwave": [
+      "art/split_aloha/open_the_microwave/left/open_the_microwave_part0.yaml"
+    ],
+    "basic/stack_cubes_lift": [
+      "basic/split_aloha/stack_cubes_lift/lr.yaml",
+      "basic/split_aloha/stack_cubes_lift/rl.yaml"
+    ],
+    "pick_and_place/single_pick": [
+      "pick_and_place/franka/single_pick/google_scan-handbag.yaml",
+      "pick_and_place/split_aloha/single_pick/left/google_scan-handbag.yaml",
+      "pick_and_place/split_aloha/single_pick/left/google_scan-hat.yaml",
+      "pick_and_place/split_aloha/single_pick/left/omniobject3d-bamboo_shoots.yaml",
+      "pick_and_place/split_aloha/single_pick/left/omniobject3d-banana.yaml",
+      "pick_and_place/split_aloha/single_pick/right/google_scan-handbag.yaml",
+      "pick_and_place/split_aloha/single_pick/right/omniobject3d-banana.yaml"
+    ],
+    "art/close_the_washingmachine": [
+      "art/franka/close_the_washingmachine/close_the_washingmachine_part1.yaml"
+    ],
+    "basic/conveyor_beef_sandwich": [
+      "basic/lift2/conveyor_beef_sandwich/conveyor_beef_sandwich.yaml"
+    ],
+    "basic/conveyor_ham_sandwich": [
+      "basic/split_aloha/conveyor_ham_sandwich/conveyor_ham_sandwich.yaml"
+    ],
+    "basic/pick_the_package_on_conveyor": [
+      "basic/lift2/pick_the_package_on_conveyor/pick_the_package_on_conveyor.yaml"
+    ],
+    "basic/sort_the_tray_on_rack": [
+      "basic/split_aloha/sort_the_tray_on_rack/sort_the_tray_on_rack.yaml"
+    ],
+    "basic/track": [
+      "basic/franka/track/track_the_targets.yaml"
+    ],
+    "example": [
+      "example/sort_the_rubbish.yaml"
+    ],
+    "long_horizon/dexpnp": [
+      "long_horizon/lift2/dexpnp/sort_parts_0.yaml"
+    ],
+    "long_horizon/sort_the_rubbish": [
+      "long_horizon/lift2/sort_the_rubbish/sort_the_rubbish_part0.yaml"
+    ],
+    "pick_and_place/single_func_pick": [
+      "pick_and_place/genie1/single_func_pick/left/phocal-red_wine_glass.yaml"
+    ],
+    "art/close_the_electriccooker": [],
+    "art/close_the_laptop": [],
+    "art/close_the_microwave": [],
+    "art/close_the_oven": [],
+    "art/close_the_package": [],
+    "art/close_the_pot": [],
+    "art/close_the_trashcan": [],
+    "art/grasp_the_microwave_handle": [],
+    "art/heat_the_food_in_the_microwave": [],
+    "art/open_the_laptop": [],
+    "art/open_the_microwave_from_scratch": [],
+    "art/open_the_oven": [],
+    "art/open_the_pot": [],
+    "art/open_the_trashcan": [],
+    "art/pull_the_storagefurniture": [],
+    "art/push_the_storagefurniture": [],
+    "basic/arrange_the_tableware": [],
+    "basic/hang_the_cup_on_rack": [],
+    "basic/insert_the_flower_in_vase": [],
+    "basic/insert_the_markpen_in_penholder": [],
+    "basic/pour_Baijiu": [],
+    "basic/pour_coke": [],
+    "basic/pour_redwine": [],
+    "basic/pour_water": [],
+    "basic/recovery_pick_objects": [],
+    "basic/sort_the_tary_on_rack": [],
+    "basic/stack_bowls": [],
+    "basic/store_the_eggs": [],
+    "basic/store_the_toothbrushes": [],
+    "basic/track_the_targets": [],
+    "basic/water_plant": [],
+    "long_horizon/clean_the_dirt_with_brown_cloth": [],
+    "long_horizon/clean_the_dirt_with_sponge": [],
+    "long_horizon/clean_the_dirt_with_white_cloth": [],
+    "long_horizon/collaborate_assemble_a_beef_sandwich": [],
+    "long_horizon/collaborate_assemble_a_beef_sandwich_mix": [],
+    "long_horizon/collaborate_assemble_a_ham_sandwich": [],
+    "long_horizon/flip_package": [],
+    "long_horizon/handover": [],
+    "long_horizon/pack_in_objects": [],
+    "long_horizon/pack_out_objects": [],
+    "long_horizon/put_the_trashcan_in_trashcan": [],
+    "long_horizon/stack_a_beef_sandwich": [],
+    "long_horizon/store_objects_in_the_drawer": [],
+    "pick_and_place/dual_pnp": [],
+    "pick_and_place/single_pnp": []
+  },
+  "distinct_run_directories": 93,
+  "additional_retest_attempts": 12,
+  "retest_runtime_counts": {
+    "planning_failed": 6,
+    "planning_succeeded": 2,
+    "runtime_error": 4
+  },
+  "initial_attempts": 25,
+  "initial_runtime_counts": {
+    "planning_failed": 13,
+    "runtime_error": 3,
+    "planning_succeeded": 9
+  },
+  "unique_attempted_configs": 81,
+  "hf_published_versions": {
+    "sim": {
+      "files": 222,
+      "bytes": 2008082278868
+    },
+    "sim_updated": {
+      "files": 273,
+      "bytes": 2122108450582
+    },
+    "sim_updated_lerobotv30": {
+      "files": 286,
+      "bytes": 2214858813234
+    }
+  },
+  "sampled_parquet_columns": [
+    "head_camera_intrinsics",
+    "hand_camera_intrinsics",
+    "head_camera_to_robot_extrinsics",
+    "hand_camera_to_robot_extrinsics",
+    "states.joint.position",
+    "states.gripper.position",
+    "states.gripper.pose",
+    "states.ee_to_armbase_pose",
+    "states.ee_to_robot_pose",
+    "states.tcp_to_armbase_pose",
+    "states.tcp_to_robot_pose",
+    "states.robot_to_env_pose",
+    "actions.joint.position",
+    "actions.gripper.position",
+    "actions.gripper.openness",
+    "actions.gripper.pose",
+    "actions.ee_to_armbase_pose",
+    "actions.ee_to_robot_pose",
+    "actions.tcp_to_armbase_pose",
+    "actions.tcp_to_robot_pose",
+    "master_actions.joint.position",
+    "master_actions.gripper.position",
+    "master_actions.gripper.openness",
+    "master_actions.gripper.pose",
+    "timestamp",
+    "frame_index",
+    "episode_index",
+    "index",
+    "task_index"
+  ],
+  "official_additional_pipeline": {
+    "discussion": "https://huggingface.co/datasets/InternRobotics/InternData-A1/discussions/11",
+    "repository": "https://github.com/InternRobotics/SIM1",
+    "scope": "Official org reply points to InternDataEngine plus SIM1. SIM1 is a separate Newton/Warp cloth pipeline, not executed by this Isaac Sim 4.1 audit; the reply does not give episode-to-scene mappings."
+  },
+  "exact_published_episode_replay": "Not established: actual v2.1 and v3.0 samples have the same 29 columns and omit complete scene/asset/object states, consistent with the official converters.",
+  "verified_paired_tasks": [
+    "hang_cup",
+    "close_microwave",
+    "insert_flower"
+  ],
+  "paired_task_scope": "New official-task episodes, original Worker, fixed eye/front cameras; complete source times and object states retained; debug rendering approximately 5 Hz.",
+  "physical_parquet_schema_checks": {
+    "status_counts": {
+      "readable": 59
+    },
+    "distinct_column_sets": 1,
+    "column_counts": [
+      29
+    ],
+    "scope": "Bounded samples of one washing-machine task in v2.1 and v3.0, not all dataset tasks."
+  },
+  "asset_downloads": {
+    "v1": {
+      "counts": {
+        "downloaded": 911
+      },
+      "downloaded_bytes": 2692498048,
+      "failed": []
+    },
+    "v2": {
+      "counts": {
+        "downloaded": 223,
+        "reused": 384,
+        "failed": 2
+      },
+      "downloaded_bytes": 1192284477,
+      "failed": [
+        {
+          "path": "InternDataAssets/assets/long_horizon/sort_the_rubbish/garbage_can/nonrecyclable_can/.thumbs/256x256/Aligned_obj.usd.png",
+          "bytes": 0,
+          "status": "failed",
+          "error": "[Errno 2] No such file or directory: '/mnt/data/pengjiaqi/egoengine-workspace/run/assets/InternDataAssets/assets/long_horizon/sort_the_rubbish/garbage_can/nonrecyclable_can/.thumbs/256x256/Aligned_obj.usd.png.audit-part'"
+        },
+        {
+          "path": "InternDataAssets/assets/long_horizon/sort_the_rubbish/garbage_can/recyclable_can/.thumbs/256x256/Aligned_obj.usd.png",
+          "bytes": 0,
+          "status": "failed",
+          "error": "[Errno 2] No such file or directory: '/mnt/data/pengjiaqi/egoengine-workspace/run/assets/InternDataAssets/assets/long_horizon/sort_the_rubbish/garbage_can/recyclable_can/.thumbs/256x256/Aligned_obj.usd.png.audit-part'"
+        }
+      ]
+    },
+    "textures": {
+      "counts": {
+        "reused": 565,
+        "downloaded": 68
+      },
+      "downloaded_bytes": 2874639,
+      "failed": []
+    },
+    "final": {
+      "counts": {
+        "reused": 633,
+        "downloaded": 12
+      },
+      "downloaded_bytes": 4975984,
+      "failed": []
+    }
+  },
+  "final_asset_verification": {
+    "manifest_files": 645,
+    "verified_files": 645,
+    "same_paths": true,
+    "note": "Historical failed zero-byte .thumbs files are generated previews and were excluded from the final manifest; no required asset failure remains in the final download check."
+  }
+}

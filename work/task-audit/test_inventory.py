@@ -6,7 +6,9 @@ import yaml
 
 
 class InventoryTest(unittest.TestCase):
-    def check_case(self, kind, randomized, expected, arena=None):
+    def check_case(
+        self, kind, randomized, expected, arena=None, texture=False, incomplete_robot=False
+    ):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             cfgroot = root / "workflows/simbox/core/configs/tasks/basic/split_aloha/sample"
@@ -36,6 +38,12 @@ class InventoryTest(unittest.TestCase):
                 ],
                 skills=[dict(robot=[dict(left=[dict(name=kind, objects=["object"])])])],
             )
+            if texture:
+                task["objects"][0]["texture"] = dict(
+                    texture_lib="missing_colors", apply_randomization=True, texture_id=0
+                )
+            if incomplete_robot:
+                task["robots"] = [dict(name="second_robot_without_type")]
             if arena:
                 task["arena_file"] = arena
             (cfgroot / "sample.yaml").write_text(yaml.safe_dump(dict(tasks=[task])))
@@ -58,6 +66,12 @@ class InventoryTest(unittest.TestCase):
 
     def test_dexpick_uses_pose_yaml_not_sparse_npy(self):
         self.check_case("dexpick", False, "ready_for_runtime")
+
+    def test_texture_pool_checked_before_randomized_object_shortcut(self):
+        self.check_case("pick", True, "blocked_assets", texture=True)
+
+    def test_missing_second_robot_declaration_is_source_block(self):
+        self.check_case("pick", False, "blocked_source", incomplete_robot=True)
 
     def test_missing_arena_is_source_block(self):
         self.check_case("pick", False, "blocked_source", arena="missing.yaml")

@@ -1,0 +1,428 @@
+[
+  {
+    "config": "art/split_aloha/close_the_microwave/left/close_the_microwave_part0.yaml",
+    "family": "art/close_the_microwave",
+    "preflight": "ready_for_runtime",
+    "seed": 43,
+    "status": "planning_failed",
+    "stages": [
+      "parse_config",
+      "initialize_scene",
+      "randomize_layout",
+      "official_generate_seq"
+    ],
+    "wall_seconds": 70.16583631999674,
+    "frames": 0,
+    "run_dir": "runs/658bc823e05f"
+  },
+  {
+    "config": "art/split_aloha/close_the_microwave/right/close_the_microwave_part1.yaml",
+    "family": "art/close_the_microwave",
+    "preflight": "ready_for_runtime",
+    "seed": 43,
+    "status": "planning_failed",
+    "stages": [
+      "parse_config",
+      "initialize_scene",
+      "randomize_layout",
+      "official_generate_seq"
+    ],
+    "wall_seconds": 67.24256053200224,
+    "frames": 0,
+    "run_dir": "runs/93a14ac2b56e"
+  },
+  {
+    "config": "art/split_aloha/grasp_the_microwave_handle/left/grasp_the_microwave_handle_part0.yaml",
+    "family": "art/grasp_the_microwave_handle",
+    "preflight": "ready_for_runtime",
+    "seed": 43,
+    "status": "runtime_error",
+    "stages": [
+      "parse_config",
+      "initialize_scene"
+    ],
+    "wall_seconds": 38.51325286900101,
+    "error": "IsADirectoryError(21, 'Is a directory')",
+    "traceback": "Traceback (most recent call last):\n  File \"/mnt/data/pengjiaqi/egoengine-workspace/run/task-audit/run_one.py\", line 55, in <module>\n    wf.init_task(0, need_preload=False)\n  File \"/mnt/data/pengjiaqi/egoengine-workspace/egoengine/workflows/base.py\", line 27, in init_task\n    self.reset(need_preload)\n  File \"/mnt/data/pengjiaqi/egoengine-workspace/egoengine/workflows/simbox_dual_workflow.py\", line 155, in reset\n    self.world.reset()\n  File \"/mnt/data/pengjiaqi/egoengine-workspace/run/runtime41/exts/omni.isaac.core/omni/isaac/core/world/world.py\", line 382, in reset\n    task.set_up_scene(self.scene)\n  File \"/mnt/data/pengjiaqi/egoengine-workspace/egoengine/workflows/simbox/core/tasks/banana.py\", line 78, in set_up_scene\n    self.objects[cfg[\"name\"]] = self._load_obj(cfg)\n  File \"/mnt/data/pengjiaqi/egoengine-workspace/egoengine/workflows/simbox/core/tasks/banana.py\", line 318, in _load_obj\n    obj = obj_cls(*ctor_args)\n  File \"/mnt/data/pengjiaqi/egoengine-workspace/egoengine/workflows/simbox/core/objects/articulated_object.py\", line 26, in __init__\n    with open(object_info_path, \"r\", encoding=\"utf-8\") as f:\nIsADirectoryError: [Errno 21] Is a directory: '/mnt/data/pengjiaqi/egoengine-workspace/egoengine/workflows/simbox/assets/'\n",
+    "run_dir": "runs/27c28820dcc9"
+  },
+  {
+    "config": "art/split_aloha/grasp_the_microwave_handle/right/grasp_the_microwave_handle_part1.yaml",
+    "family": "art/grasp_the_microwave_handle",
+    "preflight": "ready_for_runtime",
+    "seed": 43,
+    "status": "runtime_error",
+    "stages": [
+      "parse_config",
+      "initialize_scene"
+    ],
+    "wall_seconds": 34.325149027994485,
+    "error": "IsADirectoryError(21, 'Is a directory')",
+    "traceback": "Traceback (most recent call last):\n  File \"/mnt/data/pengjiaqi/egoengine-workspace/run/task-audit/run_one.py\", line 55, in <module>\n    wf.init_task(0, need_preload=False)\n  File \"/mnt/data/pengjiaqi/egoengine-workspace/egoengine/workflows/base.py\", line 27, in init_task\n    self.reset(need_preload)\n  File \"/mnt/data/pengjiaqi/egoengine-workspace/egoengine/workflows/simbox_dual_workflow.py\", line 155, in reset\n    self.world.reset()\n  File \"/mnt/data/pengjiaqi/egoengine-workspace/run/runtime41/exts/omni.isaac.core/omni/isaac/core/world/world.py\", line 382, in reset\n    task.set_up_scene(self.scene)\n  File \"/mnt/data/pengjiaqi/egoengine-workspace/egoengine/workflows/simbox/core/tasks/banana.py\", line 78, in set_up_scene\n    self.objects[cfg[\"name\"]] = self._load_obj(cfg)\n  File \"/mnt/data/pengjiaqi/egoengine-workspace/egoengine/workflows/simbox/core/tasks/banana.py\", line 318, in _load_obj\n    obj = obj_cls(*ctor_args)\n  File \"/mnt/data/pengjiaqi/egoengine-workspace/egoengine/workflows/simbox/core/objects/articulated_object.py\", line 26, in __init__\n    with open(object_info_path, \"r\", encoding=\"utf-8\") as f:\nIsADirectoryError: [Errno 21] Is a directory: '/mnt/data/pengjiaqi/egoengine-workspace/egoengine/workflows/simbox/assets/'\n",
+    "run_dir": "runs/5e9ed7d3226f"
+  },
+  {
+    "config": "art/split_aloha/open_the_microwave/left/open_the_microwave_part0.yaml",
+    "family": "art/open_the_microwave",
+    "preflight": "ready_for_runtime",
+    "seed": 43,
+    "status": "planning_succeeded",
+    "stages": [
+      "parse_config",
+      "initialize_scene",
+      "randomize_layout",
+      "official_generate_seq"
+    ],
+    "wall_seconds": 80.29961302599986,
+    "frames": 339,
+    "plan_bytes": 1439723,
+    "run_dir": "runs/bc3085c1ef17"
+  },
+  {
+    "config": "art/split_aloha/open_the_microwave/right/open_the_microwave_part1.yaml",
+    "family": "art/open_the_microwave",
+    "preflight": "ready_for_runtime",
+    "seed": 43,
+    "status": "planning_failed",
+    "stages": [
+      "parse_config",
+      "initialize_scene",
+      "randomize_layout",
+      "official_generate_seq"
+    ],
+    "wall_seconds": 66.0732803879946,
+    "frames": 0,
+    "run_dir": "runs/d48bcf0832d2"
+  },
+  {
+    "config": "art/split_aloha/open_the_microwave_from_scratch/open_the_microwave_from_scratch.yaml",
+    "family": "art/open_the_microwave_from_scratch",
+    "preflight": "ready_for_runtime",
+    "seed": 43,
+    "status": "runtime_error",
+    "stages": [
+      "parse_config",
+      "initialize_scene"
+    ],
+    "wall_seconds": 37.7029123819957,
+    "error": "IsADirectoryError(21, 'Is a directory')",
+    "traceback": "Traceback (most recent call last):\n  File \"/mnt/data/pengjiaqi/egoengine-workspace/run/task-audit/run_one.py\", line 55, in <module>\n    wf.init_task(0, need_preload=False)\n  File \"/mnt/data/pengjiaqi/egoengine-workspace/egoengine/workflows/base.py\", line 27, in init_task\n    self.reset(need_preload)\n  File \"/mnt/data/pengjiaqi/egoengine-workspace/egoengine/workflows/simbox_dual_workflow.py\", line 155, in reset\n    self.world.reset()\n  File \"/mnt/data/pengjiaqi/egoengine-workspace/run/runtime41/exts/omni.isaac.core/omni/isaac/core/world/world.py\", line 382, in reset\n    task.set_up_scene(self.scene)\n  File \"/mnt/data/pengjiaqi/egoengine-workspace/egoengine/workflows/simbox/core/tasks/banana.py\", line 78, in set_up_scene\n    self.objects[cfg[\"name\"]] = self._load_obj(cfg)\n  File \"/mnt/data/pengjiaqi/egoengine-workspace/egoengine/workflows/simbox/core/tasks/banana.py\", line 318, in _load_obj\n    obj = obj_cls(*ctor_args)\n  File \"/mnt/data/pengjiaqi/egoengine-workspace/egoengine/workflows/simbox/core/objects/articulated_object.py\", line 26, in __init__\n    with open(object_info_path, \"r\", encoding=\"utf-8\") as f:\nIsADirectoryError: [Errno 21] Is a directory: '/mnt/data/pengjiaqi/egoengine-workspace/egoengine/workflows/simbox/assets/'\n",
+    "run_dir": "runs/4849c86ed992"
+  },
+  {
+    "config": "basic/split_aloha/hang_the_cup_on_rack/hang_the_cup_on_rack_part0.yaml",
+    "family": "basic/hang_the_cup_on_rack",
+    "preflight": "ready_for_runtime",
+    "seed": 43,
+    "status": "planning_failed",
+    "stages": [
+      "parse_config",
+      "initialize_scene",
+      "randomize_layout",
+      "official_generate_seq"
+    ],
+    "wall_seconds": 112.36390230100369,
+    "frames": 0,
+    "run_dir": "runs/4e47fb1d58e4"
+  },
+  {
+    "config": "basic/split_aloha/hang_the_cup_on_rack/hang_the_cup_on_rack_part1.yaml",
+    "family": "basic/hang_the_cup_on_rack",
+    "preflight": "ready_for_runtime",
+    "seed": 43,
+    "status": "planning_failed",
+    "stages": [
+      "parse_config",
+      "initialize_scene",
+      "randomize_layout",
+      "official_generate_seq"
+    ],
+    "wall_seconds": 147.96312155999476,
+    "frames": 0,
+    "run_dir": "runs/0c88477cefb4"
+  },
+  {
+    "config": "basic/split_aloha/insert_the_flower_in_vase/insert_the_flower_in_vase_part0.yaml",
+    "family": "basic/insert_the_flower_in_vase",
+    "preflight": "ready_for_runtime",
+    "seed": 43,
+    "status": "planning_failed",
+    "stages": [
+      "parse_config",
+      "initialize_scene",
+      "randomize_layout",
+      "official_generate_seq"
+    ],
+    "wall_seconds": 102.35296287000529,
+    "frames": 0,
+    "run_dir": "runs/3c84bdea6892"
+  },
+  {
+    "config": "basic/split_aloha/insert_the_flower_in_vase/insert_the_flower_in_vase_part1.yaml",
+    "family": "basic/insert_the_flower_in_vase",
+    "preflight": "ready_for_runtime",
+    "seed": 43,
+    "status": "planning_failed",
+    "stages": [
+      "parse_config",
+      "initialize_scene",
+      "randomize_layout",
+      "official_generate_seq"
+    ],
+    "wall_seconds": 103.72056812500523,
+    "frames": 0,
+    "run_dir": "runs/09b92c210b94"
+  },
+  {
+    "config": "basic/split_aloha/stack_cubes_lift/lr.yaml",
+    "family": "basic/stack_cubes_lift",
+    "preflight": "ready_for_runtime",
+    "seed": 43,
+    "status": "planning_succeeded",
+    "stages": [
+      "parse_config",
+      "initialize_scene",
+      "randomize_layout",
+      "official_generate_seq"
+    ],
+    "wall_seconds": 144.76170352500048,
+    "frames": 945,
+    "plan_bytes": 4368099,
+    "run_dir": "runs/7dc5643bbe53"
+  },
+  {
+    "config": "basic/split_aloha/stack_cubes_lift/rl.yaml",
+    "family": "basic/stack_cubes_lift",
+    "preflight": "ready_for_runtime",
+    "seed": 43,
+    "status": "planning_succeeded",
+    "stages": [
+      "parse_config",
+      "initialize_scene",
+      "randomize_layout",
+      "official_generate_seq"
+    ],
+    "wall_seconds": 123.77164389799873,
+    "frames": 917,
+    "plan_bytes": 4238936,
+    "run_dir": "runs/e17bc27afd61"
+  },
+  {
+    "config": "basic/split_aloha/track_the_targets/track_the_targets.yaml",
+    "family": "basic/track_the_targets",
+    "preflight": "ready_for_runtime",
+    "seed": 43,
+    "status": "planning_failed",
+    "stages": [
+      "parse_config",
+      "initialize_scene",
+      "randomize_layout",
+      "official_generate_seq"
+    ],
+    "wall_seconds": 64.46221740999317,
+    "frames": 0,
+    "run_dir": "runs/e5cc3e23ff34"
+  },
+  {
+    "config": "long_horizon/split_aloha/handover/lr/dish.yaml",
+    "family": "long_horizon/handover",
+    "preflight": "ready_for_runtime",
+    "seed": 43,
+    "status": "planning_failed",
+    "stages": [
+      "parse_config",
+      "initialize_scene",
+      "randomize_layout",
+      "official_generate_seq"
+    ],
+    "wall_seconds": 79.64699817101064,
+    "frames": 0,
+    "run_dir": "runs/55d4799cdf26"
+  },
+  {
+    "config": "pick_and_place/split_aloha/single_pick/left/google_scan-handbag.yaml",
+    "family": "pick_and_place/single_pick",
+    "preflight": "ready_for_runtime",
+    "seed": 43,
+    "status": "planning_succeeded",
+    "stages": [
+      "parse_config",
+      "initialize_scene",
+      "randomize_layout",
+      "official_generate_seq"
+    ],
+    "wall_seconds": 117.40865063099773,
+    "frames": 196,
+    "plan_bytes": 942153,
+    "run_dir": "runs/c14a6b38097e"
+  },
+  {
+    "config": "pick_and_place/split_aloha/single_pick/left/google_scan-hat.yaml",
+    "family": "pick_and_place/single_pick",
+    "preflight": "ready_for_runtime",
+    "seed": 43,
+    "status": "planning_succeeded",
+    "stages": [
+      "parse_config",
+      "initialize_scene",
+      "randomize_layout",
+      "official_generate_seq"
+    ],
+    "wall_seconds": 113.52513546800765,
+    "frames": 209,
+    "plan_bytes": 1003087,
+    "run_dir": "runs/4460af896707"
+  },
+  {
+    "config": "pick_and_place/split_aloha/single_pick/left/omniobject3d-asparagus.yaml",
+    "family": "pick_and_place/single_pick",
+    "preflight": "ready_for_runtime",
+    "seed": 43,
+    "status": "planning_failed",
+    "stages": [
+      "parse_config",
+      "initialize_scene",
+      "randomize_layout",
+      "official_generate_seq"
+    ],
+    "wall_seconds": 135.74087828600022,
+    "frames": 0,
+    "run_dir": "runs/b60a87f9d3d1"
+  },
+  {
+    "config": "pick_and_place/split_aloha/single_pick/left/omniobject3d-bamboo_shoots.yaml",
+    "family": "pick_and_place/single_pick",
+    "preflight": "ready_for_runtime",
+    "seed": 43,
+    "status": "planning_succeeded",
+    "stages": [
+      "parse_config",
+      "initialize_scene",
+      "randomize_layout",
+      "official_generate_seq"
+    ],
+    "wall_seconds": 107.66366524501063,
+    "frames": 183,
+    "plan_bytes": 881263,
+    "run_dir": "runs/6d20fac42766"
+  },
+  {
+    "config": "pick_and_place/split_aloha/single_pick/left/omniobject3d-banana.yaml",
+    "family": "pick_and_place/single_pick",
+    "preflight": "ready_for_runtime",
+    "seed": 43,
+    "status": "planning_succeeded",
+    "stages": [
+      "parse_config",
+      "initialize_scene",
+      "randomize_layout",
+      "official_generate_seq"
+    ],
+    "wall_seconds": 107.51064727299672,
+    "frames": 242,
+    "plan_bytes": 1157828,
+    "run_dir": "runs/a5d942c19033"
+  },
+  {
+    "config": "pick_and_place/split_aloha/single_pick/right/google_scan-handbag.yaml",
+    "family": "pick_and_place/single_pick",
+    "preflight": "ready_for_runtime",
+    "seed": 43,
+    "status": "planning_succeeded",
+    "stages": [
+      "parse_config",
+      "initialize_scene",
+      "randomize_layout",
+      "official_generate_seq"
+    ],
+    "wall_seconds": 111.60219425099785,
+    "frames": 170,
+    "plan_bytes": 820151,
+    "run_dir": "runs/608653992192"
+  },
+  {
+    "config": "pick_and_place/split_aloha/single_pick/right/google_scan-hat.yaml",
+    "family": "pick_and_place/single_pick",
+    "preflight": "ready_for_runtime",
+    "config_sha256": "f77511f689956906246dbde75c9d4e30f73c4b774987c07189e39f1af085c910",
+    "runner_sha256": "be2cc1d8150937afc83d61af5eb2339295bc94dbf507b53b56e742990c4a6249",
+    "engine_commit": "76e0d21d6ffe4cea3fc25f580410f8db79fa550d",
+    "seed": 43,
+    "status": "planning_failed",
+    "stages": [
+      "parse_config",
+      "initialize_scene",
+      "randomize_layout",
+      "official_generate_seq"
+    ],
+    "wall_seconds": 107.2270919319999,
+    "mode": "generate_seq",
+    "frames": 0,
+    "recorded_prim_frames": 190,
+    "run_dir": "runs/abebdf49d8a0"
+  },
+  {
+    "config": "pick_and_place/split_aloha/single_pick/right/omniobject3d-asparagus.yaml",
+    "family": "pick_and_place/single_pick",
+    "preflight": "ready_for_runtime",
+    "config_sha256": "fd50e556462392dd21060afdc065221bfd80cd6dcc250a83467d20c780048553",
+    "runner_sha256": "be2cc1d8150937afc83d61af5eb2339295bc94dbf507b53b56e742990c4a6249",
+    "engine_commit": "76e0d21d6ffe4cea3fc25f580410f8db79fa550d",
+    "seed": 43,
+    "status": "planning_failed",
+    "stages": [
+      "parse_config",
+      "initialize_scene",
+      "randomize_layout",
+      "official_generate_seq"
+    ],
+    "wall_seconds": 125.37842173900572,
+    "mode": "generate_seq",
+    "frames": 0,
+    "recorded_prim_frames": 224,
+    "run_dir": "runs/085700f98cba"
+  },
+  {
+    "config": "pick_and_place/split_aloha/single_pick/right/omniobject3d-bamboo_shoots.yaml",
+    "family": "pick_and_place/single_pick",
+    "preflight": "ready_for_runtime",
+    "config_sha256": "7606b60a8b8b932dc631308afb3e9b45f9c1830ff4d1954480b5ddc9b91d2919",
+    "runner_sha256": "be2cc1d8150937afc83d61af5eb2339295bc94dbf507b53b56e742990c4a6249",
+    "engine_commit": "76e0d21d6ffe4cea3fc25f580410f8db79fa550d",
+    "seed": 43,
+    "status": "planning_failed",
+    "stages": [
+      "parse_config",
+      "initialize_scene",
+      "randomize_layout",
+      "official_generate_seq"
+    ],
+    "wall_seconds": 116.32477417899645,
+    "mode": "generate_seq",
+    "frames": 0,
+    "recorded_prim_frames": 145,
+    "run_dir": "runs/4d0d01c663e8"
+  },
+  {
+    "config": "pick_and_place/split_aloha/single_pick/right/omniobject3d-banana.yaml",
+    "family": "pick_and_place/single_pick",
+    "preflight": "ready_for_runtime",
+    "config_sha256": "4d2818fba432af74ca94d5f69dbeeb47b90d80ba5f2833118a9ab9af93ffde27",
+    "runner_sha256": "be2cc1d8150937afc83d61af5eb2339295bc94dbf507b53b56e742990c4a6249",
+    "engine_commit": "fd3e87746ce37534994b4d45c872d3ddcbdb7d55",
+    "seed": 43,
+    "status": "planning_succeeded",
+    "stages": [
+      "parse_config",
+      "initialize_scene",
+      "randomize_layout",
+      "official_generate_seq"
+    ],
+    "wall_seconds": 101.20540542299568,
+    "mode": "generate_seq",
+    "frames": 217,
+    "recorded_prim_frames": 217,
+    "plan_bytes": 1040530,
+    "run_dir": "runs/af870ba623e5"
+  }
+]

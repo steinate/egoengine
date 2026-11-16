@@ -1,0 +1,45 @@
+{
+  "verified_at_utc": "2026-11-16T20:05:34.438030+00:00",
+  "source_checks": {
+    "python_syntax_files": 229,
+    "shell_syntax_files": 23,
+    "formatted_workflow_files": 207
+  },
+  "server_regression_tests": {
+    "inventory_tests": 5,
+    "process_group_cleanup_tests": 1,
+    "result": "passed"
+  },
+  "runtime_audit": {
+    "distinct_configs": 81,
+    "distinct_runs": 93,
+    "families": 59,
+    "note": "Completed attempts; not all tasks passed. See summary.json and REPORT.md."
+  },
+  "gpu_tested_skill_revision": "7c6ac767cfab7bc4859caa1cb21381138548504d",
+  "final_skill_asts_match_gpu_tested_revision": true,
+  "plan_integrity": {
+    "plans": 22,
+    "frames": 10567,
+    "all_complete_and_finite": true,
+    "max_quaternion_norm_error": 3.3306690738754696e-16
+  },
+  "physical_parquet_schemas": {
+    "status_counts": {
+      "readable": 59
+    },
+    "distinct_column_sets": 1,
+    "column_counts": [
+      29
+    ],
+    "scope": "Bounded samples of one washing-machine task in v2.1 and v3.0, not all dataset tasks."
+  },
+  "asset_verification": {
+    "manifest_files": 645,
+    "verified_files": 645,
+    "same_paths": true,
+    "note": "Historical failed zero-byte .thumbs files are generated previews and were excluded from the final manifest; no required asset failure remains in the final download check."
+  },
+  "paired_camera_eye_frames_checked": 1619,
+  "paired_video_report": "../task-pairs/validation.json"
+}

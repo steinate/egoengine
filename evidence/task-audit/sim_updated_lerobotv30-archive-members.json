@@ -1,0 +1,26 @@
+{
+  "archive": "sim_updated_lerobotv30/articulation_tasks/franka/close_the_washingmachine_left.tar.gz",
+  "prefix_bytes": 33554432,
+  "members": [
+    {
+      "name": "close_the_washingmachine_left",
+      "size": 0,
+      "type": "b'5'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data",
+      "size": 0,
+      "type": "b'5'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000",
+      "size": 0,
+      "type": "b'5'"
+    },
+    {
+      "name": "close_the_washingmachine_left/data/chunk-000/file-000.parquet",
+      "size": 21484985,
+      "type": "b'0'"
+    }
+  ]
+}
