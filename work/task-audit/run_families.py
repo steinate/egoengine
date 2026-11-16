@@ -13,9 +13,13 @@ import time
 
 p = argparse.ArgumentParser()
 p.add_argument("workspace", type=Path)
-p.add_argument("--timeout", type=int, default=300)
+p.add_argument("--timeout", type=int, default=600)
 p.add_argument("--wait-for-assets", type=int, default=0)
+p.add_argument("--family", action="append", help="Only these exact source families")
+p.add_argument("--tag", help="Save a separate retest without replacing baseline results")
 a = p.parse_args()
+if a.tag and (not a.tag.replace("-", "").replace("_", "").isalnum()):
+    p.error("tag may contain letters, digits, hyphens and underscores")
 w = a.workspace
 base = w / "run/task-audit"
 repo = w / "egoengine"
@@ -23,6 +27,11 @@ batch_lock = (base / "family-batch.lock").open("a")
 fcntl.flock(batch_lock, fcntl.LOCK_EX)
 manifest = json.loads((base / "family-assets.json").read_text())
 rows = manifest["selected"]
+if a.family:
+    assert set(a.family) <= {row["family"] for row in rows}, "Unknown family"
+    rows = [row for row in rows if row["family"] in a.family]
+result_root = base / "retests" / a.tag if a.tag else base
+result_root.mkdir(parents=True, exist_ok=True)
 summary = []
 for row in rows:
     item = {k: row[k] for k in ["family", "config", "embodiment", "unresolved"]}
@@ -38,7 +47,7 @@ for row in rows:
         item["status"] = "blocked_dependencies"
     else:
         key = hashlib.sha256(row["config"].encode()).hexdigest()[:12]
-        out = base / "runs" / key
+        out = result_root / "runs" / key
         out.mkdir(parents=True, exist_ok=True)
         result = out / "result.json"
         with (base / "gpu.lock").open("a") as lock:
@@ -85,6 +94,6 @@ for row in rows:
         item["config"] = row["config"]
         item["run_dir"] = str(out.relative_to(base))
     summary.append(item)
-    (base / "family-runtime-results.json").write_text(json.dumps(summary, indent=2))
+    (result_root / "family-runtime-results.json").write_text(json.dumps(summary, indent=2))
     print("FAMILY_FINISHED", len(summary), len(rows), row["family"], item["status"], flush=True)
 print("FAMILIES_DONE", dict(collections.Counter(x["status"] for x in summary)), flush=True)

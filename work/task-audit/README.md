@@ -41,12 +41,18 @@ bash "$workspace/run/human41/usd_python.sh" "$audit/download_family_assets.py" \
 
 bash "$workspace/run/human41/usd_python.sh" "$audit/inventory.py" \
   "$repo" "$audit/inventory-final.json"
-bash "$workspace/run/human41/usd_python.sh" "$audit/run_families.py" "$workspace" --timeout 300
+bash "$workspace/run/human41/usd_python.sh" "$audit/run_families.py" "$workspace" --timeout 600
+bash "$workspace/run/human41/usd_python.sh" "$audit/check_plans.py" "$audit"
+bash "$workspace/run/human41/usd_python.sh" "$audit/diagnose_configs.py" \
+  "$repo" "$audit/config-defects.json"
+bash "$workspace/run/human41/usd_python.sh" "$audit/report.py" "$audit" "$audit/evidence"
 ```
 
 `family_assets.py` 尊重官方 rigid/articulated 随机化池；配置中不存在的默认实例，在 `apply_randomization: true` 时不一定是阻塞。每个池需要至少一个有效 USD 及相应抓取标注；`dexpick` 需要 `dexpick_pose.yaml`，普通 `pick` 通常需要 `Aligned_grasp_sparse.npy`。最小资产集合会改变可采样实例范围，因此结果只代表该受限资产集合。预检不保证所有 USD 嵌套纹理、外部引用或控制器资源齐全，实际加载结果单独记录。
 
-测试依次调用原配置的 `init_task → randomization → generate_seq`；流体配置使用官方要求的 `plan_with_render`。这是官方工作流 API 测试，不是完整 Nimbus 分布式 launcher 测试。每个配置独立进程、默认 seed 43，共享 GPU 文件锁，超时终止当前进程组。已有完成结果复用，需重新测试时换输出目录并保留原结果。
+已交付的三条配对视频使用固定资产实例、省略可选杂物并记录在 `task-provenance.json` 中；本审计保留原 YAML 的随机化逻辑，且只跑一个 seed。两者的配置实例和布局不同，不能用某次原配置规划失败否定已经验收的配对 episode，也不能用配对 episode 成功替代原配置的覆盖测试。
+
+测试依次调用原配置的 `init_task → randomization → generate_seq`；流体配置使用官方要求的 `plan_with_render`。这是官方工作流 API 测试，不是完整 Nimbus 分布式 launcher 测试。每个配置独立进程、默认 seed 43，共享 GPU 文件锁，超时终止当前进程组。已有完成结果复用，重测使用 `--family basic/conveyor_beef_sandwich --tag extended-timeout --timeout 600`，保存到独立的 `retests/<tag>/`，保留基线。最初批次上限为 300 秒，发现传送带仍在推进后，后续上限延长到 600 秒；初始超时单独重测。
 
 每次尝试保存：
 
@@ -80,6 +86,8 @@ bash "$workspace/run/human41/usd_python.sh" "$audit/run_families.py" "$workspace
 | 非刚体/视觉变化 | 液体粒子、布料顶点或形变缓存、污渍/材质/可见性随时间变化 |
 
 当前刚体位姿记录和人体重放不覆盖最后一行。官方 `plan_with_render` 的流体成功也不能自动成为完整粒子重放数据；必须另加逐步缓存并验证。
+
+另有一条直接的官方线索：[InternData-A1 discussion #11](https://huggingface.co/datasets/InternRobotics/InternData-A1/discussions/11) 中，Intern Robotics 成员回复应结合 InternDataEngine 与 SIM1 使用。[SIM1](https://github.com/InternRobotics/SIM1) 是基于 Newton/Warp 的双臂布料管线，包含生成、平滑、重放、过滤及可选渲染；它不在本仓库 Isaac Sim 4.1 的任务测试范围内。这说明布料任务需要另核对该上游管线，不能直接列作“官方完全未开源”。该回复也没有提供 A1 每条已发布 episode 到原始场景状态的映射。
 
 源码名称、data.task_dir 和语言指令的检查尚未找到折衣/折毛巾、炉灶旋钮、扫垃圾、识价取物、选饮料、扫码等部分发布任务的完整对应配置。因此不能承诺公开仓库可完整复现论文全部 70 项。通用技能可能实现这些任务，需补任务配置与专门验收，不能当成现成例子。
 

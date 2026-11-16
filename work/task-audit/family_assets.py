@@ -21,6 +21,7 @@ def relevant(item):
     return (
         not name.endswith((".obj", ".mtl", ".blend", ".fbx", ".zip", ".tar.gz"))
         and "copy" not in name
+        and ".thumbs" not in Path(item["path"]).parts
     )
 
 

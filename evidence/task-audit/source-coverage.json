@@ -1,0 +1,81 @@
+{
+  "checked_at_utc": "2026-11-16T18:19:11.654780+00:00",
+  "upstream_baseline": "2a0a21f2c836df97c925729084e13d68950b4deb",
+  "engine_revision_at_baseline_test": "fd3e87746ce37534994b4d45c872d3ddcbdb7d55",
+  "task_configs_and_skills_diff_from_upstream": "",
+  "paper_semantic_tasks": 70,
+  "config_files_by_category": {
+    "art": 59,
+    "basic": 61,
+    "example": 1,
+    "long_horizon": 68,
+    "pick_and_place": 939
+  },
+  "missing_corresponding_config_examples": {
+    "fold": {
+      "published_archive_examples": [
+        "sim_updated/basic_tasks/lift2/fold_short_pants.tar.gz",
+        "sim_updated/basic_tasks/lift2/fold_short_shirts.tar.gz",
+        "sim_updated/basic_tasks/lift2/fold_towels.tar.gz"
+      ],
+      "task_config_name_or_data_matches": [],
+      "scope": "Static names/language check; not proof that generic skills cannot implement this task."
+    },
+    "hearth": {
+      "published_archive_examples": [
+        "sim_updated/articulation_tasks/lift2/rotate_the_left_hearth_left_arm_clockwise.tar.gz",
+        "sim_updated/articulation_tasks/lift2/rotate_the_left_hearth_left_arm_counterclockwise.tar.gz",
+        "sim_updated/articulation_tasks/lift2/rotate_the_left_hearth_right_arm_clockwise.tar.gz"
+      ],
+      "task_config_name_or_data_matches": [],
+      "scope": "Static names/language check; not proof that generic skills cannot implement this task."
+    },
+    "sweep": {
+      "published_archive_examples": [
+        "sim_updated/long_horizon_tasks/franka/sweep_the_trash.tar.gz",
+        "sim_updated/long_horizon_tasks/lift2/sweep_the_trash_part1.tar.gz",
+        "sim_updated/long_horizon_tasks/lift2/sweep_the_trash_part2.tar.gz"
+      ],
+      "task_config_name_or_data_matches": [],
+      "scope": "Static names/language check; not proof that generic skills cannot implement this task."
+    },
+    "priced": {
+      "published_archive_examples": [
+        "sim_updated/basic_tasks/franka/pick_the_priced_item.tar.gz",
+        "sim_updated/basic_tasks/lift2/pick_the_priced_item_language.tar.gz",
+        "sim_updated/basic_tasks/split_aloha/pick_the_priced_item_language.tar.gz"
+      ],
+      "task_config_name_or_data_matches": [],
+      "scope": "Static names/language check; not proof that generic skills cannot implement this task."
+    },
+    "select_a_drink": {
+      "published_archive_examples": [
+        "sim_updated/basic_tasks/franka/select_a_drink.tar.gz",
+        "sim_updated/basic_tasks/lift2/select_a_drink_language.tar.gz",
+        "sim_updated/basic_tasks/split_aloha/select_a_drink_language.tar.gz"
+      ],
+      "task_config_name_or_data_matches": [],
+      "scope": "Static names/language check; not proof that generic skills cannot implement this task."
+    },
+    "scan_qrcode": {
+      "published_archive_examples": [
+        "sim_updated/basic_tasks/genie1/scan_qrcode_part1.tar.gz",
+        "sim_updated/basic_tasks/genie1/scan_qrcode_part2.tar.gz"
+      ],
+      "task_config_name_or_data_matches": [],
+      "scope": "Static names/language check; not proof that generic skills cannot implement this task."
+    }
+  },
+  "scope": "Static names/instructions/directory matching, not proof that generic skills cannot implement a task. Published episode-to-source-config mapping remains unverified.",
+  "additional_official_pipeline": {
+    "url": "https://github.com/InternRobotics/SIM1",
+    "revision_checked": "973476b7f201780d8d653bd76f61062890693385",
+    "official_reply": "https://huggingface.co/datasets/InternRobotics/InternData-A1/discussions/11",
+    "source_inspection": [
+      "components/recorder/recorder.py",
+      "apps/replay_app.py",
+      "configs/lift_manip_shirt.py"
+    ],
+    "finding": "Separate Newton/Warp cloth stack; replay supports paired NPZ and USD outputs. DualArmRecorder NPZ saves joint_q, openness, base_transform; no proof of mapping to every published A1 episode. Not deployed or run by this Isaac Sim 4.1 audit."
+  }
+}

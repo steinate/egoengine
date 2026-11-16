@@ -47,6 +47,14 @@ for path in sorted(base.rglob("*.yaml")):
     )
     try:
         cfg = yaml.safe_load(path.read_text())
+        row["has_fluid"] = any(bool(task.get("fluid")) for task in cfg["tasks"])
+        row["object_classes"] = sorted(
+            {
+                obj.get("target_class", "")
+                for task in cfg["tasks"]
+                for obj in task.get("objects", [])
+            }
+        )
         missing_code = []
         missing_assets = []
         assets = []
