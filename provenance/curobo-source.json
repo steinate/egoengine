@@ -1,0 +1,1394 @@
+{
+  "origin": "VLA-Infra assets/InternDataAssets/curobo",
+  "files": [
+    {
+      "path": ".github/ISSUE_TEMPLATE/standard-template.md",
+      "sha256": "1208c633d649b2f0610027d2408774a293db9e5479b2e29cd90976f5968b8088"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "sha256": "d762a80e39d03f79ac55c004dc3a17c2207f080a9d122d59d2ba750eb4cd3fe5"
+    },
+    {
+      "path": "CODEOWNERS",
+      "sha256": "084492007ff8f89cb23c44d141d090f5045c9d023b4908b8ad6d51a1a2cf8155"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "797d1e69fe7fd1c502e87af12c5a0ed08a84c7a8a22af1c7a3589cbfadff4364"
+    },
+    {
+      "path": "LICENSE_ASSETS",
+      "sha256": "208e6ee6488630aaba4d9f06113844f58c8867d3be6348c122a6aa8b9e2409c1"
+    },
+    {
+      "path": "MANIFEST.in",
+      "sha256": "6a55edf7c5014648234c97a1d2fbe6346edfe082e7c17c343cd05ea3cb0437e7"
+    },
+    {
+      "path": "README.md",
+      "sha256": "9398351b3186c0fe8d5fabc6b5c0f46ffb2e8b8243617260b53f451c80ddb5d9"
+    },
+    {
+      "path": "benchmark/README.md",
+      "sha256": "75df885e6257038a09e0f57e12a37308e94366ba7a532e2e7c36a1b84f200d02"
+    },
+    {
+      "path": "benchmark/curobo_benchmark.py",
+      "sha256": "387a380ca3d2a9f1f0117e82cdad167182f3a55d34ee96516bdc479185dc6f45"
+    },
+    {
+      "path": "benchmark/curobo_nvblox_benchmark.py",
+      "sha256": "75cec5c36d12b11a69cc47d4d37105504face6eada34756b062688d366b9f8ee"
+    },
+    {
+      "path": "benchmark/curobo_nvblox_profile.py",
+      "sha256": "034547f7b7a55a4fd83d635a82ffb686aef995819703497957edcd6c988b70b9"
+    },
+    {
+      "path": "benchmark/curobo_profile.py",
+      "sha256": "8b4a859085c2fbfeec9ef0fc518fafc88986c3a35d9a0777214cfbc7dbed8b8f"
+    },
+    {
+      "path": "benchmark/curobo_python_profile.py",
+      "sha256": "30b27de461fbf2d0de8229cc9c34f4a9ba8468dc1f07f5e593becd0453f87a86"
+    },
+    {
+      "path": "benchmark/curobo_voxel_benchmark.py",
+      "sha256": "37d767e195f5b87750889d4f14d5f28110afa61af727da61320b4f7e4157f936"
+    },
+    {
+      "path": "benchmark/curobo_voxel_profile.py",
+      "sha256": "8c5a8578967bd3d90977b09e33a0f1df0530470bd6d07879c4b3ee01a3ceb8d3"
+    },
+    {
+      "path": "benchmark/generate_nvblox_images.py",
+      "sha256": "980a8f732a7ddf7a1b611f2fefffccb9f7d0f702ffb45c80ee21166c75a983f3"
+    },
+    {
+      "path": "benchmark/ik_benchmark.py",
+      "sha256": "17587d5cd251073fed53605448741486c6b2fb3f3deb9567e275925c4f2112ba"
+    },
+    {
+      "path": "benchmark/kinematics_benchmark.py",
+      "sha256": "9dd959032e478c9b7b7fb8798c4c789dbb782619825b0852fc53bfec48338c58"
+    },
+    {
+      "path": "benchmark/metrics.py",
+      "sha256": "59df1a03e3166d3c19561c8726d1bec504b3a97a90a0353c199d272721dcf433"
+    },
+    {
+      "path": "benchmark/robometrics_benchmark.py",
+      "sha256": "da62d11420599b129e76e63a1f40493105f9873c2860e6af1a45d539eecbe62e"
+    },
+    {
+      "path": "curobo_planner/collision.yml",
+      "sha256": "6b53d8061bc3df9d4557306c4e3495e330f872d0ee06c2e852400cacaf64105e"
+    },
+    {
+      "path": "curobo_planner/planner.py",
+      "sha256": "08a2df72a2883987664dbc615ce97dbf62d34e5a03200bd856a61bdfb3feeebb"
+    },
+    {
+      "path": "docker/README.md",
+      "sha256": "e692d57db6a8dd4102662e3fb6855612e4e737e66982432e95b3d5034c49e408"
+    },
+    {
+      "path": "docker/build_dev_docker.sh",
+      "sha256": "1a50b2030ffb342263d99bf2047b47ca3865c07bb0027b862198ad041062ac7e"
+    },
+    {
+      "path": "docker/build_docker.sh",
+      "sha256": "4b8360494360e9048c07729622ac33e04ee11306719a367307ac96a5efd75407"
+    },
+    {
+      "path": "docker/start_dev_docker.sh",
+      "sha256": "904771293a02fbf8b894772b751298d6362d72bf116a4f8afe016fcdfb2eab17"
+    },
+    {
+      "path": "docker/start_docker.sh",
+      "sha256": "09d11539ea20157b59cc135c50b3c6f461521c59c5f8b74d829d71bc92fd2746"
+    },
+    {
+      "path": "docker/start_docker_aarch64.sh",
+      "sha256": "7e097a0ed5e1e9470d46ee493909c156618306726d2460794d2ea6afdfb63678"
+    },
+    {
+      "path": "docker/start_docker_arm64.sh",
+      "sha256": "5e045526238e0ff1710f2d91465fd9571a84b6c1e4f3d67dc09037efe80d9ca9"
+    },
+    {
+      "path": "docker/start_docker_isaac_sim.sh",
+      "sha256": "54db1c0e3869c1d72142b1f30b0f2689b107259fd570734367f6ecb8b3dc894c"
+    },
+    {
+      "path": "docker/start_docker_isaac_sim_headless.sh",
+      "sha256": "baf7c9b153bc28171839896b8a0dcc74f65bb2b939340720a41bde91dffa0173"
+    },
+    {
+      "path": "docker/start_docker_x86.sh",
+      "sha256": "e1f3beb085207f1fcec176aedda16f4932e0f5c3baffdfe23cf37035a0689e19"
+    },
+    {
+      "path": "docker/start_docker_x86_robot.sh",
+      "sha256": "ef87297f96d43a428f9a1592c790f417f8e50f1d3a8382d5915e97dae72ddcdb"
+    },
+    {
+      "path": "docker/start_user_docker.sh",
+      "sha256": "b4d7cca1353a44d96942b8c6c11d229a5839b6fc0a2cdaff2ab87e1aa643cfed"
+    },
+    {
+      "path": "examples/collision_check_example.py",
+      "sha256": "b2409e30db6a235667425fb4e2cdc9f8e81eeae73c66b6e2c1df5a73fa710cf4"
+    },
+    {
+      "path": "examples/ik_example.py",
+      "sha256": "5fa11faf6cbb9f63c452357e77b6347ea78275e8e68d07a7b14023e6956dcb41"
+    },
+    {
+      "path": "examples/isaac_sim/batch_collision_checker.py",
+      "sha256": "7ecbbb6aa02526d1abf050ab13f8441a752059c043e0011ad73d4283da0547a0"
+    },
+    {
+      "path": "examples/isaac_sim/batch_motion_gen_reacher.py",
+      "sha256": "8f3b617d90e6d8d9ed996c1129e627f10aaa6251cd297b3e5288d24219db0d56"
+    },
+    {
+      "path": "examples/isaac_sim/collision_checker.py",
+      "sha256": "1cfb84e3a283229066e64eebb328bff631e8c7f5d65d76ac61b8b3ee5365df27"
+    },
+    {
+      "path": "examples/isaac_sim/constrained_reacher.py",
+      "sha256": "178fae6c2f2df8f1f5ab16dbd4e7ca9d50a16efb9ef8562fc5ba2c2e383b7210"
+    },
+    {
+      "path": "examples/isaac_sim/helper.py",
+      "sha256": "2fbb515c89a8308b0f7afa5f86cec701e90ebd0f3d3b35031f76edf581b87cbd"
+    },
+    {
+      "path": "examples/isaac_sim/ik_reachability.py",
+      "sha256": "c2e2353673e7b3160896b9581233155393913c2b7dbe5fcd9bb1262c4afd9f39"
+    },
+    {
+      "path": "examples/isaac_sim/load_all_robots.py",
+      "sha256": "53a6fb837459247d5ae69a65314e4283a124bb2f2e627efab9a898541775eccb"
+    },
+    {
+      "path": "examples/isaac_sim/motion_gen_reacher.py",
+      "sha256": "ab2ca0fd8dd59f7bc4b768657cbf71bb1ea3dad05562f70d837842d57af2d51c"
+    },
+    {
+      "path": "examples/isaac_sim/motion_gen_reacher_nvblox.py",
+      "sha256": "7e10476808f4fd7c2906a37eceae2f90a921c789b5e9ba1bc69a5b48477d8422"
+    },
+    {
+      "path": "examples/isaac_sim/mpc_example.py",
+      "sha256": "6198d0dce11645b59e967235e7a1f3b601260777ae27df7d6a50fd99f5764246"
+    },
+    {
+      "path": "examples/isaac_sim/mpc_nvblox_example.py",
+      "sha256": "2aaa7fc16d26bba1459d72e0045d09c5fc902709a1c99b83fefcec82699a0f2b"
+    },
+    {
+      "path": "examples/isaac_sim/multi_arm_reacher.py",
+      "sha256": "ff9e9d9c3fbb2d4f5feaf8155a25977f6b7884d045b5008e4d3543e7d6a8bb13"
+    },
+    {
+      "path": "examples/isaac_sim/realsense_collision.py",
+      "sha256": "c14fc55264eba316d903171875d6a404c8a403f752bc1d92424851f3b51749b7"
+    },
+    {
+      "path": "examples/isaac_sim/realsense_mpc.py",
+      "sha256": "1e828aa8bee0edb9871c2735da2798015afdfa0ece7ff8d3301e4cb1c4a8bf4b"
+    },
+    {
+      "path": "examples/isaac_sim/realsense_reacher.py",
+      "sha256": "27655a01106512da087c622988111ca93d96ae99774b30f10d272e517f02b86f"
+    },
+    {
+      "path": "examples/isaac_sim/realsense_viewer.py",
+      "sha256": "c1bc9e95291ed8e2836c633cc704640ea179c2116a23b82a0b33e03a049f0198"
+    },
+    {
+      "path": "examples/isaac_sim/simple_stacking.py",
+      "sha256": "f950acdedc2bf9892489fe58093ccd4bbbafd1bbc8b6ba25a3a533f80f296358"
+    },
+    {
+      "path": "examples/isaac_sim/util/convert_urdf_to_usd.py",
+      "sha256": "17f0f91ce55ddd49113bb29c4cfcb57f39d86e46270f33eca86d904f4d574bd6"
+    },
+    {
+      "path": "examples/isaac_sim/util/dowload_assets.py",
+      "sha256": "8580430ca7f3adda93af7693ab5ed883c1bad397e089c8a4054c8de1235c3601"
+    },
+    {
+      "path": "examples/kinematics_example.py",
+      "sha256": "2d29b92b100d4be86bd613eb64db1e3f23639b15c08e55ce55cc043869ee93d0"
+    },
+    {
+      "path": "examples/motion_gen_api_example.py",
+      "sha256": "9b88fbc8f3d4861250845b9324417a8cc6c0824a3c04c6793cff4d2f9d23e3ad"
+    },
+    {
+      "path": "examples/motion_gen_example.py",
+      "sha256": "b288081899f750b5bc273285782577e404dc44e2a1fbf36185e4adab3d3cec87"
+    },
+    {
+      "path": "examples/motion_gen_profile.py",
+      "sha256": "55a7c6546f983678563380135cef172847186ff02d057dc24d6ed50dd0d537a4"
+    },
+    {
+      "path": "examples/mpc_example.py",
+      "sha256": "c4e14b85f5ccf10cc26afdbaae258c2e24e50ff9c8ec1f0f323a506ee3b8e996"
+    },
+    {
+      "path": "examples/nvblox_example.py",
+      "sha256": "c58591fc4d3330feea9f97273299be12594d172b24ff2c55f8fdef5305980e3b"
+    },
+    {
+      "path": "examples/pose_sequence_example.py",
+      "sha256": "643053f365869571d68cdd984248fa11a14db1666b96ea7157d05aa1f43ee295"
+    },
+    {
+      "path": "examples/robot_image_segmentation_example.py",
+      "sha256": "b40c6173708e774fe01df85593b8148bace91714a4181f681c737a329f34e477"
+    },
+    {
+      "path": "examples/torch_layers_example.py",
+      "sha256": "e24b3c6865e8285c0d72977f86542322f589ff1109e9346222e0ba25722b27d7"
+    },
+    {
+      "path": "examples/trajopt_example.py",
+      "sha256": "c6f2d00f205b009994e8ca7f30b4d258c1022a71c9094ce80078601ed019dd7d"
+    },
+    {
+      "path": "examples/usd_example.py",
+      "sha256": "30b30dae0a5638c2763f815dd87469aed6e47ccecf631fcac887f20ee75486e5"
+    },
+    {
+      "path": "examples/world_representation_example.py",
+      "sha256": "25234e3442539bf376e2caf46c54ee5cacd5804506e4dfebc55fa52e27617888"
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "98b6ea8e8bdeb3c5061ae0e60cd346d6d4839a21995d9b0a74b0d5a000c10192"
+    },
+    {
+      "path": "setup.cfg",
+      "sha256": "40b0bced5c78abc48859edee326832e1cc370955a71b0c9530b58072af0a3ecf"
+    },
+    {
+      "path": "setup.py",
+      "sha256": "e80a5c5fbbbe8acf8dbcb20aa551bbc23cf45b89ff7eff0a4a146fa37ce1cf0e"
+    },
+    {
+      "path": "src/curobo/__init__.py",
+      "sha256": "184595d417850c97d870de7bb5d780470ddf7fe17c774fbc9fb4d4c78b3e0ba4"
+    },
+    {
+      "path": "src/curobo/content/assets/robot/2f_85_urdf/.travis.yml",
+      "sha256": "e4831db6697ae50212d84ac6f69916686c96a54aa12d7acbea225d90aa8fe3b8"
+    },
+    {
+      "path": "src/curobo/content/assets/robot/2f_85_urdf/CMakeLists.txt",
+      "sha256": "1f412c47abf85e643d856579a3181eb190bc51bb07a19cc81abf30681136a650"
+    },
+    {
+      "path": "src/curobo/content/assets/robot/2f_85_urdf/README.md",
+      "sha256": "674618cc5538a46b1f62a2cef5456442a5408f6cbd366bf3a2eecd09e0d9b3a9"
+    },
+    {
+      "path": "src/curobo/content/assets/robot/2f_85_urdf/package.xml",
+      "sha256": "3e4e8aa9661b7a427353b2b7111a5580c54baa32c4c6b71a0fa6590de9d67659"
+    },
+    {
+      "path": "src/curobo/content/assets/robot/AzureLoong_v025/crt_ctag2f90_gripper_visualization/CMakeLists.txt",
+      "sha256": "ebedb57bdb2a38d2ca344c68191ed6af3a68267358a0a96b775084d3c88cf1eb"
+    },
+    {
+      "path": "src/curobo/content/assets/robot/AzureLoong_v025/crt_ctag2f90_gripper_visualization/config/joint_names_ctag2f90.yaml",
+      "sha256": "979b8457055e28ea8de605b487157eb76fc40c553b9d922d576f3fba9b34ec99"
+    },
+    {
+      "path": "src/curobo/content/assets/robot/AzureLoong_v025/crt_ctag2f90_gripper_visualization/docs/README.md",
+      "sha256": "d5875e8d1359366e4360652d634da2783996248643daff8001d5505730949333"
+    },
+    {
+      "path": "src/curobo/content/assets/robot/AzureLoong_v025/crt_ctag2f90_gripper_visualization/docs/README.zh-CN.md",
+      "sha256": "180621890dab383c9f4d0eb1b82253b1f1216211b27f8b432c90f1494a2da2ed"
+    },
+    {
+      "path": "src/curobo/content/assets/robot/AzureLoong_v025/crt_ctag2f90_gripper_visualization/package.xml",
+      "sha256": "cd88192d2a681b1a53a9519310f7c3dab85f19bec267de53671a14e6c32c7e1e"
+    },
+    {
+      "path": "src/curobo/content/assets/robot/AzureLoong_v025/crt_ctag2f90_gripper_visualization/scripts/check_id.py",
+      "sha256": "311d0443a7135126b581ae349327cc08c8a3831d87be82ead7a892cb9fc09d3a"
+    },
+    {
+      "path": "src/curobo/content/assets/robot/AzureLoong_v025/crt_ctag2f90_gripper_visualization/scripts/control_for_two_qt.py",
+      "sha256": "97569ffd9ae11de59b569e62ce8949ee8dc02614a67e4ade56da157d488d59a1"
+    },
+    {
+      "path": "src/curobo/content/assets/robot/AzureLoong_v025/crt_ctag2f90_gripper_visualization/scripts/gripper_upsample.py",
+      "sha256": "608fee2f5e15bd193490b522e1d032ea7853b3696606ba97c885f46e9c5166a5"
+    },
+    {
+      "path": "src/curobo/content/assets/robot/AzureLoong_v025/crt_ctag2f90_gripper_visualization/scripts/state_control_for_two.py",
+      "sha256": "73fecb70d8bc5a975af820634d2c39b72d2cc5ad3e2f5afd71cc51284811adeb"
+    },
+    {
+      "path": "src/curobo/content/assets/robot/R5a/CMakeLists.txt",
+      "sha256": "f9dcf648b2954e224433460b6d55e5efd7dac6327882a795a167ad3cabe7b3b1"
+    },
+    {
+      "path": "src/curobo/content/assets/robot/R5a/config/joint_names_R5a.yaml",
+      "sha256": "a9988bbc2d6dd7b297de0c01f849f7e996137c9fb1416e8f02acf0a5a08b0de4"
+    },
+    {
+      "path": "src/curobo/content/assets/robot/R5a/package.xml",
+      "sha256": "e5a59f241a7c61a2d2365166f16f9859025de6fdb0fe4408a87d6c70894bd651"
+    },
+    {
+      "path": "src/curobo/content/assets/robot/kinova/README.md",
+      "sha256": "0bd627c142e754e992d131e2f540f9296f307e61bc01ce5d8b79e2e9e50250c5"
+    },
+    {
+      "path": "src/curobo/content/assets/robot/kinova/kortex_description/grippers/robotiq_2f_140/LICENSE",
+      "sha256": "bfe9a4de3ec95dac1d2bf02df4d774ecfd6d492df1fa33476c3af5576bd08435"
+    },
+    {
+      "path": "src/curobo/content/assets/robot/kinova/kortex_description/grippers/robotiq_2f_140/README.md",
+      "sha256": "8772be60eaa1a67261ac4ddebfb3302f30644934950e713783a64472c6d391fa"
+    },
+    {
+      "path": "src/curobo/content/assets/robot/kinova/kortex_description/grippers/robotiq_2f_85/LICENSE",
+      "sha256": "bfe9a4de3ec95dac1d2bf02df4d774ecfd6d492df1fa33476c3af5576bd08435"
+    },
+    {
+      "path": "src/curobo/content/assets/robot/kinova/kortex_description/grippers/robotiq_2f_85/README.md",
+      "sha256": "b7b779ba109fbabae5d2122d80cd594a9e433a49bc18e5a020cc731051729170"
+    },
+    {
+      "path": "src/curobo/content/assets/robot/piper100/piper_description/CMakeLists.txt",
+      "sha256": "672328fed8381f31326ab35732e169f51eef4d176f0ebd74621d95f706e103ec"
+    },
+    {
+      "path": "src/curobo/content/assets/robot/piper100/piper_description/mujoco_model/piper_description.xml",
+      "sha256": "964896663baf7542380b38d7e542457e8bc1de051563b59756a3e0959d8efd8f"
+    },
+    {
+      "path": "src/curobo/content/assets/robot/piper100/piper_description/mujoco_model/piper_no_gripper_description.xml",
+      "sha256": "548567b7626194b68199d80bf27c8942e494f80436be0a04b55f9bfb3854d8f6"
+    },
+    {
+      "path": "src/curobo/content/assets/robot/piper100/piper_description/package.xml",
+      "sha256": "f0178fdea2f0007561905bea21d54d6811207470cedef2d2c01ea8c56575105e"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/AzureLoong_v025_left_arm.yml",
+      "sha256": "8960c892531f9a4690d6ef8b40a058c485e315cc064100fef965808eb6ae23cd"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/AzureLoong_v025_left_arm_parallel_gripper.yml",
+      "sha256": "ac672953ab69a610f3a9db933d9e30fa5ffeb1899d3c9c82713b447134bb9fcd"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/AzureLoong_v025_right_arm.yml",
+      "sha256": "b32ab558856656e25741c4bdf16ab8e621e29585436286de8769e87184a53572"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/AzureLoong_v025_right_arm_parallel_gripper.yml",
+      "sha256": "368fee3d6f4d76fb575d2d16427399dfecdf546a2d72cd0210e6acb559a35d42"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/G1_120s_left_arm_parallel_gripper.yml",
+      "sha256": "5dac4f5af99904425945dadd9edea8ab82b32f24d2660a34fecbe579a2589f99"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/G1_120s_left_arm_parallel_gripper_xym.yml",
+      "sha256": "9bb4fe1321199d2a30046d26a6ea4c93ef904c1d28254ed916f38eb226cd7f3b"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/G1_120s_right_arm_parallel_gripper.yml",
+      "sha256": "1d1003650aed5ee7979910adae21f917e73331fc236181a77596af7afc2414d1"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/G1_120s_right_arm_parallel_gripper_xym.yml",
+      "sha256": "fcb3e86308244ff212566e9a506d7401267517b9fd197a5bb8d3dac3472c1ac6"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/G1_omnipicker_fixed_dual.yml",
+      "sha256": "253e318e13542c8e878f6805b016a38ad465a6974cf2b5d1d3ebe65bd1e86f5f"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/G1_omnipicker_fixed_left.yml",
+      "sha256": "7cecb8a86392424d825a5a98e35ab10e2f836ff7ca47516f83bfecd3bac424f5"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/G1_omnipicker_fixed_right.yml",
+      "sha256": "253e318e13542c8e878f6805b016a38ad465a6974cf2b5d1d3ebe65bd1e86f5f"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/debug.yml",
+      "sha256": "0fb69046f8e30ccb91b9b6c77a993535d1bbcd3c488b081c7bdba395ee4b8cae"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/debug2.yml",
+      "sha256": "d70b4c087d9ef605c20045377e4e09c15fb3fd48f7fb39302787c4fa332dddd0"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/debug3.yml",
+      "sha256": "cc8883987bc0d03922687e5346794c0eaf9aa6251f1ccaf0ad0fa6b6db3b9b5b"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/dual_ur10e.yml",
+      "sha256": "15014deed2902aa5c404d6925adfc271d27d48c3bda59f7f4391488dcbc4fa55"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/fr3_left_arm.yml",
+      "sha256": "7231e8b0257b8c987340b7bef2bfdf7a4acdeeb15cf3c440fe63748e9e1c6455"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/franka.yml",
+      "sha256": "c809e9c1d044c8cf98d888552fb55739077419fb3568d5e696242cdecb457430"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/franka_mobile.yml",
+      "sha256": "75f3995c6d5508f48ecc2d1f43a0f93d04ae7404eb54a91b0930597f4df3e969"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/frankarobotiq_left_arm.yml",
+      "sha256": "0ace07db362dd875d4f5b5fa4dbdb11f36fa92caf5a74414f31a21735fed4c65"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/iiwa.yml",
+      "sha256": "99cee8659f7a57884400551c8619d67122d9aa71f5f2bb2e3529b4f4491bc8d0"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/iiwa_allegro.yml",
+      "sha256": "2be663cecb9c6a85fa72a5727f1ba37615da8879181d9e48a84758c9b9bf096c"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/isaac_sim_description/jaco_7s.yaml",
+      "sha256": "1b4174b308cb4ccc40a953436c224f413fc84bb863e2d9cb8c63df50222d92c3"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/isaac_sim_description/tm12.yaml",
+      "sha256": "705a3922d081c13d392d9930e1fc8afba3759c13f78cd66ee9047a0ee6cc86c7"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/isaac_sim_description/ur5e.yaml",
+      "sha256": "722813df9fe963d40c36db45ebf5a5448037f6059b6d298d3d41bfea06d5c506"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/jaco7.yml",
+      "sha256": "1d256bc928a472d9baae43ed4bfe23d59eb72e42454bac159211d65ff967e364"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/kinova_gen3.yml",
+      "sha256": "785f1206df359fa81c675820ff5a8aeb6d254840a3da1a4bd1a256bc854953e1"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/piper.yml",
+      "sha256": "991d3c8167d2faf856aa9932b0fe41c8d9a11971a6b4ba6a66e466332bd353c9"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/piper100_left_arm.yml",
+      "sha256": "1de077526e9a45afa6b55477c442aa0733f6c7259311446e3abfc4ef922f42dd"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/piper100_right_arm.yml",
+      "sha256": "1de077526e9a45afa6b55477c442aa0733f6c7259311446e3abfc4ef922f42dd"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/piper_left_arm.yml",
+      "sha256": "78b51b1c6329efe8d075adc06bfe88f4a5cf312292c850906f0d4345b38f6a3c"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/piper_right_arm.yml",
+      "sha256": "78b51b1c6329efe8d075adc06bfe88f4a5cf312292c850906f0d4345b38f6a3c"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/quad_ur10e.yml",
+      "sha256": "463d7a71c8e145aa628d0a640ee65ba13d25a58ed16e324c1cfc82a16bbff6c5"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/r5a_left_arm.yml",
+      "sha256": "8869136c801697bd9a09c3ffc2747bb1d847111b70f817fc7f86678c78eded14"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/r5a_right_arm.yml",
+      "sha256": "8869136c801697bd9a09c3ffc2747bb1d847111b70f817fc7f86678c78eded14"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/simple_mimic_robot.yml",
+      "sha256": "500c2899680b17ae349078cbf3b74246505b591c44ba0e687b6633af7541f780"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/spheres/dual_ur10e.yml",
+      "sha256": "7280d8fa35798ea4ca86bcca2a83bd2358112a2734417a6dae05e7c586d63700"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/spheres/franka.yml",
+      "sha256": "6ed4ec174825281c5ec7db4f83aecf515bbd18ba3c266932c51e9cc50308bd28"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/spheres/franka_collision_mesh.yml",
+      "sha256": "551c4a2357daca4c921273fcd343851a818fc44ce73a703f2bd6d50a66cf49e4"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/spheres/franka_mesh.yml",
+      "sha256": "6e3e032a01cc0904b115d24953b2b55d0a91e79d6965b8f0bc224ad2591dec83"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/spheres/franka_mesh_inside.yml",
+      "sha256": "66d03a6fea85efabf99ad9a229b7134152363af723a272417308b3eb24248dd6"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/spheres/franka_mesh_mb.yml",
+      "sha256": "6a8ff8732aeeaddf19230d3e69bb7a04d5b7d65a38292aac40c5dbbb4a2262d3"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/spheres/franka_real_robot.yml",
+      "sha256": "941a2c059a10b3f2df6a909047d758dad0c7f6ab526604aaaf34ffdf86acbb8c"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/spheres/iiwa_allegro.yml",
+      "sha256": "f70ecff6b1ecdc894de8a652a64fe3e83bb6e97308928dfe546e1a67eecc43a0"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/spheres/kinova_gen3.yml",
+      "sha256": "ebab913a2eade453f6568086c5a0c26fb7a4fde144bf6f533de789e2d1485564"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/spheres/quad_ur10e.yml",
+      "sha256": "f97d9b4885fb03d26cd3745a90d700e36306dcfa66f7499fdf3c3053b4a8b3f4"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/spheres/single.yml",
+      "sha256": "eefc142e54f2647cd02af7019695f71493ed2af0d01f384735def3147fd0450c"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/spheres/ur10e.yml",
+      "sha256": "85e964b1e7b443b12d17b637e2b9bf9abfaa5b4132e240a6b66176277cf19ee0"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/sx_humanoid_left.yml",
+      "sha256": "7c60109e80ed7926f639902b90c2176e6042f2637eb3136a944c64c4e72cc74d"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/sx_humanoid_left2.yml",
+      "sha256": "0d962303ecb7dcb6603cd1adb02fb9c666504c5b897735f2363fcd83bdcbfead"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/sx_humanoid_left3.yml",
+      "sha256": "426d4c37707cbf2b7eaf87b39b3e1ea3fe7666f2a498eddd64e048150418879f"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/template.yml",
+      "sha256": "344bcdbd3bd849244f5680ea6c235a3c7ede5ac309fe6882520fc932b1e9ac04"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/tm12.yml",
+      "sha256": "291f9930ac7670d38f78653e9ccf249eb0db072a234ff6d1062048298d5b678c"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/tmp.yml",
+      "sha256": "2ac1d4a5c86f55310ec032153ba0f857adb12fc98bbe21b692b0ea20e7d70cc9"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/tmp_dualarmhand.yml",
+      "sha256": "84ad5421d84427c8e5eb3edadd313ea479b0912d86fe1eaeceff22c2fe9d283b"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/tmp_sx_humanoid_left.yml",
+      "sha256": "2ac1d4a5c86f55310ec032153ba0f857adb12fc98bbe21b692b0ea20e7d70cc9"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/tri_ur10e.yml",
+      "sha256": "fd09f3b891a96f4083358dd42c57cff865bb74c41205402d8353680991913931"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/ur10e.yml",
+      "sha256": "634a87287afc7d0259d98aec0b186698ad8461856a5b7785f62608cda67b9a24"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/ur5e.yml",
+      "sha256": "8e96ca172984d510659fb1cc2e8947f3e3c1f8e6a9d1447d924883bc59b9ce68"
+    },
+    {
+      "path": "src/curobo/content/configs/robot/ur5e_robotiq_2f_140.yml",
+      "sha256": "0f0ea5ebf32ca78123efcbbb2c1e438f783e3c2028af6c9c71a8636801de5ff3"
+    },
+    {
+      "path": "src/curobo/content/configs/task/base_cfg.yml",
+      "sha256": "82b7c484a7f08ec0a0696a7177972b8075d8cbfdf35343c636a101f08d0da6a7"
+    },
+    {
+      "path": "src/curobo/content/configs/task/finetune_trajopt.yml",
+      "sha256": "40c71fcdfbd5ce1a7ce008e1fe77bca34cce55467a72e9d6cfdb004f9b2f31b2"
+    },
+    {
+      "path": "src/curobo/content/configs/task/finetune_trajopt_slow.yml",
+      "sha256": "dc093471452fb406ff817f3b1ba788ba3141f5ade1ec076300c9e44f59ff70f4"
+    },
+    {
+      "path": "src/curobo/content/configs/task/gradient_ik.yml",
+      "sha256": "1a4002d1c82cbf6bc4ba6ed38520b8194b1ef2d9205215c528d8cbee758f5502"
+    },
+    {
+      "path": "src/curobo/content/configs/task/gradient_mpc.yml",
+      "sha256": "c7773e5e65c2c16e76f829c0e304ee367abfbaedb6dabf12054d4f363ac434a6"
+    },
+    {
+      "path": "src/curobo/content/configs/task/gradient_trajopt.yml",
+      "sha256": "c866b19c703926ad366c552af53a1695012699a59746315b61b4b5073520bfbb"
+    },
+    {
+      "path": "src/curobo/content/configs/task/graph.yml",
+      "sha256": "05be858a85555a4abc9ed445c5451b524b36965305cbfbcd6a8cfc6da9f04186"
+    },
+    {
+      "path": "src/curobo/content/configs/task/particle_ik.yml",
+      "sha256": "e5f7e9b81860a319dff90507698db6ccfa885ec551c29f26c8f88410e23076a2"
+    },
+    {
+      "path": "src/curobo/content/configs/task/particle_mpc.yml",
+      "sha256": "3ef3ae6aea7c51e3fef79ad45c283e37471e5b9a07ff5acb0652a251ca56536b"
+    },
+    {
+      "path": "src/curobo/content/configs/task/particle_trajopt.yml",
+      "sha256": "18ca9253c8e38b5eedb0b82de51fd229ad1cb8d9b3ed3acc414108031db1012c"
+    },
+    {
+      "path": "src/curobo/content/configs/world/collision_base.yml",
+      "sha256": "fd7f43311783c6267956f2c5cf809458a779babf9d8ed64b5dd8ffe4d44c44cf"
+    },
+    {
+      "path": "src/curobo/content/configs/world/collision_cage.yml",
+      "sha256": "448dd59b9f65301869bcc9621de4f906631f48ab603d67f0ee3f228b939bee59"
+    },
+    {
+      "path": "src/curobo/content/configs/world/collision_cubby.yml",
+      "sha256": "bc1c5bb4dd91788dee4fd5ec5c22ef66951385c74d29f3016d7c6f24b74e7b09"
+    },
+    {
+      "path": "src/curobo/content/configs/world/collision_floor_plan.yml",
+      "sha256": "7a1c7d28d62b839dec871801449602502d68bcd4c8a9cc54ab913e922931cafd"
+    },
+    {
+      "path": "src/curobo/content/configs/world/collision_handover.yml",
+      "sha256": "bb348460589edc32fa5dbf17e5b55963cdb7f7f85a139261c5f93a1c0d20097f"
+    },
+    {
+      "path": "src/curobo/content/configs/world/collision_mesh_scene.yml",
+      "sha256": "9d22bb03281f74b088b80ddfbac3df7332a2d81ec100ad57c2ff56121a7f892c"
+    },
+    {
+      "path": "src/curobo/content/configs/world/collision_nvblox.yml",
+      "sha256": "245d29fa16e1b759abb5d913dd4df8bd4823915e6ac2b5fd40111d5496b803e1"
+    },
+    {
+      "path": "src/curobo/content/configs/world/collision_nvblox_online.yml",
+      "sha256": "1c389fe07764417217b0b5bd9d862acf91c86082ae0f291c68af4831d6ec149f"
+    },
+    {
+      "path": "src/curobo/content/configs/world/collision_nvblox_ur10.yml",
+      "sha256": "d8cb6ee1d9b540a33a69f4bbe1daf48c309f2cf358bbe1f1cde8e1c983b4b9a5"
+    },
+    {
+      "path": "src/curobo/content/configs/world/collision_pillar_wall.yml",
+      "sha256": "b88dc1963345aee0bb7b0aebfe307838f886781f92d2b0b5843fb9394e982b81"
+    },
+    {
+      "path": "src/curobo/content/configs/world/collision_primitives_3d.yml",
+      "sha256": "861a5f0dd41a6f3ab25357d797b481031a051186b0ee1de2d0ef6f3dc0352b52"
+    },
+    {
+      "path": "src/curobo/content/configs/world/collision_table.yml",
+      "sha256": "23814bacdd1a5a857633ed3fc33bac15d9cb1286ca668979d7318c30d875b1b4"
+    },
+    {
+      "path": "src/curobo/content/configs/world/collision_test.yml",
+      "sha256": "fb716ce3d033d46772eedba5fb133f1706b841f200cd164c748a05c135acf622"
+    },
+    {
+      "path": "src/curobo/content/configs/world/collision_thin_walls.yml",
+      "sha256": "81a60986cafe95e4b0300da70ea5a0872342353574088bd3fb6a45bcc72e7ce2"
+    },
+    {
+      "path": "src/curobo/content/configs/world/collision_wall.yml",
+      "sha256": "b09219fde8a54d2cdc81d0e11b489e0f32cd0037842dba5da75d70ebc4098b71"
+    },
+    {
+      "path": "src/curobo/cuda_robot_model/__init__.py",
+      "sha256": "c77cbd31c9ca8f37116767702841be1b806cc975261e7bfa780b04ee74abe0dd"
+    },
+    {
+      "path": "src/curobo/cuda_robot_model/cuda_robot_generator.py",
+      "sha256": "3c34e7971a9b19f82f18318a48f8cb9949fe84f4af314f49d74bbda3e5573a7d"
+    },
+    {
+      "path": "src/curobo/cuda_robot_model/cuda_robot_model.py",
+      "sha256": "3ebf45845292a044c2999290a1ead6a5147f09e4cc509174459f6309df594201"
+    },
+    {
+      "path": "src/curobo/cuda_robot_model/kinematics_parser.py",
+      "sha256": "3da973965de968115b1a23de0a3a755675108aa01edb46563e74a3845c2d6516"
+    },
+    {
+      "path": "src/curobo/cuda_robot_model/types.py",
+      "sha256": "4ea764f467c2dc86fa854748fdecf057dc7d929ba144a13f8df33ca3ddb747f3"
+    },
+    {
+      "path": "src/curobo/cuda_robot_model/urdf_kinematics_parser.py",
+      "sha256": "bed90c3cebfab3d8d7d3cda5ac0e2133db3880f5e76e8232fdba53c0b375c582"
+    },
+    {
+      "path": "src/curobo/cuda_robot_model/usd_kinematics_parser.py",
+      "sha256": "d515ee59c456c1c98f9577ce45bd2c3a39554c2f327cb9c935c0fc892c789cc0"
+    },
+    {
+      "path": "src/curobo/cuda_robot_model/util.py",
+      "sha256": "3af1b40b18e678d0549ce4e4cb05d80080988ddb0d7445f9957bacd76aa67f1c"
+    },
+    {
+      "path": "src/curobo/curobolib/__init__.py",
+      "sha256": "9946fbf4864cb0a9b516ee7a13719b253788302a81d304e5b5373120ee4f3e39"
+    },
+    {
+      "path": "src/curobo/curobolib/cpp/check_cuda.h",
+      "sha256": "46848842a45fdc535c9a6784912a3bbe2ac9dcf858c3192f393170022b4f7c39"
+    },
+    {
+      "path": "src/curobo/curobolib/cpp/cuda_precisions.h",
+      "sha256": "7942db90395149138c2f0a13bfe8e60016d3fdf9dfe697b4bfe74b38c379387a"
+    },
+    {
+      "path": "src/curobo/curobolib/cpp/geom_cuda.cpp",
+      "sha256": "a04120f5c92ac41ca1413d55e248a9094ce70cd5f96c1b8d263720127aa9bcd7"
+    },
+    {
+      "path": "src/curobo/curobolib/cpp/helper_math.h",
+      "sha256": "6520a4fb82705d44abdfc23e3155f986dfbef06f517545d910ca3366f21be214"
+    },
+    {
+      "path": "src/curobo/curobolib/cpp/kinematics_fused_cuda.cpp",
+      "sha256": "20b20c1a3f3d0146d6a8522a3ab0a857250650d32bf193f6c9c96f372abbe313"
+    },
+    {
+      "path": "src/curobo/curobolib/cpp/kinematics_fused_kernel.cu",
+      "sha256": "b8da74bdd6523114c84c91115c297a23d53368b836175999dd831b4e6fe880c2"
+    },
+    {
+      "path": "src/curobo/curobolib/cpp/lbfgs_step_cuda.cpp",
+      "sha256": "1b5863f904884cedc053d707a6a326259de754a446f5852c468bfd1ce6667e15"
+    },
+    {
+      "path": "src/curobo/curobolib/cpp/lbfgs_step_kernel.cu",
+      "sha256": "0decd2ad0cafa31d15cd43454bddfc3f9e7c43ea1ee3b298c067743af83e4656"
+    },
+    {
+      "path": "src/curobo/curobolib/cpp/line_search_cuda.cpp",
+      "sha256": "3970487f13db2dfb3f9930c3121a0d2cd218344d4e217820345e3591c6000eb5"
+    },
+    {
+      "path": "src/curobo/curobolib/cpp/line_search_kernel.cu",
+      "sha256": "17491544dfa93fe3b499d63b3d20a64dcf0be5ae76f297f415ab9d9fb69db870"
+    },
+    {
+      "path": "src/curobo/curobolib/cpp/pose_distance_kernel.cu",
+      "sha256": "0f1b62c4338a06fc1861ea7a620104b1d9ae3d736545ffab907b215ee6b67ef4"
+    },
+    {
+      "path": "src/curobo/curobolib/cpp/self_collision_kernel.cu",
+      "sha256": "b73288eeb678d099e902bca3f458fc3948a64e010e5f4f17061d0954b3b58acc"
+    },
+    {
+      "path": "src/curobo/curobolib/cpp/sphere_obb_kernel.cu",
+      "sha256": "896c915047f390aa3e05f7b2d334cd6d574ecb6cd9c5201a3a7c806a17521d8b"
+    },
+    {
+      "path": "src/curobo/curobolib/cpp/tensor_step_cuda.cpp",
+      "sha256": "724c7f03a432e47d5d77da57452c7259e84ad222c10a8c97da4424d29c3071f2"
+    },
+    {
+      "path": "src/curobo/curobolib/cpp/tensor_step_kernel.cu",
+      "sha256": "fdf4320b7befb3cdd7f9da90fedd68dd6beb54082b32ce8b42ea57cb22a0c883"
+    },
+    {
+      "path": "src/curobo/curobolib/cpp/update_best_kernel.cu",
+      "sha256": "c92337bf96d383ccb2e3fb930bb21243b8836aff23aca4f82759f15d292eaa00"
+    },
+    {
+      "path": "src/curobo/curobolib/geom.py",
+      "sha256": "4c392e5eeeeb8bf81d8b79250e8249cf96e22f30a0eae5df3be0d20cb7802a79"
+    },
+    {
+      "path": "src/curobo/curobolib/kinematics.py",
+      "sha256": "bad4231034d918022e9712d1b05ec047084df719b34d9de7e9449afb0f0ebb6b"
+    },
+    {
+      "path": "src/curobo/curobolib/ls.py",
+      "sha256": "9088cffb6d2b30ad326ab75e0da0d10777dadb0f3408521d435532f90ada55f5"
+    },
+    {
+      "path": "src/curobo/curobolib/opt.py",
+      "sha256": "963aeea3c8e42528bebb0f9c5d827b4316b4881374f73eca91128844ceef57c0"
+    },
+    {
+      "path": "src/curobo/curobolib/tensor_step.py",
+      "sha256": "ef10ab50e85ab799145765047e3fbc072497f9b8ffdd135412a908da462e3d37"
+    },
+    {
+      "path": "src/curobo/curobolib/util_file.py",
+      "sha256": "71956cc7be6565b78b490711e5f332ff327220c3157a9d7dcb65e41987161734"
+    },
+    {
+      "path": "src/curobo/geom/__init__.py",
+      "sha256": "abecac8892e55a6694a9d9341021d90ef300e1a290d766e2ea4fe53b1ab0471d"
+    },
+    {
+      "path": "src/curobo/geom/cv.py",
+      "sha256": "b132b31ce53f4ea24335dc66cf1986a50442979d7d54f848e983c00483cd316b"
+    },
+    {
+      "path": "src/curobo/geom/sdf/__init__.py",
+      "sha256": "fb4f9ade97c54f7c142b49f403a7b689be15aff5f280f71f9ebc0863b9f8e112"
+    },
+    {
+      "path": "src/curobo/geom/sdf/sdf_grid.py",
+      "sha256": "da8faec84c89c53c85a2ef8fc751c2e07fcf8915090344d8a539f516805423b4"
+    },
+    {
+      "path": "src/curobo/geom/sdf/utils.py",
+      "sha256": "53e9458ac247dd1758dbbba2a55b1d5c29116398a2238ffbd99f8266d69065e0"
+    },
+    {
+      "path": "src/curobo/geom/sdf/warp_primitives.py",
+      "sha256": "afc55c7e64c34c7ff6eeb29ae1aa10ec03624fc2dfb7c5f8ef495d9b12355925"
+    },
+    {
+      "path": "src/curobo/geom/sdf/warp_sdf_fns.py",
+      "sha256": "a6678382aae92e4ada7e0f62d87d77a2c2ca5c75057699eb08e1b2200bf2cead"
+    },
+    {
+      "path": "src/curobo/geom/sdf/warp_sdf_fns_deprecated.py",
+      "sha256": "8ff22d0ddc94227d05ff8e2144748b9243f04f231f5b309fb3ab42666a0bec2e"
+    },
+    {
+      "path": "src/curobo/geom/sdf/world.py",
+      "sha256": "be50a644c1130336105507074bfe42e4346213a0a025fa80c979b76fc781adac"
+    },
+    {
+      "path": "src/curobo/geom/sdf/world_blox.py",
+      "sha256": "e113b52af6633a694bcc00123f01595b9ad95594d1cd28984428ff501104788d"
+    },
+    {
+      "path": "src/curobo/geom/sdf/world_mesh.py",
+      "sha256": "15453454421e17f400630f0c917a14c4fceed7ecc168c260f1eb0721d37bba94"
+    },
+    {
+      "path": "src/curobo/geom/sdf/world_voxel.py",
+      "sha256": "918c3017d58084ec1283b6e8147349ad888693fe07297d4650941f2742647e8d"
+    },
+    {
+      "path": "src/curobo/geom/sphere_fit.py",
+      "sha256": "aa3b5a4e2a80d8845de78798b091f340646d7340c70626372324d62433cebd87"
+    },
+    {
+      "path": "src/curobo/geom/transform.py",
+      "sha256": "4b8a1412e00ac7c1cfb48c564444a7126456c2a9baf05268c7e86e5124e481b7"
+    },
+    {
+      "path": "src/curobo/geom/types.py",
+      "sha256": "59f8fefb287fa3f3e11d4bb29d08f7ee9fac19380cd3334eaf461643bfa862b7"
+    },
+    {
+      "path": "src/curobo/graph/__init__.py",
+      "sha256": "b9c5b3bddaab7de6c5aaee2289205552ce75466f30ea81a098afb7473200eef6"
+    },
+    {
+      "path": "src/curobo/graph/graph_base.py",
+      "sha256": "e0b33ea59d15cb93c26957c8db1f64a2683b2df6d64c8a79e0131572de2bb5f9"
+    },
+    {
+      "path": "src/curobo/graph/graph_nx.py",
+      "sha256": "155383f81bd9c6761e262677f41af5e8eb8d1292cbd67e61b92f12c8e620d068"
+    },
+    {
+      "path": "src/curobo/graph/prm.py",
+      "sha256": "19e174815d7e3384cc4e75f8dc9faa48722dc7d98099fbf5735987cf6f16ad58"
+    },
+    {
+      "path": "src/curobo/opt/__init__.py",
+      "sha256": "efeb46e53f6756578b8e539b6cd26d683dd24723720a57b98bab594f2d08e680"
+    },
+    {
+      "path": "src/curobo/opt/newton/__init__.py",
+      "sha256": "bd6aad7f9a449e9c1dedf4eaefa8da8299884c2fe01f347cc4d220716968331c"
+    },
+    {
+      "path": "src/curobo/opt/newton/lbfgs.py",
+      "sha256": "c7c349c02dcd1d2cdb41ec63de41500c2a751c3bb9f92a2ef89d8dffb4847a3a"
+    },
+    {
+      "path": "src/curobo/opt/newton/newton_base.py",
+      "sha256": "92bb47a37f0eb73f16fb611f954a36e100b70597df9a6320b82b187d5d7baf54"
+    },
+    {
+      "path": "src/curobo/opt/opt_base.py",
+      "sha256": "1f4377bbd12dc692b89bcb0dd1b6550082a9ffb588c9ef05e9d461af5dc9840e"
+    },
+    {
+      "path": "src/curobo/opt/particle/__init__.py",
+      "sha256": "ad75df985efb6cf6ea38822fcc0d5c0972039691d42ef4383807911363a987d7"
+    },
+    {
+      "path": "src/curobo/opt/particle/parallel_es.py",
+      "sha256": "c4a4b686b9ddc66d38842beb97485f005afd5c1edcdf3b4c3cc2ea1f82465997"
+    },
+    {
+      "path": "src/curobo/opt/particle/parallel_mppi.py",
+      "sha256": "56a75ba8609f7a23d4f95b242d3d8c525c6872dd4fb38f857ca2d824bb584c28"
+    },
+    {
+      "path": "src/curobo/opt/particle/particle_opt_base.py",
+      "sha256": "cfe3c340507f54e66c32259890af3721875250fd24be28099803da2a189cbbd8"
+    },
+    {
+      "path": "src/curobo/opt/particle/particle_opt_utils.py",
+      "sha256": "dd9fb63ec4a3d7319fb5d0c3b4e9c2d4f9d815f9d7fb00c56d2742c3f367e68b"
+    },
+    {
+      "path": "src/curobo/rollout/__init__.py",
+      "sha256": "8d0983cc8ab04cc73560542678711fcbfc4950c9668b3e3f0a3107428a785af6"
+    },
+    {
+      "path": "src/curobo/rollout/arm_base.py",
+      "sha256": "a3e632a66f274604d6adf3f1ab59ea0ac1333933710976d893633b0ee8a510f3"
+    },
+    {
+      "path": "src/curobo/rollout/arm_reacher.py",
+      "sha256": "92035c6a6170e28ff261ae78418dbdbeca19a5d2fb9d002b8b611bb36d3532c8"
+    },
+    {
+      "path": "src/curobo/rollout/cost/__init__.py",
+      "sha256": "437fe8b5a5b8c1f751cdd268dfde657c6ba14d3e221e700e683df5803bbc1d9c"
+    },
+    {
+      "path": "src/curobo/rollout/cost/bound_cost.py",
+      "sha256": "392baca1eec53eb7f8a4f364fbd55fe5ba8070a706fc7988d5b9891633003fc6"
+    },
+    {
+      "path": "src/curobo/rollout/cost/cost_base.py",
+      "sha256": "ddbd7ad23a2506529ab8e94007720cfc41214b47ed0a2edf48be5f67b42c210c"
+    },
+    {
+      "path": "src/curobo/rollout/cost/dist_cost.py",
+      "sha256": "c490e67e42f0ed36d79c9e9605d05b212a285062e800d87750b5f8286fc540da"
+    },
+    {
+      "path": "src/curobo/rollout/cost/manipulability_cost.py",
+      "sha256": "3fba3c35a3156fa7b07a325134b0703a3388c67e006f45249c0fc32e48f99e64"
+    },
+    {
+      "path": "src/curobo/rollout/cost/pose_cost.py",
+      "sha256": "c924f1807024730f17f0611263d364ed650ffa26f404c1e0e3c93f4b9b49c646"
+    },
+    {
+      "path": "src/curobo/rollout/cost/primitive_collision_cost.py",
+      "sha256": "373f1f15731268bf4364adea102d09e746d9efad20c5c94a9408d26096019da7"
+    },
+    {
+      "path": "src/curobo/rollout/cost/projected_dist_cost.py",
+      "sha256": "4823f83414e616b4a4d7e4600510e12ddcaa9977ddd3e4f1f48ad3969cc01f75"
+    },
+    {
+      "path": "src/curobo/rollout/cost/self_collision_cost.py",
+      "sha256": "2c88c09d8080a2f30ab6d6a97b0965c05982b6fd078d41311d8a758aac453db4"
+    },
+    {
+      "path": "src/curobo/rollout/cost/stop_cost.py",
+      "sha256": "c136f5ac4920347e3bc1b140001bf1b27b5a16de3900e5ffdda3a9c045c21319"
+    },
+    {
+      "path": "src/curobo/rollout/cost/straight_line_cost.py",
+      "sha256": "3175dc057885827bb32e114c1f60798b9fc740269b0383509b5539277dfd9bb7"
+    },
+    {
+      "path": "src/curobo/rollout/cost/zero_cost.py",
+      "sha256": "c8a76d1b6c56bd879b4d8fcfc3ed9b64339107f964ec2cfa986e18ef6a1bb11f"
+    },
+    {
+      "path": "src/curobo/rollout/dynamics_model/__init__.py",
+      "sha256": "b9c5b3bddaab7de6c5aaee2289205552ce75466f30ea81a098afb7473200eef6"
+    },
+    {
+      "path": "src/curobo/rollout/dynamics_model/integration_utils.py",
+      "sha256": "714bc62229d56dca86f4431c58485694002538b411894cc27be6fdefec325baa"
+    },
+    {
+      "path": "src/curobo/rollout/dynamics_model/kinematic_model.py",
+      "sha256": "9ef149aa7b72c6b8d6595ce70f163691383db196e15e4c38364057ab496c6960"
+    },
+    {
+      "path": "src/curobo/rollout/dynamics_model/model_base.py",
+      "sha256": "789e13f5ef81b9ab73b5370edfeea9aba743116a5298b4b5e7e80c91a8e0cfab"
+    },
+    {
+      "path": "src/curobo/rollout/dynamics_model/tensor_step.py",
+      "sha256": "cdf9620527789413a183e168d5e49c6895d68bfb7a823ef8f098b998e72544b1"
+    },
+    {
+      "path": "src/curobo/rollout/rollout_base.py",
+      "sha256": "5039f02048aaa2d2dfd701f914d9c104ecfe426a91fc153fd76f689cbaa4afd0"
+    },
+    {
+      "path": "src/curobo/types/__init__.py",
+      "sha256": "b9c5b3bddaab7de6c5aaee2289205552ce75466f30ea81a098afb7473200eef6"
+    },
+    {
+      "path": "src/curobo/types/base.py",
+      "sha256": "25f5a28889a619bf1a6f1aaec9f8b2a18d0449668137a5390bccfd50b46a5906"
+    },
+    {
+      "path": "src/curobo/types/camera.py",
+      "sha256": "9e93fb1bbb1731bc2679cd28783ea41359d2d06376f9cd02a192ea4c19aa4f80"
+    },
+    {
+      "path": "src/curobo/types/enum.py",
+      "sha256": "d7f438157def644134ccaf8acf4b2456e0275c51740480c88c0280c05989dc2d"
+    },
+    {
+      "path": "src/curobo/types/file_path.py",
+      "sha256": "c3b3d6deb7efeefef547348d08e760a49b6c0de18e90f591af13e8c7b5bd3548"
+    },
+    {
+      "path": "src/curobo/types/math.py",
+      "sha256": "e305cebdb14b44430098aba30ccb2e6610a6f7e8e4865639242955266ce636b7"
+    },
+    {
+      "path": "src/curobo/types/robot.py",
+      "sha256": "375051c0893dc422f55d727b2294f06e6c057a6c0ecbbb718e8ebe324a8a940e"
+    },
+    {
+      "path": "src/curobo/types/state.py",
+      "sha256": "18304737d142b4c9a572c65bc480e812f12cff40eb1a39a68b1bf441f6cc5ffb"
+    },
+    {
+      "path": "src/curobo/types/tensor.py",
+      "sha256": "953662a474053123e4ca75cbc879d84b7a8fb0c8ae077e4a09c2814ac946bf0f"
+    },
+    {
+      "path": "src/curobo/util/__init__.py",
+      "sha256": "b9c5b3bddaab7de6c5aaee2289205552ce75466f30ea81a098afb7473200eef6"
+    },
+    {
+      "path": "src/curobo/util/error_metrics.py",
+      "sha256": "507d5dceb833076a9ef93ba136b64e370ffe9f20b1dff19e58c83f506a2bbd5b"
+    },
+    {
+      "path": "src/curobo/util/helpers.py",
+      "sha256": "cadb2eb0ff1be95a0a098efc24858bfd66878363e479729aaff95c60b44ac6b9"
+    },
+    {
+      "path": "src/curobo/util/logger.py",
+      "sha256": "03d66239edc56163e0aeec07bd4be3dee8a34738e213329d66d6b98f730461da"
+    },
+    {
+      "path": "src/curobo/util/metrics.py",
+      "sha256": "47fedeb51283388f0e30e43cc54df81645271a0ac2c2d73a990757ffb61ffd23"
+    },
+    {
+      "path": "src/curobo/util/sample_lib.py",
+      "sha256": "1e96f568bc8b92e1b4a29ee525105865d23359ac38d36f4830f9fa1a1a4fbe01"
+    },
+    {
+      "path": "src/curobo/util/state_filter.py",
+      "sha256": "a578e58b88005a361917b2e2928ee2538118db9969adb1023a1d32cffeef9d12"
+    },
+    {
+      "path": "src/curobo/util/tensor_util.py",
+      "sha256": "3e994b50dbeefdf70c0207a9ab01bc9a70adad02341b06b7c468fcfdd3e5b536"
+    },
+    {
+      "path": "src/curobo/util/torch_utils.py",
+      "sha256": "26e261bb986b2d78526df1a9ba027fd5f9ceb632c46a3461195f577c57ca451b"
+    },
+    {
+      "path": "src/curobo/util/trajectory.py",
+      "sha256": "5a54494584eea1e379d5314dab613a95a76ff94c97027d62acb5f268c34327ce"
+    },
+    {
+      "path": "src/curobo/util/usd_helper.py",
+      "sha256": "32c56767d4cd64ef8bce5f5fa74f185fdf8cfe784edb5aeb50d2d0e3ed19f2d5"
+    },
+    {
+      "path": "src/curobo/util/warp.py",
+      "sha256": "9da36f6073ae93b1de4554bdbc4a7da8865e09f6662a1c9f5c4fd1fc4cde3d52"
+    },
+    {
+      "path": "src/curobo/util/warp_interpolation.py",
+      "sha256": "c560e6cd7e627ead29ab31c29cc7ec4aa5eddf9c2be4d11d45e1b6070439b775"
+    },
+    {
+      "path": "src/curobo/util/xrdf_utils.py",
+      "sha256": "cb0c6e7c5bd4034b132f8b5b57e89a2bb18112b4798599e7496e9fa7d9231060"
+    },
+    {
+      "path": "src/curobo/util_file.py",
+      "sha256": "d547acb0b66dfd3bba616d30b16e3a140cd11b7cda08ed53e07638e608ae389d"
+    },
+    {
+      "path": "src/curobo/wrap/__init__.py",
+      "sha256": "b2d16fdb9d106c7b8eba1e599fb463fe16037007e70ac668cf49a376c7da17e7"
+    },
+    {
+      "path": "src/curobo/wrap/model/__init__.py",
+      "sha256": "b9c5b3bddaab7de6c5aaee2289205552ce75466f30ea81a098afb7473200eef6"
+    },
+    {
+      "path": "src/curobo/wrap/model/curobo_robot_world.py",
+      "sha256": "69815d41b7e252975f70551f2228182ba2d0139d8c95ad3d508f63c3754e458f"
+    },
+    {
+      "path": "src/curobo/wrap/model/robot_segmenter.py",
+      "sha256": "6d03a5d38f3c3b12dc50959b5660227f5e9d11ac6db8e3461755d6b42e3a41c8"
+    },
+    {
+      "path": "src/curobo/wrap/model/robot_world.py",
+      "sha256": "d4e8e0adabaa80910da58d63eeefc373ed09c88d608e292144a1dcaa4bd2ee0b"
+    },
+    {
+      "path": "src/curobo/wrap/reacher/__init__.py",
+      "sha256": "b37c8897583d1b9aa21eea41af8ea831a3a63534889e300da35fab2fcdf3c349"
+    },
+    {
+      "path": "src/curobo/wrap/reacher/evaluator.py",
+      "sha256": "520b470e6eb596a2d97370c1f6f09035275cb206cbef72fa2bbd72643b91013f"
+    },
+    {
+      "path": "src/curobo/wrap/reacher/ik_solver.py",
+      "sha256": "be5ac293a9ee60db5b43056895ab262318ffed598e45dcf237f7e1e1e8989c47"
+    },
+    {
+      "path": "src/curobo/wrap/reacher/motion_gen.py",
+      "sha256": "d7e9a2a4eb32390069f4974b2844c7e34d54657e62bc6dfda427c3fe460f660e"
+    },
+    {
+      "path": "src/curobo/wrap/reacher/mpc.py",
+      "sha256": "c65e4a99ec64b9487d3449990773f16f98f8a5ca5198b8e0d96fb07ed4973539"
+    },
+    {
+      "path": "src/curobo/wrap/reacher/trajopt.py",
+      "sha256": "43967e4a88a2ed4d06d6f120acdb54dafc64dd41190c06edf04922133b9cb617"
+    },
+    {
+      "path": "src/curobo/wrap/reacher/types.py",
+      "sha256": "e0e1f7a5034103382bf29291a728bc1ba41c45fd4688c8958d463c3babcde84a"
+    },
+    {
+      "path": "src/curobo/wrap/wrap_base.py",
+      "sha256": "26a452b49ed09d613e410e36619256e65ebf98d8e724097263b7a9f00db48919"
+    },
+    {
+      "path": "src/curobo/wrap/wrap_mpc.py",
+      "sha256": "74fa46521e05aa8a33096dd51e048583284223d60d60ec432306ff690b650d57"
+    },
+    {
+      "path": "src/nvidia_curobo.egg-info/SOURCES.txt",
+      "sha256": "322ae59ba6e9ff5e080b91efe503213dc446afe33cd63c237f5511a8a327bfbf"
+    },
+    {
+      "path": "src/nvidia_curobo.egg-info/dependency_links.txt",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "path": "src/nvidia_curobo.egg-info/requires.txt",
+      "sha256": "a00dd2cac03b67fca59fb629e383204a3096d52a1129d38b0ddf5aad6bfbf61c"
+    },
+    {
+      "path": "src/nvidia_curobo.egg-info/top_level.txt",
+      "sha256": "45424d124517566ea428fbe04ee0dff59d191cfb2f162b87d908175f35fae126"
+    },
+    {
+      "path": "tests/__init__.py",
+      "sha256": "278b3dcf08df35b6d7e9f3852543e06bb8792ace5e6a863afee5112d449c4c14"
+    },
+    {
+      "path": "tests/conftest.py",
+      "sha256": "0259a1a94e3af886d1a91a4427e6d4065d34fb15b8936738e8af9a22c5c6034d"
+    },
+    {
+      "path": "tests/cost_test.py",
+      "sha256": "6b6fe5de9cdfee3b916a3df28f7b269dcd4bc0d771b406d63fc047544afdd552"
+    },
+    {
+      "path": "tests/cuda_graph_test.py",
+      "sha256": "374093ab2487e4acb79f2f12528a68791742bcfdbbf15d2d14bcf9ee3c727380"
+    },
+    {
+      "path": "tests/cuda_robot_generator_test.py",
+      "sha256": "ab38c8a34711042dfb8bc019ff05fc4bed1a0be68ef4c9d60ff0fe7c93a69eea"
+    },
+    {
+      "path": "tests/curobo_robot_world_model_test.py",
+      "sha256": "091051d2fca182863a151fc26117850e26201a21912c58ba24f41c0a4e905466"
+    },
+    {
+      "path": "tests/curobo_version_test.py",
+      "sha256": "58f5f75dd34a0328cc9381703079c2485e6905f6007b60be06f9a9718f55b272"
+    },
+    {
+      "path": "tests/geom_test.py",
+      "sha256": "88757bdefbcad05889250e5ef039783e42e11aadd1c3f79e343fcdc7961e7e1b"
+    },
+    {
+      "path": "tests/geom_types_test.py",
+      "sha256": "fd151a82e1deeca8b448ebbc58d7ff8cacbe0d90dc003c1551b6e0aa7d4cf0c4"
+    },
+    {
+      "path": "tests/goal_test.py",
+      "sha256": "359c0d537f79b2de96f32e99eaf18ef91723b3ec945428ae6c5478ee4778d648"
+    },
+    {
+      "path": "tests/ik_config_test.py",
+      "sha256": "030ac4adca7accfe56f1f316946da54a62efd6179926ac4d959b9375a4713b19"
+    },
+    {
+      "path": "tests/ik_module_test.py",
+      "sha256": "13c5eb1fdb8af80d9bbd0614bc53cabf7809c94c75c1ea159b81fb96dde3c2cd"
+    },
+    {
+      "path": "tests/ik_test.py",
+      "sha256": "4b9331ed61483fa9ca7e18fe611cd1e8203c1f8a372481d1e9a894e15ac39ddd"
+    },
+    {
+      "path": "tests/interpolation_test.py",
+      "sha256": "6db7c4fe2d7c15db16dbd6ff7b1445a452e7adb644aaa99cd0048cdfc4b0197b"
+    },
+    {
+      "path": "tests/kinematics_parser_test.py",
+      "sha256": "94dea5e06fed11a96e19ad19c2850b883f2bb86c83c50b9228be5d73f998c8c4"
+    },
+    {
+      "path": "tests/kinematics_test.py",
+      "sha256": "969992b8cb4cd95db3e7cf07dc95d251c784570cea933a4f2344e8d9ee6b0bb8"
+    },
+    {
+      "path": "tests/mimic_joint_test.py",
+      "sha256": "cb4a236bd1b423846c90b6c2be4d209cb696995d79ab7e47f6e551ba6dcc3544"
+    },
+    {
+      "path": "tests/motion_gen_api_test.py",
+      "sha256": "2968a54438f46a5e9918cf3ed7a005a3509655b835fdc27d808c717e610ee772"
+    },
+    {
+      "path": "tests/motion_gen_constrained_test.py",
+      "sha256": "75c5f0908202087802c862499b5ff9aec4c6f9decba20c9e85efe374c91f94dd"
+    },
+    {
+      "path": "tests/motion_gen_cuda_graph_test.py",
+      "sha256": "72e93f6b7cce664ea0d7ac8aeeec38c7109e3737f47552abd8987b570650fdef"
+    },
+    {
+      "path": "tests/motion_gen_eval_test.py",
+      "sha256": "d76c1ed953dca4e8f354fe8eae382932b3b6606ae1681a62259159317fda97eb"
+    },
+    {
+      "path": "tests/motion_gen_goalset_test.py",
+      "sha256": "f6ded3dd6bdcb0ff9041184ebf8eb1ac0684319b4604ff293b1698c35139202b"
+    },
+    {
+      "path": "tests/motion_gen_js_test.py",
+      "sha256": "b7f278252c02b47e30ef2100aec2d0e7c1923248a77608f7ae1b948eb95abd75"
+    },
+    {
+      "path": "tests/motion_gen_module_test.py",
+      "sha256": "f6b8e8004a4ae9e86f34786c1d5097efecd6b3eafacaa4533a162baaa6b5d6fa"
+    },
+    {
+      "path": "tests/motion_gen_speed_test.py",
+      "sha256": "c92d4607bc88b186c9293389aff6d53f13af5671c7627f87ffcbe2d45ff3f8bd"
+    },
+    {
+      "path": "tests/motion_gen_test.py",
+      "sha256": "f340fe25b849d576cd4f03b1b4449391388adecd94a6ecf1c80012e921f26d99"
+    },
+    {
+      "path": "tests/mpc_test.py",
+      "sha256": "b5b60e0e5dac16b5b4cb4967a0c4d77a15efa3d518117c2caed7fc0274df579d"
+    },
+    {
+      "path": "tests/multi_pose_test.py",
+      "sha256": "5e2bedd762a85640ce719b0bdb903df7065ede68c8b2430178ffada26c6a1d42"
+    },
+    {
+      "path": "tests/nvblox_test.py",
+      "sha256": "408b939861f5bb0c45ed6aca83ee69d2ac875748ba49ae5c56d261a786d6fa98"
+    },
+    {
+      "path": "tests/pose_reaching_test.py",
+      "sha256": "1aedbb1d0a365bbe23d43a107075b9498dbf295823471652f04a0d74e32ebcc3"
+    },
+    {
+      "path": "tests/pose_test.py",
+      "sha256": "c65f2b1d1156232cf2b6f952218bc5ff8cf5953574894afb81e41650e806c499"
+    },
+    {
+      "path": "tests/robot_assets_test.py",
+      "sha256": "aee37ca64f0cea8557b9872bcdfe7715f62b929e2086da9b3774ff70043d4484"
+    },
+    {
+      "path": "tests/robot_config_test.py",
+      "sha256": "64bda7021fb63c9d0ba588694d9ac8ab2972d33d85b42cab9be72a033dcea8c8"
+    },
+    {
+      "path": "tests/robot_segmentation_test.py",
+      "sha256": "4cc736388422a564403dacb24f0bdc062de260bfc9a8a69e6f9e7482b35ef7b1"
+    },
+    {
+      "path": "tests/robot_world_model_test.py",
+      "sha256": "4c2afbb949b31a9f4344a8fff035734bad07e0b551fbe2febd571b1ed4a1c027"
+    },
+    {
+      "path": "tests/self_collision_test.py",
+      "sha256": "448089626f7438d300c9c2d1906c841b7c14d66434268d132150e7fa57f7f849"
+    },
+    {
+      "path": "tests/trajopt_config_test.py",
+      "sha256": "eceb2725d4c5026931b92c66f21a26a59edf1f4f2928b14ae6163d0d4fa88761"
+    },
+    {
+      "path": "tests/trajopt_test.py",
+      "sha256": "e90ac1813bfe11251101bcf270a287c8a3766ae32d5772bea4fceeed4d768e5f"
+    },
+    {
+      "path": "tests/usd_export_test.py",
+      "sha256": "ecfa2d3295548e4596aa1d317d7154e9718869f380e719a226b617144195e5ca"
+    },
+    {
+      "path": "tests/voxel_collision_test.py",
+      "sha256": "2343e7db719c684206a0238ce810d05d602563e70f4135954c41d5e8d489cb8d"
+    },
+    {
+      "path": "tests/voxelization_test.py",
+      "sha256": "2b6bae1d4c32f83e84b7895916049a530277a3da4dd0d490705c0b3ce7af81f0"
+    },
+    {
+      "path": "tests/warp_mesh_test.py",
+      "sha256": "79815183b69ab686221d0636c4d41bc9940563096f897a8affaef86b8b54260b"
+    },
+    {
+      "path": "tests/world_config_test.py",
+      "sha256": "781bc2856476018c63f1d6e1ef78ec4817f013825323c1d68318146e70ca5925"
+    },
+    {
+      "path": "tests/xrdf_test.py",
+      "sha256": "8037e76eddbc0a58f9b1f08b4c4fb2e6b2f2b55a51828d2f32056cc32820c97f"
+    }
+  ],
+  "note": "Deployed source including CUDA kernels and planning configs. Binary robot meshes and compiled extensions are preserved in the private migration bundle."
+}

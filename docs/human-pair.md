@@ -13,8 +13,8 @@
 人物输出是保持源物体轨迹的视觉配对重放，不代表重新验证了人体接触动力学。
 
 - 源轨迹 SHA256：`ffe2178587c9dcb770c28e528bb3d76f2e48bf7d693eb20858f8073cc4d6c655`
-- 验证报告：[evidence/amber-upright](evidence/amber-upright/)
-- 实现与复现顺序：[安柏说明](work/anime-human-v1/README.txt)
+- 验证报告：[evidence/amber-upright](../evidence/amber-upright/)
+- 实现与复现顺序：[安柏说明](../work/anime-human-v1/README.txt)
 - 本机完整视频：`outputs/anime-human-v1/delivery/robot-ego-front-full.mp4`
 
 学园偶像大师人物目前仅进行资产调研，尚未接入或渲染完成。
@@ -60,7 +60,7 @@ python -m unittest human_pair.test_geometry
 VLA-Infra 的现有部署根目录为 `/vepfs/public/pengjiaqi/interndata-human-pair`。
 仓库的 `work/<阶段>/` 对应部署的 `<根目录>/<阶段>/`；`work/isaac41/` 中环境包装脚本对应部署根目录。
 脚本仍包含这套实验环境的固定路径，不能把干净克隆视为已安装好资产与运行环境的一键工程。
-引擎补丁用法见 [patches/README.md](patches/README.md)。
+引擎补丁用法见 [patches/README.md](../patches/README.md)。
 
 人物解算、Blender 导入、Isaac Sim 渲染分别需要对应运行环境，以及原轨迹、场景、合法取得的人物资产和阶段缓存。
 安柏的顺序为导入/导出资产 → `solve_motion.py` → `verify.py` → `bake_and_template.py` → `render_full.sh`。
@@ -70,7 +70,7 @@ VLA-Infra 的现有部署根目录为 `/vepfs/public/pengjiaqi/interndata-human-
 格式化后的源码不冒充重新渲染过的版本。格式化通过 Python AST 等价检查和既有验证脚本核验。
 
 模型、贴图、原轨迹、视频、缓存、下载的第三方仓库及虚拟环境保留在磁盘，由 `.gitignore` 排除。
-第三方仓库版本见 [provenance/dependencies.json](provenance/dependencies.json)，不在本仓库重复打包。
+第三方仓库版本见 [provenance/dependencies.json](../provenance/dependencies.json)，InternDataEngine、CuRobo 与 MMD 导入器源码已直接保存在本仓库；其余实验代码保存在私有迁移包。
 安柏资产条款禁止商用和二次分发；代码提交不含原模型或贴图。其他资产遵循各自授权。
 
 本机与部署源码比对时，三个本机诊断/实验脚本比部署更新：`audit_colliders.py` 排除 Cooked 属性、

@@ -1,0 +1,144 @@
+##
+## Copyright (c) 2023 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+##
+## NVIDIA CORPORATION, its affiliates and licensors retain all intellectual
+## property and proprietary rights in and to this material, related
+## documentation and any modifications thereto. Any use, reproduction,
+## disclosure or distribution of this material and related documentation
+## without an express license agreement from NVIDIA CORPORATION or
+## its affiliates is strictly prohibited.
+##
+
+robot_cfg:
+  kinematics:
+    usd_path: "robot/G1_120s_left_arm_parallel_gripper.usd"
+    usd_robot_root: "/robot"
+    isaac_usd_path: ""
+    usd_flip_joints: {}
+    usd_flip_joint_limits: []
+
+    urdf_path: "robot/G1_120s/left_arm_parallel.urdf"
+    asset_root_path: "robot"  
+
+    base_link: "arm_base_link"
+    ee_link: "arm_l_end_link"
+    # lock_joints: null
+    extra_links: {"attached_object":{"parent_link_name": "arm_l_end_link" ,
+    "link_name": "attached_object", "fixed_transform": [0,0,0,1,0,0,0], "joint_type":"FIXED",
+    "joint_name": "attach_joint" }}
+
+    collision_link_names:
+      [
+        "arm_l_base_link",
+        "arm_l_link1",
+        "arm_l_link2",
+        "arm_l_link3",
+        "arm_l_link4",
+        "arm_l_link5",
+        "arm_l_link6",
+        "arm_l_end_link",
+        "gripper_l_base_link",
+        "attached_object",
+      ]
+
+    collision_spheres:
+      arm_l_base_link:
+        - "center": [0.0, 0.0, 0.027]
+          "radius": 0.02
+      arm_l_link1:
+        - "center": [0.0, 0.0, 0.0]
+          "radius": 0.02
+        - "center": [0.0, 0.0, -0.073]
+          "radius": 0.02
+        - "center": [0.0, 0.0, -0.033]
+          "radius": 0.02
+      arm_l_link2:
+        - "center": [0.0, -0.086, 0.0]
+          "radius": 0.02
+      arm_l_link3:
+        - "center": [0.0, 0.0, 0.0]
+          "radius": 0.02
+        - "center": [0.0, 0.0, -0.141]
+          "radius": 0.02
+        - "center": [0.0, 0.0, -0.03]
+          "radius": 0.02
+        - "center": [0.0, 0.0, -0.084]
+          "radius": 0.02
+      arm_l_link4:
+        - "center": [0.0, -0.05, 0.0]
+          "radius": 0.02
+      arm_l_link5:
+        - "center": [0.0, 0.0, 0.0]
+          "radius": 0.02
+        - "center": [0.0, 0.0, -0.093]
+          "radius": 0.02
+        - "center": [0.0, 0.0, -0.031]
+          "radius": 0.02
+      arm_l_link6:
+        - "center": [0.0, -0.065, 0.0]
+          "radius": 0.02
+      arm_l_end_link:
+        - "center": [0.0, 0.0, -0.013]
+          "radius": 0.02
+      gripper_l_base_link:
+        - "center": [-0.066, 0.003, 0.122]
+          "radius": 0.01
+        - "center": [0.057, -0.0, 0.13]
+          "radius": 0.01
+        - "center": [0.001, -0.006, 0.045]
+          "radius": 0.03
+
+
+    collision_sphere_buffer: 0.004
+    extra_collision_spheres: {"attached_object": 4}
+    self_collision_ignore: 
+      {
+        "arm_l_base_link": ["arm_l_link1", "arm_l_link2", "arm_l_link3", "arm_l_link4", "arm_l_link5", "arm_l_link6", "arm_l_end_link", "gripper_l_inner_link3", "gripper_l_base_link", "gripper_l_outer_link3", "gripper_l_inner_link4", "gripper_l_outer_link4", "attached_object"],
+        "arm_l_link1": ["arm_l_link2", "arm_l_link3", "arm_l_link4", "arm_l_link5", "arm_l_link6", "arm_l_end_link", "gripper_l_inner_link3", "gripper_l_base_link", "gripper_l_outer_link3", "gripper_l_inner_link4", "gripper_l_outer_link4", "attached_object"],
+        "arm_l_link2": ["arm_l_link3", "arm_l_link4", "arm_l_link5", "arm_l_link6", "arm_l_end_link", "gripper_l_inner_link3", "gripper_l_base_link", "gripper_l_outer_link3", "gripper_l_inner_link4", "gripper_l_outer_link4", "attached_object"],
+        "arm_l_link3": ["arm_l_link4", "arm_l_link5", "arm_l_link6", "arm_l_end_link", "gripper_l_inner_link3", "gripper_l_base_link", "gripper_l_outer_link3", "gripper_l_inner_link4", "gripper_l_outer_link4", "attached_object"],
+        "arm_l_link4": ["arm_l_link5", "arm_l_link6", "arm_l_end_link", "gripper_l_inner_link3", "gripper_l_base_link", "gripper_l_outer_link3", "gripper_l_inner_link4", "gripper_l_outer_link4", "attached_object"],
+        "arm_l_link5": ["arm_l_link6", "arm_l_end_link", "gripper_l_inner_link3", "gripper_l_base_link", "gripper_l_outer_link3", "gripper_l_inner_link4", "gripper_l_outer_link4", "attached_object"],
+        "arm_l_link6": ["arm_l_end_link", "gripper_l_inner_link3", "gripper_l_base_link", "gripper_l_outer_link3", "gripper_l_inner_link4", "gripper_l_outer_link4", "attached_object"],
+        "arm_l_end_link": ["gripper_l_inner_link3", "gripper_l_base_link", "gripper_l_outer_link3", "gripper_l_inner_link4", "gripper_l_outer_link4", "attached_object"],
+        "gripper_l_base_link": ["gripper_l_outer_link3", "gripper_l_inner_link4", "gripper_l_outer_link4", "attached_object"],
+      }
+    self_collision_buffer:
+      {
+        "arm_l_base_link": 0.1,
+        "arm_l_link1": 0.05,
+        "arm_l_link2": 0.05,
+        "arm_l_link3": 0.05,
+        "arm_l_link4": 0.05,
+        "arm_l_link5": 0.05,
+        "arm_l_link6": 0.05,
+        "arm_l_end_link": 0.05,
+        "gripper_l_base_link": 0.01,
+        "attached_object": 0.0,
+      }
+
+    use_global_cumul: True
+    mesh_link_names: 
+      [
+        "arm_l_base_link",
+        "arm_l_link1",
+        "arm_l_link2",
+        "arm_l_link3",
+        "arm_l_link4",
+        "arm_l_link5",
+        "arm_l_link6",
+        "arm_l_end_link",
+        "gripper_l_base_link",
+        "attached_object",
+      ]
+
+    external_asset_path: null
+
+    cspace:
+      joint_names: ["idx21_arm_l_joint1","idx22_arm_l_joint2","idx23_arm_l_joint3","idx24_arm_l_joint4", "idx25_arm_l_joint5", "idx26_arm_l_joint6","idx27_arm_l_joint7",]
+      # retract_config: [-1.06903934, 0.60804528, 0.27862415, -1.27765417, 0.72653073, 1.48858964, -0.1861217]
+      retract_config: [2.07, -0.61, -1.57, 1, -1.57, -1.57, 1.57,]
+      null_space_weight: [1,1,1,1,1,1,1]
+      cspace_distance_weight: [1,1,1,1,1,1,1]
+      max_acceleration: 15.0
+      max_jerk: 500.0

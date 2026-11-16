@@ -1,0 +1,136 @@
+##
+## Copyright (c) 2023 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+##
+## NVIDIA CORPORATION, its affiliates and licensors retain all intellectual
+## property and proprietary rights in and to this material, related
+## documentation and any modifications thereto. Any use, reproduction,
+## disclosure or distribution of this material and related documentation
+## without an express license agreement from NVIDIA CORPORATION or
+## its affiliates is strictly prohibited.
+##
+
+robot_cfg:
+  kinematics:
+    usd_path: "robot/sx_humanoid/left2.usd" 
+    usd_robot_root: "/robot"
+    isaac_usd_path: ""
+    usd_flip_joints: {}
+    usd_flip_joint_limits: []
+
+    urdf_path: "robot/sx_humanoid/left2.urdf"
+    asset_root_path: "robot"
+    
+    base_link: "base_link"
+    ee_link: "link7l"
+    extra_links: {"attached_object":{"parent_link_name": "link7l" ,
+    "link_name": "attached_object", "fixed_transform": [0,0,0,1,0,0,0], "joint_type":"FIXED",
+    "joint_name": "attach_joint" }}
+
+    
+    collision_link_names:
+      [
+        "base_link",
+        "link0l",
+        "link1l",
+        "link2l",
+        "link3l",
+        "link4l",
+        "link5l",
+        "link6l",
+        "link7l",
+        "attached_object",
+      ]
+    collision_spheres:
+      base_link:
+        - "center": [0.008, 0.005, 0.108]
+          "radius": 0.0848
+      link0l:
+        - "center": [0.003, -0.003, 0.002]
+          "radius": 0.02219
+      link1l:
+        - "center": [0.002, 0.001, 0.018]
+          "radius": 0.02548
+        - "center": [0.002, -0.001, 0.066]
+          "radius": 0.02548
+      link2l:
+        - "center": [0.118, 0.006, 0.0]
+          "radius": 0.02864
+        - "center": [0.06, 0.006, 0.001]
+          "radius": 0.02864
+      link3l:
+        - "center": [-0.002, 0.006, -0.078]
+          "radius": 0.02183
+        - "center": [-0.003, 0.006, -0.026]
+          "radius": 0.02183
+        - "center": [-0.001, 0.008, -0.126]
+          "radius": 0.02183
+      link4l:
+        - "center": [-0.005, 0.038, -0.004]
+          "radius": 0.0228
+        - "center": [-0.004, 0.075, -0.003]
+          "radius": 0.0228
+      link5l:
+        - "center": [-0.005, -0.002, 0.064]
+          "radius": 0.02227
+        - "center": [-0.006, -0.002, 0.023]
+          "radius": 0.02227
+        - "center": [-0.003, -0.004, 0.101]
+          "radius": 0.01727
+      link6l:
+        - "center": [-0.003, 0.005, 0.0]
+          "radius": 0.01206
+      link7l:
+        - "center": [0.021, -0.001, -0.01]
+          "radius": 0.00659
+        - "center": [0.021, -0.001, 0.014]
+          "radius": 0.00659
+    collision_sphere_buffer: 0.004
+    extra_collision_spheres: {"attached_object": 4}
+
+    self_collision_ignore:
+      {
+        "base_link": ["link0l", "link1l", "link2l", "link3l", "link4l", "link5l", "link6l", "link7l", "attached_object"],
+        "link0l": ["link1l", "link2l", "link3l", "link4l", "link5l", "link6l", "link7l", "attached_object"],
+        "link1l": ["link2l", "link3l", "link4l", "link5l", "link6l", "link7l", "attached_object"],
+        "link2l": ["link3l", "link4l", "link5l", "link6l", "link7l", "attached_object"],
+        "link3l": ["link4l", "link5l", "link6l", "link7l", "attached_object"],
+        "link4l": ["link5l", "link6l", "link7l", "attached_object"],
+        "link5l": ["link6l", "link7l", "attached_object"],
+        "link6l": ["link7l", "attached_object"],
+        "link7l": ["attached_object"],
+      }
+    self_collision_buffer:
+      {
+        "base_link": 0.1,
+        "link0l": 0.05,
+        "link1l": 0.05,
+        "link2l": 0.05,
+        "link3l": 0.05,
+        "link4l": 0.05,
+        "link5l": 0.05,
+        "link6l": 0.05,
+        "link7l": 0.05,
+      }
+    use_global_cumul: True
+    mesh_link_names:
+      [
+        "base_link",
+        "link0l",
+        "link1l",
+        "link2l",
+        "link3l",
+        "link4l",
+        "link5l",
+        "link6l",
+        "link7l",
+      ]
+
+    external_asset_path: null # Use this to add path for externally located assets/robot folder.
+
+    cspace:
+        joint_names: ["joint0l", "joint1l", "joint2l", "joint3l", "joint4l", "joint5l", "joint6l", "joint7l"]
+        retract_config:  [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        null_space_weight:  [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+        cspace_distance_weight: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+        max_jerk: 500.0
+        max_acceleration: 15.0

@@ -1,0 +1,218 @@
+##
+## Copyright (c) 2023 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+##
+## NVIDIA CORPORATION, its affiliates and licensors retain all intellectual
+## property and proprietary rights in and to this material, related
+## documentation and any modifications thereto. Any use, reproduction,
+## disclosure or distribution of this material and related documentation
+## without an express license agreement from NVIDIA CORPORATION or
+## its affiliates is strictly prohibited.
+##
+
+robot_cfg:
+  kinematics:
+    usd_path: "robot/piper.usd"
+    usd_robot_root: "/robot"
+    isaac_usd_path: ""
+    usd_flip_joints: {}
+    usd_flip_joint_limits: []
+
+    urdf_path: "robot/piper/piper.urdf"
+    asset_root_path: "robot"
+
+    base_link: "base_link"
+    ee_link: "link6"
+
+    lock_joints: {"joint7": 0.0, "joint8": 0.0}
+    extra_links: {"attached_object":{"parent_link_name": "link6" ,
+    "link_name": "attached_object", "fixed_transform": [0,0,0,1,0,0,0], "joint_type":"FIXED",
+    "joint_name": "attach_joint" }}
+
+
+    collision_link_names:
+      [
+        "base_link",
+        "link1",
+        "link2",
+        "link3",
+        "link4",
+        "link5",
+        "link6",
+        "link7",
+        "link8"
+      ]
+    # collision_spheres:
+    #   base_link:
+    #       - "center": [0.0, 0.0, 0.0]
+    #         "radius": 0.01
+    #   link1:
+    #       - "center": [0.0, 0.0, 0.0]
+    #         "radius": 0.04
+    #   link2:
+    #       - "center": [0.0, 0.0, 0.0]
+    #         "radius": 0.03
+    #       - "center": [0.03, 0.0, 0.0]
+    #         "radius": 0.03
+    #       - "center": [0.06, 0.0, 0.0]
+    #         "radius": 0.03
+    #       - "center": [0.09, -0.007, 0.0]
+    #         "radius": 0.03
+    #       - "center": [0.12, -0.009, 0.0]
+    #         "radius": 0.03
+    #       - "center": [0.15, -0.011, 0.0]
+    #         "radius": 0.03
+    #       - "center": [0.18, -0.014, 0.0]
+    #         "radius": 0.03
+    #       - "center": [0.21, -0.017, 0.0]
+    #         "radius": 0.03
+    #       - "center": [0.146, -0.003, 0.0]
+    #         "radius": 0.03
+    #   link3:
+    #       - "center": [0.0, 0.0, 0.0]
+    #         "radius": 0.03
+    #       - "center": [-0.033, 0.021, 0.0]
+    #         "radius": 0.03
+    #       - "center": [-0.048, 0.024, -0.0]
+    #         "radius": 0.02
+    #       - "center": [-0.067, 0.033, 0.0]
+    #         "radius": 0.02
+    #       - "center": [-0.08, 0.039, 0.0]
+    #         "radius": 0.02
+    #       - "center": [-0.102, 0.04, -0.003]
+    #         "radius": 0.02
+    #       - "center": [-0.137, 0.047, -0.003]
+    #         "radius": 0.02
+    #       - "center": [-0.161, 0.052, 0.0]
+    #         "radius": 0.02
+    #       - "center": [-0.17, 0.055, 0.0]
+    #         "radius": 0.03
+    #   link4:
+    #       - "center": [-0.005, 0.0, 0.004]
+    #         "radius": 0.03
+    #   link5:
+    #       - "center": [0.0, 0.064, -0.0]
+    #         "radius": 0.03
+    #   link6:
+    #       - "center": [0.005, 0.0, 0.03]
+    #         "radius": 0.03
+    #       - "center": [0.001, 0.055, 0.055]
+    #         "radius": 0.01
+    #       - "center": [0.001, 0.033, 0.054]
+    #         "radius": 0.01
+    #       - "center": [-0.001, -0.037, 0.056]
+    #         "radius": 0.01
+    #   link7:
+    #       - "center": [-0.0, -0.008, -0.007]
+    #         "radius": 0.01
+    #       - "center": [0.003, -0.047, -0.019]
+    #         "radius": 0.01
+    #   link8:
+    #       - "center": [-0.001, -0.031, -0.009]
+    #         "radius": 0.01
+    #       - "center": [-0.001, 0.007, -0.008]
+    #         "radius": 0.01
+    #       - "center": [-0.001, 0.05, -0.012]
+    #         "radius": 0.01
+    #       - "center": [-0.001, 0.03, -0.011]
+    #         "radius": 0.01
+    collision_spheres:
+      base_link:
+        - "center": [-0.011, -0.003, 0.046]
+          "radius": 0.01
+      link1:
+        - "center": [-0.001, -0.015, -0.006]
+          "radius": 0.05343
+      link2:
+        - "center": [0.258, -0.004, 0.014]
+          "radius": 0.03
+        - "center": [0.058, 0.0, 0.013]
+          "radius": 0.03
+        - "center": [0.207, -0.022, -0.016]
+          "radius": 0.03
+        - "center": [0.114, -0.012, -0.007]
+          "radius": 0.03
+        - "center": [0.159, -0.016, -0.011]
+          "radius": 0.03
+        - "center": [0.226, -0.009, -0.013]
+          "radius": 0.03
+      link3:
+        - "center": [-0.154, 0.045, -0.011]
+          "radius": 0.03
+        - "center": [0.014, 0.011, 0.012]
+          "radius": 0.03
+        - "center": [-0.11, 0.046, -0.002]
+          "radius": 0.03
+        - "center": [-0.184, 0.046, -0.008]
+          "radius": 0.03
+        - "center": [-0.007, 0.017, -0.03]
+          "radius": 0.03
+        - "center": [-0.058, 0.029, 0.011]
+          "radius": 0.03
+      link4:
+        - "center": [0.011, -0.0, 0.004]
+          "radius": 0.03
+      link5:
+        - "center": [-0.002, 0.062, 0.002]
+          "radius": 0.03
+      link6:
+        - "center": [0.01, 0.0, 0.02]
+          "radius": 0.03
+      link7:
+        - "center": [0.017, -0.055, -0.015]
+          "radius": 0.0155
+        - "center": [-0.017, -0.057, -0.008]
+          "radius": 0.0155
+      link8:
+        - "center": [0.018, 0.055, -0.011]
+          "radius": 0.01601
+        - "center": [-0.019, 0.061, -0.007]
+          "radius": 0.0149
+    collision_sphere_buffer: 0.004
+    extra_collision_spheres: {"attached_object": 4}
+    self_collision_ignore:
+      {
+        "base_link": ["link1", "link2", "link3", "link4", "link5", "link6", "link7", "link8"],
+        "link1": ["link2", "link3", "link4", "link5", "link6", "link7", "link8"],
+        "link2": ["link3", "link4", "link5", "link6", "link7", "link8"],
+        "link3": ["link4", "link5", "link6", "link7", "link8"],
+        "link4": ["link5", "link6", "link7", "link8"],
+        "link5": ["link6", "link7", "link8"],
+        "link6": ["link7", "link8"],
+        "link7": ["link8"]
+      }
+
+    self_collision_buffer:
+      {
+        "base_link": 0.1,
+        "link1": 0.05,
+        "link2": 0.05,
+        "link3": 0.05,
+        "link4": 0.05,
+        "link5": 0.05,
+        "link6": 0.05,
+        "link7": 0.05,
+        "link8": 0.05
+      }
+
+    use_global_cumul: True
+    mesh_link_names:
+      [
+        "base_link",
+        "link1",
+        "link2",
+        "link3",
+        "link4",
+        "link5",
+        "link6",
+        "link7",
+        "link8"
+      ]
+
+    cspace:
+      joint_names: ["joint1","joint2","joint3","joint4", "joint5", "joint6","joint7","joint8"]
+      # retract_config: [0.0, 0.35, -0.35, 0.0, 0.0, 0.0, 0.0, 0.0]
+      retract_config: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+      null_space_weight: [1,1,1,1,1,1,1,1]
+      cspace_distance_weight: [1,1,1,1,1,1,1,1]
+      max_acceleration: 15.0
+      max_jerk: 500.0

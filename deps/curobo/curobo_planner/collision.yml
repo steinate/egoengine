@@ -1,0 +1,40 @@
+##
+## Copyright (c) 2023 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+##
+## NVIDIA CORPORATION, its affiliates and licensors retain all intellectual
+## property and proprietary rights in and to this material, related
+## documentation and any modifications thereto. Any use, reproduction,
+## disclosure or distribution of this material and related documentation
+## without an express license agreement from NVIDIA CORPORATION or
+## its affiliates is strictly prohibited.
+##
+
+##
+cuboid:
+  table:
+    dims: [1.5, 1.0, 0.02] # x, y, z
+    pose: [-0.5, 0.0, 0.0, 1, 0, 0, 0.0] # x, y, z, qx, qy, qz, qw
+    color: [0.6, 0.6, 0.8, 1.0]
+  
+  wall_right:
+    dims: [0.4, 0.1, 0.4]
+    pose: [-0.01, -0.3, 0.2, 1, 0, 0, 0.0]
+    color: [0.6, 0.6, 0.8, 1.0]
+
+  wall_left:
+    dims: [1.0, 0.1, 1.0]
+    pose: [-0.01, 0.4, 0.4, 1, 0, 0, 0.0]
+    color: [0.6, 0.6, 0.8, 1.0]
+
+
+
+ 
+  # obs:
+  #   dims: [0.1, 0.06, 0.46]
+  #   pose: [-0.6, -0.15, 0.23, 1, 0, 0, 0.0]
+  #   color: [0.6, 0.6, 0.8, 1.0]
+  
+  # obs2:
+  #   dims: [0.1, 0.1, 0.06]
+  #   pose: [-0.6, -0.15, 0.43, 1, 0, 0, 0.0]
+  #   color: [0.6, 0.6, 0.8, 1.0]

@@ -10,6 +10,11 @@ def main():
     paths = subprocess.check_output(["git", "ls-files", "-z"], cwd=root).decode().split("\0")
     python_count = shell_count = 0
     for name in filter(None, paths):
+        if not (
+            name.startswith(("work/", "migration/", "human_pair/"))
+            or name in ("scripts/check_sources.py", "scripts/format_sources.py")
+        ):
+            continue
         path = root / name
         if path.suffix == ".py":
             ast.parse(path.read_text(encoding="utf-8"), filename=name)

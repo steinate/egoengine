@@ -1,0 +1,127 @@
+##
+## Copyright (c) 2023 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+##
+## NVIDIA CORPORATION, its affiliates and licensors retain all intellectual
+## property and proprietary rights in and to this material, related
+## documentation and any modifications thereto. Any use, reproduction,
+## disclosure or distribution of this material and related documentation
+## without an express license agreement from NVIDIA CORPORATION or
+## its affiliates is strictly prohibited.
+##
+
+robot_cfg:
+  kinematics:
+    usd_path: "robot/AzureLoong_v025_right_arm.usd"
+    usd_robot_root: "/robot"
+    isaac_usd_path: ""
+    usd_flip_joints: {}
+    usd_flip_joint_limits: []
+
+    urdf_path: "robot/AzureLoong_v025/right_arm_dex.urdf"
+    asset_root_path: "robot"
+
+    base_link: "base_link"
+    ee_link: "Link_arm_r_07"
+    lock_joints: null
+    extra_links: {"attached_object":{"parent_link_name": "Link_arm_r_07" ,
+    "link_name": "attached_object", "fixed_transform": [0,0,0,1,0,0,0], "joint_type":"FIXED",
+    "joint_name": "attach_joint" }}
+
+    collision_link_names:
+      [
+        "base_link",
+        "Link_arm_r_01",
+        "Link_arm_r_02",
+        "Link_arm_r_03",
+        "Link_arm_r_04",
+        "Link_arm_r_05",
+        "Link_arm_r_06",
+        "Link_arm_r_07",
+      ]
+    collision_spheres:
+      base_link:
+        - "center": [-0.002, -0.1, 0.387]
+          "radius": 0.03
+      Link_arm_r_01:
+        - "center": [0.004, -0.061, -0.0]
+          "radius": 0.03
+      Link_arm_r_02:
+        - "center": [-0.0, -0.082, 0.0]
+          "radius": 0.04436
+        - "center": [0.013, -0.013, -0.002]
+          "radius": 0.04119
+        - "center": [-0.03, -0.013, 0.004]
+          "radius": 0.03801
+      Link_arm_r_03:
+        - "center": [0.006, -0.175, 0.026]
+          "radius": 0.03
+        - "center": [-0.001, -0.058, -0.0]
+          "radius": 0.03
+        - "center": [0.0, -0.11, -0.005]
+          "radius": 0.03
+        - "center": [-0.002, -0.031, 0.001]
+          "radius": 0.03
+      Link_arm_r_04:
+        - "center": [-0.001, -0.087, -0.023]
+          "radius": 0.03482
+        - "center": [0.007, -0.063, -0.024]
+          "radius": 0.03333
+        - "center": [-0.008, -0.063, -0.025]
+          "radius": 0.03259
+      Link_arm_r_05:
+        - "center": [-0.001, -0.043, 0.002]
+          "radius": 0.02
+        - "center": [0.005, -0.139, -0.001]
+          "radius": 0.02
+        - "center": [0.003, -0.086, 0.0]
+          "radius": 0.02
+      Link_arm_r_06:
+        - "center": [-0.0, -0.055, 0.003]
+          "radius": 0.02
+      Link_arm_r_07:
+        - "center": [0.0, -0.048, 0.0]
+          "radius": 0.01
+    collision_sphere_buffer: 0.004
+    extra_collision_spheres: {"attached_object": 4}
+    self_collision_ignore:
+      {
+        "base_link": ["Link_arm_r_01", "Link_arm_r_02", "Link_arm_r_03", "Link_arm_r_04", "Link_arm_r_05", "Link_arm_r_06", "Link_arm_r_07"],
+        "Link_arm_r_01": ["Link_arm_r_02", "Link_arm_r_03", "Link_arm_r_04", "Link_arm_r_05", "Link_arm_r_06", "Link_arm_r_07"],
+        "Link_arm_r_02": ["Link_arm_r_03", "Link_arm_r_04", "Link_arm_r_05", "Link_arm_r_06", "Link_arm_r_07"],
+        "Link_arm_r_03": ["Link_arm_r_04", "Link_arm_r_05", "Link_arm_r_06", "Link_arm_r_07"],
+        "Link_arm_r_04": ["Link_arm_r_05", "Link_arm_r_06", "Link_arm_r_07"],
+        "Link_arm_r_05": ["Link_arm_r_06", "Link_arm_r_07"],
+        "Link_arm_r_06": ["Link_arm_r_07"],
+      }
+    self_collision_buffer:
+      {
+        "base_link": 0.1,
+        "Link_arm_r_01": 0.05,
+        "Link_arm_r_02": 0.05,
+        "Link_arm_r_03": 0.05,
+        "Link_arm_r_04": 0.05,
+        "Link_arm_r_05": 0.05,
+        "Link_arm_r_06": 0.05,
+        "Link_arm_r_07": 0.05,
+      }
+
+    use_global_cumul: True
+    mesh_link_names:
+      [
+        "base_link",
+        "Link_arm_r_01",
+        "Link_arm_r_02",
+        "Link_arm_r_03",
+        "Link_arm_r_04",
+        "Link_arm_r_05",
+        "Link_arm_r_06",
+        "Link_arm_r_07",
+      ]
+
+    cspace:
+      joint_names: ["J_arm_r_01","J_arm_r_02","J_arm_r_03","J_arm_r_04", "J_arm_r_05", "J_arm_r_06","J_arm_r_07"]
+      retract_config: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+      null_space_weight: [1,1,1,1,1,1,1]
+      cspace_distance_weight: [1,1,1,1,1,1,1]
+      max_acceleration: 15.0
+      max_jerk: 500.0

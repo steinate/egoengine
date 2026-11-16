@@ -12,7 +12,16 @@ def main():
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
     names = subprocess.check_output(["git", "ls-files", "-z"], cwd=root).decode().split("\0")
-    paths = [name for name in names if name.endswith(".py")]
+    # Preserve the upstream engine's formatting; only format our workflow tools.
+    paths = [
+        name
+        for name in names
+        if name.endswith(".py")
+        and (
+            name.startswith(("work/", "migration/"))
+            or name in ("scripts/check_sources.py", "scripts/format_sources.py")
+        )
+    ]
     if paths:
         command = [args.ruff, "format"]
         if args.check:

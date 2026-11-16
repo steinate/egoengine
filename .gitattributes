@@ -4,3 +4,6 @@
 # Patch context prefixes and original license hard breaks must be preserved.
 *.patch -whitespace
 work/gaussian-ego/RASTERIZER-LICENSE.md -whitespace
+# Preserve vendored planner/importer source bytes and original formatting.
+deps/curobo/** -text -whitespace
+deps/blender_mmd_tools/** -text -whitespace
