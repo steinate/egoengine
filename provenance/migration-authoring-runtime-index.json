@@ -1,0 +1,28 @@
+{
+  "source_root": "/Applications/Blender.app",
+  "prefix": "blender-macos",
+  "excluded_names": [],
+  "archives": [
+    {
+      "archive": "blender-macos-Contents.tar.gz",
+      "sha256": "fa98573bab9890dff3dcf5552d62a8f65e5b2432c7810d7fb2ffae9b0a91369e",
+      "manifest": "blender-macos-Contents.files.jsonl",
+      "manifest_sha256": "92c5d1d1e3343a1ff0311515c5941c00ae0b3f491193a5ae033fc0df0c751f21",
+      "entries": 7549,
+      "uncompressed_file_bytes": 934504050,
+      "archive_bytes": 345353191,
+      "elapsed_s": 7.9
+    },
+    {
+      "archive": "blender-macos-root-files.tar.gz",
+      "sha256": "3985e3be96005f555b6ac898c1e39226d08f97b6c044929a8489eea2d67674fa",
+      "manifest": "blender-macos-root-files.files.jsonl",
+      "manifest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "entries": 0,
+      "uncompressed_file_bytes": 0,
+      "archive_bytes": 120,
+      "elapsed_s": 0.0
+    }
+  ],
+  "created_unix": 1794801001.368665
+}

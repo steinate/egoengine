@@ -1,0 +1,21 @@
+{
+  "upstream": "https://github.com/InternRobotics/InternDataEngine",
+  "baseline": "2a0a21f2c836df97c925729084e13d68950b4deb",
+  "upstream_is_git_ancestor": true,
+  "upstream_history_commits": 19,
+  "upstream_tracked_files": 1786,
+  "missing_files": [],
+  "identical_upstream_files": 1779,
+  "modified_upstream_files": [
+    ".gitignore",
+    "README.md",
+    "deps/world_toolkit/world_recorder/__init__.py",
+    "pyproject.toml",
+    "workflows/simbox/core/controllers/template_controller.py",
+    "workflows/simbox/core/objects/rigid_object.py",
+    "workflows/simbox_dual_workflow.py"
+  ],
+  "deployed_engine_patch": "patches/interndataengine-isaac41.patch",
+  "planning_source": "deps/curobo",
+  "character_import_source": "deps/blender_mmd_tools"
+}

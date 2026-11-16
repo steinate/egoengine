@@ -1,0 +1,212 @@
+{
+  "source_root": "/Users/steinate/Documents/Codex/2026-11-12/wo-x/work",
+  "prefix": "local-work",
+  "excluded_names": [
+    ".git",
+    "__pycache__",
+    "venv"
+  ],
+  "archives": [
+    {
+      "archive": "local-work-InternDataEngine.tar.gz",
+      "sha256": "4f7412abaa1ee7a3a3873fa4f530b0bc3fdd9e8754fc8d58d958bac50b371b4d",
+      "manifest": "local-work-InternDataEngine.files.jsonl",
+      "manifest_sha256": "59ea538ed5d506821402b83e5ddc9d5e691fc78964830a49f368ac0043df1d53",
+      "entries": 2199,
+      "uncompressed_file_bytes": 216871755,
+      "archive_bytes": 118536820,
+      "elapsed_s": 2.5
+    },
+    {
+      "archive": "local-work-anime-human-v1.tar.gz",
+      "sha256": "2103b43a14bd9d12d86044756f045179fbfef2b2fb184859372ff502b8e0ebd8",
+      "manifest": "local-work-anime-human-v1.files.jsonl",
+      "manifest_sha256": "876edf557431e2956f0696658769ec587eda94d9ec5898c2d806cabd7ca2faec",
+      "entries": 309,
+      "uncompressed_file_bytes": 64297441,
+      "archive_bytes": 50959359,
+      "elapsed_s": 1.0
+    },
+    {
+      "archive": "local-work-avatar-assets-v1.tar.gz",
+      "sha256": "feb9e9e885f230897c96a357401231393b5f0a628737de6a31008dff146234e6",
+      "manifest": "local-work-avatar-assets-v1.files.jsonl",
+      "manifest_sha256": "28cc0d1a8a81bb76c6d388ad45adc761e38a7b02fa41beed787821e9f1cfb786",
+      "entries": 15,
+      "uncompressed_file_bytes": 316336,
+      "archive_bytes": 74925,
+      "elapsed_s": 0.0
+    },
+    {
+      "archive": "local-work-gakumas-human-v1.tar.gz",
+      "sha256": "bf172781ea3bea79e88eb939948b7112e3ea4ab19cf6e56bc1609543e5e5c463",
+      "manifest": "local-work-gakumas-human-v1.files.jsonl",
+      "manifest_sha256": "44ccd313aed933be5f3770db42007b14577de33f60e8180b622fc6778b474a9a",
+      "entries": 4,
+      "uncompressed_file_bytes": 190899,
+      "archive_bytes": 58347,
+      "elapsed_s": 0.0
+    },
+    {
+      "archive": "local-work-gaussian-avatar-audit.tar.gz",
+      "sha256": "304f1e06d68f6ff3354fd77c3740dce0fdf27bbc015b47d941cf1f9698ea5ba8",
+      "manifest": "local-work-gaussian-avatar-audit.files.jsonl",
+      "manifest_sha256": "2f51197045f2603b20b5684c3448d92b88d9beb7c41edaca18b3567645fa8045",
+      "entries": 251,
+      "uncompressed_file_bytes": 23215889,
+      "archive_bytes": 21362819,
+      "elapsed_s": 0.4
+    },
+    {
+      "archive": "local-work-gaussian-ego.tar.gz",
+      "sha256": "af66bd3b69b8f371035b1e0a6c54e04896233e38476bd37064c74532931a507c",
+      "manifest": "local-work-gaussian-ego.files.jsonl",
+      "manifest_sha256": "95a45385a871b33f1b0526c42f15edecabea8fec3a7db94d5a89af8addb9e72c",
+      "entries": 1718,
+      "uncompressed_file_bytes": 68528358,
+      "archive_bytes": 49085148,
+      "elapsed_s": 1.3
+    },
+    {
+      "archive": "local-work-human-ego.tar.gz",
+      "sha256": "2f471579ccb0e453a44c578de0f87d267cdc7b9c613aa47a152047bb909b5ba2",
+      "manifest": "local-work-human-ego.files.jsonl",
+      "manifest_sha256": "d06bc2a424ef6c135bb5d89ab1ac480201eea03e6ed518cb85a583f238645287",
+      "entries": 37,
+      "uncompressed_file_bytes": 27562465,
+      "archive_bytes": 26707116,
+      "elapsed_s": 0.4
+    },
+    {
+      "archive": "local-work-human-ik-v2.tar.gz",
+      "sha256": "137c8320448b0c46a1408e471ad277625aeedb247e4c2bdd4d3dd248a2d6c217",
+      "manifest": "local-work-human-ik-v2.files.jsonl",
+      "manifest_sha256": "12eb5f3fdbdff773bb54ad8a5d8f30754625cc2274c3d58088ab902f8431d386",
+      "entries": 19,
+      "uncompressed_file_bytes": 4588347,
+      "archive_bytes": 4558878,
+      "elapsed_s": 0.1
+    },
+    {
+      "archive": "local-work-human-natural-v4.tar.gz",
+      "sha256": "61b466b6ab37d3d8eb3bb972df681e9a924087e249a5f1311f2e12bb016db2f8",
+      "manifest": "local-work-human-natural-v4.files.jsonl",
+      "manifest_sha256": "5e2bea2dde32e58e902a7a36b0fecef809cc49439b982921f16a0a046b262c54",
+      "entries": 20,
+      "uncompressed_file_bytes": 133436,
+      "archive_bytes": 79234,
+      "elapsed_s": 0.0
+    },
+    {
+      "archive": "local-work-human-scan-v5.tar.gz",
+      "sha256": "dc306a9cb1ed72340cc97dfe20053cffbb742745b4dbfc949798cc9588bbf2e4",
+      "manifest": "local-work-human-scan-v5.files.jsonl",
+      "manifest_sha256": "9e421c5cbfc718b4a8442016ddd2cf42d37dee9fbab34176c680dc22f52c5c24",
+      "entries": 22,
+      "uncompressed_file_bytes": 513372104,
+      "archive_bytes": 493320345,
+      "elapsed_s": 6.9
+    },
+    {
+      "archive": "local-work-human-scan-v6.tar.gz",
+      "sha256": "333b21e1dd9b742e2cc0095e061bc81a531bdd8c6eb434cce37493bab096001b",
+      "manifest": "local-work-human-scan-v6.files.jsonl",
+      "manifest_sha256": "f7af6a89943f92f19ade57ca5d9524db813a05adacb6f73321be043048843ee4",
+      "entries": 17,
+      "uncompressed_file_bytes": 3266244,
+      "archive_bytes": 3119641,
+      "elapsed_s": 0.1
+    },
+    {
+      "archive": "local-work-human-stack-v3.tar.gz",
+      "sha256": "1e366f6522ebeb7684d50615854d3d69d354fc16a08c260fdaa391716a928d44",
+      "manifest": "local-work-human-stack-v3.files.jsonl",
+      "manifest_sha256": "9ddba3ea34afc2bd77c4fb86d76bc7df4a0edcd08e79849e787fa8e6590e22dd",
+      "entries": 19,
+      "uncompressed_file_bytes": 3172231,
+      "archive_bytes": 3135073,
+      "elapsed_s": 0.1
+    },
+    {
+      "archive": "local-work-human41.tar.gz",
+      "sha256": "836d6d0903c2d34cc5550895e4d92d2ea7c51317303840a1bddbd749a7864656",
+      "manifest": "local-work-human41.files.jsonl",
+      "manifest_sha256": "cf325c7ff91b0a88a763b23da85806824aa6f3fccff2084cbef5006f79066b58",
+      "entries": 23,
+      "uncompressed_file_bytes": 5092868,
+      "archive_bytes": 5033938,
+      "elapsed_s": 0.1
+    },
+    {
+      "archive": "local-work-isaac41.tar.gz",
+      "sha256": "d90fcca543ac44c19d49562c02b9cbf3cf1895d81d413f20fa031a126fb88bc5",
+      "manifest": "local-work-isaac41.files.jsonl",
+      "manifest_sha256": "782a4dca4f734f5e912457c431bdad77f5a69e245b95169d47cabd4cc5fb7b2f",
+      "entries": 40,
+      "uncompressed_file_bytes": 5194808,
+      "archive_bytes": 5145401,
+      "elapsed_s": 0.1
+    },
+    {
+      "archive": "local-work-isaac51-validation.tar.gz",
+      "sha256": "be04dcf4e5c8b76ca3bc05b7df6ed1d31769bf72b15d34766870fc010b1a849c",
+      "manifest": "local-work-isaac51-validation.files.jsonl",
+      "manifest_sha256": "b433fba1c852e435fb188df7bd2c8088fec61bc6dd331757fb840af524cf7515",
+      "entries": 459,
+      "uncompressed_file_bytes": 4517137,
+      "archive_bytes": 2086016,
+      "elapsed_s": 0.1
+    },
+    {
+      "archive": "local-work-paired-human-ego.tar.gz",
+      "sha256": "82a6e9c705344e7496ad421faf74a8efb68040bcd882697d31297c94a9925677",
+      "manifest": "local-work-paired-human-ego.files.jsonl",
+      "manifest_sha256": "0bc744495bb15dd388903fb9b2047c68ff341d64e5d16bdf50ee3ab8a2394666",
+      "entries": 39,
+      "uncompressed_file_bytes": 11328053,
+      "archive_bytes": 11288788,
+      "elapsed_s": 0.2
+    },
+    {
+      "archive": "local-work-pycache.tar.gz",
+      "sha256": "cbcef01f74b90f207ea825c82b72ce0d4d86398d80ec7a7f5ce8350f850a7565",
+      "manifest": "local-work-pycache.files.jsonl",
+      "manifest_sha256": "1d41beeed1eeb46f24a901025f214a84faa7364e6fb8ed838f3a68c275284daf",
+      "entries": 109,
+      "uncompressed_file_bytes": 1014602,
+      "archive_bytes": 464014,
+      "elapsed_s": 0.1
+    },
+    {
+      "archive": "local-work-robot-stack-v2.tar.gz",
+      "sha256": "e69952d7df2bf74032af520a791579d453ea293925040a5b5a33f790e1a57553",
+      "manifest": "local-work-robot-stack-v2.files.jsonl",
+      "manifest_sha256": "7f995697a6f988f649528f827be4e3d025d3607ea8ba27698f0a712c2ff83221",
+      "entries": 10,
+      "uncompressed_file_bytes": 280998,
+      "archive_bytes": 258990,
+      "elapsed_s": 0.0
+    },
+    {
+      "archive": "local-work-robot-to-human-research.tar.gz",
+      "sha256": "0e827ef37c4e0fcf7a3ff8d6115d2b801b921787b98117630016fa7702ad9611",
+      "manifest": "local-work-robot-to-human-research.files.jsonl",
+      "manifest_sha256": "73d46adc6067ea60e08ad215655c36ccdc37fa1422f0913b0750da30c2a502b0",
+      "entries": 4,
+      "uncompressed_file_bytes": 800041,
+      "archive_bytes": 116496,
+      "elapsed_s": 0.0
+    },
+    {
+      "archive": "local-work-root-files.tar.gz",
+      "sha256": "d3fa2f63117ea8e9648ca030d910733119185b46a93a7a017f70e628754e6f72",
+      "manifest": "local-work-root-files.files.jsonl",
+      "manifest_sha256": "1c33a23649dca1592299090fce7c5498bf027623295fcdfd339333bd4bebcf7a",
+      "entries": 18,
+      "uncompressed_file_bytes": 129088788,
+      "archive_bytes": 118715369,
+      "elapsed_s": 1.7
+    }
+  ],
+  "created_unix": 1794799879.9088361
+}

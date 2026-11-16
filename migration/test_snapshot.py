@@ -13,6 +13,38 @@ TOOLS = Path(__file__).resolve().parent
 
 
 class SnapshotTests(unittest.TestCase):
+    def test_relocation_changes_only_restored_paths(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp).resolve()
+            original = base / "original"
+            restored = base / "restored"
+            original.mkdir()
+            restored.mkdir()
+            content = f'ROOT = "{original}"\n'
+            (original / "run.py").write_text(content)
+            (restored / "run.py").write_text(content)
+            (restored / "input-link").symlink_to(original / "run.py")
+            (restored / "binary.npz").write_bytes(b"unchanged-binary")
+            subprocess.run(
+                [
+                    sys.executable,
+                    str(TOOLS / "relocate.py"),
+                    str(restored),
+                    "--old-root",
+                    str(original),
+                    "--report",
+                    str(base / "report.json"),
+                ],
+                check=True,
+                capture_output=True,
+            )
+            self.assertEqual((original / "run.py").read_text(), content)
+            self.assertEqual(
+                (restored / "run.py").read_text(), content.replace(str(original), str(restored))
+            )
+            self.assertEqual(os.readlink(restored / "input-link"), str(restored / "run.py"))
+            self.assertEqual((restored / "binary.npz").read_bytes(), b"unchanged-binary")
+
     def test_roundtrip_and_corruption(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)

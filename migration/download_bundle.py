@@ -26,8 +26,18 @@ def main():
     ssh = ["ssh", "-o", "BatchMode=yes", "-o", "Compression=no", "-p", args.port, args.host]
     remote = args.remote.rstrip("/")
 
+    def remote_read(command):
+        for attempt in range(5):
+            result = subprocess.run([*ssh, command], capture_output=True)
+            if result.returncode == 0:
+                return result.stdout
+            if result.returncode != 255:
+                break
+            time.sleep(attempt + 1)
+        raise RuntimeError(f"SSH read failed: {command}: {result.stderr!r}")
+
     def fetch_bytes(name):
-        return subprocess.check_output([*ssh, "cat " + shlex.quote(remote + "/" + name)])
+        return remote_read("cat " + shlex.quote(remote + "/" + name))
 
     verified = set()
     while True:
@@ -37,7 +47,7 @@ def main():
             "p.glob(" + repr(args.prefix + "-*.summary.json") + ")], "
             "'complete':(p/" + repr(args.prefix + "-index.json") + ").exists()}))"
         )
-        state = json.loads(subprocess.check_output([*ssh, "python3 -c " + shlex.quote(query)]))
+        state = json.loads(remote_read("python3 -c " + shlex.quote(query)))
         for summary in state["summaries"]:
             name = summary["archive"]
             if name in verified:

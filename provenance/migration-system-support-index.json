@@ -1,0 +1,38 @@
+{
+  "source_root": "/vepfs/public/pengjiaqi/egoengine-migration-20261116/system-root",
+  "prefix": "system-root",
+  "excluded_names": [],
+  "archives": [
+    {
+      "archive": "system-root-etc.tar.gz",
+      "sha256": "418f8170928c2584b19f462dbe1cf9c83aba0b3be843897a4a0c47e706a3e423",
+      "manifest": "system-root-etc.files.jsonl",
+      "manifest_sha256": "a29304056113c38dc7770d2dbda22113d4ea0e9ce51e35488e2bdefbb6a71ead",
+      "entries": 368,
+      "uncompressed_file_bytes": 332055,
+      "archive_bytes": 175542,
+      "elapsed_s": 0.1
+    },
+    {
+      "archive": "system-root-usr.tar.gz",
+      "sha256": "994693ecb83aef83662513ce845a36fb7550df33379af28e38c63f3dac1cac93",
+      "manifest": "system-root-usr.files.jsonl",
+      "manifest_sha256": "ca3e380072a78be997841bbe8369a266cb33a451957ede2ecf156245cb537879",
+      "entries": 9796,
+      "uncompressed_file_bytes": 2039014916,
+      "archive_bytes": 785288694,
+      "elapsed_s": 36.2
+    },
+    {
+      "archive": "system-root-root-files.tar.gz",
+      "sha256": "73c9078ee083a2d12204ac7bb55ec0cf956b626e8c10603b6bc3fc1c193e80ac",
+      "manifest": "system-root-root-files.files.jsonl",
+      "manifest_sha256": "c91d1b477c874770c5c4dee6b89313702479822baf18f1a4f966adac4257b364",
+      "entries": 6,
+      "uncompressed_file_bytes": 40221,
+      "archive_bytes": 15175,
+      "elapsed_s": 0.0
+    }
+  ],
+  "created_unix": 1794800507.824933
+}

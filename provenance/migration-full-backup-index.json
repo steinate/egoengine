@@ -1,0 +1,268 @@
+{
+  "source_root": "/vepfs/public/pengjiaqi/interndata-human-pair",
+  "prefix": "deployment",
+  "excluded_names": [],
+  "archives": [
+    {
+      "archive": "deployment-anime-human-v1.tar.gz",
+      "sha256": "fccd67df7a07f7e218e4dcc04f5dcd9a4ff407263b7e833b40d277e9fcb89796",
+      "manifest": "deployment-anime-human-v1.files.jsonl",
+      "manifest_sha256": "f7e6a23847788e15ff88b7c57245b0861e90cab930e74ae9f926fb9b9f506543",
+      "entries": 4642,
+      "uncompressed_file_bytes": 2106843284,
+      "archive_bytes": 1962635893,
+      "elapsed_s": 65.4
+    },
+    {
+      "archive": "deployment-assets.tar.gz",
+      "sha256": "dad1a58c870e16c049a9de9bbdbd128b78e6e7ab1a4ff8b138bf6ba0e9e61f06",
+      "manifest": "deployment-assets.files.jsonl",
+      "manifest_sha256": "8902ae5b97061abefe33f4d36529b2da0a5a46d439f392931c96f85d468b7f5a",
+      "entries": 3639,
+      "uncompressed_file_bytes": 4119956339,
+      "archive_bytes": 2005482959,
+      "elapsed_s": 70.5
+    },
+    {
+      "archive": "deployment-avatar-assets-v1.tar.gz",
+      "sha256": "5e65c23cb58e4f00b6a7d888f9d9131317001d4d5ebbbfdab3b7380e691bbdb5",
+      "manifest": "deployment-avatar-assets-v1.files.jsonl",
+      "manifest_sha256": "80272c4bb1d7f7da4fcebda799904b45e30e029b3dbdddd08b18690183e2554c",
+      "entries": 11637,
+      "uncompressed_file_bytes": 4278845939,
+      "archive_bytes": 3198191418,
+      "elapsed_s": 113.2
+    },
+    {
+      "archive": "deployment-backups41.tar.gz",
+      "sha256": "84a59bf5db31e796988009f4b0bcc389d26ea441597cd6da30035d43c423de39",
+      "manifest": "deployment-backups41.files.jsonl",
+      "manifest_sha256": "82a05e7f343e216456328233335467f7d95755b3ffe55dc61b530e9e843a7ea5",
+      "entries": 3,
+      "uncompressed_file_bytes": 22168,
+      "archive_bytes": 5892,
+      "elapsed_s": 0.0
+    },
+    {
+      "archive": "deployment-cache.tar.gz",
+      "sha256": "b44a0c024dfa58da9f4b8cab2173c1908fc38716e8fe0c39e11d503bd237f980",
+      "manifest": "deployment-cache.files.jsonl",
+      "manifest_sha256": "620b78178201af7dbc2dc99ff5e73d506b807499feccc4ff2d90f1b9a3429098",
+      "entries": 10554,
+      "uncompressed_file_bytes": 883074614,
+      "archive_bytes": 362710763,
+      "elapsed_s": 23.2
+    },
+    {
+      "archive": "deployment-cache41.tar.gz",
+      "sha256": "b2364a51c480083dda92ba3697a62211deab38d84bf9804811a4649eac090249",
+      "manifest": "deployment-cache41.files.jsonl",
+      "manifest_sha256": "41da4caef8f78f734d3e98dd40dbb3ac9547635610b0ec2a7159a4370e7caab5",
+      "entries": 60282,
+      "uncompressed_file_bytes": 9143105733,
+      "archive_bytes": 7773721794,
+      "elapsed_s": 292.8
+    },
+    {
+      "archive": "deployment-downloads.tar.gz",
+      "sha256": "dfd6b0327e5d2f4f5927b40716d713d33e388fd1ddddf9637e004a8d798c2f55",
+      "manifest": "deployment-downloads.files.jsonl",
+      "manifest_sha256": "968eb246a4d69d27f242fe9a910962dd2c46128a0c5a58fe2c12b3c5787b143a",
+      "entries": 1459,
+      "uncompressed_file_bytes": 8609873061,
+      "archive_bytes": 8423006068,
+      "elapsed_s": 223.1
+    },
+    {
+      "archive": "deployment-env.tar.gz",
+      "sha256": "ee92e5dce9b6ee70ff651e2e2677ce603c0bb39577cbb652e2d3c6dfd8ef7bef",
+      "manifest": "deployment-env.files.jsonl",
+      "manifest_sha256": "7feaa200f7e4d253921609267d028c9a386cdd920679c94952d005191ff9d3d5",
+      "entries": 31225,
+      "uncompressed_file_bytes": 4174321452,
+      "archive_bytes": 1412357896,
+      "elapsed_s": 90.6
+    },
+    {
+      "archive": "deployment-gaussian-ego.tar.gz",
+      "sha256": "dbab9a110b670abf8543fe5f079c01939db854260a9ba08c2ab07589048b77d5",
+      "manifest": "deployment-gaussian-ego.files.jsonl",
+      "manifest_sha256": "59d4659477518a6127258f49548f0db6a62daa3115cff3e2ae6c30f85ab5f5d1",
+      "entries": 5839,
+      "uncompressed_file_bytes": 551472880,
+      "archive_bytes": 311130535,
+      "elapsed_s": 17.2
+    },
+    {
+      "archive": "deployment-human-ik-v2.tar.gz",
+      "sha256": "9aab6a2d5bee085b21bb7aa3933b3f9a524f474eddfd2b5acf52a624373a2d2c",
+      "manifest": "deployment-human-ik-v2.files.jsonl",
+      "manifest_sha256": "5cd2d4fc90d36405a8d65403ca58c9848cc4404856c03e638a70a4fb350a653a",
+      "entries": 2612,
+      "uncompressed_file_bytes": 1615202560,
+      "archive_bytes": 1401280216,
+      "elapsed_s": 42.8
+    },
+    {
+      "archive": "deployment-human-natural-v4.tar.gz",
+      "sha256": "5aaa233d734d22f0f131ba6edab28f2058b7043f4d8b88659ffcab25cee377c0",
+      "manifest": "deployment-human-natural-v4.files.jsonl",
+      "manifest_sha256": "112522cb445422d6dba18330db950bac2d625b5a515a4804682391625c8b0003",
+      "entries": 4666,
+      "uncompressed_file_bytes": 2901969082,
+      "archive_bytes": 2555814925,
+      "elapsed_s": 77.7
+    },
+    {
+      "archive": "deployment-human-scan-v5.tar.gz",
+      "sha256": "fb0a04d71c10b4ef7a08ecec9bf774a0bdb5071514ca0f6dfc4d63ed956457f0",
+      "manifest": "deployment-human-scan-v5.files.jsonl",
+      "manifest_sha256": "bf23ff977366fa35bb214393e8f1e581e0404ae023ec67ac4267747659843ab1",
+      "entries": 4678,
+      "uncompressed_file_bytes": 9600176737,
+      "archive_bytes": 7866151555,
+      "elapsed_s": 278.4
+    },
+    {
+      "archive": "deployment-human-scan-v6.tar.gz",
+      "sha256": "72296c7b5a7a67009da55e16bc197d71803e2f57f5b7bb269cfa8ada6d104fe2",
+      "manifest": "deployment-human-scan-v6.files.jsonl",
+      "manifest_sha256": "21eaaf6cb4d754f2de285aefa34eee52447a45d5db76998a6d7f6751ba6b99f1",
+      "entries": 4651,
+      "uncompressed_file_bytes": 7359238856,
+      "archive_bytes": 6731445237,
+      "elapsed_s": 243.0
+    },
+    {
+      "archive": "deployment-human-stack-v3.tar.gz",
+      "sha256": "97c0aa12b8bab9f737ca7f4dc067ade597c3fa0e8fd091a57c8f37d272b5bf2d",
+      "manifest": "deployment-human-stack-v3.files.jsonl",
+      "manifest_sha256": "e9dcfe7d25dc4981b8d60de9cd4fc6fe62b6c55ef6da2959ca8752a128e0f1ce",
+      "entries": 4615,
+      "uncompressed_file_bytes": 2954484005,
+      "archive_bytes": 2525680612,
+      "elapsed_s": 75.4
+    },
+    {
+      "archive": "deployment-human41.tar.gz",
+      "sha256": "c62b4c0eac73336b4488cb9c0bb9339c37bb2e8596574e4370b95406ac0d991b",
+      "manifest": "deployment-human41.files.jsonl",
+      "manifest_sha256": "6d619a63dcd0d58ba76fdc9748c4e9a1926748a25fa17e9dddfce9a8eeb62097",
+      "entries": 1965,
+      "uncompressed_file_bytes": 2587523000,
+      "archive_bytes": 2370007694,
+      "elapsed_s": 64.2
+    },
+    {
+      "archive": "deployment-logs.tar.gz",
+      "sha256": "83749cae1b0b581a703a17bb434166a90d3c7c42b79e941c6f6e46189d3b16a5",
+      "manifest": "deployment-logs.files.jsonl",
+      "manifest_sha256": "e0690a8f0736721672a8d3c1d9e8b1cf2951d441baa4cf4c6d2e719d646436e5",
+      "entries": 31,
+      "uncompressed_file_bytes": 7471532,
+      "archive_bytes": 861618,
+      "elapsed_s": 0.1
+    },
+    {
+      "archive": "deployment-logs41.tar.gz",
+      "sha256": "72f5f257c1135c3d92c70024e6c316f2ac52f062a1f9d8dcb1c1a0132428e947",
+      "manifest": "deployment-logs41.files.jsonl",
+      "manifest_sha256": "86e368af8178c925c9f8f94cda9df6a68be1ffee7ee308fbca648f2e860d4f47",
+      "entries": 39,
+      "uncompressed_file_bytes": 2427672,
+      "archive_bytes": 324517,
+      "elapsed_s": 0.1
+    },
+    {
+      "archive": "deployment-outputs.tar.gz",
+      "sha256": "b4644363e78dd2c7bcb0d35598b038daf184e71a8eb23a7c0b2ec2a2489d5198",
+      "manifest": "deployment-outputs.files.jsonl",
+      "manifest_sha256": "1b5775df2f386ab4493d1fcdbba3adb091702ab8885a84590ed857ee00adc456",
+      "entries": 23,
+      "uncompressed_file_bytes": 20026473,
+      "archive_bytes": 6603805,
+      "elapsed_s": 0.3
+    },
+    {
+      "archive": "deployment-outputs41.tar.gz",
+      "sha256": "877c7825b7a2c27fbfadccb6afce9903d6cd793038a33b5a78c4ce52c76fa491",
+      "manifest": "deployment-outputs41.files.jsonl",
+      "manifest_sha256": "8a5a4bd3f1e0fb3fb8489040411da6ff10817da1920e257a99dde4ebb94ba551",
+      "entries": 185,
+      "uncompressed_file_bytes": 566584950,
+      "archive_bytes": 431348358,
+      "elapsed_s": 11.9
+    },
+    {
+      "archive": "deployment-paired-human-ego.tar.gz",
+      "sha256": "4d588fc6fde91448967e084cb7ebef86d83dc45471ec7187e8f8fd4195a3487a",
+      "manifest": "deployment-paired-human-ego.files.jsonl",
+      "manifest_sha256": "e52e1e7e8915c54b5d83b5493893f97bee28f856c6bf6e2cde4cdbee65b65c3b",
+      "entries": 3485,
+      "uncompressed_file_bytes": 1924652263,
+      "archive_bytes": 1667399675,
+      "elapsed_s": 49.8
+    },
+    {
+      "archive": "deployment-robot-stack-v2.tar.gz",
+      "sha256": "d89fcbcd5f56964061e75ddf2b7d7b6aaf6b71fb456593dab6e875f7fb0a50fa",
+      "manifest": "deployment-robot-stack-v2.files.jsonl",
+      "manifest_sha256": "4a64c6b8f3cf049da47bf48edb0c4c2aebf096b69d969410db42e3543961b3cf",
+      "entries": 121,
+      "uncompressed_file_bytes": 400053143,
+      "archive_bytes": 283389992,
+      "elapsed_s": 8.2
+    },
+    {
+      "archive": "deployment-runtime41.tar.gz",
+      "sha256": "79b74aa9f37055efed637db2d10c4e4983bdd4a76f25c1ebf2fc9fa7ae8e384f",
+      "manifest": "deployment-runtime41.files.jsonl",
+      "manifest_sha256": "94c89012fe7869484cf03a4dafee9cca5057a91cc6d918bbf95244108955f739",
+      "entries": 112262,
+      "uncompressed_file_bytes": 17423575838,
+      "archive_bytes": 9019456931,
+      "elapsed_s": 445.2
+    },
+    {
+      "archive": "deployment-src.tar.gz",
+      "sha256": "e8df76d8cdd2e3a4bc44d8b06284043355eac0e13a720003585370150d74c196",
+      "manifest": "deployment-src.files.jsonl",
+      "manifest_sha256": "aa66d6fd426ec052b3c3cc23d17367832d237cedc86177f61ec692e52165ebf8",
+      "entries": 9117,
+      "uncompressed_file_bytes": 552796497,
+      "archive_bytes": 353258382,
+      "elapsed_s": 21.7
+    },
+    {
+      "archive": "deployment-tmp.tar.gz",
+      "sha256": "be24c14192c100352dbb831954e8ef4c408dc2776338f5ba6b8aaec40d06da9f",
+      "manifest": "deployment-tmp.files.jsonl",
+      "manifest_sha256": "599632cf23f682654fe123a9f774f06a76b1c35a1e48aa7320fcb23822d9d5c7",
+      "entries": 24,
+      "uncompressed_file_bytes": 2097152,
+      "archive_bytes": 2097607,
+      "elapsed_s": 0.1
+    },
+    {
+      "archive": "deployment-validation51.tar.gz",
+      "sha256": "ab681792396807174bc520fe25df66d334be3dd14b387277baf55ca927e8fe21",
+      "manifest": "deployment-validation51.files.jsonl",
+      "manifest_sha256": "4cdb9813057bf85fb39f8f296d891a237f407873284b60478187e49e545cbd05",
+      "entries": 7950,
+      "uncompressed_file_bytes": 1741432298,
+      "archive_bytes": 961670476,
+      "elapsed_s": 40.1
+    },
+    {
+      "archive": "deployment-root-files.tar.gz",
+      "sha256": "955ce947a8af331ad9349a60526b10f4e087615e574a4d7d18db9ad7a39aaa0b",
+      "manifest": "deployment-root-files.files.jsonl",
+      "manifest_sha256": "f904c941a37ce909923b1590be5e9b1347280d64ba4c6a67d00259aea556a4b7",
+      "entries": 28,
+      "uncompressed_file_bytes": 163671,
+      "archive_bytes": 129910,
+      "elapsed_s": 0.0
+    }
+  ],
+  "created_unix": 1794800662.939658
+}

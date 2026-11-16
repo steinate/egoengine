@@ -1,0 +1,208 @@
+{
+  "source_root": "/vepfs/public/pengjiaqi/egoengine-migration-20261116/reproduction-tree",
+  "prefix": "deployment",
+  "excluded_names": [],
+  "archives": [
+    {
+      "archive": "deployment-anime-human-v1.tar.gz",
+      "sha256": "a01aae0a39e1e6dcd5fc616edc4b00e6f79d61a167a4746faf89c7cebb9aa125",
+      "manifest": "deployment-anime-human-v1.files.jsonl",
+      "manifest_sha256": "cc2c53b579b8797a6c63861120244f05f24989eae5be5f7b3966dc3d499f0367",
+      "entries": 1568,
+      "uncompressed_file_bytes": 530289767,
+      "archive_bytes": 390177762,
+      "elapsed_s": 16.0
+    },
+    {
+      "archive": "deployment-assets.tar.gz",
+      "sha256": "795167e1f27fc2b713fb278efa53888b0a5e19e4acdce40d2d2977854d3c8f90",
+      "manifest": "deployment-assets.files.jsonl",
+      "manifest_sha256": "8902ae5b97061abefe33f4d36529b2da0a5a46d439f392931c96f85d468b7f5a",
+      "entries": 3639,
+      "uncompressed_file_bytes": 4119956339,
+      "archive_bytes": 2005483274,
+      "elapsed_s": 69.2
+    },
+    {
+      "archive": "deployment-avatar-assets-v1.tar.gz",
+      "sha256": "12508b3730404c9f0ac2f23a3faa8aaa1953f9d525a3a6590cc8990e0f94b498",
+      "manifest": "deployment-avatar-assets-v1.files.jsonl",
+      "manifest_sha256": "b2aa0a6bca3634ef837f23c815ded859a99a56e3c4e11fc52bdc0bdf731caf11",
+      "entries": 9916,
+      "uncompressed_file_bytes": 4201749909,
+      "archive_bytes": 3138284947,
+      "elapsed_s": 107.5
+    },
+    {
+      "archive": "deployment-cache41.tar.gz",
+      "sha256": "0fd611b97d913ec7404ecdc481cf3a53a8efb54f052e073de0212abb886ddba6",
+      "manifest": "deployment-cache41.files.jsonl",
+      "manifest_sha256": "97a93d6c57149417f94ecd15dbce2f201f9b65bdfacec6966b34d399fc7941c5",
+      "entries": 1681,
+      "uncompressed_file_bytes": 273447052,
+      "archive_bytes": 255612936,
+      "elapsed_s": 8.2
+    },
+    {
+      "archive": "deployment-env.tar.gz",
+      "sha256": "44c8d30b9fd90dc6b50473f03c9783249f80300b366d754732824ae5e5951663",
+      "manifest": "deployment-env.files.jsonl",
+      "manifest_sha256": "f1089af051a3fe477818f92e3c17cae2c851ecb0c78e52220c167082ede81e27",
+      "entries": 31225,
+      "uncompressed_file_bytes": 4174321452,
+      "archive_bytes": 1412362328,
+      "elapsed_s": 84.7
+    },
+    {
+      "archive": "deployment-gaussian-ego.tar.gz",
+      "sha256": "0913c3fde196e0e225b2f8abede32a8da33b43e85b95e69a066916b9cd319862",
+      "manifest": "deployment-gaussian-ego.files.jsonl",
+      "manifest_sha256": "923558ff4ede107a86682192dca49b5a583d20e29b356b280c24800b11c7b648",
+      "entries": 5825,
+      "uncompressed_file_bytes": 551387715,
+      "archive_bytes": 311105025,
+      "elapsed_s": 16.8
+    },
+    {
+      "archive": "deployment-human-ik-v2.tar.gz",
+      "sha256": "141514c7a1f855e4a804d8002e2b370e67dd4503add238ad32e394dccc5e005d",
+      "manifest": "deployment-human-ik-v2.files.jsonl",
+      "manifest_sha256": "66467d54cf6b765f0f3ab291ad9163a447a51563547e5827ff2720f0fd22afc8",
+      "entries": 16,
+      "uncompressed_file_bytes": 49651347,
+      "archive_bytes": 23479937,
+      "elapsed_s": 0.8
+    },
+    {
+      "archive": "deployment-human-natural-v4.tar.gz",
+      "sha256": "eda9f5f012870f3f8abed71a1c50430ac53a101f54bd9e6278fb0a81cb18267c",
+      "manifest": "deployment-human-natural-v4.files.jsonl",
+      "manifest_sha256": "565b450251453460459baae3713e47ff431b6fef60ded2f6ea273bb679af47f3",
+      "entries": 37,
+      "uncompressed_file_bytes": 105861543,
+      "archive_bytes": 53246670,
+      "elapsed_s": 1.9
+    },
+    {
+      "archive": "deployment-human-scan-v5.tar.gz",
+      "sha256": "157453f5343e805750f573e2304505d77b0d277f59e28975c6ef0498f5d8876f",
+      "manifest": "deployment-human-scan-v5.files.jsonl",
+      "manifest_sha256": "7a22a658127e64e1dcf9a6bdfeeb62b443f288171e19c2fab22f80f6329edf30",
+      "entries": 64,
+      "uncompressed_file_bytes": 2308954993,
+      "archive_bytes": 1167664988,
+      "elapsed_s": 34.6
+    },
+    {
+      "archive": "deployment-human-scan-v6.tar.gz",
+      "sha256": "899c036953365c2151955871fb74c33bbe49ed61a582e066d9c5a4deab94bbb5",
+      "manifest": "deployment-human-scan-v6.files.jsonl",
+      "manifest_sha256": "3dd97c822480947599edd40aa0e0e7f9eccf7bc2d89ce8e8006910ca4d34bec3",
+      "entries": 44,
+      "uncompressed_file_bytes": 61083171,
+      "archive_bytes": 29885641,
+      "elapsed_s": 1.1
+    },
+    {
+      "archive": "deployment-human-stack-v3.tar.gz",
+      "sha256": "30e546972f454479e2f92c7c43c8fc7aa905ec2d079ce9404647a338c7c840d5",
+      "manifest": "deployment-human-stack-v3.files.jsonl",
+      "manifest_sha256": "21249ddc4b8cde1f03ed6ba447857e4f91b8d3b417bb9fba8785a8f6f98e387a",
+      "entries": 29,
+      "uncompressed_file_bytes": 197351651,
+      "archive_bytes": 80652323,
+      "elapsed_s": 2.8
+    },
+    {
+      "archive": "deployment-human41.tar.gz",
+      "sha256": "f62090a1075b388b364e3fd2d581fddd8eee5862c3fdad48b6da35207da71b56",
+      "manifest": "deployment-human41.files.jsonl",
+      "manifest_sha256": "0e01b7d6e745e9a4083cc76c0d765b07203fb2d82f235466db8e2c0800b8de67",
+      "entries": 1945,
+      "uncompressed_file_bytes": 2582620391,
+      "archive_bytes": 2365673273,
+      "elapsed_s": 68.2
+    },
+    {
+      "archive": "deployment-outputs.tar.gz",
+      "sha256": "8b41ff5a1028bc09a2490fd848e265874c72e5d9f5137d97c262206d1eba38c2",
+      "manifest": "deployment-outputs.files.jsonl",
+      "manifest_sha256": "1b5775df2f386ab4493d1fcdbba3adb091702ab8885a84590ed857ee00adc456",
+      "entries": 23,
+      "uncompressed_file_bytes": 20026473,
+      "archive_bytes": 6603832,
+      "elapsed_s": 0.3
+    },
+    {
+      "archive": "deployment-outputs41.tar.gz",
+      "sha256": "a50e0955add5c70fe49340df7773530a80538a7af6b5131a6b44d97dccc6a510",
+      "manifest": "deployment-outputs41.files.jsonl",
+      "manifest_sha256": "4d4dea6618cca0cb83d25c4b9337e93e5137f7c09d2da3515ea0cc078c6308de",
+      "entries": 185,
+      "uncompressed_file_bytes": 566584950,
+      "archive_bytes": 431348151,
+      "elapsed_s": 12.1
+    },
+    {
+      "archive": "deployment-paired-human-ego.tar.gz",
+      "sha256": "c967d3e574122dd00eb9449953a3a3573f275b921a9365b3995c66541d2cdaf6",
+      "manifest": "deployment-paired-human-ego.files.jsonl",
+      "manifest_sha256": "11da178851a60bcbf7a4add85468b75fadc1e59920f7fe435e2fec4d01a47b01",
+      "entries": 1739,
+      "uncompressed_file_bytes": 821690961,
+      "archive_bytes": 655937446,
+      "elapsed_s": 20.9
+    },
+    {
+      "archive": "deployment-robot-stack-v2.tar.gz",
+      "sha256": "c819c7cf8aa67b220da691fbce4b1f73a6e1058523540f99601465596a1f4aad",
+      "manifest": "deployment-robot-stack-v2.files.jsonl",
+      "manifest_sha256": "b9a68f4681a69b501878d90ca39125856b826b394604b7fb65a9110c97f8839f",
+      "entries": 83,
+      "uncompressed_file_bytes": 398184670,
+      "archive_bytes": 281971572,
+      "elapsed_s": 8.2
+    },
+    {
+      "archive": "deployment-runtime41.tar.gz",
+      "sha256": "e8bbe9333bea5070d282c2e91c88c62e0d9d5ebe3da7a05702720d587af88a73",
+      "manifest": "deployment-runtime41.files.jsonl",
+      "manifest_sha256": "bb77ff7bd4d706934bb6a063029bf16fae55a22c2ced1101de36b1d46489901f",
+      "entries": 112262,
+      "uncompressed_file_bytes": 17423575838,
+      "archive_bytes": 9019895938,
+      "elapsed_s": 409.8
+    },
+    {
+      "archive": "deployment-src.tar.gz",
+      "sha256": "1c47640fb4aaefe85cbf92a25eefe9f2728736285f88fbe5fb1f4350d671b0e8",
+      "manifest": "deployment-src.files.jsonl",
+      "manifest_sha256": "b12b771fbfe71c1db033b9e78f2b78ec0a0e361133668a8949dff3e15e34b979",
+      "entries": 8711,
+      "uncompressed_file_bytes": 434561445,
+      "archive_bytes": 237391217,
+      "elapsed_s": 15.4
+    },
+    {
+      "archive": "deployment-validation51.tar.gz",
+      "sha256": "7983c3b1ae2368a88042d027f4d72f4c83bbe1240b0b0672bbaf9afbab98ecad",
+      "manifest": "deployment-validation51.files.jsonl",
+      "manifest_sha256": "d8dc4f1c580b081b5863906aaa19b9363d0dace51112a93faef6f0c113d0edf6",
+      "entries": 7934,
+      "uncompressed_file_bytes": 1739032333,
+      "archive_bytes": 959321569,
+      "elapsed_s": 38.8
+    },
+    {
+      "archive": "deployment-root-files.tar.gz",
+      "sha256": "32c63fed4e5caeaab7d0e3eb215be65078d6bcfb779bad92ff3a99477a14da81",
+      "manifest": "deployment-root-files.files.jsonl",
+      "manifest_sha256": "507d67c20a92bfd882d9cc15fb56cefd58c7213f4f2f90fb3365bd556b0c28e7",
+      "entries": 28,
+      "uncompressed_file_bytes": 137222,
+      "archive_bytes": 29374,
+      "elapsed_s": 0.0
+    }
+  ],
+  "created_unix": 1794800838.5721364
+}

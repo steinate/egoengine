@@ -83,7 +83,7 @@ output
 *.out
 .cursor
 assets
-curobo
+/curobo/
 panda_drake
 tests/*.log
 tests/*.txt
