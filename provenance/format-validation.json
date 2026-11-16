@@ -1,0 +1,22 @@
+{
+  "source_snapshot_commit": "521e97551ccf6cf4883f09a57458c9b45ccbea98",
+  "formatter": "ruff 0.14.4",
+  "python_files_checked": 152,
+  "all_python_ast_equal": true,
+  "cuda_and_insert_snippet_changes": "Trailing whitespace only",
+  "runtime_render_repeated": false,
+  "syntax_check": {
+    "python_files": 153,
+    "shell_files": 15
+  },
+  "engine_geometry_tests_passed": 3,
+  "motion_validation": {
+    "scope": "Local existing animation cache, not a new render or a replacement for delivery evidence",
+    "frames": 1507,
+    "source_objects_bitwise_equal": true,
+    "pelvis_and_spine_constant_upright": true,
+    "max_arm_reach_error_m": 0.0,
+    "animation_sha256": "adb3ddc21b5c50e42a77c7ccf03d826f9210d3a89d0672b34f076c60796801e8"
+  },
+  "format_scope": "Root repository tracked Python files only; nested dependency working trees clean"
+}

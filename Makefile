@@ -3,8 +3,8 @@ RUFF ?= ruff
 
 .PHONY: format check
 format:
-	$(RUFF) format work scripts
+	$(PYTHON) scripts/format_sources.py --ruff $(RUFF)
 
 check:
-	$(RUFF) format --check work scripts
+	$(PYTHON) scripts/format_sources.py --ruff $(RUFF) --check
 	$(PYTHON) scripts/check_sources.py

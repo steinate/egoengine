@@ -3,7 +3,7 @@
  * GRAPHDECO research group, https://team.inria.fr/graphdeco
  * All rights reserved.
  *
- * This software is free for non-commercial, research and evaluation use 
+ * This software is free for non-commercial, research and evaluation use
  * under the terms of the LICENSE.md file.
  *
  * For inquiries contact  george.drettakis@inria.fr
@@ -19,8 +19,8 @@ namespace cg = cooperative_groups;
 // coefficients of each Gaussian to a simple RGB color.
 __device__ glm::vec3 computeColorFromSH(int idx, int deg, int max_coeffs, const glm::vec3* means, glm::vec3 campos, const float* shs, bool* clamped)
 {
-	// The implementation is loosely based on code for 
-	// "Differentiable Point-Based Radiance Fields for 
+	// The implementation is loosely based on code for
+	// "Differentiable Point-Based Radiance Fields for
 	// Efficient View Synthesis" by Zhang et al. (2022)
 	glm::vec3 pos = means[idx];
 	glm::vec3 dir = pos - campos;
@@ -80,7 +80,7 @@ __device__ void compute_transmat(
 	const float* projmatrix,
 	const float* viewmatrix,
 	const int W,
-	const int H, 
+	const int H,
 	glm::mat3 &T,
 	float3 &normal
 ) {
@@ -117,7 +117,7 @@ __device__ void compute_transmat(
 // Computing the bounding box of the 2D Gaussian and its center
 // The center of the bounding box is used to create a low pass filter
 __device__ bool compute_aabb(
-	glm::mat3 T, 
+	glm::mat3 T,
 	float cutoff,
 	float2& point_image,
 	float2& extent
@@ -132,7 +132,7 @@ __device__ bool compute_aabb(
 		glm::dot(f, T[1] * T[2])
 	);
 
-	glm::vec2 h0 = p * p - 
+	glm::vec2 h0 = p * p -
 		glm::vec2(
 			glm::dot(f, T[0] * T[0]),
 			glm::dot(f, T[1] * T[1])
@@ -185,7 +185,7 @@ __global__ void preprocessCUDA(int P, int D, int M,
 	float3 p_view;
 	if (!in_frustum(idx, orig_points, viewmatrix, projmatrix, prefiltered, p_view))
 		return;
-	
+
 	// Compute transformation matrix
 	glm::mat3 T;
 	float3 normal;
@@ -199,7 +199,7 @@ __global__ void preprocessCUDA(int P, int D, int M,
 	} else {
 		glm::vec3 *T_ptr = (glm::vec3*)transMat_precomp;
 		T = glm::mat3(
-			T_ptr[idx * 3 + 0], 
+			T_ptr[idx * 3 + 0],
 			T_ptr[idx * 3 + 1],
 			T_ptr[idx * 3 + 2]
 		);
@@ -235,7 +235,7 @@ __global__ void preprocessCUDA(int P, int D, int M,
 	if ((rect_max.x - rect_min.x) * (rect_max.y - rect_min.y) == 0)
 		return;
 
-	// Compute colors 
+	// Compute colors
 	if (colors_precomp == nullptr) {
 		glm::vec3 result = computeColorFromSH(idx, D, M, (glm::vec3*)orig_points, *cam_pos, shs, clamped);
 		rgb[idx * C + 0] = result.x;
@@ -251,7 +251,7 @@ __global__ void preprocessCUDA(int P, int D, int M,
 }
 
 // Main rasterization method. Collaboratively works on one tile per
-// block, each thread treats one pixel. Alternates between fetching 
+// block, each thread treats one pixel. Alternates between fetching
 // and rasterizing data.
 template <uint32_t CHANNELS>
 __global__ void __launch_bounds__(BLOCK_X * BLOCK_Y)
@@ -351,7 +351,7 @@ renderCUDA(
 			const float3 Tu = collected_Tu[j];
 			const float3 Tv = collected_Tv[j];
 			const float3 Tw = collected_Tw[j];
-			// Transform the two planes into local u-v system. 
+			// Transform the two planes into local u-v system.
 			float3 k = pix.x * Tw - Tu;
 			float3 l = pix.y * Tw - Tv;
 			// Cross product of two planes is a line, Eq. (9)
@@ -359,16 +359,16 @@ renderCUDA(
 			if (p.z == 0.0) continue;
 			// Perspective division to get the intersection (u,v), Eq. (10)
 			float2 s = {p.x / p.z, p.y / p.z};
-			float rho3d = (s.x * s.x + s.y * s.y); 
+			float rho3d = (s.x * s.x + s.y * s.y);
 			// Add low pass filter
 			float2 d = {xy.x - pixf.x, xy.y - pixf.y};
-			float rho2d = FilterInvSquare * (d.x * d.x + d.y * d.y); 
+			float rho2d = FilterInvSquare * (d.x * d.x + d.y * d.y);
 			float rho = min(rho3d, rho2d);
 
 			// compute depth
 			float depth = (s.x * Tw.x + s.y * Tw.y) + Tw.z;
 			// if a point is too small, its depth is not reliable?
-			// depth = (rho3d <= rho2d) ? depth : Tw.z 
+			// depth = (rho3d <= rho2d) ? depth : Tw.z
 			if (depth < near_n) continue;
             // Ego inference extension: negative bg[0] marks packed [RGB, scene Z].
             // Reject each surfel intersection behind the opaque Isaac scene.
@@ -386,7 +386,7 @@ renderCUDA(
 			// Eq. (2) from 3D Gaussian splatting paper.
 			// Obtain alpha by multiplying with Gaussian opacity
 			// and its exponential falloff from mean.
-			// Avoid numerical instabilities (see paper appendix). 
+			// Avoid numerical instabilities (see paper appendix).
 			float alpha = min(0.99f, opa * exp(power));
 			if (alpha < 1.0f / 255.0f)
 				continue;
@@ -522,7 +522,7 @@ void FORWARD::preprocess(int P, int D, int M,
 		clamped,
 		transMat_precomp,
 		colors_precomp,
-		viewmatrix, 
+		viewmatrix,
 		projmatrix,
 		cam_pos,
 		W, H,

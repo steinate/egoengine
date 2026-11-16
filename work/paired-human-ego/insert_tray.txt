@@ -18,4 +18,3 @@ def fit_tray(side):
  H=unpack(best.x);tips,pts=handpoints(side,best.x[6:],H)
  print('TRAY_FIT',side,'wrist',H[:3,3],'tiperr',np.linalg.norm(tips-targets,axis=1),flush=True)
  return H,best.x[6:],{'tip_error_m':np.linalg.norm(tips-targets,axis=1).tolist(),'wrist':H.tolist(),'type':'Thumb outside and four fingers inside the original tray end rim'}
-

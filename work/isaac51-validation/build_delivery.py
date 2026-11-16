@@ -1,18 +1,24 @@
 """Assemble a local, model-weight-free verification deliverable."""
+
 from pathlib import Path
 import json, statistics, shutil, zipfile, hashlib
 
-cwd = Path('/Users/steinate/Documents/Codex/2026-11-12/wo-x')
-out = cwd / 'outputs/isaac51-validation'
-src = cwd / 'work/isaac51-validation'
-checks = json.loads((out / 'delivery-check.json').read_text())
-upper = checks['mixed-upperlimb']['render']
-assert upper['frames'] == 31 and upper['arm_included'] and upper['native_gaussian']
-assert upper['max_position_error_m'] == 0 and upper['max_rotation_error_rad'] == 0
-shutil.copy2(cwd / 'outputs/isaac41/human-ego/official-source-check.json', out / 'official-source-check.json')
-shutil.copy2(cwd / 'outputs/isaac41/official-dual-grasp/reproduce-and-data-guide.txt', out / 'original-official-task-provenance.txt')
-median = statistics.median(upper['render_frame_seconds'])
-report = f'''Isaac Sim 5.1 原生 Gaussian / 网格混合渲染验证
+cwd = Path("/Users/steinate/Documents/Codex/2026-11-12/wo-x")
+out = cwd / "outputs/isaac51-validation"
+src = cwd / "work/isaac51-validation"
+checks = json.loads((out / "delivery-check.json").read_text())
+upper = checks["mixed-upperlimb"]["render"]
+assert upper["frames"] == 31 and upper["arm_included"] and upper["native_gaussian"]
+assert upper["max_position_error_m"] == 0 and upper["max_rotation_error_rad"] == 0
+shutil.copy2(
+    cwd / "outputs/isaac41/human-ego/official-source-check.json", out / "official-source-check.json"
+)
+shutil.copy2(
+    cwd / "outputs/isaac41/official-dual-grasp/reproduce-and-data-guide.txt",
+    out / "original-official-task-provenance.txt",
+)
+median = statistics.median(upper["render_frame_seconds"])
+report = f"""Isaac Sim 5.1 原生 Gaussian / 网格混合渲染验证
 验证日期：2026-11-12；运行机器：VLA-Infra。
 
 结论
@@ -91,19 +97,22 @@ https://github.com/nv-tlabs/3dgrut/blob/main/threedgrut/export/README.md
 https://github.com/ATAboukhadra/GHOST
 https://developer.download.nvidia.com/ProGraphics/nvpro-samples/flowers_1.zip
 花卉原作者 Jean-Eudes Marvie https://jmarvie.com；下载包附带许可证为 CC BY 4.0；本次进行了 NuRec 格式转换并与测试方块共同渲染。
-'''
-(out / 'validation-report.txt').write_text(report)
-names = ['probe51.py', 'run51.sh', 'export_ghost.py', 'package_results.py', 'audit_motion.py']
-with zipfile.ZipFile(out / 'validation-code-and-results.zip', 'w', zipfile.ZIP_DEFLATED) as z:
+"""
+(out / "validation-report.txt").write_text(report)
+names = ["probe51.py", "run51.sh", "export_ghost.py", "package_results.py", "audit_motion.py"]
+with zipfile.ZipFile(out / "validation-code-and-results.zip", "w", zipfile.ZIP_DEFLATED) as z:
     for name in names:
-        z.write(src / name, 'code/' + name)
+        z.write(src / name, "code/" + name)
     for path in sorted(out.iterdir()):
-        if path.suffix in ['.txt', '.json', '.csv', '.npz']:
+        if path.suffix in [".txt", ".json", ".csv", ".npz"]:
             z.write(path, path.name)
-    z.write(out / 'static-hand/result.json', 'static-hand/result.json')
+    z.write(out / "static-hand/result.json", "static-hand/result.json")
 manifest = {}
 for path in sorted(out.iterdir()):
-    if path.is_file() and path.suffix in ['.mp4', '.npz', '.csv', '.zip']:
-        manifest[path.name] = {'bytes': path.stat().st_size, 'sha256': hashlib.sha256(path.read_bytes()).hexdigest()}
-(out / 'download-checksums.json').write_text(json.dumps(manifest, indent=2))
-print('LOCAL_DELIVERY_READY', list(manifest))
+    if path.is_file() and path.suffix in [".mp4", ".npz", ".csv", ".zip"]:
+        manifest[path.name] = {
+            "bytes": path.stat().st_size,
+            "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+        }
+(out / "download-checksums.json").write_text(json.dumps(manifest, indent=2))
+print("LOCAL_DELIVERY_READY", list(manifest))

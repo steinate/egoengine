@@ -7,9 +7,7 @@ from pathlib import Path
 
 def main():
     root = Path(__file__).resolve().parents[1]
-    paths = subprocess.check_output(
-        ["git", "ls-files", "-z"], cwd=root
-    ).decode().split("\0")
+    paths = subprocess.check_output(["git", "ls-files", "-z"], cwd=root).decode().split("\0")
     python_count = shell_count = 0
     for name in filter(None, paths):
         path = root / name
