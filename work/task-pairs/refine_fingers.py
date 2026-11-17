@@ -9,13 +9,15 @@ from scipy.spatial.transform import Rotation
 p = argparse.ArgumentParser()
 p.add_argument("root", type=Path)
 p.add_argument("episode", type=Path)
+p.add_argument("--folder", default="human")
 a = p.parse_args()
 sys.path.insert(0, str(a.root / "human41"))
 from human_control import Human
 from worker import fingers, tip_local, FINGER_LOW, FINGER_HIGH
 
 h = Human()
-folder = a.episode / "human"
+assert Path(a.folder).name == a.folder
+folder = a.episode / a.folder
 d = dict(np.load(folder / "human-animation.npz"))
 r = json.loads((folder / "retarget-report.json").read_text())
 h.world = d["world_transform"]

@@ -6,11 +6,14 @@ import numpy as np
 
 p = argparse.ArgumentParser()
 p.add_argument("episode", type=Path)
+p.add_argument("--folder", default="human")
 a = p.parse_args()
 ep = a.episode
+assert Path(a.folder).name == a.folder
+folder = ep / a.folder
 s = np.load(ep / "source/world-tracks.npz")
-d = np.load(ep / "human/human-animation.npz")
-r = json.loads((ep / "human/retarget-report.json").read_text())
+d = np.load(folder / "human-animation.npz")
+r = json.loads((folder / "retarget-report.json").read_text())
 checks = {
     "source_hash": r["source_sha256"]
     == hashlib.sha256((ep / "source/world-tracks.npz").read_bytes()).hexdigest(),
@@ -24,6 +27,9 @@ metrics = {
     "max_native_arm_joint_step_deg": float(np.rad2deg(np.abs(np.diff(d["arm_q"], axis=0)).max())),
     "max_foot_drift_m": float(np.linalg.norm(d["feet"] - d["feet"][0], axis=-1).max()),
     "max_fitted_fingertip_error_m": max(c["fit_tip_error_m"] for c in r["contacts"].values()),
+    "max_refined_fingertip_target_error_m": r["finger_contact_refinement"][
+        "after_max_target_error_m"
+    ],
 }
 checks.update(
     wrist_position=metrics["max_wrist_error_m"] < 0.01,
@@ -31,6 +37,7 @@ checks.update(
     no_large_joint_jump=metrics["max_native_arm_joint_step_deg"] < 15,
     feet_fixed=metrics["max_foot_drift_m"] < 1e-7,
     fingertip_fit=metrics["max_fitted_fingertip_error_m"] < 0.02,
+    refined_fingertip_target=metrics["max_refined_fingertip_target_error_m"] < 0.01,
 )
 report = dict(
     passed=all(checks.values()),
@@ -38,6 +45,6 @@ report = dict(
     metrics=metrics,
     note="Numerical gate only; rendered grasp/occlusion/whole-body review still required.",
 )
-(ep / "human/validation.json").write_text(json.dumps(report, indent=2))
+(folder / "validation.json").write_text(json.dumps(report, indent=2))
 print(json.dumps(report, indent=2))
 assert report["passed"], report

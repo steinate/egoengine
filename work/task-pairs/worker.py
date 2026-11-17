@@ -60,8 +60,9 @@ def tip_local(h, side, values):
 
 
 class Arm:
-    def __init__(self, h, side, body):
+    def __init__(self, h, side, body, orientation_weight=35.0):
         self.h, self.side = h, side
+        self.orientation_weight = orientation_weight
         self.sign = 1 if side == "R" else -1
         self.ids = [h.idx(side + "_" + n) for n in ("Clavicle", "Upperarm", "Forearm", "Hand")]
         g = h.fk(body)
@@ -132,7 +133,8 @@ class Arm:
             )
             result = [
                 (wrist[:3, 3] - target[:3, 3]) * 1500,
-                Rotation.from_matrix(target[:3, :3].T @ wrist[:3, :3]).as_rotvec() * 35,
+                Rotation.from_matrix(target[:3, :3].T @ wrist[:3, :3]).as_rotvec()
+                * self.orientation_weight,
                 (elbow - goal) * 18,
                 [max(0.0, 0.01 - self.sign * np.dot(elbow - shoulder, self.right)) * 1000],
                 [max(0.0, -np.dot(elbow - shoulder, self.forward) - 0.005) * 180],

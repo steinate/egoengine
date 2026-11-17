@@ -12,6 +12,18 @@ p.add_argument("root", type=Path)
 p.add_argument("episode", type=Path)
 p.add_argument("--grasp-roll", type=float, default=0.0)
 p.add_argument("--output", default="human")
+p.add_argument(
+    "--swap-hands",
+    action="store_true",
+    help="Use the opposite human hand while retaining the source robot contact events",
+)
+p.add_argument("--orientation-weight", type=float, default=35.0)
+p.add_argument("--grasp-yaw", type=float, default=0.0)
+p.add_argument(
+    "--max-eye-offset",
+    type=float,
+    help="Maximum native eye distance from robot head camera during stance selection, in meters",
+)
 a = p.parse_args()
 root = a.root.resolve()
 ep = a.episode.resolve()
@@ -21,6 +33,7 @@ out.mkdir(exist_ok=True)
 sys.path.insert(0, str(root / "human41"))
 from human_control import Human
 from worker import Arm, rot, smooth, fingers, tip_local, IDLE, CLOSED, FINGER_LOW, FINGER_HIGH
+from camera_frame import reference_pitch, pose_head, eye_camera
 from pxr import Usd, UsdGeom
 
 result = json.loads((ep / "result.json").read_text())
@@ -34,7 +47,11 @@ N = len(track["time_s"])
 fps = 1 / np.median(np.diff(track["time_s"]))
 task = ep.parent.name
 h = Human()
+h.world = np.diag([-1.0, -1.0, 1.0, 1.0])
 body = h.rest.copy()
+head_reference = track["camera_world"][0]
+head_pitch = reference_pitch(head_reference)
+body = pose_head(h, body, head_pitch)
 contacts = {}
 
 
@@ -47,8 +64,9 @@ def phaseframes(side, skill, command):
     ]
 
 
-for side in prov["active"]:
-    lr = {"L": "left", "R": "right"}[side]
+for robot_side in prov["active"]:
+    side = ({"L": "R", "R": "L"}[robot_side]) if a.swap_hands else robot_side
+    lr = {"L": "left", "R": "right"}[robot_side]
     name = prov["object"]
     if task == "close_microwave":
         angles = track[name + "_joints"][:, 0]
@@ -82,7 +100,12 @@ for side in prov["active"]:
         if delta_angle > np.deg2rad(15) or delta_position > 0.03:
             release -= 1
     contacts[side] = dict(
-        grasp=grasp, release=release, open_command_frame=open_frame, path=path, matrices=rigid
+        grasp=grasp,
+        release=release,
+        open_command_frame=open_frame,
+        path=path,
+        matrices=rigid,
+        robot_side=robot_side,
     )
 
 stage = Usd.Stage.Open(str(ep / "source/scene.usdc"))
@@ -122,11 +145,12 @@ for side, c in contacts.items():
     sign = 1 if side == "R" else -1
     frame = c["grasp"]
     cloud = vertices(c["path"], frame)
-    tcp = track[side + "_tcp_world"][frame, :3, 3]
+    tcp = track[c["robot_side"] + "_tcp_world"][frame, :3, 3]
     # The robot TCP locates the grasp region only. Human bones/finger angles are independent.
     nearest = cloud[np.linalg.norm(cloud - tcp, axis=1).argsort()[: min(200, len(cloud))]]
     center = nearest.mean(0)
     R = rot(2, sign * 0.35) @ rot(0, -0.5) @ np.array([[0, 0, -sign], [0, 1, 0], [sign, 0, 0.0]])
+    R = rot(2, np.deg2rad(a.grasp_yaw)) @ R
     if a.grasp_roll:
         axis = c["matrices"][frame, :3, 1]
         R = Rotation.from_rotvec(axis * np.deg2rad(a.grasp_roll)).as_matrix() @ R
@@ -186,7 +210,7 @@ table_box = (
     .ComputeAlignedBox()
 )
 front_limit = float(table_box.GetMin()[1]) - 0.12
-for yaw in [-45, -30, -15, 0, 15, 30, 45]:
+for yaw in [0]:
     for back in [0.22, 0.30, 0.38]:
         for height in [0.02, 0.10, 0.18, 0.26]:
             h.world[:3, :3] = rot(2, np.deg2rad(yaw)) @ np.diag([-1.0, -1.0, 1.0])
@@ -207,24 +231,67 @@ for yaw in [-45, -30, -15, 0, 15, 30, 45]:
                 cost += np.sum(np.maximum(ds - length + 0.04, 0) ** 2) * 100 + np.mean(
                     (ds - 0.35) ** 2
                 )
-            candidates.append((cost, h.world.copy()))
+            camera_error = np.linalg.norm(
+                eye_camera(h, body, head_pitch)[:3, 3] - head_reference[:3, 3]
+            )
+            candidates.append((cost + camera_error**2 * 8, h.world.copy()))
+# Feet need not meet the floor. Search head-camera anchored translations while
+# hard-locking the pelvis/torso yaw, pitch and roll to the table frame.
+h.world = np.diag([-1.0, -1.0, 1.0, 1.0])
+eye_offset = eye_camera(h, body, head_pitch)[:3, 3]
+lateral_offsets = [-0.16, -0.08, 0.0, 0.08, 0.16]
+if a.max_eye_offset is not None:
+    lateral_offsets += [-0.12, 0.12]
+for dx in lateral_offsets:
+    for dy in [-0.08, 0.0, 0.08]:
+        for dz in [0.0, 0.06, 0.12, 0.18, 0.24, 0.30]:
+            h.world[:3, 3] = head_reference[:3, 3] - eye_offset + [dx, dy, dz]
+            h.world[1, 3] = min(h.world[1, 3], front_limit)
+            g = h.fk(body)
+            cost = 0.0
+            for s, c in contacts.items():
+                ts = (c["matrices"][c["grasp"] : c["release"] + 1 : 10] @ fits[s][2])[:, :3, 3]
+                distances = np.linalg.norm(ts - g[h.idx(s + "_Upperarm"), :3, 3], axis=1)
+                length = sum(
+                    np.linalg.norm(h.rest[h.idx(s + "_" + n), :3, 3]) for n in ["Forearm", "Hand"]
+                )
+                cost += np.sum(np.maximum(distances - length + 0.04, 0) ** 2) * 100 + np.mean(
+                    (distances - 0.35) ** 2
+                )
+            camera_error = np.linalg.norm(
+                eye_camera(h, body, head_pitch)[:3, 3] - head_reference[:3, 3]
+            )
+            candidates.append((cost + camera_error**2 * 8, h.world.copy()))
 ranked = []
 unique = {tuple(np.round(W.ravel(), 8)): (cost, W) for cost, W in candidates}
-for _, W in sorted(unique.values(), key=lambda x: x[0])[:20]:
+eligible = [
+    item
+    for item in unique.values()
+    if a.max_eye_offset is None
+    or np.linalg.norm(item[1][:3, 3] + eye_offset - head_reference[:3, 3]) <= a.max_eye_offset
+]
+assert eligible, "No stance satisfies the requested eye-to-head-camera distance"
+for _, W in sorted(eligible, key=lambda x: x[0])[:20]:
     h.world = W
     score = 0.0
     for s, c in contacts.items():
-        arm = Arm(h, s, body)
+        arm = Arm(h, s, body, a.orientation_weight)
         for frame in np.linspace(c["grasp"], c["release"], 5, dtype=int):
             H = c["matrices"][frame] @ fits[s][2]
             q, (_, g) = arm.solve(H)
             score += np.linalg.norm(g[-1, :3, 3] - H[:3, 3]) ** 2 * 1500**2
-            score += Rotation.from_matrix(H[:3, :3].T @ g[-1, :3, :3]).magnitude() ** 2 * 35**2
+            score += (
+                Rotation.from_matrix(H[:3, :3].T @ g[-1, :3, :3]).magnitude() ** 2
+                * a.orientation_weight**2
+            )
             score += np.sum(q[7:9] ** 2)
+    score += (
+        np.linalg.norm(eye_camera(h, body, head_pitch)[:3, 3] - head_reference[:3, 3]) ** 2 * 100
+    )
     ranked.append((score, W.copy()))
 h.world = min(ranked, key=lambda x: x[0])[1]
 print("STANCE_SELECTED", min(x[0] for x in ranked), h.world.tolist(), flush=True)
-arms = {s: Arm(h, s, body) for s in ["L", "R"]}
+arms = {s: Arm(h, s, body, a.orientation_weight) for s in ["L", "R"]}
 rest = {}
 for s, arm in arms.items():
     sign = arm.sign
@@ -339,6 +406,10 @@ np.savez_compressed(
     video_time_s=track["time_s"],
 )
 report = dict(
+    max_eye_offset_m=a.max_eye_offset,
+    grasp_yaw_degrees=a.grasp_yaw,
+    orientation_weight=a.orientation_weight,
+    swap_human_hands=a.swap_hands,
     grasp_roll_degrees=a.grasp_roll,
     frames=N,
     fps=float(fps),
@@ -346,6 +417,9 @@ report = dict(
     max_wrist_position_error_m=float(np.max(np.asarray(errors)[:, :, 0])),
     max_wrist_orientation_error_deg=float(np.rad2deg(np.max(np.asarray(errors)[:, :, 1]))),
     stance_world=h.world.tolist(),
+    stance_policy="Torso faces table (+Y), zero root yaw/pitch/roll; floor penetration permitted; prefer native eye position near robot head camera",
+    head_reference_world=head_reference.tolist(),
+    head_reference_pitch_deg=head_pitch,
     contacts={s: {k: v for k, v in c.items() if k != "matrices"} for s, c in contacts.items()},
     method="Native Worker fixed upright stance, independent anatomical arm/finger IK; object-local contact locks; source object poses/time unchanged; visual replay, no human dynamics",
 )

@@ -8,9 +8,9 @@ from scipy.spatial.transform import Rotation
 p = argparse.ArgumentParser()
 p.add_argument("root", type=Path)
 p.add_argument("episode", type=Path)
-p.add_argument("--pitch-deg", type=float, default=35.0)
+p.add_argument("--pitch-deg", type=float, default=None)
 p.add_argument("--folder", default="human")
-p.add_argument("--focal-mm", type=float, default=10.0)
+p.add_argument("--focal-mm", type=float, default=None)
 a = p.parse_args()
 sys.path.insert(0, str(a.root / "human41"))
 from human_control import Human
@@ -21,55 +21,42 @@ folder = a.episode / a.folder
 d = dict(np.load(folder / "human-animation.npz"))
 r = json.loads((folder / "retarget-report.json").read_text())
 h.world = d["world_transform"]
-sys.path.insert(0, str(Path(__file__).parent))
-# A stable, table-aligned head-mounted view: no hand/object tracking and no roll.
-# World +Y is across the table; X is parallel to its front edge.
-pitch = np.deg2rad(a.pitch_deg)
-direction = np.array([0.0, np.cos(pitch), -np.sin(pitch)])
-forward = -h.world[:3, 1]
-neck = h.idx("NeckTwist01")
-head = h.idx("Head")
-eyes = [h.idx("L_Eye"), h.idx("R_Eye")]
-angles = []
-for i, p0 in enumerate(d["local"]):
-    pose = p0.copy()
-    # Idempotent: recompute head and neck from the original upright rest pose.
-    for j in [neck, h.idx("NeckTwist02"), head]:
-        pose[j] = h.rest[j]
-    g = h.fk(pose)
-    eye = g[eyes, :3, 3].mean(0)
-    target = direction.copy()
-    D = Rotation.align_vectors([target], [forward])[0]
-    rv = D.as_rotvec()
-    rv *= min(1.0, 1.48 / max(np.linalg.norm(rv), 1e-8))
-    angles.append(np.linalg.norm(rv))
-    for j, fraction in [(neck, 0.35), (head, 0.65)]:
-        g = h.fk(pose)
-        desired = Rotation.from_rotvec(rv * fraction).as_matrix() @ g[j, :3, :3]
-        pose[j, :3, :3] = g[h.parents[j], :3, :3].T @ desired
-    g = h.fk(pose)
-    direction = Rotation.from_rotvec(rv).apply(forward)
-    eye = g[eyes, :3, 3].mean(0) + direction * 0.018
-    z = -direction
-    x = np.cross([0, 0, 1], z)
-    x /= np.linalg.norm(x)
-    C = np.eye(4)
-    C[:3, :3] = np.stack([x, np.cross(z, x), z], 1)
-    C[:3, 3] = eye
-    d["local"][i] = pose
-    d["camera_world_usd"][i] = C
-assert np.max(np.abs(d["camera_world_usd"] - d["camera_world_usd"][0])) < 1e-7, (
-    "Fixed head camera moved"
+from camera_frame import reference_pitch, pose_head, eye_camera
+
+reference = d["camera_world"][0]
+from pxr import Usd, UsdGeom
+
+meta = json.loads((a.episode / "source/scene-meta.json").read_text())
+stage = Usd.Stage.Open(str(a.episode / "source/scene.usdc"))
+robot_camera = UsdGeom.Camera(stage.GetPrimAtPath(meta["camera_path"]))
+reference_focal = float(
+    robot_camera.GetFocalLengthAttr().Get() * 36 / robot_camera.GetHorizontalApertureAttr().Get()
 )
+pitch_deg = reference_pitch(reference) if a.pitch_deg is None else a.pitch_deg
+focal_mm = reference_focal if a.focal_mm is None else a.focal_mm
+for i, local in enumerate(d["local"]):
+    pose = pose_head(h, local, pitch_deg)
+    d["local"][i] = pose
+    d["camera_world_usd"][i] = eye_camera(h, pose, pitch_deg)
+C = d["camera_world_usd"][0]
+assert np.max(np.abs(d["camera_world_usd"] - C)) < 1e-7
+assert np.allclose(h.world[:3, :3], np.diag([-1.0, -1.0, 1.0]))
 np.savez_compressed(folder / "human-animation.npz", **d)
 r["gaze"] = {
-    "method": "Native neck/head share gaze rotation 35/65%; camera uses posed eye position and same gaze direction",
-    "max_total_rotation_deg": float(np.rad2deg(max(angles))),
-    "fixed_world_direction": direction.tolist(),
-    "pitch_deg": a.pitch_deg,
-    "focal_length_mm": a.focal_mm,
+    "method": "Fixed native eye pose; robot head-camera reference; table-aligned heading and zero roll",
+    "pitch_deg": pitch_deg,
+    "focal_length_mm": focal_mm,
+    "robot_reference_focal_equivalent_mm": reference_focal,
+    "framing": "Robot reference pitch and normalized lens by default; table-normal yaw and zero roll; no per-frame tracking",
     "follow_object": False,
-    "camera_policy": "Fixed native eye pose, table-aligned yaw, world-up roll; no trajectory-dependent camera target",
+    "camera_policy": "Fixed head/eye, not tracking hands; full observer body, first-person head visibility mask",
+    "robot_head_position_m": reference[:3, 3].tolist(),
+    "human_eye_position_m": C[:3, 3].tolist(),
+    "position_delta_m": (C[:3, 3] - reference[:3, 3]).tolist(),
+    "position_distance_m": float(np.linalg.norm(C[:3, 3] - reference[:3, 3])),
+    "rotation_delta_deg": float(
+        np.rad2deg(Rotation.from_matrix(reference[:3, :3].T @ C[:3, :3]).magnitude())
+    ),
 }
 (folder / "retarget-report.json").write_text(json.dumps(r, indent=2))
 print("GAZE_DONE", r["gaze"])

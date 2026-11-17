@@ -28,18 +28,27 @@ while True:
                 "human.py",
                 str(root),
                 str(ep),
-                *(["--grasp-roll", "-20"] if task == "insert_flower" else []),
+                *(
+                    ["--grasp-roll", "-20", "--orientation-weight", "70"]
+                    if task == "insert_flower"
+                    else []
+                ),
+                *(
+                    ["--swap-hands", "--grasp-yaw", "-30", "--orientation-weight", "70"]
+                    if task == "close_microwave"
+                    else []
+                ),
             ],
-            *([["refine_fingers.py", str(root), str(ep)]] if task == "insert_flower" else []),
+            ["refine_fingers.py", str(root), str(ep)],
             [
                 "gaze.py",
                 str(root),
                 str(ep),
-                *(["--pitch-deg", "26", "--focal-mm", "7"] if task == "insert_flower" else []),
             ],
             ["check_human.py", str(ep)],
             ["bake.py", "--root", str(root), "--folder", str(ep / "human"), "--stride", "3"],
             ["ego_mask.py", "--root", str(root), "--folder", str(ep / "human")],
+            ["check_eye_clearance.py", str(ep)],
         ]
         with (w / f"logs/pair-{task}-{ep.name}-human.log").open("w") as log:
             for script, *args in commands:

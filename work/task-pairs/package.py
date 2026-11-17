@@ -18,7 +18,8 @@ for task, value in selected.items():
     sv = json.loads((ep / "source-validation.json").read_text())
     hv = json.loads((ep / "human/validation.json").read_text())
     cv = json.loads((ep / "human/camera-verification.json").read_text())
-    assert sv["passed"] and hv["passed"] and cv["passed"]
+    clearance = json.loads((ep / "human/eye-clearance.json").read_text())
+    assert sv["passed"] and hv["passed"] and cv["passed"] and clearance["passed"]
     assert (
         v["source_sha256"]
         == hashlib.sha256((ep / "source/world-tracks.npz").read_bytes()).hexdigest()
@@ -39,6 +40,7 @@ for task, value in selected.items():
         "videos": v["videos"],
         "human_metrics": hv["metrics"],
         "camera_metrics": cv["metrics"],
+        "eye_clearance": clearance,
         "robot_metrics": sv["metrics"],
     }
     for name in [
@@ -54,6 +56,7 @@ for task, value in selected.items():
         "human/retarget-report.json",
         "human/validation.json",
         "human/camera-verification.json",
+        "human/eye-clearance.json",
         "human/render/delivery/debug-verification.json",
     ]:
         entries.append((ep / name, f"{task}/{name}"))
@@ -67,7 +70,7 @@ with zipfile.ZipFile(archive, "w", zipfile.ZIP_DEFLATED, compresslevel=6) as z:
         z.write(path, name)
     z.writestr(
         "README.txt",
-        "Three newly planned InternDataEngine tasks with native Worker human replay.\nAll source object/link matrices and time arrays are preserved in human-animation.npz.\nMatrices use column-vector convention, metres, and retain scale.\nphysics_step counts explicit PhysX simulate(dt) calls at 30 Hz. Raw Isaac callbacks are separate diagnostic fields.\nVideos sample at approximately 5 Hz plus contact keyframes, hold until the next source timestamp, and encode at 30 fps.\nHuman views lower the actor floor and add a table support plinth; task objects/link poses are unchanged.\nHuman contact is geometric replay, not a new dynamics simulation.\nScene USD, assets, source robot videos and frame caches remain on the server at paths in pair-manifest.json.\nSee work/task-pairs/README.md in the code repository for regeneration.\n",
+        "Three newly planned InternDataEngine tasks with native Worker human replay.\nAll source object/link matrices and time arrays are preserved in human-animation.npz.\nMatrices use column-vector convention, metres, and retain scale.\nphysics_step counts explicit PhysX simulate(dt) calls at 30 Hz. Raw Isaac callbacks are separate diagnostic fields.\nVideos sample at approximately 5 Hz plus contact keyframes, hold until the next source timestamp, and encode at 30 fps.\nOriginal floor/table are retained; upright human legs may penetrate the floor. Eye camera uses source robot head pitch and normalized optics. Task objects/link poses are unchanged.\nHuman contact is geometric replay, not a new dynamics simulation.\nScene USD, assets, source robot videos and frame caches remain on the server at paths in pair-manifest.json.\nSee work/task-pairs/README.md in the code repository for regeneration.\n",
     )
 print(
     json.dumps(

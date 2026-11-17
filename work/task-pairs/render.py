@@ -88,9 +88,8 @@ try:
             )
         ).T
 
-    floor_path = meta["robot_root"].rsplit("/", 1)[0] + "/floor"
     first_mesh = np.load(cache / "0000.npz")
-    floor_height = (
+    native_foot_height = (
         float(
             d["world_transform"][2, 3]
             + min(
@@ -101,21 +100,8 @@ try:
         )
         - 0.005
     )
-    if stage.GetPrimAtPath(floor_path) and floor_height < -0.02:
-        floor = UsdGeom.Xformable(stage.GetPrimAtPath(floor_path))
-        F = matrix(floor_path)
-        F[2, 3] = floor_height
-        floor.ClearXformOpOrder()
-        floor.AddTransformOp().Set(Gf.Matrix4d(F.T.tolist()))
-        platform = UsdGeom.Cube.Define(stage, "/World/TableSupportPlatform")
-        platform.CreateSizeAttr(1.0)
-        platform.AddTranslateOp().Set(Gf.Vec3d(0.0, 0.0, floor_height / 2))
-        platform.AddScaleOp().Set(Gf.Vec3f(1.72, 0.96, -floor_height))
-        platform.CreateDisplayColorAttr(Vt.Vec3fArray([Gf.Vec3f(0.35, 0.28, 0.18)]))
     replay = []
     for j, path in sorted(enumerate(meta["prim_paths"]), key=lambda x: x[1].count("/")):
-        if path == floor_path:
-            continue
         pr = stage.GetPrimAtPath(path)
         if not pr or not UsdGeom.Xformable(pr):
             continue
@@ -139,7 +125,7 @@ try:
 
     # Front is along table normal, not avatar shoulder yaw. Equal X eliminates
     # the previous diagonal tabletop perspective. The eye camera is fixed.
-    front = look(np.array([0.0, 1.55, 1.35]), np.array([0.0, -0.15, 0.88]))
+    front = look(np.array([0.0, 1.15, 1.3]), np.array([0.0, -0.2, 1.05]))
     ego_focal = report["gaze"].get("focal_length_mm", 10.0)
     assert np.max(np.abs(d["camera_world_usd"] - d["camera_world_usd"][0])) < 1e-7
     annotators = {}
@@ -148,7 +134,7 @@ try:
         c = UsdGeom.Camera.Define(stage, "/World/PairCamera_" + name)
         camops[name] = c.AddTransformOp()
         camops[name].Set(Gf.Matrix4d(T.T.tolist()))
-        c.CreateFocalLengthAttr(ego_focal if name == "ego" else 18.0)
+        c.CreateFocalLengthAttr(ego_focal if name == "ego" else 24.0)
         c.CreateHorizontalApertureAttr(36.0)
         c.CreateVerticalApertureAttr(20.25)
         c.CreateClippingRangeAttr(Gf.Vec2f(0.045, 100))
@@ -273,9 +259,9 @@ try:
         stride=a.stride,
         light_intensity_multiplier=0.5,
         ego_focal_length_mm=ego_focal,
-        front_focal_length_mm=18.0,
-        actor_floor_height_m=floor_height,
-        staging="Actor floor lowered to native feet with support plinth under original table; task objects and links unchanged",
+        front_focal_length_mm=24.0,
+        native_foot_height_m=native_foot_height,
+        staging="Original floor/table retained; lower-body floor penetration permitted; torso upright/table-facing",
         method="Full-scale rigid/link replay, fresh avatar geometry each sampled frame, source time retained",
     )
     (out / "verification.json").write_text(json.dumps(verification, indent=2))

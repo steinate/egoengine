@@ -50,19 +50,22 @@ bash "$root/human41/usd_python.sh" "$root/task-pairs/validate.py" "$episode"
 export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1
 case "$episode" in
   */insert_flower/*)
-    bash "$root/human41/usd_python.sh" "$root/task-pairs/human.py" "$root" "$episode" --grasp-roll -20
-    bash "$root/human41/usd_python.sh" "$root/task-pairs/refine_fingers.py" "$root" "$episode"
-    bash "$root/human41/usd_python.sh" "$root/task-pairs/gaze.py" "$root" "$episode" --pitch-deg 26 --focal-mm 7
+    bash "$root/human41/usd_python.sh" "$root/task-pairs/human.py" "$root" "$episode" --grasp-roll -20 --orientation-weight 70
+    ;;
+  */close_microwave/*)
+    bash "$root/human41/usd_python.sh" "$root/task-pairs/human.py" "$root" "$episode" --swap-hands --grasp-yaw -30 --orientation-weight 70
     ;;
   *)
     bash "$root/human41/usd_python.sh" "$root/task-pairs/human.py" "$root" "$episode"
-    bash "$root/human41/usd_python.sh" "$root/task-pairs/gaze.py" "$root" "$episode"
     ;;
 esac
-# 插花的额外参数调整人体握持方向、指尖和固定相机视野，不改变物体运动。
+bash "$root/human41/usd_python.sh" "$root/task-pairs/refine_fingers.py" "$root" "$episode"
+bash "$root/human41/usd_python.sh" "$root/task-pairs/gaze.py" "$root" "$episode"
+# 微波炉用人体右手接触原机器人左手操作区域；物体、事件和时间轴不变。
 bash "$root/human41/usd_python.sh" "$root/task-pairs/check_human.py" "$episode"
 bash "$root/human41/usd_python.sh" "$root/task-pairs/bake.py" --root "$root" --folder "$episode/human" --stride 3
 bash "$root/human41/usd_python.sh" "$root/task-pairs/ego_mask.py" --root "$root" --folder "$episode/human"
+bash "$root/human41/usd_python.sh" "$root/task-pairs/check_eye_clearance.py" "$episode"
 bash "$root/run_env41.sh" "$root/task-pairs/render.py" "$episode" --preview
 # 先看 preview 的抓取、释放和末帧，再跑全程。
 bash "$root/run_env41.sh" "$root/task-pairs/render.py" "$episode"
@@ -82,11 +85,13 @@ bash "$root/human41/usd_python.sh" "$root/task-pairs/encode.py" "$episode"
 - `human/skin-cache/`：原模型网格蒙皮、UV 与材质，三帧采样一次用于低成本预览；原始轨迹仍保存每一帧。
 - `human/render/delivery/`：完整时长 ego 和机器人/ego/正面拼接视频及编码校验。
 
-ego 相机固定在人体双眼之间，朝向桌子法线，消除横滚；没有逐帧手部、物体或 TCP 跟踪。头部采用固定姿态。正面相机固定在桌子前方、沿桌子法线取景，桌沿保持水平。插花使用固定 26° 俯角与 7 mm 广角，其他两项使用固定 35° 俯角与 10 mm 焦距；这些参数在整条视频中不变。`check_cameras.py` 独立检查眼位绑定、相机稳定、桌沿方向及原物体状态。
+ego 相机固定在原生人体双眼中点前方 18 mm，头部姿态固定；没有逐帧手部、物体或 TCP 跟踪。人体根节点锁定为正对桌子的直立姿态，不绕桌面斜站。相机采用源机器人 Head Camera 的俯角和等效视场角，去掉微小横滚及偏航，使桌沿水平；焦距按源相机传感器尺寸归一化，而非直接复制毫米值。本批约 44–45° 俯角、36 mm 画幅上的 18.188 mm 焦距。眼位由人体可达性与机器人头部位置共同约束，不把相机放进胸部。位置验收上限为 20 cm，本批挂杯 / 微波炉 / 插花分别约 6.2 / 17.1 / 8.1 cm；微波炉更近的站位候选未通过 1 cm 指尖目标误差门槛，因此保留较自然的可达站位。源 Head Camera 在高举物体时也可能看不到手和物体；保持其视场角时保留这种取景限制，完整动作可通过正面视图查看。
+
+正面相机位于 `[0, 1.15, 1.3]`，看向 `[0, -0.2, 1.05]`，24 mm 焦距，沿桌子法线近距离取景。`check_cameras.py` 检查全帧眼位绑定、相机稳定、人体根朝向、桌沿方向、原物体状态及头部参考相机偏差。`check_eye_clearance.py` 检查所有蒙皮采样帧的眼位到可见人体三角面的距离大于 4.5 cm 近裁剪距离；仅 ego 隐藏自己的头部和帽子，正面视角保留。这是相机附近的几何检查，不能代替全身碰撞或视觉验收。
 
 三视角使用同一个源帧索引和时间。原始状态为 30 Hz，调试画面约 5 Hz，并额外保留接触关键帧；编码仍为 30 fps，保持原时长。两个采样时刻之间保持同一幅图，不插值篡改物体轨迹。首尾都包含。渲染先做“末帧→明显不同的姿态→末帧”检查，用重复帧误差排查 Isaac 4.1 动态网格滞后。首次充分预热，审计帧多次取样平均，减少 RTX 光照噪声，误差阈值保持不变。
 
-人体视图把站立地面降低到原生模型脚底，并在原桌子下面加承台，允许人物直立操作较高的工作台；桌子和任务物体的轨迹不变。这一布景差异记在渲染报告中。正面观察相机位于室内，桌子仍会产生正常遮挡。
+原场景地板和桌子保持不变，不再降低地面或增加承台。允许人物下肢穿入地面，以调整眼位和手臂可达范围；不为脚底贴地而弯腰。人体高度固定，整个动作中不改变身体根姿态。
 
 这是**机器人生成物体运动 + 人体几何重放**。人体有独立骨架/IK，但未进行人体驱动物体的动力学求解；指尖贴合误差、手腕误差与视觉检查决定能否作为训练数据，不能把初步渲染当成人类自然动作的验证。
 
