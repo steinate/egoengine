@@ -97,3 +97,4 @@ depre
 # Private full migration packages.
 /migration-private/
 !/work/task-pairs/catalog.json
+!/work/grasp-prior-v1/sources.json

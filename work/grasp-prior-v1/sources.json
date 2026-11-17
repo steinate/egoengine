@@ -1,0 +1,59 @@
+{
+  "status": "Integration preparation; neural inference not yet validated",
+  "repositories": {
+    "GrabNet": {
+      "url": "https://github.com/otaheri/GrabNet.git",
+      "commit": "c90ce891952e251bed5fd37bf054d2272bad59ee"
+    },
+    "ContactOpt": {
+      "url": "https://github.com/facebookresearch/ContactOpt.git",
+      "commit": "9eeb59a1cdddf4a5e94fec39d77808ddd5ed512c"
+    },
+    "manopth": {
+      "url": "https://github.com/hassony2/manopth.git",
+      "commit": "4f1dcad1201ff1bfca6e065a85f0e3456e1aa32b"
+    },
+    "human_body_prior": {
+      "url": "https://github.com/nghorbani/human_body_prior.git",
+      "commit": "4c246d8a83ce16d3cff9c79dcf04d81fa440a6bc",
+      "note": "Pin original VPoser 2.2.2.0 source; current staging requires Python 3.11 and a much newer Torch stack. Runtime compatibility still requires testing."
+    }
+  },
+  "models": {
+    "mano_right": {
+      "path": "models/mano/MANO_RIGHT.pkl",
+      "official_url": "https://mano.is.tue.mpg.de/",
+      "note": "Official account and model license required; not included in manopth"
+    },
+    "grabnet_coarse": {
+      "path": "models/grabnet/coarsenet.pt",
+      "official_url": "https://grab.is.tue.mpg.de/",
+      "note": "Download model weights, not the full GRAB dataset"
+    },
+    "grabnet_refine": {
+      "path": "models/grabnet/refinenet.pt",
+      "official_url": "https://grab.is.tue.mpg.de/",
+      "note": "Required with CoarseNet; uninitialized weights must never be used"
+    },
+    "deepcontact": {
+      "path": "sources/ContactOpt/checkpoints/deepcontact_checkpoint.pt",
+      "official_url": "https://github.com/facebookresearch/ContactOpt",
+      "note": "Included in pinned official repository; approximately 5.8 MB"
+    },
+    "smplx_neutral": {
+      "path": "models/smplx/SMPLX_NEUTRAL.npz",
+      "official_url": "https://smpl-x.is.tue.mpg.de/",
+      "note": "Official body model for the VPoser reference skeleton"
+    },
+    "vposer_weights": {
+      "path": "models/vposer/model.ckpt",
+      "official_url": "https://smpl-x.is.tue.mpg.de/",
+      "note": "Use an explicit local path override for the official archive's checkpoint"
+    },
+    "vposer_config": {
+      "path": "models/vposer/config.yaml",
+      "official_url": "https://smpl-x.is.tue.mpg.de/",
+      "note": "Use the configuration distributed with the checkpoint, not guessed network dimensions"
+    }
+  }
+}
